@@ -16,11 +16,6 @@ import {
     IconSettings,
     IconUsers,
 } from "@tabler/icons-react";
-
-import { NavDocuments } from "@/components/ui/1-dashboard/nav-documents";
-import { NavMain } from "@/components/ui/1-dashboard/nav-main";
-import { NavSecondary } from "@/components/ui/1-dashboard/nav-secondary";
-import { NavUser } from "@/components/ui/1-dashboard/nav-user";
 import {
     Sidebar,
     SidebarContent,
@@ -31,16 +26,18 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/shadcn/sidebar";
 
+import { NavDocuments } from "@/components/2-main/1-pages/1-dashboard/13-left-nav-documents";
+import { NavMain } from "@/components/2-main/1-pages/1-dashboard/12-left-nav-main";
+import { NavSecondary } from "@/components/2-main/1-pages/1-dashboard/14-left-nav-secondary";
+import { NavUser } from "@/components/2-main/1-pages/1-dashboard/15-left-nav-user";
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar collapsible="offcanvas" {...props}>
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton
-                            asChild
-                            className="data-[slot=sidebar-menu-button]:!p-1.5"
-                        >
+                        <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
                             <a href="#">
                                 <IconInnerShadowTop className="!size-5" />
                                 <span className="text-base font-semibold">Acme Inc.</span>
@@ -49,11 +46,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarHeader>
+
             <SidebarContent>
                 <NavMain items={data.navMain} />
                 <NavDocuments items={data.documents} />
                 <NavSecondary items={data.navSecondary} className="mt-auto" />
             </SidebarContent>
+
             <SidebarFooter>
                 <NavUser user={data.user} />
             </SidebarFooter>

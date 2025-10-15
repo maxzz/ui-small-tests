@@ -1,16 +1,13 @@
-import { AppSidebar } from "@/components/ui/1-dashboard/app-sidebar";
-import { ChartAreaInteractive } from "@/components/ui/1-dashboard/chart-area-interactive";
-import { DataTable } from "@/components/ui/1-dashboard/data-table";
-import { SectionCards } from "@/components/ui/1-dashboard/section-cards";
-import { SiteHeader } from "@/components/ui/1-dashboard/site-header";
-import {
-    SidebarInset,
-    SidebarProvider,
-} from "@/components/ui/shadcn/sidebar";
+import { AppSidebar } from "@/components/2-main/1-pages/1-dashboard/11-left-app-sidebar";
+import { ChartAreaInteractive } from "@/components/2-main/1-pages/1-dashboard/23-right-chart-area-interactive";
+import { DataTable } from "@/components/2-main/1-pages/1-dashboard/24-right-data-table";
+import { SectionCards } from "@/components/2-main/1-pages/1-dashboard/22-right-section-cards";
+import { SiteHeader } from "@/components/2-main/1-pages/1-dashboard/21-right-site-header";
+import { SidebarInset, SidebarProvider } from "@/components/ui/shadcn/sidebar";
 
-import data from "@/app/dashboard/data.json";
+import data from "./8-data.json";
 
-export function PageMain() {
+export function Demo_Dashboard() {
     return (
         <SidebarProvider
             style={
@@ -21,6 +18,7 @@ export function PageMain() {
             }
         >
             <AppSidebar variant="inset" />
+
             <SidebarInset>
                 <SiteHeader />
                 <div className="flex flex-1 flex-col">
@@ -35,6 +33,7 @@ export function PageMain() {
                     </div>
                 </div>
             </SidebarInset>
+
         </SidebarProvider>
     );
 }
