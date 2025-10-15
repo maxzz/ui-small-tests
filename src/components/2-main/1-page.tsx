@@ -1,12 +1,12 @@
-import { AppSidebar } from "@/components/ui/shadcn/app-sidebar";
-import { ChartAreaInteractive } from "@/components/ui/shadcn/chart-area-interactive";
-import { DataTable } from "@/components/ui/shadcn/data-table";
-import { SectionCards } from "@/components/ui/shadcn/section-cards";
-import { SiteHeader } from "@/components/ui/shadcn/site-header";
+import { AppSidebar } from "@/components/ui/1-dashboard/app-sidebar";
+import { ChartAreaInteractive } from "@/components/ui/1-dashboard/chart-area-interactive";
+import { DataTable } from "@/components/ui/1-dashboard/data-table";
+import { SectionCards } from "@/components/ui/1-dashboard/section-cards";
+import { SiteHeader } from "@/components/ui/1-dashboard/site-header";
 import {
     SidebarInset,
     SidebarProvider,
-} from "@/components/ui/sidebar";
+} from "@/components/ui/shadcn/sidebar";
 
 import data from "@/app/dashboard/data.json";
 
