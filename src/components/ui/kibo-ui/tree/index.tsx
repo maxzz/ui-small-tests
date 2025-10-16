@@ -90,15 +90,17 @@ export const TreeProvider = ({
 
     const toggleExpanded = useCallback(
         (nodeId: string) => {
-            setExpandedIds((prev) => {
-                const newSet = new Set(prev);
-                if (newSet.has(nodeId)) {
-                    newSet.delete(nodeId);
-                } else {
-                    newSet.add(nodeId);
+            setExpandedIds(
+                (prev) => {
+                    const newSet = new Set(prev);
+                    if (newSet.has(nodeId)) {
+                        newSet.delete(nodeId);
+                    } else {
+                        newSet.add(nodeId);
+                    }
+                    return newSet;
                 }
-                return newSet;
-            });
+            );
         }, []
     );
 
