@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, ReactNode } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState, ReactNode } from "react";
 import { createPortal } from "react-dom";
 
 export interface IframePortalProps extends React.IframeHTMLAttributes<HTMLIFrameElement> {
@@ -13,13 +13,21 @@ export function IframePortal({ children, className, ...props }: IframePortalProp
     const ref = useRef<HTMLIFrameElement | null>(null);
     const [mounted, setMounted] = useState(false);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const iframe = ref.current;
         if (!iframe) return;
-        
-        const onLoad = () => {
+
+        const setupIframe = () => {
             const iframeDoc = iframe.contentDocument;
             if (!iframeDoc) return;
+
+            // Prevent duplicate setup
+            if (iframeDoc.head.querySelector('[data-iframe-setup]')) return;
+
+            // Mark as setup
+            const marker = iframeDoc.createElement('meta');
+            marker.setAttribute('data-iframe-setup', 'true');
+            iframeDoc.head.appendChild(marker);
 
             // Copy all stylesheets from parent document to iframe
             const parentStylesheets = document.querySelectorAll('link[rel="stylesheet"], style');
@@ -34,34 +42,47 @@ export function IframePortal({ children, className, ...props }: IframePortalProp
             meta.content = 'width=device-width, initial-scale=1.0';
             iframeDoc.head.appendChild(meta);
 
+            // Add base styles to ensure iframe body takes full height
+            const style = iframeDoc.createElement('style');
+            style.textContent = `
+                html, body {
+                    margin: 0;
+                    padding: 0;
+                    height: 100%;
+                    overflow: auto;
+                }
+            `;
+            iframeDoc.head.appendChild(style);
+
             setMounted(true);
         };
 
-        iframe.addEventListener("load", onLoad);
-        
-        // If already loaded (about:blank), set mounted
-        if (iframe.contentDocument && iframe.contentDocument.readyState === "complete") {
-            onLoad();
+        // Try to setup immediately if document is ready
+        if (iframe.contentDocument?.readyState === "complete") {
+            setupIframe();
+        } else {
+            // Otherwise wait for load event
+            iframe.addEventListener("load", setupIframe);
         }
-        
-        return () => iframe.removeEventListener("load", onLoad);
+
+        return () => {
+            iframe.removeEventListener("load", setupIframe);
+        };
     }, []);
 
     // When mounted and iframe body exists, portal children into it
     const target = ref.current?.contentDocument?.body ?? null;
 
-    return (
-        <>
-            <iframe
-                ref={ref}
-                className={className}
-                // keep default same-origin document
-                srcDoc="<html><body></body></html>"
-                // remove border and allow full sizing via classes
-                style={{ border: "0" }}
-                {...props}
-            />
-            {target && mounted && createPortal(children, target)}
-        </>
-    );
+    return (<>
+        <iframe
+            ref={ref}
+            className={className}
+            // keep default same-origin document with proper structure
+            srcDoc="<!DOCTYPE html><html><head></head><body></body></html>"
+            // remove border and allow full sizing via classes
+            style={{ border: "0", display: "block" }}
+            {...props}
+        />
+        {target && mounted && createPortal(children, target)}
+    </>);
 }
