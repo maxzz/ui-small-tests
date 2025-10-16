@@ -1,13 +1,16 @@
+import { IframePortal } from "./iframe-portal";
 import { Demo_Dashboard } from "../2-main/1-pages/1-dashboard";
 
 export function App() {
     return (
-        <div className="min-h-screen p-4 1flex items-center justify-center">
-            <div className="grid 1grid-rows-2 gap-4">
-                <div className="bg-green-500">123</div>
-                <div className="flex items-center justify-center gap-4">
+        <div className="min-h-screen p-4 flex items-center justify-center">
+            <div className="grid grid-rows-2 gap-4 w-full max-w-4xl">
+                <div className="h-12 bg-green-500">123</div>
+
+                <IframePortal className="w-full h-[600px]">
                     <Demo_Dashboard />
-                </div>
+                </IframePortal>
+
             </div>
         </div>
     );
