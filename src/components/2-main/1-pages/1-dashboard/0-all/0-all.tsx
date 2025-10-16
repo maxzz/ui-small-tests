@@ -5,9 +5,21 @@ import { SectionCards } from "@/components/2-main/1-pages/1-dashboard/2-2-right-
 import { SiteHeader } from "@/components/2-main/1-pages/1-dashboard/2-1-right-site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/shadcn/sidebar";
 
-import data from "./8-data.json";
+import data from "../8-data.json";
+import { classNames } from "@/utils";
 
-export function Demo_Dashboard() {
+export function Demo_Dashboard({className, ...rest}: React.ComponentProps<"iframe">) {
+    return (
+        <iframe
+            src="/index-dashboard.html"
+            className={classNames("w-full h-[600px] border rounded-lg shadow-lg", className)}
+            title="Demo Dashboard"
+            {...rest}
+        />
+    );
+}
+
+export function Dashboard() {
     return (
         <SidebarProvider
             style={
