@@ -1,7 +1,4 @@
 "use client";
-
-import { ChevronRight, File, Folder, FolderOpen } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
 import {
     type ComponentProps,
     createContext,
@@ -12,6 +9,8 @@ import {
     useId,
     useState,
 } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { ChevronRight, File, Folder, FolderOpen } from "lucide-react";
 import { cn } from "@/utils/index";
 
 type TreeContextType = {
@@ -314,20 +313,14 @@ export const TreeNodeContent = ({ children, hasChildren = false, className, ...p
                     className="overflow-hidden"
                     exit={{ height: 0, opacity: 0 }}
                     initial={{ height: 0, opacity: 0 }}
-                    transition={{
-                        duration: animateExpand ? 0.3 : 0,
-                        ease: "easeInOut",
-                    }}
+                    transition={{ duration: animateExpand ? 0.3 : 0, ease: "easeInOut", }}
                 >
                     <motion.div
                         animate={{ y: 0 }}
                         className={className}
                         exit={{ y: -10 }}
                         initial={{ y: -10 }}
-                        transition={{
-                            duration: animateExpand ? 0.2 : 0,
-                            delay: animateExpand ? 0.1 : 0,
-                        }}
+                        transition={{ duration: animateExpand ? 0.2 : 0, delay: animateExpand ? 0.1 : 0, }}
                         {...props}
                     >
                         {children}
@@ -383,24 +376,18 @@ export const TreeIcon = ({ icon, hasChildren = false, className, ...props }: Tre
     }
 
     const getDefaultIcon = () =>
-        hasChildren ? (
-            isExpanded
-                ? (
-                    <FolderOpen className="h-4 w-4" />
-                )
-                : (
-                    <Folder className="h-4 w-4" />
-                )
-        ) : (
-            <File className="h-4 w-4" />
-        );
+        hasChildren
+            ? (
+                isExpanded
+                    ? <FolderOpen className="h-4 w-4" />
+                    : <Folder className="h-4 w-4" />
+            ) : (
+                <File className="h-4 w-4" />
+            );
 
     return (
         <motion.div
-            className={cn(
-                "mr-2 flex h-4 w-4 items-center justify-center text-muted-foreground",
-                className
-            )}
+            className={cn("mr-2 flex h-4 w-4 items-center justify-center text-muted-foreground", className)}
             transition={{ duration: 0.15 }}
             whileHover={{ scale: 1.1 }}
             {...props}
