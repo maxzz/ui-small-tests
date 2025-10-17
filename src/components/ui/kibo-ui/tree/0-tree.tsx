@@ -255,20 +255,20 @@ export const TreeLines = () => {
 
     return (
         <div className="pointer-events-none absolute top-0 bottom-0 left-0">
+            
             {/* Render vertical lines for all parent levels */}
             {Array.from({ length: level },
-                (_, index) => {
-                    const shouldHideLine = parentPath[index] === true;
-                    if (shouldHideLine && index === level - 1) {
+                (_, idx) => {
+                    const shouldHideLine = parentPath[idx] === true;
+                    if (shouldHideLine && idx === level - 1) {
                         return null;
                     }
-
                     return (
                         <div
                             className="absolute top-0 bottom-0 border-border/40 border-l"
-                            key={index.toString()}
+                            key={idx.toString()}
                             style={{
-                                left: index * (indent ?? 0) + 12,
+                                left: idx * (indent ?? 0) + 16,
                                 display: shouldHideLine ? "none" : "block",
                             }}
                         />
@@ -280,7 +280,7 @@ export const TreeLines = () => {
             <div
                 className="absolute top-1/2 border-border/40 border-t"
                 style={{
-                    left: (level - 1) * (indent ?? 0) + 12,
+                    left: (level - 1) * (indent ?? 0) + 16,
                     width: (indent ?? 0) - 4,
                     transform: "translateY(-1px)",
                 }}
@@ -291,7 +291,7 @@ export const TreeLines = () => {
                 <div
                     className="absolute top-0 border-border/40 border-l"
                     style={{
-                        left: (level - 1) * (indent ?? 0) + 12,
+                        left: (level - 1) * (indent ?? 0) + 16,
                         height: "50%",
                     }}
                 />

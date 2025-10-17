@@ -5,9 +5,9 @@ import { FileCode, FileJson, FileText } from "lucide-react";
 export function LeftList() {
     return (
         <TreeProvider
-            // defaultExpandedIds={["src", "components", "ui"]}
-            // animateExpand={false}
-            // onSelectionChange={(ids) => console.log("Selected:", ids)}
+        // defaultExpandedIds={["src", "components", "ui"]}
+        // animateExpand={false}
+        // onSelectionChange={(ids) => console.log("Selected:", ids)}
         >
             <TreeView>
                 <TreeNode nodeId="public" className="[--border:var(--color-red-500)]">
@@ -27,26 +27,8 @@ export function LeftList() {
                             </TreeNodeTrigger>
 
                             <TreeNodeContent hasChildren>
-
-<RenderTreeNode level={2} label="logo.svg" nodeId="logo.svg" onItemClick={defaultClick} icon={<FileText className="size-4" />} />
-<RenderTreeNode isLast level={2} label="hero.png" nodeId="hero.png" onItemClick={defaultClick} icon={<FileText className="size-4" />} />
-
-                                <TreeNode level={2} nodeId="logo.svg">
-                                    <TreeNodeTrigger>
-                                        <TreeExpander />
-                                        <TreeIcon icon={<FileText className="size-4" />} />
-                                        <TreeLabel>logo.svg</TreeLabel>
-                                    </TreeNodeTrigger>
-                                </TreeNode>
-
-                                <TreeNode isLast level={2} nodeId="hero.png">
-                                    <TreeNodeTrigger>
-                                        <TreeExpander />
-                                        <TreeIcon icon={<FileText className="size-4" />} />
-                                        <TreeLabel>hero.png</TreeLabel>
-                                    </TreeNodeTrigger>
-                                </TreeNode>
-
+                                <RenderTreeNode level={2} label="logo.svg" nodeId="logo.svg" onItemClick={defaultClick} icon={<FileText className="size-4" />} />
+                                <RenderTreeNode isLast level={2} label="hero.png" nodeId="hero.png" onItemClick={defaultClick} icon={<FileText className="size-4" />} />
                             </TreeNodeContent>
                         </TreeNode>
                     </TreeNodeContent>
