@@ -27,7 +27,8 @@ export function App() {
                 <div className="px-4 py-3 bg-gray-100">
                     {
                         leftItem === "public"
-                            ? <WelcomeHeroTitle allowHandleFiles={true} />
+                            ? <div className="bg-green-500">123</div>
+                            // <WelcomeHeroTitle allowHandleFiles={true} />
                             : leftItem === "hero.png"
                                 ? (<>{Dashboard}</>)
                                 : <div className="bg-green-500">123</div>
