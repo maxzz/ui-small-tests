@@ -12,12 +12,11 @@ export function TextHoverEffect({ text, duration, }: { text: string; duration?: 
         () => {
             if (svgRef.current && !!cursor.x && !!cursor.y) {
                 const svgRect = svgRef.current.getBoundingClientRect();
-                console.log('svgRect', svgRect, 'cursor', cursor);
 
                 const cxPercentage = ((cursor.x - svgRect.left) / svgRect.width) * 100;
                 const cyPercentage = ((cursor.y - svgRect.top) / svgRect.height) * 100;
 
-                console.log('cxPercentage', cxPercentage, 'cyPercentage', cyPercentage);
+                console.log('useEffect: svgRect', svgRect, 'cursor', cursor, 'cxPercentage', cxPercentage, 'cyPercentage', cyPercentage);
 
                 setMaskPosition({
                     cx: `${cxPercentage}%`,
@@ -35,7 +34,7 @@ export function TextHoverEffect({ text, duration, }: { text: string; duration?: 
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             onMouseMove={(e) => {
-                console.log({ x: e.clientX, y: e.clientY });
+                // console.log({ x: e.clientX, y: e.clientY });
                 
                 setCursor({ x: e.clientX, y: e.clientY });
             }}
@@ -64,6 +63,7 @@ export function TextHoverEffect({ text, duration, }: { text: string; duration?: 
                     r="20%"
                     cx="50%"
                     cy="50%"
+                    initial={maskPosition}
                     animate={maskPosition}
                     transition={{ duration: duration ?? 0, ease: "easeOut" }}
                 >
