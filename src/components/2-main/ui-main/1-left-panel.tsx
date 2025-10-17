@@ -32,7 +32,7 @@ export function TreeExample() {
                                     </TreeNodeTrigger>
                                     <TreeNodeContent hasChildren>
                                         <TreeNode level={3} nodeId="button.tsx">
-                                            <TreeNodeTrigger onClick={() => console.log("Button clicked")}>
+                                            <TreeNodeTrigger onClick={(e) => console.log("Button clicked", e, "id=", (e.currentTarget as HTMLElement).dataset["uuid"])} data-uuid="button.tsx">
                                                 <TreeExpander />
                                                 <TreeIcon icon={<FileCode className="h-4 w-4" />} />
                                                 <TreeLabel>button.tsx</TreeLabel>
