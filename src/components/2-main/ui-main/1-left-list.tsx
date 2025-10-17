@@ -1,8 +1,17 @@
 "use client";
+import { useSetAtom } from "jotai";
 import { TreeExpander, TreeIcon, TreeLabel, TreeNode, TreeNodeContent, TreeNodeProps, TreeNodeTrigger, TreeProvider, TreeView, } from "@/components/ui/kibo-ui/tree";
 import { FileCode, FileJson, FileText } from "lucide-react";
+import { LeftItem } from "./8-left-item";
 
 export function LeftList() {
+    const setLeftItem = useSetAtom(LeftItem);
+    const defaultClick = (nodeId: string, e: React.MouseEvent<HTMLElement>) => {
+        // console.log("Button clicked", e, "nodeid=", (e.currentTarget as HTMLElement).dataset["nodeid"]);
+        // console.log(`node id="${nodeId}"`, e);
+        setLeftItem(nodeId);
+    };
+
     return (
         <TreeProvider
         // defaultExpandedIds={["src", "components", "ui"]}
@@ -39,11 +48,6 @@ export function LeftList() {
 }
 
 //
-
-const defaultClick = (nodeId: string, e: React.MouseEvent<HTMLElement>) => {
-    console.log("Button clicked", e, "nodeid=", (e.currentTarget as HTMLElement).dataset["nodeid"]);
-    console.log(`node id="${nodeId}"`, e);
-};
 
 function RenderTreeNode({ nodeId, label, icon, level, isLast, className, onItemClick }: { nodeId: string; level?: number; isLast?: boolean; label: React.ReactNode; icon?: React.ReactNode; onItemClick?: (nodeId: string, e: React.MouseEvent<HTMLElement>) => void; className?: string; }) {
     return (
