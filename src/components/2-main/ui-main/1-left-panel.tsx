@@ -113,7 +113,7 @@ export function TreeExample() {
                         </TreeNode>
                     </TreeNodeContent>
                 </TreeNode>
-                <RenderTreeNode label="11package.json" itemId="package.json" nodeId="package.json" onItemClick={(nodeId: string) => console.log(`node id="${nodeId}"`)} />
+                <RenderTreeNode label="package.json" nodeId="package.json" onItemClick={defaultClick} />
                 <TreeNode nodeId="package.json">
                     <TreeNodeTrigger>
                         <TreeExpander />
@@ -140,13 +140,15 @@ export function TreeExample() {
     );
 }
 
-function RenderTreeNode({ label, itemId, nodeId, className, onItemClick, ...props }: TreeNodeProps & { nodeId: string; label: React.ReactNode; itemId: string; onItemClick?: (nodeId: string) => void; }) {
-    const onClick = (e: React.MouseEvent<HTMLElement>) => {
-        onItemClick?.(itemId);
-    };
+const defaultClick = (nodeId: string, e: React.MouseEvent<HTMLElement>) => {
+    console.log("Button clicked", e, "nodeid=", (e.currentTarget as HTMLElement).dataset["nodeid"])
+    console.log(`node id="${nodeId}"`, e);
+};
+
+function RenderTreeNode({ label, nodeId, className, onItemClick }: { nodeId: string; label: React.ReactNode; onItemClick?: (nodeId: string, e: React.MouseEvent<HTMLElement>) => void; className?: string; }) {
     return (
-        <TreeNode>
-            <TreeNodeTrigger className={className} onClick={onClick} data-uuid={itemId}>
+        <TreeNode nodeId={nodeId}>
+            <TreeNodeTrigger data-nodeid={nodeId} className={className} onClick={(e) => onItemClick?.(nodeId, e)}>
                 <TreeExpander />
                 <TreeIcon icon={<FileCode className="size-4" />} />
                 <TreeLabel>{label}</TreeLabel>
