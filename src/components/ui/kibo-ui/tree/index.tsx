@@ -82,6 +82,8 @@ export const TreeProvider = ({
     animateExpand = true,
     className,
 }: TreeProviderProps) => {
+    console.log('tree render', defaultExpandedIds, selectedIds);
+    
     const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set(defaultExpandedIds));
     const [internalSelectedIds, setInternalSelectedIds] = useState<string[]>(selectedIds ?? []);
 

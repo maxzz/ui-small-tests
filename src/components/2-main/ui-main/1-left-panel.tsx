@@ -1,20 +1,12 @@
 "use client";
-import {
-    TreeExpander,
-    TreeIcon,
-    TreeLabel,
-    TreeNode,
-    TreeNodeContent,
-    TreeNodeTrigger,
-    TreeProvider,
-    TreeView,
-} from "@/components/ui/kibo-ui/tree";
+import { TreeExpander, TreeIcon, TreeLabel, TreeNode, TreeNodeContent, TreeNodeTrigger, TreeProvider, TreeView, } from "@/components/ui/kibo-ui/tree";
 import { FileCode, FileJson, FileText } from "lucide-react";
 
 export function TreeExample() {
     return (
         <TreeProvider
-            defaultExpandedIds={["src", "components", "ui"]}
+            // defaultExpandedIds={["src", "components", "ui"]}
+            // animateExpand={false}
             onSelectionChange={(ids) => console.log("Selected:", ids)}
         >
             <TreeView>
@@ -33,14 +25,14 @@ export function TreeExample() {
                             </TreeNodeTrigger>
                             <TreeNodeContent hasChildren>
                                 <TreeNode level={2} nodeId="ui">
-                                    <TreeNodeTrigger>
+                                    <TreeNodeTrigger onClick={() => console.log("Button clicked")}>
                                         <TreeExpander hasChildren />
                                         <TreeIcon hasChildren />
                                         <TreeLabel>ui</TreeLabel>
                                     </TreeNodeTrigger>
                                     <TreeNodeContent hasChildren>
                                         <TreeNode level={3} nodeId="button.tsx">
-                                            <TreeNodeTrigger>
+                                            <TreeNodeTrigger onClick={() => console.log("Button clicked")}>
                                                 <TreeExpander />
                                                 <TreeIcon icon={<FileCode className="h-4 w-4" />} />
                                                 <TreeLabel>button.tsx</TreeLabel>

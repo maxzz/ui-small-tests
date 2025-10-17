@@ -12,7 +12,7 @@ export function App() {
                 <TreeExample />
                 <div className="bg-green-500">123</div>
 
-                <Demo_Dashboard />
+                {/* <Demo_Dashboard /> */}
             </div>
 
             <footer className="px-4 py-3 bg-gray-100">
