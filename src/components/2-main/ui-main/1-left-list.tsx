@@ -22,16 +22,17 @@ export function LeftList() {
         >
             <TreeView>
                 <TreeNode nodeId="public" className="[--border:var(--color-red-500)]">
-                    <RenderTreeNodeTrigger nodeId="public" label="public" hasChildren onItemClick={defaultClick} />
+                    {/* <RenderTreeNodeTrigger nodeId="public" label="public" hasChildren onItemClick={defaultClick} /> */}
+                    <TreeNodeTrigger data-nodeid={"public"} onClick={(e) => defaultClick?.("public", e)}>
+                        <TreeExpander hasChildren />
+                        <TreeIcon hasChildren />
+                        <TreeLabel>public</TreeLabel>
+                    </TreeNodeTrigger>
 
                     <TreeNodeContent hasChildren>
                         <TreeNode isLast level={1} nodeId="images">
 
-                            <TreeNodeTrigger>
-                                <TreeExpander hasChildren />
-                                <TreeIcon hasChildren />
-                                <TreeLabel>images</TreeLabel>
-                            </TreeNodeTrigger>
+                            <RenderTreeNodeTrigger nodeId="images" label="images" hasChildren onItemClick={defaultClick} />
 
                             <TreeNodeContent hasChildren>
                                 <RenderTreeNode level={2} label="logo.svg" nodeId="logo.svg" onItemClick={defaultClick} icon={<FileText className="size-4" />} />
