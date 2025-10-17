@@ -128,15 +128,21 @@ const defaultClick = (nodeId: string, e: React.MouseEvent<HTMLElement>) => {
     console.log(`node id="${nodeId}"`, e);
 };
 
-function RenderTreeNode({ nodeId, label, icon, level, isLast, className, onItemClick }: { nodeId: string; level?: number; isLast?: boolean; label: React.ReactNode; icon?: React.ReactNode; onItemClick?: (nodeId: string, e: React.MouseEvent<HTMLElement>) => void; className?: string; }) {
+function RenderTreeNode({ nodeId, label, icon, className, onItemClick, hasChildren, level, isLast }: { nodeId: string; label: React.ReactNode; icon?: React.ReactNode; onItemClick?: (nodeId: string, e: React.MouseEvent<HTMLElement>) => void; className?: string; hasChildren?: boolean; level?: number; isLast?: boolean; }) {
     return (
         <TreeNode nodeId={nodeId} level={level} isLast={isLast}>
-            <TreeNodeTrigger data-nodeid={nodeId} className={className} onClick={(e) => onItemClick?.(nodeId, e)}>
-                <TreeExpander />
-                <TreeIcon icon={icon ? icon : <FileCode className="size-4" />} />
-                <TreeLabel>{label}</TreeLabel>
-            </TreeNodeTrigger>
+            <RenderTreeNodeTrigger nodeId={nodeId} label={label} icon={icon} className={className} onItemClick={onItemClick} hasChildren={hasChildren} />
         </TreeNode>
+    );
+}
+
+function RenderTreeNodeTrigger({ nodeId, label, hasChildren, icon, className, onItemClick }: { nodeId: string; label: React.ReactNode; icon?: React.ReactNode; onItemClick?: (nodeId: string, e: React.MouseEvent<HTMLElement>) => void; className?: string; hasChildren?: boolean; }) {
+    return (
+        <TreeNodeTrigger data-nodeid={nodeId} className={className} onClick={(e) => onItemClick?.(nodeId, e)}>
+            <TreeExpander hasChildren={hasChildren} />
+            <TreeIcon icon={icon ? icon : <FileCode className="size-4" />} hasChildren={hasChildren} />
+            <TreeLabel>{label}</TreeLabel>
+        </TreeNodeTrigger>
     );
 }
 

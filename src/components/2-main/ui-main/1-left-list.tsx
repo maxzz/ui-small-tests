@@ -2,7 +2,7 @@
 import { useSetAtom } from "jotai";
 import { TreeExpander, TreeIcon, TreeLabel, TreeNode, TreeNodeContent, TreeNodeProps, TreeNodeTrigger, TreeProvider, TreeView, } from "@/components/ui/kibo-ui/tree";
 import { FileCode, FileJson, FileText } from "lucide-react";
-import { LeftItem } from "./8-left-item";
+import { LeftItem } from "./8-left-item-atom";
 
 export function LeftList() {
     const setLeftItem = useSetAtom(LeftItem);
@@ -22,11 +22,7 @@ export function LeftList() {
         >
             <TreeView>
                 <TreeNode nodeId="public" className="[--border:var(--color-red-500)]">
-                    <TreeNodeTrigger>
-                        <TreeExpander hasChildren />
-                        <TreeIcon hasChildren />
-                        <TreeLabel>public</TreeLabel>
-                    </TreeNodeTrigger>
+                    <RenderTreeNodeTrigger nodeId="public" label="public" hasChildren onItemClick={defaultClick} />
 
                     <TreeNodeContent hasChildren>
                         <TreeNode isLast level={1} nodeId="images">
@@ -51,15 +47,21 @@ export function LeftList() {
 
 //
 
-function RenderTreeNode({ nodeId, label, icon, level, isLast, className, onItemClick }: { nodeId: string; level?: number; isLast?: boolean; label: React.ReactNode; icon?: React.ReactNode; onItemClick?: (nodeId: string, e: React.MouseEvent<HTMLElement>) => void; className?: string; }) {
+function RenderTreeNode({ nodeId, label, icon, className, onItemClick, hasChildren, level, isLast }: { nodeId: string; label: React.ReactNode; icon?: React.ReactNode; onItemClick?: (nodeId: string, e: React.MouseEvent<HTMLElement>) => void; className?: string; hasChildren?: boolean; level?: number; isLast?: boolean; }) {
     return (
         <TreeNode nodeId={nodeId} level={level} isLast={isLast}>
-            <TreeNodeTrigger data-nodeid={nodeId} className={className} onClick={(e) => onItemClick?.(nodeId, e)}>
-                <TreeExpander />
-                <TreeIcon icon={icon ? icon : <FileCode className="size-4" />} />
-                <TreeLabel>{label}</TreeLabel>
-            </TreeNodeTrigger>
+            <RenderTreeNodeTrigger nodeId={nodeId} label={label} icon={icon} className={className} onItemClick={onItemClick} hasChildren={hasChildren} />
         </TreeNode>
+    );
+}
+
+function RenderTreeNodeTrigger({ nodeId, label, hasChildren, icon, className, onItemClick }: { nodeId: string; label: React.ReactNode; icon?: React.ReactNode; onItemClick?: (nodeId: string, e: React.MouseEvent<HTMLElement>) => void; className?: string; hasChildren?: boolean; }) {
+    return (
+        <TreeNodeTrigger data-nodeid={nodeId} className={className} onClick={(e) => onItemClick?.(nodeId, e)}>
+            <TreeExpander hasChildren={hasChildren} />
+            <TreeIcon icon={icon ? icon : <FileCode className="size-4" />} hasChildren={hasChildren} />
+            <TreeLabel>{label}</TreeLabel>
+        </TreeNodeTrigger>
     );
 }
 
@@ -79,15 +81,18 @@ function renderNodes(nodes: TreeSpec[], parentLevel = 0) {
             const isLast = idx === nodes.length - 1;
             return (
                 <TreeNode key={node.id} nodeId={node.id} level={node.level} isLast={isLast}>
+
                     <TreeNodeTrigger className="py-0.5">
                         <TreeExpander hasChildren={hasChildren} />
                         <TreeLabel>{node.label}</TreeLabel>
                     </TreeNodeTrigger>
+
                     {hasChildren && (
                         <TreeNodeContent hasChildren>
                             {renderNodes(node.children, parentLevel + 1)}
                         </TreeNodeContent>
                     )}
+
                 </TreeNode>
             );
         }
