@@ -1,5 +1,5 @@
-// "use client"; //https://github.com/RexanWONG/text-behind-image/blob/main/components/ui/text-hover-effect.tsx
-import { useRef, useEffect, useState } from "react";
+"use client";
+import { useRef, useEffect, useState } from "react"; //https://github.com/RexanWONG/text-behind-image/blob/main/components/ui/text-hover-effect.tsx
 import { motion } from "motion/react";
 
 export function TextHoverEffect({ text, duration, }: { text: string; duration?: number; automatic?: boolean; }) {
@@ -24,7 +24,8 @@ export function TextHoverEffect({ text, duration, }: { text: string; duration?: 
 
     return (
         <svg
-            ref={svgRef} width="100%" height="100%" viewBox="0 0 300 100"
+            ref={svgRef}
+            width="100%" height="100%" viewBox="0 0 300 100"
             className="select-none"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
@@ -37,7 +38,7 @@ export function TextHoverEffect({ text, duration, }: { text: string; duration?: 
                     cx="50%"
                     cy="50%"
                     r="25%"
-                    // className="[--yellow-500:#fff400] [--red-500:#ea3939] [--blue-500:#395eea] [--cyan-500:#39ead7]"
+                // className="[--yellow-500:#fff400] [--red-500:#ea3939] [--blue-500:#395eea] [--cyan-500:#39ead7]"
                 >
                     {hovered && (<>
                         <stop offset="0%" stopColor={"var(--yellow-500)"} />
@@ -54,15 +55,16 @@ export function TextHoverEffect({ text, duration, }: { text: string; duration?: 
                     r="20%"
                     animate={maskPosition}
                     transition={{ duration: duration ?? 0, ease: "easeOut" }}
-
                 >
                     <stop offset="0%" stopColor="white" />
                     <stop offset="100%" stopColor="black" />
                 </motion.radialGradient>
+
                 <mask id="textMask">
                     <rect x="0" y="0" width="100%" height="100%" fill="url(#revealMask)" />
                 </mask>
             </defs>
+
             <text
                 x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" strokeWidth="0.3"
                 className="font-[helvetica] font-bold stroke-neutral-200 dark:stroke-neutral-800 fill-transparent text-7xl  "
@@ -70,21 +72,17 @@ export function TextHoverEffect({ text, duration, }: { text: string; duration?: 
             >
                 {text}
             </text>
+
             <motion.text
                 x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" strokeWidth="0.3"
                 className="font-[helvetica] font-bold fill-transparent text-7xl   stroke-neutral-200 dark:stroke-neutral-800"
                 initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
-                animate={{
-                    strokeDashoffset: 0,
-                    strokeDasharray: 1000,
-                }}
-                transition={{
-                    duration: 4,
-                    ease: "easeInOut",
-                }}
+                animate={{ strokeDashoffset: 0, strokeDasharray: 1000, }}
+                transition={{ duration: 4, ease: "easeInOut", }}
             >
                 {text}
             </motion.text>
+
             <text
                 x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" strokeWidth="0.3"
                 stroke="url(#textGradient)"
@@ -93,6 +91,7 @@ export function TextHoverEffect({ text, duration, }: { text: string; duration?: 
             >
                 {text}
             </text>
+
         </svg>
     );
 }
