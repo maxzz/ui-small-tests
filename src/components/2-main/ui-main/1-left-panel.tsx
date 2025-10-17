@@ -113,30 +113,34 @@ export function TreeExample() {
                         </TreeNode>
                     </TreeNodeContent>
                 </TreeNode>
-                <RenderTreeNode label="package.json" nodeId="package.json" onItemClick={defaultClick} />
-                <RenderTreeNode label="tsconfig.json" nodeId="tsconfig.json" onItemClick={defaultClick} />
-                <RenderTreeNode label="README.md" nodeId="README.md" onItemClick={defaultClick} />
+                <RenderTreeNode label="package.json" nodeId="package.json" onItemClick={defaultClick} icon={<FileJson className="size-4" />} />
+                <RenderTreeNode label="tsconfig.json" nodeId="tsconfig.json" onItemClick={defaultClick} icon={<FileJson className="size-4" />} />
+                <RenderTreeNode label="README.md" nodeId="README.md" onItemClick={defaultClick} icon={<FileJson className="size-4" />} />
             </TreeView>
         </TreeProvider>
     );
 }
+
+//
 
 const defaultClick = (nodeId: string, e: React.MouseEvent<HTMLElement>) => {
     console.log("Button clicked", e, "nodeid=", (e.currentTarget as HTMLElement).dataset["nodeid"]);
     console.log(`node id="${nodeId}"`, e);
 };
 
-function RenderTreeNode({ label, nodeId, className, onItemClick }: { nodeId: string; label: React.ReactNode; onItemClick?: (nodeId: string, e: React.MouseEvent<HTMLElement>) => void; className?: string; }) {
+function RenderTreeNode({ nodeId, label, icon, level, isLast, className, onItemClick }: { nodeId: string; level?: number; isLast?: boolean; label: React.ReactNode; icon?: React.ReactNode; onItemClick?: (nodeId: string, e: React.MouseEvent<HTMLElement>) => void; className?: string; }) {
     return (
-        <TreeNode nodeId={nodeId}>
+        <TreeNode nodeId={nodeId} level={level} isLast={isLast}>
             <TreeNodeTrigger data-nodeid={nodeId} className={className} onClick={(e) => onItemClick?.(nodeId, e)}>
                 <TreeExpander />
-                <TreeIcon icon={<FileCode className="size-4" />} />
+                <TreeIcon icon={icon ? icon : <FileCode className="size-4" />} />
                 <TreeLabel>{label}</TreeLabel>
             </TreeNodeTrigger>
         </TreeNode>
     );
 }
+
+//
 
 type TreeSpec = {
     id: string;
@@ -146,21 +150,23 @@ type TreeSpec = {
 };
 
 function renderNodes(nodes: TreeSpec[], parentLevel = 0) {
-    return nodes.map((node, idx) => {
-        const hasChildren = node.children.length > 0;
-        const isLast = idx === nodes.length - 1;
-        return (
-            <TreeNode key={node.id} nodeId={node.id} level={node.level} isLast={isLast}>
-                <TreeNodeTrigger className="py-0.5">
-                    <TreeExpander hasChildren={hasChildren} />
-                    <TreeLabel>{node.label}</TreeLabel>
-                </TreeNodeTrigger>
-                {hasChildren && (
-                    <TreeNodeContent hasChildren>
-                        {renderNodes(node.children, parentLevel + 1)}
-                    </TreeNodeContent>
-                )}
-            </TreeNode>
-        );
-    });
+    return nodes.map(
+        (node, idx) => {
+            const hasChildren = node.children.length > 0;
+            const isLast = idx === nodes.length - 1;
+            return (
+                <TreeNode key={node.id} nodeId={node.id} level={node.level} isLast={isLast}>
+                    <TreeNodeTrigger className="py-0.5">
+                        <TreeExpander hasChildren={hasChildren} />
+                        <TreeLabel>{node.label}</TreeLabel>
+                    </TreeNodeTrigger>
+                    {hasChildren && (
+                        <TreeNodeContent hasChildren>
+                            {renderNodes(node.children, parentLevel + 1)}
+                        </TreeNodeContent>
+                    )}
+                </TreeNode>
+            );
+        }
+    );
 }
