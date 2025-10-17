@@ -7,7 +7,7 @@ export function TreeExample() {
         <TreeProvider
             // defaultExpandedIds={["src", "components", "ui"]}
             // animateExpand={false}
-            onSelectionChange={(ids) => console.log("Selected:", ids)}
+            // onSelectionChange={(ids) => console.log("Selected:", ids)}
         >
             <TreeView>
                 <TreeNode nodeId="src">
