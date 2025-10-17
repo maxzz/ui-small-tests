@@ -1,5 +1,5 @@
 "use client";
-import { TreeExpander, TreeIcon, TreeLabel, TreeNode, TreeNodeContent, TreeNodeTrigger, TreeProvider, TreeView, } from "@/components/ui/kibo-ui/tree";
+import { TreeExpander, TreeIcon, TreeLabel, TreeNode, TreeNodeContent, TreeNodeProps, TreeNodeTrigger, TreeProvider, TreeView, } from "@/components/ui/kibo-ui/tree";
 import { FileCode, FileJson, FileText } from "lucide-react";
 
 export function TreeExample() {
@@ -113,6 +113,7 @@ export function TreeExample() {
                         </TreeNode>
                     </TreeNodeContent>
                 </TreeNode>
+                <RenderTreeNode label="11package.json" itemId="package.json" nodeId="package.json" onItemClick={(nodeId: string) => console.log(`node id="${nodeId}"`)} />
                 <TreeNode nodeId="package.json">
                     <TreeNodeTrigger>
                         <TreeExpander />
@@ -136,5 +137,20 @@ export function TreeExample() {
                 </TreeNode>
             </TreeView>
         </TreeProvider>
+    );
+}
+
+function RenderTreeNode({ label, itemId, nodeId, className, onItemClick, ...props }: TreeNodeProps & { nodeId: string; label: React.ReactNode; itemId: string; onItemClick?: (nodeId: string) => void; }) {
+    const onClick = (e: React.MouseEvent<HTMLElement>) => {
+        onItemClick?.(itemId);
+    };
+    return (
+        <TreeNode>
+            <TreeNodeTrigger className={className} onClick={onClick} data-uuid={itemId}>
+                <TreeExpander />
+                <TreeIcon icon={<FileCode className="size-4" />} />
+                <TreeLabel>{label}</TreeLabel>
+            </TreeNodeTrigger>
+        </TreeNode>
     );
 }
