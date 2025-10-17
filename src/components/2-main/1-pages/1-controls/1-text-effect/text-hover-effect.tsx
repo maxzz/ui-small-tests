@@ -12,11 +12,8 @@ export function TextHoverEffect({ text, duration, }: { text: string; duration?: 
         () => {
             if (svgRef.current && !!cursor.x && !!cursor.y) {
                 const svgRect = svgRef.current.getBoundingClientRect();
-
                 const cxPercentage = ((cursor.x - svgRect.left) / svgRect.width) * 100;
                 const cyPercentage = ((cursor.y - svgRect.top) / svgRect.height) * 100;
-
-                console.log('useEffect: svgRect', svgRect, 'cursor', cursor, 'cxPercentage', cxPercentage, 'cyPercentage', cyPercentage);
 
                 setMaskPosition({
                     cx: `${cxPercentage}%`,
@@ -33,11 +30,7 @@ export function TextHoverEffect({ text, duration, }: { text: string; duration?: 
             className="select-none"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
-            onMouseMove={(e) => {
-                // console.log({ x: e.clientX, y: e.clientY });
-                
-                setCursor({ x: e.clientX, y: e.clientY });
-            }}
+            onMouseMove={(e) => setCursor({ x: e.clientX, y: e.clientY })}
         >
             <defs>
                 <linearGradient
@@ -61,9 +54,7 @@ export function TextHoverEffect({ text, duration, }: { text: string; duration?: 
                     id="revealMask"
                     gradientUnits="userSpaceOnUse"
                     r="20%"
-                    cx="50%"
-                    cy="50%"
-                    initial={maskPosition}
+                    initial={{ cx: "50%", cy: "50%" }}
                     animate={maskPosition}
                     transition={{ duration: duration ?? 0, ease: "easeOut" }}
                 >
