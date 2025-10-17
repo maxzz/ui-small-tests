@@ -12,6 +12,8 @@ export function LeftList() {
         setLeftItem(nodeId);
     };
 
+    console.log('render LeftList');
+
     return (
         <TreeProvider
         // defaultExpandedIds={["src", "components", "ui"]}
