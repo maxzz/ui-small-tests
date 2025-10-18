@@ -4,6 +4,7 @@ import { LeftList } from "../2-main/ui-main";
 import { LeftItem } from "../2-main/ui-main/8-left-item-atom";
 import { useMemo } from "react";
 import { WelcomeHeroTitle } from "../2-main/1-pages/1-controls/1-text-effect/0-all";
+import { Section3_Footer } from "../3-footer";
 
 export function App() {
     const leftItem = useAtomValue(LeftItem);
@@ -37,7 +38,7 @@ export function App() {
             </div>
 
             <footer className="px-4 py-3 bg-gray-100">
-                3
+                <Section3_Footer />
             </footer>
         </div>
     );
