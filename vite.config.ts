@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://vite.dev/config/
 export default defineConfig({
+    base: '',
     plugins: [
         react(),
         tailwindcss(),
@@ -24,5 +25,6 @@ export default defineConfig({
                 demo: resolve(__dirname, 'index-dashboard.html'),
             },
         },
+        chunkSizeWarningLimit: 1000,
     },
 });
