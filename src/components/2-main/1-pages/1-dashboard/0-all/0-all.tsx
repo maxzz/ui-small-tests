@@ -11,7 +11,7 @@ import { classNames } from "@/utils";
 export function Demo_Dashboard({className, ...rest}: React.ComponentProps<"iframe">) {
     return (
         <iframe
-            src="/index-dashboard.html"
+            src="index-dashboard.html"
             className={classNames("w-full h-[600px] border rounded-lg shadow-lg", className)}
             title="Demo Dashboard"
             {...rest}
