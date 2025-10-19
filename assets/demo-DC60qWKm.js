@@ -1,0 +1,1 @@
+import{i as e,l as t,m as n,t as r,u as i}from"./src-CAxFPyMo.js";var a=n(i()),o=n(t()),s=n(e());(0,o.createRoot)(document.getElementById(`demo-root`)).render((0,s.jsx)(a.StrictMode,{children:(0,s.jsx)(r,{})}));
