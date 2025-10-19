@@ -1,28 +1,21 @@
-import { useAtomValue } from "jotai";
-import { Demo_Dashboard } from "../2-main/1-pages/1-dashboard";
-import { LeftList } from "../2-main/ui-main";
-import { LeftItem } from "../2-main/ui-main/8-left-item-atom";
 import { useMemo } from "react";
-import { WelcomeHeroTitle } from "../2-main/1-pages/1-controls/1-text-effect/0-all";
+import { useAtomValue } from "jotai";
+import { Section1_Header } from "../1-header";
 import { Section3_Footer } from "../3-footer";
+import { LeftList } from "../2-main/ui-main";
+import { LeftItemAtom } from "../2-main/ui-main/8-left-item-atom";
+import { HeroTitleText } from "../2-main/1-pages/1-controls/1-hero-title-text/0-all";
+import { Demo_Dashboard } from "../2-main/1-pages/1-dashboard";
 
 export function App() {
-    const leftItem = useAtomValue(LeftItem);
-    console.log('leftItem', leftItem);
-
-    const Dashboard = useMemo(
-        () => {
-            return <Demo_Dashboard />;
-        }, []
-    );
-
+    //console.log('App render');
     return (
         <div className="min-h-screen grid grid-rows-[auto_1fr_auto] gap-4">
             <header className="px-4 py-3 bg-gray-100">
-                1
+                <Section1_Header />
             </header>
 
-            <div className="place-self-center p-4 w-full max-w-7xl grid grid-cols-2 place-items-center gap-4">
+            <div className="p-4 w-full max-w-7xl grid grid-cols-[minmax(30%,1fr)_4fr] gap-4">
                 <LeftList />
 
                 <div className="px-4 py-3 bg-gray-100">
@@ -38,7 +31,7 @@ export function App() {
 }
 
 function RenderDemoComponent() {
-    const leftItem = useAtomValue(LeftItem);
+    const leftItem = useAtomValue(LeftItemAtom);
     const Dashboard = useMemo(
         () => {
             return <Demo_Dashboard />;
@@ -46,7 +39,7 @@ function RenderDemoComponent() {
     );
     switch (leftItem) {
         case "Hero Title":
-            return <WelcomeHeroTitle />;
+            return <HeroTitleText />;
         case "Dashboard":
             return <>{Dashboard}</>;
         default:

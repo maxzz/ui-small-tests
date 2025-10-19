@@ -297,8 +297,8 @@ export type TreeNodeContentProps = ComponentProps<typeof motion.div> & {
 export const TreeNodeContent = ({ children, hasChildren = false, className, ...rest }: TreeNodeContentProps) => {
     const { animateExpand, expandedIds } = useTree();
     const { nodeId } = useTreeNode();
-    const isExpanded = expandedIds.has(nodeId);
 
+    const isExpanded = expandedIds.has(nodeId);
     return (
         <AnimatePresence>
             {hasChildren && isExpanded && (
@@ -332,11 +332,12 @@ export type TreeExpanderProps = ComponentProps<typeof motion.div> & {
 export const TreeExpander = ({ hasChildren = false, className, onClick, ...rest }: TreeExpanderProps) => {
     const { expandedIds, toggleExpanded } = useTree();
     const { nodeId } = useTreeNode();
-    const isExpanded = expandedIds.has(nodeId);
 
     if (!hasChildren) {
         return <div className="mr-1 size-4" />;
     }
+
+    const isExpanded = expandedIds.has(nodeId);
 
     return (
         <motion.div
@@ -363,21 +364,10 @@ export type TreeIconProps = ComponentProps<typeof motion.div> & {
 export const TreeIcon = ({ icon, hasChildren = false, className, ...rest }: TreeIconProps) => {
     const { showIcons, expandedIds } = useTree();
     const { nodeId } = useTreeNode();
-    const isExpanded = expandedIds.has(nodeId);
 
     if (!showIcons) {
         return null;
     }
-
-    const getDefaultIcon = () =>
-        hasChildren
-            ? (
-                isExpanded
-                    ? <FolderOpen className="size-4" />
-                    : <Folder className="size-4" />
-            ) : (
-                <File className="size-4" />
-            );
 
     return (
         <motion.div
@@ -386,10 +376,21 @@ export const TreeIcon = ({ icon, hasChildren = false, className, ...rest }: Tree
             whileHover={{ scale: 1.1 }}
             {...rest}
         >
-            {icon || getDefaultIcon()}
+            {icon || getDefaultIcon({ hasChildren, isExpanded: expandedIds.has(nodeId) })}
         </motion.div>
     );
 };
+
+function getDefaultIcon({ hasChildren, isExpanded }: { hasChildren: boolean; isExpanded: boolean; }) {
+    return hasChildren
+        ? (
+            isExpanded
+                ? <FolderOpen className="size-4" />
+                : <Folder className="size-4" />
+        ) : (
+            <File className="size-4" />
+        );
+}
 
 export type TreeLabelProps = HTMLAttributes<HTMLSpanElement>;
 

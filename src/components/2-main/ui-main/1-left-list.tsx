@@ -3,11 +3,11 @@ import { useCallback } from "react";
 import { useSetAtom } from "jotai";
 import { TreeExpander, TreeIcon, TreeLabel, TreeNode, TreeNodeContent, TreeNodeProps, TreeNodeTrigger, TreeProvider, TreeView, } from "@/components/ui/kibo-ui/tree";
 import { FileCode, FileJson, FileText } from "lucide-react";
-import { LeftItem } from "./8-left-item-atom";
+import { LeftItemAtom } from "./8-left-item-atom";
 import { type NodeId, type TreeData, treeData } from "./7-tree-data";
 
 export function LeftList() {
-    const setLeftItem = useSetAtom(LeftItem);
+    const setLeftItem = useSetAtom(LeftItemAtom);
     const defaultClick = useCallback((nodeId: NodeId, e: React.MouseEvent<HTMLElement>) => {
         // console.log("Button clicked", e, "nodeid=", (e.currentTarget as HTMLElement).dataset["nodeid"]);
         // console.log(`node id="${nodeId}"`, e);
