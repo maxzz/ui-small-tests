@@ -26,14 +26,7 @@ export function App() {
                 <LeftList />
 
                 <div className="px-4 py-3 bg-gray-100">
-                    {
-                        leftItem === "public"
-                            // ? <div className="bg-green-500">123</div>
-                            ? <WelcomeHeroTitle />
-                            : leftItem === "hero.png"
-                                ? (<>{Dashboard}</>)
-                                : <div className="bg-green-500">123</div>
-                    }
+                    <RenderDemoComponent />
                 </div>
             </div>
 
@@ -42,4 +35,22 @@ export function App() {
             </footer>
         </div>
     );
+}
+
+function RenderDemoComponent() {
+    const leftItem = useAtomValue(LeftItem);
+    const Dashboard = useMemo(
+        () => {
+            return <Demo_Dashboard />;
+        }, []
+    );
+    switch (leftItem) {
+        case "public":
+            // ? <div className="bg-green-500">123</div>
+            return <WelcomeHeroTitle />;
+        case "dashboard":
+            return <>{Dashboard}</>;
+        default:
+            return <div className="bg-green-500">123</div>;
+    }
 }

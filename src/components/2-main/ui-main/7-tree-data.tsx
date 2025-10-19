@@ -1,4 +1,4 @@
-export type NodeId = "" | "public" | "images" | "logo.svg" | "hero.png";
+export type NodeId = "" | "public" | "images" | "logo.svg" | "dashboard";
 
 export type TreeData<T = string> = {
     id: T;
@@ -12,7 +12,7 @@ export const treeData: TreeData<NodeId> = {
             id: "logo.svg",
         },
         {
-            id: "hero.png",
+            id: "dashboard",
         },
     ],
 };
