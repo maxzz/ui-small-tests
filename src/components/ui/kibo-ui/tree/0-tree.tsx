@@ -406,3 +406,5 @@ export type TreeLabelProps = HTMLAttributes<HTMLSpanElement>;
 export const TreeLabel = ({ className, ...props }: TreeLabelProps) => (
     <span className={cn("font flex-1 truncate text-sm", className)} {...props} />
 );
+
+//TODO: click to expand/collapse should be on the icon, not on the label
