@@ -28,9 +28,11 @@ export function LeftList() {
     );
 }
 
-type TreeData = {
-    id: string;
-    children?: TreeData[];
+type NodeId = "public" | "images" | "logo.svg" | "hero.png";
+
+type TreeData<T = string> = {
+    id: T;
+    children?: TreeData<T>[];
 };
 
 function consvertTreeDataToTreeSpec(data: TreeData, level = 0): TreeSpec {
@@ -76,7 +78,7 @@ function renderNodes(nodes: TreeSpec[], parentLevel = 0, options: { onItemClick?
     );
 }
 
-const treeData: TreeData = {
+const treeData: TreeData<NodeId> = {
     id: "public",
     children: [
         {
