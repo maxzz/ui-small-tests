@@ -33,14 +33,6 @@ type TreeData = {
     children?: TreeData[];
 };
 
-type TreeSpec = {
-    id: string;
-    label: React.ReactNode;
-    icon?: React.ReactNode;
-    level: number;
-    children: TreeSpec[];
-};
-
 function consvertTreeDataToTreeSpec(data: TreeData, level = 0): TreeSpec {
     return {
         id: data.id,
@@ -49,6 +41,14 @@ function consvertTreeDataToTreeSpec(data: TreeData, level = 0): TreeSpec {
         children: data.children ? data.children.map(child => consvertTreeDataToTreeSpec(child, level + 1)) : [],
     };
 }
+
+type TreeSpec = {
+    id: string;
+    label: React.ReactNode;
+    icon?: React.ReactNode;
+    level: number;
+    children: TreeSpec[];
+};
 
 function renderNodes(nodes: TreeSpec[], parentLevel = 0, options: { onItemClick?: (nodeId: string, e: React.MouseEvent<HTMLElement>) => void; }) {
     return nodes.map(
@@ -77,21 +77,16 @@ function renderNodes(nodes: TreeSpec[], parentLevel = 0, options: { onItemClick?
 }
 
 const treeData: TreeData = {
-    id: "root",
+    id: "public",
     children: [
         {
-            id: "public",
+            id: "images",
             children: [
                 {
-                    id: "images",
-                    children: [
-                        {
-                            id: "logo.svg",
-                        },
-                        {
-                            id: "hero.png",
-                        },
-                    ],
+                    id: "logo.svg",
+                },
+                {
+                    id: "hero.png",
                 },
             ],
         },

@@ -1,6 +1,6 @@
 import { TextHoverEffect } from "./text-hover-effect";
 
-export function WelcomeHeroTitle({ allowHandleFiles }: { allowHandleFiles: boolean; }) {
+export function WelcomeHeroTitle() {
     return (<>
         <div className="text-2xl font-extrabold opacity-30 scale-y-125 select-none" style={titleStyle}>
             Welcome to the Password Manager Admin Tool

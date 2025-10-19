@@ -29,7 +29,7 @@ export function App() {
                     {
                         leftItem === "public"
                             // ? <div className="bg-green-500">123</div>
-                            ? <WelcomeHeroTitle allowHandleFiles={true} />
+                            ? <WelcomeHeroTitle />
                             : leftItem === "hero.png"
                                 ? (<>{Dashboard}</>)
                                 : <div className="bg-green-500">123</div>
