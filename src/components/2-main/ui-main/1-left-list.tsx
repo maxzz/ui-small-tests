@@ -22,8 +22,8 @@ export function LeftList() {
         // onSelectionChange={(ids) => console.log("Selected:", ids)}
         >
             <TreeView>
-                <TreeNode nodeId="public" className="[--border:var(--color-red-500)]">
-                    {/* <RenderTreeNodeTrigger nodeId="public" label="public" hasChildren onItemClick={defaultClick} /> */}
+                {renderNodes([consvertTreeDataToTreeSpec(treeData, 0)], 0)}
+                {/* <TreeNode nodeId="public" className="[--border:var(--color-gray-500)]/30">
                     <TreeNodeTrigger data-nodeid={"public"} onClick={(e) => defaultClick?.("public", e)}>
                         <TreeExpander hasChildren />
                         <TreeIcon hasChildren />
@@ -41,7 +41,7 @@ export function LeftList() {
                             </TreeNodeContent>
                         </TreeNode>
                     </TreeNodeContent>
-                </TreeNode>
+                </TreeNode> */}
             </TreeView>
         </TreeProvider>
     );
@@ -100,3 +100,40 @@ function renderNodes(nodes: TreeSpec[], parentLevel = 0) {
         }
     );
 }
+
+type TreeData = {
+    id: string;
+    children?: TreeData[];
+};
+
+//conver tree data to tree spec and update level according to parent. Starting with root node
+function consvertTreeDataToTreeSpec(data: TreeData, level = 0): TreeSpec {
+    return {
+        id: data.id,
+        level,
+        label: data.id,
+        children: data.children ? data.children.map(child => consvertTreeDataToTreeSpec(child, level + 1)) : [],
+    };
+}
+
+const treeData: TreeData = {
+    id: "root",
+    children: [
+        {
+            id: "public",
+            children: [
+                {
+                    id: "images",
+                    children: [
+                        {
+                            id: "logo.svg",
+                        },
+                        {
+                            id: "hero.png",
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+};
