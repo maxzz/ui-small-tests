@@ -21,7 +21,7 @@ export function LeftList() {
         // animateExpand={false}
         // onSelectionChange={(ids) => console.log("Selected:", ids)}
         >
-            <TreeView>
+            <TreeView className="[--border:var(--color-gray-500)]/30">
                 {renderNodes([consvertTreeDataToTreeSpec(treeData, 0)], 0)}
                 {/* <TreeNode nodeId="public" className="[--border:var(--color-gray-500)]/30">
                     <TreeNodeTrigger data-nodeid={"public"} onClick={(e) => defaultClick?.("public", e)}>
@@ -71,8 +71,9 @@ function RenderTreeNodeTrigger({ nodeId, label, hasChildren, icon, className, on
 
 type TreeSpec = {
     id: string;
-    level: number;
     label: React.ReactNode;
+    icon?: React.ReactNode;
+    level: number;
     children: TreeSpec[];
 };
 
@@ -86,6 +87,7 @@ function renderNodes(nodes: TreeSpec[], parentLevel = 0) {
 
                     <TreeNodeTrigger className="py-0.5">
                         <TreeExpander hasChildren={hasChildren} />
+                        <TreeIcon icon={node.icon ? node.icon : <FileCode className="size-4" />} hasChildren={hasChildren} />
                         <TreeLabel>{node.label}</TreeLabel>
                     </TreeNodeTrigger>
 
