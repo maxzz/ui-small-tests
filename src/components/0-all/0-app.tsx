@@ -5,6 +5,7 @@ import { LeftItem } from "../2-main/ui-main/8-left-item-atom";
 import { useMemo } from "react";
 import { WelcomeHeroTitle } from "../2-main/1-pages/1-controls/1-text-effect/0-all";
 import { Section3_Footer } from "../3-footer";
+import { ca } from "zod/v4/locales";
 
 export function App() {
     const leftItem = useAtomValue(LeftItem);
@@ -45,10 +46,9 @@ function RenderDemoComponent() {
         }, []
     );
     switch (leftItem) {
-        case "public":
-            // ? <div className="bg-green-500">123</div>
+        case "Hero Title":
             return <WelcomeHeroTitle />;
-        case "dashboard":
+        case "Dashboard":
             return <>{Dashboard}</>;
         default:
             return <div className="bg-green-500">123</div>;
