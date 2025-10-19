@@ -22,7 +22,7 @@ export function LeftList() {
         // onSelectionChange={(ids) => console.log("Selected:", ids)}
         >
             <TreeView className="[--border:var(--color-gray-500)]/30">
-                {renderNodes([consvertTreeDataToTreeSpec(treeData, 0)], 0)}
+                {renderNodes([consvertTreeDataToTreeSpec(treeData, 0)], 0, { onItemClick: defaultClick })}
                 {/* <TreeNode nodeId="public" className="[--border:var(--color-gray-500)]/30">
                     <TreeNodeTrigger data-nodeid={"public"} onClick={(e) => defaultClick?.("public", e)}>
                         <TreeExpander hasChildren />
@@ -77,7 +77,7 @@ type TreeSpec = {
     children: TreeSpec[];
 };
 
-function renderNodes(nodes: TreeSpec[], parentLevel = 0) {
+function renderNodes(nodes: TreeSpec[], parentLevel = 0, options: { onItemClick?: (nodeId: string, e: React.MouseEvent<HTMLElement>) => void; }) {
     return nodes.map(
         (node, idx) => {
             const hasChildren = node.children.length > 0;
@@ -85,7 +85,7 @@ function renderNodes(nodes: TreeSpec[], parentLevel = 0) {
             return (
                 <TreeNode key={node.id} nodeId={node.id} level={node.level} isLast={isLast}>
 
-                    <TreeNodeTrigger className="py-0.5">
+                    <TreeNodeTrigger className="py-0.5" onClick={options.onItemClick && ((e) => options.onItemClick?.(node.id, e))}>
                         <TreeExpander hasChildren={hasChildren} />
                         <TreeIcon icon={node.icon ? node.icon : <FileCode className="size-4" />} hasChildren={hasChildren} />
                         <TreeLabel>{node.label}</TreeLabel>
@@ -93,7 +93,7 @@ function renderNodes(nodes: TreeSpec[], parentLevel = 0) {
 
                     {hasChildren && (
                         <TreeNodeContent hasChildren>
-                            {renderNodes(node.children, parentLevel + 1)}
+                            {renderNodes(node.children, parentLevel + 1, options)}
                         </TreeNodeContent>
                     )}
 
