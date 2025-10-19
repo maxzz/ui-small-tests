@@ -23,51 +23,15 @@ export function LeftList() {
         >
             <TreeView className="[--border:var(--color-gray-500)]/30">
                 {renderNodes([consvertTreeDataToTreeSpec(treeData, 0)], 0, { onItemClick: defaultClick })}
-                {/* <TreeNode nodeId="public" className="[--border:var(--color-gray-500)]/30">
-                    <TreeNodeTrigger data-nodeid={"public"} onClick={(e) => defaultClick?.("public", e)}>
-                        <TreeExpander hasChildren />
-                        <TreeIcon hasChildren />
-                        <TreeLabel>public</TreeLabel>
-                    </TreeNodeTrigger>
-
-                    <TreeNodeContent hasChildren>
-                        <TreeNode isLast level={1} nodeId="images">
-
-                            <RenderTreeNodeTrigger nodeId="images" label="images" hasChildren onItemClick={defaultClick} />
-
-                            <TreeNodeContent hasChildren>
-                                <RenderTreeNode level={2} label="logo.svg" nodeId="logo.svg" onItemClick={defaultClick} icon={<FileText className="size-4" />} />
-                                <RenderTreeNode isLast level={2} label="hero.png" nodeId="hero.png" onItemClick={defaultClick} icon={<FileText className="size-4" />} />
-                            </TreeNodeContent>
-                        </TreeNode>
-                    </TreeNodeContent>
-                </TreeNode> */}
             </TreeView>
         </TreeProvider>
     );
 }
 
-//
-
-function RenderTreeNode({ nodeId, label, icon, className, onItemClick, hasChildren, level, isLast }: { nodeId: string; label: React.ReactNode; icon?: React.ReactNode; onItemClick?: (nodeId: string, e: React.MouseEvent<HTMLElement>) => void; className?: string; hasChildren?: boolean; level?: number; isLast?: boolean; }) {
-    return (
-        <TreeNode nodeId={nodeId} level={level} isLast={isLast}>
-            <RenderTreeNodeTrigger nodeId={nodeId} label={label} icon={icon} className={className} onItemClick={onItemClick} hasChildren={hasChildren} />
-        </TreeNode>
-    );
-}
-
-function RenderTreeNodeTrigger({ nodeId, label, hasChildren, icon, className, onItemClick }: { nodeId: string; label: React.ReactNode; icon?: React.ReactNode; onItemClick?: (nodeId: string, e: React.MouseEvent<HTMLElement>) => void; className?: string; hasChildren?: boolean; }) {
-    return (
-        <TreeNodeTrigger data-nodeid={nodeId} className={className} onClick={(e) => onItemClick?.(nodeId, e)}>
-            <TreeExpander hasChildren={hasChildren} />
-            <TreeIcon icon={icon ? icon : <FileCode className="size-4" />} hasChildren={hasChildren} />
-            <TreeLabel>{label}</TreeLabel>
-        </TreeNodeTrigger>
-    );
-}
-
-//
+type TreeData = {
+    id: string;
+    children?: TreeData[];
+};
 
 type TreeSpec = {
     id: string;
@@ -77,6 +41,15 @@ type TreeSpec = {
     children: TreeSpec[];
 };
 
+function consvertTreeDataToTreeSpec(data: TreeData, level = 0): TreeSpec {
+    return {
+        id: data.id,
+        level,
+        label: data.id,
+        children: data.children ? data.children.map(child => consvertTreeDataToTreeSpec(child, level + 1)) : [],
+    };
+}
+
 function renderNodes(nodes: TreeSpec[], parentLevel = 0, options: { onItemClick?: (nodeId: string, e: React.MouseEvent<HTMLElement>) => void; }) {
     return nodes.map(
         (node, idx) => {
@@ -85,7 +58,7 @@ function renderNodes(nodes: TreeSpec[], parentLevel = 0, options: { onItemClick?
             return (
                 <TreeNode key={node.id} nodeId={node.id} level={node.level} isLast={isLast}>
 
-                    <TreeNodeTrigger className="py-0.5" onClick={options.onItemClick && ((e) => options.onItemClick?.(node.id, e))}>
+                    <TreeNodeTrigger data-nodeid={node.id} className="py-0.5" onClick={options.onItemClick && ((e) => options.onItemClick?.(node.id, e))}>
                         <TreeExpander hasChildren={hasChildren} />
                         <TreeIcon icon={node.icon ? node.icon : <FileCode className="size-4" />} hasChildren={hasChildren} />
                         <TreeLabel>{node.label}</TreeLabel>
@@ -101,21 +74,6 @@ function renderNodes(nodes: TreeSpec[], parentLevel = 0, options: { onItemClick?
             );
         }
     );
-}
-
-type TreeData = {
-    id: string;
-    children?: TreeData[];
-};
-
-//conver tree data to tree spec and update level according to parent. Starting with root node
-function consvertTreeDataToTreeSpec(data: TreeData, level = 0): TreeSpec {
-    return {
-        id: data.id,
-        level,
-        label: data.id,
-        children: data.children ? data.children.map(child => consvertTreeDataToTreeSpec(child, level + 1)) : [],
-    };
 }
 
 const treeData: TreeData = {
