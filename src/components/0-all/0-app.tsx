@@ -9,10 +9,10 @@ import { Demo_Dashboard } from "../2-main/1-pages/1-dashboard";
 
 export function App() {
     return (
-        <div className="min-h-screen grid grid-rows-[auto_1fr_auto]">
+        <div className="h-screen overflow-clip  grid grid-rows-[auto_1fr_auto]">
             <Section1_Header className="bg-gray-100" />
 
-            <div className="p-4 w-full max-w-7xl grid grid-cols-[minmax(30%,1fr)_4fr] gap-4">
+            <div className="max-w-7xl grid grid-cols-[minmax(30%,1fr)_4fr] gap-4">
                 <LeftList />
 
                 <div className="px-4 py-3 bg-gray-100">
@@ -20,7 +20,7 @@ export function App() {
                 </div>
             </div>
 
-            <footer className="px-4 py-3 bg-gray-100">
+            <footer className="bg-gray-100">
                 <Section3_Footer />
             </footer>
         </div>
@@ -40,6 +40,6 @@ function RenderDemoComponent() {
         case "Dashboard":
             return <>{Dashboard}</>;
         default:
-            return <div className="bg-green-500">123</div>;
+            return <div className="h-full bg-green-500/10">Space for rent</div>;
     }
 }
