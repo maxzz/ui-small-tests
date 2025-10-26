@@ -1,24 +1,11 @@
 import { type HTMLAttributes } from "react";
-import { classNames, envBuildVersion, envModifiedDate } from "@/utils";
-import { IconSunnyvale } from "../ui/icons";
+import { classNames } from "@/utils";
 
 export function Section1_Header({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     return (
-        <div className={classNames("pb-1 h-6 text-xs dark:bg-black dark:text-slate-600 flex items-center justify-center", className)} {...rest}>
-
-            <a className={urlClasses} href="https://github.com/maxzz" target="_blank" rel="noopener">
-                Created by Max Zakharzhevskiy
-            </a>
-
-            <IconSunnyvale
-                className="pt-1 size-8 hover:scale-150 transition-all duration-300"
-                title={`${envModifiedDate()}\n   Sunnyvale Produce\n\tVersion ${envBuildVersion()}`}
-            />
-
-            <a className={urlClasses} href="https://github.com/maxzz/ui-small-tests" target="_blank" rel="noopener">
-                Open source code on GitHub
-            </a>
-        </div>
+        <header className={classNames("px-4 pb-1 text-xs text-gray-500 dark:bg-black dark:text-slate-600 border-border border-b", className)} {...rest}>
+            ... the time is gone, the song is over, thought I'd something more to say.
+        </header>
     );
 }
 

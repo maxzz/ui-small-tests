@@ -8,12 +8,9 @@ import { HeroTitleText } from "../2-main/1-pages/1-controls/1-hero-title-text/0-
 import { Demo_Dashboard } from "../2-main/1-pages/1-dashboard";
 
 export function App() {
-    //console.log('App render');
     return (
-        <div className="min-h-screen grid grid-rows-[auto_1fr_auto] gap-4">
-            <header className="px-4 py-3 bg-gray-100">
-                <Section1_Header />
-            </header>
+        <div className="min-h-screen grid grid-rows-[auto_1fr_auto]">
+            <Section1_Header className="bg-gray-100" />
 
             <div className="p-4 w-full max-w-7xl grid grid-cols-[minmax(30%,1fr)_4fr] gap-4">
                 <LeftList />
