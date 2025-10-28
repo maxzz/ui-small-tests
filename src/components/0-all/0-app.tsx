@@ -6,7 +6,7 @@ import { LeftList } from "../2-main/ui-main";
 import { LeftItemAtom } from "../2-main/ui-main/8-left-item-atom";
 import { HeroTitleText } from "../2-main/1-pages/1-controls/1-hero-title-text/0-all";
 import { Demo_Dashboard } from "../2-main/1-pages/1-dashboard";
-import CardsDemo from "../2-main/1-pages/cards";
+import { CardsDemo } from "../2-main/1-pages/cards";
 import { ScrollArea } from "../ui/shadcn/scroll-area";
 
 export function App() {
