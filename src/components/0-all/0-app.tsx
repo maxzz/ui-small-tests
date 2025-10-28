@@ -14,10 +14,10 @@ export function App() {
         <div className="h-screen grid grid-rows-[auto_1fr_auto]">
             <Section1_Header className="bg-gray-100" />
 
-            <div className="max-w-7xl grid grid-cols-[minmax(30%,1fr)_4fr] gap-4 overflow-hidden">
+            <div className="grid grid-cols-[250px_1fr] gap-4 overflow-hidden">
                 <LeftList />
 
-                <div className="min-h-0 px-4 py-3 bg-gray-100">
+                <div className="@container min-h-0 px-4 py-3 bg-gray-100 1scale-50 origin-top-left">
                     <RenderDemoComponent />
                 </div>
             </div>
@@ -54,10 +54,8 @@ function RenderDemoComponent() {
 
 function CardsContainer() {
     return (
-        <ScrollArea className="size-full">
-            <div className="size-full bg-pink-500">
-                <CardsDemo />
-            </div>
+        <ScrollArea className="size-full bg-pink-100">
+            <CardsDemo />
         </ScrollArea>
     );
 }
