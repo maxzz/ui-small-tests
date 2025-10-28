@@ -7,16 +7,16 @@ export function CardsStats() {
     return (<>
         <Card>
             <CardHeader>
-                <CardDescription>Total Revenue</CardDescription>
+                <CardDescription>
+                    Total Revenue
+                </CardDescription>
                 <CardTitle className="text-3xl">$15,231.89</CardTitle>
                 <CardDescription>+20.1% from last month</CardDescription>
             </CardHeader>
+
             <CardContent className="pb-0">
                 <ChartContainer config={chartConfig} className="h-[90px] w-full">
-                    <LineChart
-                        data={data}
-                        margin={{ top: 5, right: 10, left: 10, bottom: 0, }}
-                    >
+                    <LineChart data={data} margin={{ top: 5, right: 10, left: 10, bottom: 0, }}>
                         <Line
                             type="monotone"
                             strokeWidth={2}
@@ -31,17 +31,16 @@ export function CardsStats() {
 
         <Card className="relative flex flex-col overflow-hidden pb-0 @5xl:hidden @7xl:flex">
             <CardHeader>
-                <CardDescription>Subscriptions</CardDescription>
+                <CardDescription>
+                    Subscriptions
+                </CardDescription>
                 <CardTitle className="text-3xl">+2,350</CardTitle>
                 <CardDescription>+180.1% from last month</CardDescription>
             </CardHeader>
+
             <CardContent className="relative mt-auto flex-1 p-0">
                 <ChartContainer config={chartConfig} className="relative size-full h-[90px]">
-                    <AreaChart
-                        data={data}
-                        margin={{ left: 0, right: 0, }}
-                        className="size-fit"
-                    >
+                    <AreaChart data={data} margin={{ left: 0, right: 0, }} className="size-fit">
                         <Area
                             dataKey="subscription"
                             fill="var(--color-subscription)"
