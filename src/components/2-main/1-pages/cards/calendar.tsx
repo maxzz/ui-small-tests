@@ -2,8 +2,8 @@
 
 import { addDays } from "date-fns";
 
-import { Calendar } from "@/components/ui/calendar";
-import { Card, CardContent } from "@/components/ui/card";
+import { Calendar } from "@/components/ui/shadcn/calendar";
+import { Card, CardContent } from "@/components/ui/shadcn/card";
 
 const start = new Date(2025, 5, 5);
 

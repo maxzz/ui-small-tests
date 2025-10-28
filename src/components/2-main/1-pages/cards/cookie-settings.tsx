@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/shadcn/button";
 import {
   Card,
   CardContent,
@@ -8,9 +8,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
+} from "@/components/ui/shadcn/card";
+import { Label } from "@/components/ui/shadcn//label";
+import { Switch } from "@/components/ui/shadcn/switch";
 
 export function CardsCookieSettings() {
   return (

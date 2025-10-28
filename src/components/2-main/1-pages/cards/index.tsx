@@ -1,15 +1,15 @@
-import { CardsActivityGoal } from "@/components/examples/cards/activity-goal";
-import { CardsCalendar } from "@/components/examples/cards/calendar";
-import { CardsChat } from "@/components/examples/cards/chat";
-import { CardsCookieSettings } from "@/components/examples/cards/cookie-settings";
-import { CardsCreateAccount } from "@/components/examples/cards/create-account";
-import { CardsExerciseMinutes } from "@/components/examples/cards/exercise-minutes";
-import { CardsForms } from "@/components/examples/cards/forms";
-import { CardsPayments } from "@/components/examples/cards/payments";
-import { CardsReportIssue } from "@/components/examples/cards/report-issue";
-import { CardsShare } from "@/components/examples/cards/share";
-import { CardsStats } from "@/components/examples/cards/stats";
-import { CardsTeamMembers } from "@/components/examples/cards/team-members";
+import { CardsActivityGoal } from "./activity-goal";
+import { CardsCalendar } from "./calendar";
+import { CardsChat } from "./chat";
+import { CardsCookieSettings } from "./cookie-settings";
+import { CardsCreateAccount } from "./create-account";
+import { CardsExerciseMinutes } from "./exercise-minutes";
+import { CardsForms } from "./forms";
+import { CardsPayments } from "./payments";
+import { CardsReportIssue } from "./report-issue";
+import { CardsShare } from "./share";
+import { CardsStats } from "./stats";
+import { CardsTeamMembers } from "./team-members";
 import { DatePickerWithRange } from "./date-picker-with-range";
 import { GithubCard } from "./github-card";
 

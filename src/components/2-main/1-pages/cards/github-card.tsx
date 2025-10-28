@@ -2,9 +2,9 @@
 
 import { Circle, Star } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import Link from "next/link";
+import { Button } from "@/components/ui/shadcn/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/shadcn/card";
+//import Link from "next/link";
 
 export function GithubCard() {
   return (
@@ -43,4 +43,8 @@ export function GithubCard() {
       </CardContent>
     </Card>
   );
+}
+
+function Link(props: React.ComponentProps<"a">) {
+    return <a {...props} target="_blank" rel="noopener" />;
 }

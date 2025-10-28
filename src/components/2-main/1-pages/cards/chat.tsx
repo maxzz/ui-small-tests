@@ -2,9 +2,9 @@
 
 import * as React from "react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/shadcn/avatar";
+import { Button } from "@/components/ui/shadcn/button";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/shadcn/card";
 import {
   Command,
   CommandEmpty,
@@ -12,8 +12,8 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
-import { Input } from "@/components/ui/input";
+} from "@/components/ui/shadcn/command";
+import { Input } from "@/components/ui/shadcn/input";
 import {
   ResponsiveDialog,
   ResponsiveDialogContent,
@@ -21,9 +21,9 @@ import {
   ResponsiveDialogFooter,
   ResponsiveDialogHeader,
   ResponsiveDialogTitle,
-} from "@/components/ui/revola";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
+} from "@/components/ui/shadcn/revola";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/shadcn/tooltip";
+import { cn } from "@/utils";
 import { ArrowUpIcon, CheckIcon, PlusIcon } from "lucide-react";
 
 const users = [
