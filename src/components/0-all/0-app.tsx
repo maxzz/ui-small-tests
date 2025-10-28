@@ -12,14 +12,16 @@ import { ScrollArea } from "../ui/shadcn/scroll-area";
 
 export function App() {
     return (
-        <div className="h-screen overflow-clip  grid grid-rows-[auto_1fr_auto]">
+        <div className="h-screen grid grid-rows-[auto_1fr_auto]">
             <Section1_Header className="bg-gray-100" />
 
-            <div className="max-w-7xl grid grid-cols-[minmax(30%,1fr)_4fr] gap-4">
+            <div className="1max-w-7xl grid grid-cols-[minmax(30%,1fr)_4fr] gap-4 overflow-hidden">
                 <LeftList />
 
-                <div className="px-4 py-3 bg-gray-100">
-                    <RenderDemoComponent />
+                <div className="min-h-0 px-4 py-3 bg-gray-100">
+                    <ScrollArea className="size-full">
+                        <RenderDemoComponent />
+                    </ScrollArea>
                 </div>
             </div>
 
@@ -43,8 +45,16 @@ function RenderDemoComponent() {
         case "Dashboard":
             return <>{Dashboard}</>;
         case "Cards":
-            return <ScrollArea className="size-full"><CardsDemo /></ScrollArea>            ;
+            return <CardsContainer />;
         default:
             return <div className="h-full bg-green-500/10">Space for rent</div>;
     }
+}
+
+function CardsContainer() {
+    return (
+        <div className="flex flex-col min-h-0 size-full">
+            <CardsDemo />
+        </div>
+    );
 }
