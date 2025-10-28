@@ -8,6 +8,7 @@ import { HeroTitleText } from "../2-main/1-pages/1-controls/1-hero-title-text/0-
 import { Demo_Dashboard } from "../2-main/1-pages/1-dashboard";
 import { ca } from "date-fns/locale";
 import CardsDemo from "../2-main/1-pages/cards";
+import { ScrollArea } from "../ui/shadcn/scroll-area";
 
 export function App() {
     return (
@@ -42,7 +43,7 @@ function RenderDemoComponent() {
         case "Dashboard":
             return <>{Dashboard}</>;
         case "Cards":
-            return <CardsDemo />;
+            return <ScrollArea className="size-full"><CardsDemo /></ScrollArea>            ;
         default:
             return <div className="h-full bg-green-500/10">Space for rent</div>;
     }
