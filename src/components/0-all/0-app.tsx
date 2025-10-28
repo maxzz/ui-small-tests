@@ -6,7 +6,6 @@ import { LeftList } from "../2-main/ui-main";
 import { LeftItemAtom } from "../2-main/ui-main/8-left-item-atom";
 import { HeroTitleText } from "../2-main/1-pages/1-controls/1-hero-title-text/0-all";
 import { Demo_Dashboard } from "../2-main/1-pages/1-dashboard";
-import { ca } from "date-fns/locale";
 import CardsDemo from "../2-main/1-pages/cards";
 import { ScrollArea } from "../ui/shadcn/scroll-area";
 
@@ -15,13 +14,11 @@ export function App() {
         <div className="h-screen grid grid-rows-[auto_1fr_auto]">
             <Section1_Header className="bg-gray-100" />
 
-            <div className="1max-w-7xl grid grid-cols-[minmax(30%,1fr)_4fr] gap-4 overflow-hidden">
+            <div className="max-w-7xl grid grid-cols-[minmax(30%,1fr)_4fr] gap-4 overflow-hidden">
                 <LeftList />
 
                 <div className="min-h-0 px-4 py-3 bg-gray-100">
-                    <ScrollArea className="size-full">
-                        <RenderDemoComponent />
-                    </ScrollArea>
+                    <RenderDemoComponent />
                 </div>
             </div>
 
@@ -34,11 +31,15 @@ export function App() {
 
 function RenderDemoComponent() {
     const leftItem = useAtomValue(LeftItemAtom);
+
     const Dashboard = useMemo(
         () => {
-            return <Demo_Dashboard />;
+            return <div className="size-full">
+                <Demo_Dashboard />
+            </div>;
         }, []
     );
+
     switch (leftItem) {
         case "Hero Title":
             return <HeroTitleText />;
@@ -47,14 +48,16 @@ function RenderDemoComponent() {
         case "Cards":
             return <CardsContainer />;
         default:
-            return <div className="h-full bg-green-500/10">Space for rent</div>;
+            return <div className="px-4 py-2 h-full text-xs text-green-950 bg-green-500/10 uppercase">Space for rent</div>;
     }
 }
 
 function CardsContainer() {
     return (
-        <div className="flex flex-col min-h-0 size-full">
-            <CardsDemo />
-        </div>
+        <ScrollArea className="size-full">
+            <div className="size-full bg-pink-500">
+                <CardsDemo />
+            </div>
+        </ScrollArea>
     );
 }

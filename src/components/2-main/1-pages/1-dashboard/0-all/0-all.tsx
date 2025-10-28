@@ -12,7 +12,7 @@ export function Demo_Dashboard({className, ...rest}: React.ComponentProps<"ifram
     return (
         <iframe
             src="index-dashboard.html"
-            className={classNames("w-full h-full border rounded-lg shadow-lg", className)}
+            className={classNames("size-full border rounded-lg shadow-lg", className)}
             title="Demo Dashboard"
             {...rest}
         />

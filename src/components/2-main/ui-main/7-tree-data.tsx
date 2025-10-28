@@ -12,13 +12,13 @@ export const treeData: TreeData<NodeId> = {
     id: "Examples",
     children: [
         {
-            id: "Hero Title",
+            id: "Cards",
         },
         {
             id: "Dashboard",
         },
         {
-            id: "Cards",
+            id: "Hero Title",
         },
     ],
 };
