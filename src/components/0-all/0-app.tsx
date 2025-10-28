@@ -6,6 +6,8 @@ import { LeftList } from "../2-main/ui-main";
 import { LeftItemAtom } from "../2-main/ui-main/8-left-item-atom";
 import { HeroTitleText } from "../2-main/1-pages/1-controls/1-hero-title-text/0-all";
 import { Demo_Dashboard } from "../2-main/1-pages/1-dashboard";
+import { ca } from "date-fns/locale";
+import CardsDemo from "../2-main/1-pages/cards";
 
 export function App() {
     return (
@@ -39,6 +41,8 @@ function RenderDemoComponent() {
             return <HeroTitleText />;
         case "Dashboard":
             return <>{Dashboard}</>;
+        case "Cards":
+            return <CardsDemo />;
         default:
             return <div className="h-full bg-green-500/10">Space for rent</div>;
     }
