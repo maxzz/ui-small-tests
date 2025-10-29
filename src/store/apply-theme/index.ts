@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { type ThemeEditorState, defaultPresets, defaultThemeState } from "./utils";
+import { type ThemeEditorState, type ThemeStyles, defaultPresets, defaultThemeState } from "./utils";
 
 const _themeStateAtom = atom<ThemeEditorState>(defaultThemeState);
 
@@ -25,3 +25,29 @@ export const themeNamesAtom = atom<string[]>(
         return rv;
     }
 );
+
+//
+
+export function getPresetThemeStyles(name: string): ThemeStyles {
+    const defaultTheme = defaultThemeState.styles;
+    if (name === "default") {
+        return defaultTheme;
+    }
+
+    const preset = defaultPresets[name]; // const store = useThemePresetStore.getState(); const preset = store.getPreset(name);
+    if (!preset) {
+        return defaultTheme;
+    }
+
+    return {
+        light: {
+            ...defaultTheme.light,
+            ...(preset.styles.light || {}),
+        },
+        dark: {
+            ...defaultTheme.dark,
+            ...(preset.styles.light || {}),
+            ...(preset.styles.dark || {}),
+        },
+    };
+}

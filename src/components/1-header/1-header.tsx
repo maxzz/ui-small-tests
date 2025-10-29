@@ -43,7 +43,13 @@ flex items-center justify-between \
 ";
 
 
-const ThemeColors: React.FC<ThemeColorsProps> = ({ presetName, mode }) => {
+function ColorBox({ color }: { color: string; }) {
+    return (
+        <div className="border-muted h-3 w-3 rounded-sm border" style={{ backgroundColor: color }} />
+    );
+}
+
+function ThemeColors({ presetName, mode }: { presetName: string; mode: "light" | "dark"; }) {
     const styles = getPresetThemeStyles(presetName)[mode];
     return (
         <div className="flex gap-0.5">
@@ -53,4 +59,4 @@ const ThemeColors: React.FC<ThemeColorsProps> = ({ presetName, mode }) => {
             <ColorBox color={styles.border} />
         </div>
     );
-};
+}
