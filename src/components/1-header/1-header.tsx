@@ -41,3 +41,16 @@ dark:bg-black border-border \
 border-b \
 flex items-center justify-between \
 ";
+
+
+const ThemeColors: React.FC<ThemeColorsProps> = ({ presetName, mode }) => {
+    const styles = getPresetThemeStyles(presetName)[mode];
+    return (
+        <div className="flex gap-0.5">
+            <ColorBox color={styles.primary} />
+            <ColorBox color={styles.accent} />
+            <ColorBox color={styles.secondary} />
+            <ColorBox color={styles.border} />
+        </div>
+    );
+};
