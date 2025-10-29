@@ -14,19 +14,18 @@ export function Section1_Header({ className, ...rest }: HTMLAttributes<HTMLDivEl
                 ... the time is gone, the song is over, thought I'd something more to say.
             </div>
 
-            <div className="text-xs">
+            <div className="text-xs flex items-center gap-2">
+                <ThemeColors presetName={themeName || "default"} mode="light" />
+
                 <Select defaultValue={themeName} onValueChange={setThemeName}>
                     <SelectTrigger className="px-2 !h-6 text-xs rounded-sm">
-                        <div className="flex gap-0.5">
-                            {/* <ThemeColors presetName={themeName || "default"} mode="light" /> */}
-                            <SelectValue placeholder="Select" />
-                        </div>
+                        <SelectValue placeholder="Select" />
                     </SelectTrigger>
 
                     <SelectContent>
                         {themeNames.map((name) => (
-                            <div className="flex gap-0.5">
-                                <ThemeColors2 presetName={name} mode="light" />
+                            <div className="flex items-center gap-0.5">
+                                <ThemeColors presetName={name} mode="light" />
                                 <SelectItem key={name} className="text-xs !flex gap-0.5" value={name}>
                                     {name}
                                 </SelectItem>
@@ -37,20 +36,6 @@ export function Section1_Header({ className, ...rest }: HTMLAttributes<HTMLDivEl
             </div>
 
         </header>
-    );
-}
-
-const sectionClasses = "\
-px-4 h-9 \
-text-gray-500 dark:text-slate-600 \
-dark:bg-black border-border \
-border-b \
-flex items-center justify-between \
-";
-
-function ColorBox({ color }: { color: string; }) {
-    return (
-        <div className="border-muted h-3 w-3 rounded-sm border" style={{ backgroundColor: color }} />
     );
 }
 
@@ -67,14 +52,16 @@ function ThemeColors({ presetName, mode }: { presetName: string; mode: "light" |
     );
 }
 
-function ThemeColors2({ presetName, mode }: { presetName: string; mode: "light" | "dark"; }) {
-    const styles = getPresetThemeStyles(presetName)[mode];
+function ColorBox({ color }: { color: string; }) {
     return (
-        <div className="flex gap-0.5">
-            <ColorBox color={styles.primary} />
-            <ColorBox color={styles.accent} />
-            <ColorBox color={styles.secondary} />
-            <ColorBox color={styles.border} />
-        </div>
+        <div className="border-muted h-3 w-3 rounded-sm border" style={{ backgroundColor: color }} />
     );
 }
+
+const sectionClasses = "\
+px-4 h-9 \
+text-gray-500 dark:text-slate-600 \
+dark:bg-black border-border \
+border-b \
+flex items-center justify-between \
+";
