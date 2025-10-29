@@ -12,7 +12,7 @@ import { ScrollArea } from "../ui/shadcn/scroll-area";
 export function App() {
     return (
         <div className="h-screen grid grid-rows-[auto_1fr_auto]">
-            <Section1_Header className="bg-gray-100" />
+            <Section1_Header className="1bg-gray-100" />
 
             <div className="grid grid-cols-[250px_1fr] gap-4 overflow-hidden">
                 <LeftList />

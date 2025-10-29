@@ -4,7 +4,7 @@ import { IconSunnyvale } from "../ui/icons";
 
 export function Section3_Footer({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     return (
-        <div className={classNames("pb-1 1h-6 text-xs dark:bg-black dark:text-slate-600 border-t flex items-center justify-center", className)} {...rest}>
+        <div className={classNames("pb-1 h-9 text-xs dark:bg-black dark:text-slate-600 border-t flex items-center justify-center overflow-hidden", className)} {...rest}>
 
             <a className={urlClasses} href="https://github.com/maxzz" target="_blank" rel="noopener">
                 Created by Max Zakharzhevskiy
