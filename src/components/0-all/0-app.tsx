@@ -2,11 +2,11 @@ import { useMemo } from "react";
 import { useAtomValue } from "jotai";
 import { Section1_Header } from "../1-header";
 import { Section3_Footer } from "../3-footer";
-import { LeftList } from "../2-main/ui-main";
-import { LeftItemAtom } from "../2-main/ui-main/8-left-item-atom";
-import { HeroTitleText } from "../2-main/1-pages/3-controls/1-hero-title-text/0-all";
-import { Demo_Dashboard } from "../2-main/1-pages/2-dashboard";
-import { CardsDemo } from "../2-main/1-pages/1-cards";
+import { LeftList } from "../2-main/1-left-list";
+import { LeftItemAtom } from "../../store/left-list/8-left-item-atom";
+import { HeroTitleText } from "../2-main/2-pages/3-controls/1-hero-title-text/0-all";
+import { Demo_Dashboard } from "../2-main/2-pages/2-dashboard";
+import { CardsDemo } from "../2-main/2-pages/1-cards";
 import { ScrollArea } from "../ui/shadcn/scroll-area";
 
 export function App() {
