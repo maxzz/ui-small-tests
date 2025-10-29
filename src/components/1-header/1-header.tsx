@@ -2,7 +2,7 @@ import { type HTMLAttributes } from "react";
 import { classNames } from "@/utils";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/shadcn/select";
 import { useAtom, useAtomValue } from "jotai";
-import { themeNameAtom, themeNamesAtom, themeStateAtom } from "@/store/apply-theme";
+import { getPresetThemeStyles, themeNameAtom, themeNamesAtom, themeStateAtom } from "@/store/apply-theme";
 
 export function Section1_Header({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const [themeName, setThemeName] = useAtom(themeNameAtom);
@@ -23,6 +23,7 @@ export function Section1_Header({ className, ...rest }: HTMLAttributes<HTMLDivEl
                     <SelectContent>
                         {themeNames.map((name) => (
                             <SelectItem key={name} className="text-xs" value={name}>
+                                <ThemeColors presetName={name} mode="light" />
                                 {name}
                             </SelectItem>
                         ))}
@@ -41,7 +42,6 @@ dark:bg-black border-border \
 border-b \
 flex items-center justify-between \
 ";
-
 
 function ColorBox({ color }: { color: string; }) {
     return (
