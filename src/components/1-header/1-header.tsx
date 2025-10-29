@@ -17,16 +17,30 @@ export function Section1_Header({ className, ...rest }: HTMLAttributes<HTMLDivEl
             <div className="text-xs">
                 <Select defaultValue={themeName} onValueChange={setThemeName}>
                     <SelectTrigger className="px-2 !h-6 text-xs rounded-sm">
-                        <SelectValue placeholder="Select" />
+                        <div className="flex gap-0.5">
+                            <ThemeColors presetName={themeName || "default"} mode="light" />
+                            <SelectValue placeholder="Select" />
+                        </div>
                     </SelectTrigger>
 
                     <SelectContent>
-                        {themeNames.map((name) => (
+                        {themeNames.map((name, idx) => {
+                            if (idx > 1) {
+                                return null;
+                            }
+                            return (
+                                <SelectItem key={name} className="text-xs" value={name}>
+                                    <ThemeColors2 presetName={name} mode="light" />
+                                    {name}
+                                </SelectItem>
+                            );
+                        })}
+                        {/* {themeNames.map((name) => (
                             <SelectItem key={name} className="text-xs" value={name}>
                                 <ThemeColors presetName={name} mode="light" />
                                 {name}
                             </SelectItem>
-                        ))}
+                        ))} */}
                     </SelectContent>
                 </Select>
             </div>
@@ -50,6 +64,19 @@ function ColorBox({ color }: { color: string; }) {
 }
 
 function ThemeColors({ presetName, mode }: { presetName: string; mode: "light" | "dark"; }) {
+    const styles = getPresetThemeStyles(presetName)[mode];
+    console.log(presetName, mode, styles);
+    return (
+        <div className="flex gap-0.5">
+            <ColorBox color={styles.primary} />
+            <ColorBox color={styles.accent} />
+            <ColorBox color={styles.secondary} />
+            <ColorBox color={styles.border} />
+        </div>
+    );
+}
+
+function ThemeColors2({ presetName, mode }: { presetName: string; mode: "light" | "dark"; }) {
     const styles = getPresetThemeStyles(presetName)[mode];
     return (
         <div className="flex gap-0.5">
