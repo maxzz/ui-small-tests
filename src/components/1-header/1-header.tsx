@@ -1,11 +1,12 @@
 import { type HTMLAttributes } from "react";
 import { classNames } from "@/utils";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/shadcn/select";
-import { useAtom } from "jotai";
-import { themeStateAtom } from "@/store/apply-theme";
+import { useAtom, useAtomValue } from "jotai";
+import { themeNameAtom, themeNamesAtom, themeStateAtom } from "@/store/apply-theme";
 
 export function Section1_Header({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
-    const [themeState, setThemeState] = useAtom(themeStateAtom);
+    const [themeName, setThemeName] = useAtom(themeNameAtom);
+    const themeNames = useAtomValue(themeNamesAtom);
     return (
         <header className={classNames(sectionClasses, className)} {...rest}>
 
@@ -14,14 +15,17 @@ export function Section1_Header({ className, ...rest }: HTMLAttributes<HTMLDivEl
             </div>
 
             <div className="text-xs">
-                <Select defaultValue="option1" onValueChange={(value) => console.log("Selected:", value)}>
+                <Select defaultValue={themeName} onValueChange={setThemeName}>
                     <SelectTrigger className="px-2 !h-6 text-xs rounded-sm">
                         <SelectValue placeholder="Select" />
                     </SelectTrigger>
 
                     <SelectContent>
-                        <SelectItem className="text-xs" value="option1">Option 1</SelectItem>
-                        <SelectItem className="text-xs" value="option2">Option 2</SelectItem>
+                        {themeNames.map((name) => (
+                            <SelectItem key={name} className="text-xs" value={name}>
+                                {name}
+                            </SelectItem>
+                        ))}
                     </SelectContent>
                 </Select>
             </div>
