@@ -5,6 +5,21 @@ import { setShadowVariables } from "./shadows";
 import { applyStyleToElement } from "./apply-style-to-element";
 import { COMMON_STYLES } from "./config/theme"; //"@/config/theme"
 
+// Exported function to apply theme styles to an element
+export const applyThemeToElement = (themeState: ThemeEditorState, rootElement: HTMLElement) => {
+    if (!rootElement) {
+        return;
+    }
+
+    const { currentMode: mode, styles: themeStyles } = themeState;
+
+    updateThemeClass(rootElement, mode);
+    
+    applyCommonStyles(rootElement, themeStyles.light); // Apply common styles (like border-radius) based on the 'light' mode definition
+    applyThemeColors(rootElement, themeStyles, mode); // Apply mode-specific colors
+    setShadowVariables(themeState); // Apply shadow variables
+};
+
 type Theme = "dark" | "light";
 
 const COMMON_NON_COLOR_KEYS = COMMON_STYLES;
@@ -44,19 +59,4 @@ const applyThemeColors = (root: HTMLElement, themeStyles: ThemeStyles, mode: The
                 }
             }
         );
-};
-
-// Exported function to apply theme styles to an element
-export const applyThemeToElement = (themeState: ThemeEditorState, rootElement: HTMLElement) => {
-    if (!rootElement) {
-        return;
-    }
-
-    const { currentMode: mode, styles: themeStyles } = themeState;
-
-    updateThemeClass(rootElement, mode);
-    
-    applyCommonStyles(rootElement, themeStyles.light); // Apply common styles (like border-radius) based on the 'light' mode definition
-    applyThemeColors(rootElement, themeStyles, mode); // Apply mode-specific colors
-    setShadowVariables(themeState); // Apply shadow variables
 };
