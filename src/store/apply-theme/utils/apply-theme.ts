@@ -1,9 +1,9 @@
-import { ThemeEditorState } from "./editor"; //"@/types/editor" 
-import { ThemeStyleProps, ThemeStyles } from "./theme"; //"@/types/theme"
+import { ThemeEditorState } from "./types-editor"; //"@/types/editor" 
+import { ThemeStyleProps, ThemeStyles } from "./types-theme"; //"@/types/theme"
 import { colorFormatter } from "./color-converter";
 import { setShadowVariables } from "./shadows";
 import { applyStyleToElement } from "./apply-style-to-element";
-import { COMMON_STYLES } from "./config/theme"; //"@/config/theme"
+import { COMMON_STYLES } from "./config/defaults-theme"; //"@/config/theme"
 
 // Exported function to apply theme styles to an element
 export const applyThemeToElement = (themeState: ThemeEditorState, rootElement: HTMLElement) => {

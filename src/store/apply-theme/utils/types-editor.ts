@@ -1,4 +1,4 @@
-import { ThemeStyles } from "./theme";
+import { ThemeStyles } from "./types-theme";
 
 // Base interface for any editor's state
 export interface BaseEditorState {
