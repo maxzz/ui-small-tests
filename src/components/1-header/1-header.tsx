@@ -18,29 +18,20 @@ export function Section1_Header({ className, ...rest }: HTMLAttributes<HTMLDivEl
                 <Select defaultValue={themeName} onValueChange={setThemeName}>
                     <SelectTrigger className="px-2 !h-6 text-xs rounded-sm">
                         <div className="flex gap-0.5">
-                            <ThemeColors presetName={themeName || "default"} mode="light" />
+                            {/* <ThemeColors presetName={themeName || "default"} mode="light" /> */}
                             <SelectValue placeholder="Select" />
                         </div>
                     </SelectTrigger>
 
                     <SelectContent>
-                        {themeNames.map((name, idx) => {
-                            if (idx > 1) {
-                                return null;
-                            }
-                            return (
-                                <SelectItem key={name} className="text-xs" value={name}>
-                                    <ThemeColors2 presetName={name} mode="light" />
+                        {themeNames.map((name) => (
+                            <div className="flex gap-0.5">
+                                <ThemeColors2 presetName={name} mode="light" />
+                                <SelectItem key={name} className="text-xs !flex gap-0.5" value={name}>
                                     {name}
                                 </SelectItem>
-                            );
-                        })}
-                        {/* {themeNames.map((name) => (
-                            <SelectItem key={name} className="text-xs" value={name}>
-                                <ThemeColors presetName={name} mode="light" />
-                                {name}
-                            </SelectItem>
-                        ))} */}
+                            </div>
+                        ))}
                     </SelectContent>
                 </Select>
             </div>
