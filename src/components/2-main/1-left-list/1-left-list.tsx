@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useSetAtom } from "jotai";
 import { TreeExpander, TreeIcon, TreeLabel, TreeNode, TreeNodeContent, TreeNodeProps, TreeNodeTrigger, TreeProvider, TreeView, } from "@/components/ui/kibo-ui/tree";
 import { FileCode, FileJson, FileText } from "lucide-react";
-import { type NodeId, type TreeData, treeData, LeftItemAtom } from "@/store/left-list";
+import { type NodeId, type TreeData, treeData, LeftItemAtom } from "@/store/1-left-list";
 
 export function LeftList() {
     const setLeftItem = useSetAtom(LeftItemAtom);

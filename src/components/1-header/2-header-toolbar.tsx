@@ -2,7 +2,7 @@ import { type HTMLAttributes } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import { classNames } from "@/utils";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/shadcn/select";
-import { getPresetThemeStyles, themeNameAtom, themeNamesAtom } from "@/store/apply-theme";
+import { getPresetThemeStyles, themeNameAtom, themeNamesAtom } from "@/store/2-apply-theme";
 
 export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const [themeName, setThemeName] = useAtom(themeNameAtom);
