@@ -1,8 +1,10 @@
 import { type HTMLAttributes } from "react";
-import { classNames } from "@/utils";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/shadcn/select";
+import { classNames, cn } from "@/utils";
+import { Select, SelectContent, SelectTrigger, SelectValue } from "../ui/shadcn/select";
+import * as SelectPrimitive from "@radix-ui/react-select";
 import { useAtom, useAtomValue } from "jotai";
 import { getPresetThemeStyles, themeNameAtom, themeNamesAtom, themeStateAtom } from "@/store/apply-theme";
+import { CheckIcon } from "lucide-react";
 
 export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const [themeName, setThemeName] = useAtom(themeNameAtom);
@@ -14,22 +16,20 @@ export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElem
                     <SelectValue placeholder="Select" />
                 </SelectTrigger>
 
-                <SelectContent>
+                <SelectContent align="start" className="w-full">
                     {themeNames.map(
-                        (name, idx) => (
-                            <div className="flex items-center gap-0.5" key={idx}>
-                                <SelectItem key={name} className="text-xs flex! gap-0.5" value={name}>
+                        (name) => (
+                            <SelectItem className="text-xs flex items-center justify-between gap-0.5" value={name} key={name}>
+                                <div className="flex-1 text-right">
                                     {name}
-                                    <ThemeColors presetName={name} mode="light" />
-                                </SelectItem>
-
-                            </div>
+                                </div>
+                                {/* <ThemeColors presetName={name} mode="light" /> */}
+                            </SelectItem>
                         )
                     )}
                 </SelectContent>
+                <ThemeColors presetName={themeName || "default"} mode="light" />
             </Select>
-
-            {/* <ThemeColors presetName={themeName || "default"} mode="light" /> */}
         </div>
     );
 }
@@ -49,6 +49,27 @@ function ThemeColors({ presetName, mode }: { presetName: string; mode: "light" |
 
 function ColorBox({ color }: { color: string; }) {
     return (
-        <div className="border-muted h-3 w-3 rounded-sm border" style={{ backgroundColor: color }} />
+        <div className="size-4 rounded-sm border-muted border" style={{ backgroundColor: color }} />
+    );
+}
+
+function SelectItem({ className, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Item>) {
+    return (
+        <SelectPrimitive.Item
+            data-slot="select-item"
+            className={cn("focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2", className)}
+            {...props}
+        >
+            <span className="absolute right-2 flex size-3.5 items-center justify-center">
+                <SelectPrimitive.ItemIndicator>
+                    <CheckIcon className="size-4" />
+                </SelectPrimitive.ItemIndicator>
+            </span>
+            <div className="w-full flex items-center justify-between gap-2">
+                <SelectPrimitive.ItemText className="w-full">{children}</SelectPrimitive.ItemText>
+                {/* {children} */}
+                <ThemeColors presetName={props.value} mode="light" />
+            </div>
+        </SelectPrimitive.Item>
     );
 }
