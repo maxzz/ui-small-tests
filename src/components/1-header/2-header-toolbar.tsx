@@ -1,22 +1,23 @@
 import { type HTMLAttributes } from "react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/shadcn/select";
 import { useAtom, useAtomValue } from "jotai";
+import { classNames } from "@/utils";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/shadcn/select";
 import { getPresetThemeStyles, themeNameAtom, themeNamesAtom } from "@/store/apply-theme";
 
 export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const [themeName, setThemeName] = useAtom(themeNameAtom);
     const themeNames = useAtomValue(themeNamesAtom);
     return (
-        <div className="text-xs flex items-center gap-2">
+        <div className={classNames("text-xs flex items-center gap-2", className)} {...rest}>
             <Select defaultValue={themeName} onValueChange={setThemeName}>
-                <SelectTrigger className="px-2 h-6! text-xs rounded-sm">
+                <SelectTrigger className="px-2 h-8! text-xs rounded-sm" title="primary, accent, secondary, border">
                     <SelectValue placeholder="Select" />
                 </SelectTrigger>
 
                 <SelectContent align="end" alignOffset={-4}>
                     {themeNames.map(
                         (name) => (
-                            <SelectItem className="text-xs flex items-center justify-between gap-0.5 [&_span]:last:w-full [&_span]:last:block [&_span]:last:justify-between" value={name} key={name}>
+                            <SelectItem className="text-xs [&_span]:last:w-full [&_span]:last:block [&_span]:last:justify-between" value={name} key={name}>
                                 {name}
                                 <ThemeColors presetName={name} mode="light" />
                             </SelectItem>
@@ -43,6 +44,6 @@ function ThemeColors({ presetName, mode }: { presetName: string; mode: "light" |
 
 function ColorBox({ color }: { color: string; }) {
     return (
-        <div className="size-4 rounded-sm border-muted border" style={{ backgroundColor: color }} />
+        <div className="size-4 rounded-sm border-foreground/30 border" style={{ backgroundColor: color }} />
     );
 }
