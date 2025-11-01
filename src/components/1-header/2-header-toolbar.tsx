@@ -1,6 +1,6 @@
 import { type HTMLAttributes } from "react";
 import { classNames, cn } from "@/utils";
-import { Select, SelectContent, SelectTrigger, SelectValue } from "../ui/shadcn/select";
+import { Select, SelectContent, selectItemClasses, SelectTrigger, SelectValue } from "../ui/shadcn/select";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { useAtom, useAtomValue } from "jotai";
 import { getPresetThemeStyles, themeNameAtom, themeNamesAtom, themeStateAtom } from "@/store/apply-theme";
@@ -23,12 +23,10 @@ export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElem
                                 <div className="flex-1 text-right">
                                     {name}
                                 </div>
-                                {/* <ThemeColors presetName={name} mode="light" /> */}
                             </SelectItem>
                         )
                     )}
                 </SelectContent>
-                {/* <ThemeColors presetName={themeName || "default"} mode="light" /> */}
             </Select>
         </div>
     );
@@ -55,16 +53,14 @@ function ColorBox({ color }: { color: string; }) {
 
 function SelectItem({ className, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Item>) {
     return (
-        <SelectPrimitive.Item
-            data-slot="select-item"
-            className={cn("focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2", className)}
-            {...props}
-        >
+        <SelectPrimitive.Item data-slot="select-item" className={cn(selectItemClasses, className)} {...props}>
+
             <span className="absolute right-2 flex size-3.5 items-center justify-center">
                 <SelectPrimitive.ItemIndicator>
                     <CheckIcon className="size-4" />
                 </SelectPrimitive.ItemIndicator>
             </span>
+
             <div className="w-full 1flex items-center justify-between gap-2">
                 <SelectPrimitive.ItemText className="">
                     <span className="flex items-center gap-2">
@@ -72,10 +68,6 @@ function SelectItem({ className, children, ...props }: React.ComponentProps<type
                         <ThemeColors presetName={props.value} mode="light" />
                     </span>
                 </SelectPrimitive.ItemText>
-
-                {/* <SelectPrimitive.ItemText className="w-full">{children}</SelectPrimitive.ItemText> */}
-                {/* {children} */}
-                {/* <ThemeColors presetName={props.value} mode="light" /> */}
             </div>
         </SelectPrimitive.Item>
     );

@@ -75,20 +75,44 @@ function SelectLabel({ className, ...props }: React.ComponentProps<typeof Select
 
 function SelectItem({ className, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Item>) {
     return (
-        <SelectPrimitive.Item
-            data-slot="select-item"
-            className={cn("focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2", className)}
-            {...props}
-        >
+        <SelectPrimitive.Item data-slot="select-item" className={cn(selectItemClasses, className)} {...props}>
             <span className="absolute right-2 flex size-3.5 items-center justify-center">
                 <SelectPrimitive.ItemIndicator>
                     <CheckIcon className="size-4" />
                 </SelectPrimitive.ItemIndicator>
             </span>
+
             <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
         </SelectPrimitive.Item>
     );
 }
+
+export const selectItemClasses = "\
+relative pl-2 pr-8 py-1.5 w-full text-sm \
+\
+focus:text-accent-foreground \
+focus:bg-accent \
+\
+data-disabled:pointer-events-none \
+data-disabled:opacity-50 \
+\
+[&_svg]:shrink-0 \
+[&_svg:not([class*='size-'])]:size-4 \
+[&_svg]:pointer-events-none \
+[&_svg:not([class*='text-'])]:text-muted-foreground \
+\
+*:[span]:last:flex \
+*:[span]:last:items-center \
+*:[span]:last:gap-2 \
+\
+rounded-sm \
+cursor-default \
+outline-hidden \
+select-none \
+flex \
+items-center \
+gap-2 \
+";
 
 function SelectSeparator({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.Separator>) {
     return (
