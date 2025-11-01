@@ -9,8 +9,6 @@ export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElem
     const themeNames = useAtomValue(themeNamesAtom);
     return (
         <div className="text-xs flex items-center gap-2">
-            <ThemeColors presetName={themeName || "default"} mode="light" />
-
             <Select defaultValue={themeName} onValueChange={setThemeName}>
                 <SelectTrigger className="px-2 h-6! text-xs rounded-sm">
                     <SelectValue placeholder="Select" />
@@ -20,16 +18,18 @@ export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElem
                     {themeNames.map(
                         (name, idx) => (
                             <div className="flex items-center gap-0.5" key={idx}>
-                                <ThemeColors presetName={name} mode="light" />
-
                                 <SelectItem key={name} className="text-xs flex! gap-0.5" value={name}>
                                     {name}
+                                    <ThemeColors presetName={name} mode="light" />
                                 </SelectItem>
+
                             </div>
                         )
                     )}
                 </SelectContent>
             </Select>
+
+            {/* <ThemeColors presetName={themeName || "default"} mode="light" /> */}
         </div>
     );
 }
