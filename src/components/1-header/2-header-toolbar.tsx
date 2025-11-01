@@ -16,7 +16,7 @@ export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElem
                     <SelectValue placeholder="Select" />
                 </SelectTrigger>
 
-                <SelectContent align="start" className="w-full">
+                <SelectContent align="end" alignOffset={-4}>
                     {themeNames.map(
                         (name) => (
                             <SelectItem className="text-xs flex items-center justify-between gap-0.5" value={name} key={name}>
@@ -28,7 +28,7 @@ export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElem
                         )
                     )}
                 </SelectContent>
-                <ThemeColors presetName={themeName || "default"} mode="light" />
+                {/* <ThemeColors presetName={themeName || "default"} mode="light" /> */}
             </Select>
         </div>
     );
@@ -65,10 +65,17 @@ function SelectItem({ className, children, ...props }: React.ComponentProps<type
                     <CheckIcon className="size-4" />
                 </SelectPrimitive.ItemIndicator>
             </span>
-            <div className="w-full flex items-center justify-between gap-2">
-                <SelectPrimitive.ItemText className="w-full">{children}</SelectPrimitive.ItemText>
+            <div className="w-full 1flex items-center justify-between gap-2">
+                <SelectPrimitive.ItemText className="">
+                    <span className="flex items-center gap-2">
+                        {children}
+                        <ThemeColors presetName={props.value} mode="light" />
+                    </span>
+                </SelectPrimitive.ItemText>
+
+                {/* <SelectPrimitive.ItemText className="w-full">{children}</SelectPrimitive.ItemText> */}
                 {/* {children} */}
-                <ThemeColors presetName={props.value} mode="light" />
+                {/* <ThemeColors presetName={props.value} mode="light" /> */}
             </div>
         </SelectPrimitive.Item>
     );
