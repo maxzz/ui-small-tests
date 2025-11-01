@@ -53,6 +53,7 @@
         "culori": "^4.0.2",
         "date-fns": "^4.1.0",
         "jotai": "^2.15.0",
+        "jotai-valtio": "^0.6.0",
         "lucide-react": "^0.545.0",
         "motion": "^12.23.24",
         "next-themes": "^0.4.6",
@@ -63,6 +64,7 @@
         "sonner": "^2.0.7",
         "tailwind-merge": "^3.3.1",
         "upen": "^1.0.2",
+        "valtio": "^2.1.8",
         "vaul": "^1.1.2",
         "zod": "^4.1.12"
     },
