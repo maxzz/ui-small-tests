@@ -6,6 +6,7 @@ export type AppUISettings = {
     // accordionsOpened: Record<string, boolean>;
     leftTree: NodeId;
     themePreseetName: string;
+    zoom: number;
 };
 
 export const defaultAppUISettings: AppUISettings = {
@@ -13,4 +14,5 @@ export const defaultAppUISettings: AppUISettings = {
     // accordionsOpened: {},
     leftTree: "Cards",
     themePreseetName: "dafault",
+    zoom: 1,
 };

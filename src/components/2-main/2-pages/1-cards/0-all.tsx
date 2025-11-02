@@ -1,3 +1,6 @@
+import { useSnapshot } from "valtio";
+import { classNames } from "@/utils";
+import { appSettings } from "@/store/0-local-storage";
 import { CardsActivityGoal } from "./2-2-activity-goal";
 import { CardsCalendar } from "./2-1-calendar";
 import { CardsChat } from "./3-6-chat";
@@ -14,8 +17,9 @@ import { DatePickerWithRange } from "./3-7-date-picker-with-range";
 import { GithubCard } from "./3-4-github-card";
 
 export function CardsDemo() {
+    const { zoom } = useSnapshot(appSettings.appUi);
     return (
-        <div className="@3xl:grids-col-2 grid p-2 **:data-[slot=card]:shadow-none md:p-4 @3xl:gap-4 @5xl:grid-cols-10 @7xl:grid-cols-11 1scale-50 origin-top-left">
+        <div className={classNames("@3xl:grids-col-2 grid p-2 **:data-[slot=card]:shadow-none md:p-4 @3xl:gap-4 @5xl:grid-cols-10 @7xl:grid-cols-11", zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100")}>
 
             <div className="grid gap-4 @5xl:col-span-4 @7xl:col-span-6">
                 {/* <div className="grid gap-4 @xl:grid-cols-2 @5xl:grid-cols-1 @7xl:grid-cols-2">

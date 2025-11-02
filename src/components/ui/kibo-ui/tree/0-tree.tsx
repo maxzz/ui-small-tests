@@ -73,7 +73,7 @@ export const TreeProvider = ({
     animateExpand = true,
     className,
 }: TreeProviderProps) => {
-    // console.log('tree render', defaultExpandedIds, selectedIds);
+    console.log(`tree provider render defExp:${JSON.stringify(defaultExpandedIds)} selIds:${JSON.stringify(selectedIds)}`);
 
     const [expandedIds, setExpandedIds] = useState<Set<string>>(() => new Set(defaultExpandedIds));
     const [internalSelectedIds, setInternalSelectedIds] = useState<string[]>(() => selectedIds ?? []);
@@ -165,16 +165,7 @@ export type TreeNodeProps = HTMLAttributes<HTMLDivElement> & {
     children?: ReactNode;
 };
 
-export const TreeNode = ({
-    nodeId: providedNodeId,
-    level = 0,
-    isLast = false,
-    parentPath = [],
-    children,
-    className,
-    onClick,
-    ...rest
-}: TreeNodeProps) => {
+export const TreeNode = ({ nodeId: providedNodeId, level = 0, isLast = false, parentPath = [], children, className, onClick, ...rest }: TreeNodeProps) => {
     const generatedId = useId();
     const nodeId = providedNodeId ?? generatedId;
 

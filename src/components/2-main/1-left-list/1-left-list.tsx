@@ -7,26 +7,23 @@ import { FileCode, FileJson, FileText } from "lucide-react";
 import { appSettings, type NodeId } from "@/store/0-local-storage";
 import { type TreeNodeData, initialTreeSpec } from "@/store/1-left-list";
 
-
 export function LeftList() {
-    // const { leftTree } = useSnapshot(appSettings.appUi);
+    const { leftTree } = useSnapshot(appSettings.appUi);
     
-    const defaultClick = useCallback((nodeId: NodeId, e: React.MouseEvent<HTMLElement>) => {
-        // console.log("Button clicked", e, "nodeid=", (e.currentTarget as HTMLElement).dataset["nodeid"]);
-        // console.log(`node id="${nodeId}"`, e);
+    const onItemClick = useCallback((nodeId: NodeId, e: React.MouseEvent<HTMLElement>) => {
         appSettings.appUi.leftTree = nodeId;
     }, []);
 
-    // console.log('render LeftList');
-
     return (
         <TreeProvider
+            defaultExpandedIds={[leftTree]}
+            selectedIds={[leftTree]}
             // defaultExpandedIds={["src", "components", "ui"]}
             // animateExpand={false}
             // onSelectionChange={(ids) => console.log("Selected:", ids)}
         >
             <TreeView className="[--border:var(--color-gray-500)]/30">
-                {renderNodes(initialTreeSpec, 0, { onItemClick: defaultClick })}
+                {renderNodes(initialTreeSpec, 0, { onItemClick })}
             </TreeView>
         </TreeProvider>
     );
