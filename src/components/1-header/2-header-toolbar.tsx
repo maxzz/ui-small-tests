@@ -32,8 +32,6 @@ export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElem
 
 function ThemeColors({ presetName, mode }: { presetName: string; mode: "light" | "dark"; }) {
     const styles = getPresetThemeStyles(presetName)[mode];
-    // console.log(presetName, mode, styles);
-
     return (
         <div className="flex gap-0.5">
             <ColorBox color={styles.primary} />
