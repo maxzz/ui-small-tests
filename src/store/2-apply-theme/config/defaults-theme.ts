@@ -1,4 +1,4 @@
-import { ThemeEditorState } from "../types-editor";
+import { ThemeEditorState } from "../utils/9-2-types-editor";
 
 // these are common between light and dark modes
 // we can assume that light mode's value will be used for dark mode as well
@@ -121,10 +121,7 @@ export const defaultThemeState: ThemeEditorState = {
         light: defaultLightThemeStyles,
         dark: defaultDarkThemeStyles,
     },
-    currentMode:
-        typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light",
+    currentMode: typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light",
     hslAdjustments: {
         hueShift: 0,
         saturationScale: 1,

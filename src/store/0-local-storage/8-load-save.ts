@@ -1,6 +1,6 @@
 import { proxy, subscribe } from 'valtio';
 import { mergeDefaultAndLoaded, themeApplyMode } from '@/utils';
-import { type AppUISettings, defaultAppUISettings } from './8-defaults';
+import { type AppUISettings, defaultAppUISettings } from './0-default-store';
 
 const STORAGE_UI_KEY = 'ui-small-tests';
 const STORAGE_UI_VER = 'v1';

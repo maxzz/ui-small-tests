@@ -1,2 +1,2 @@
-export * from "./0-all";
-export * from "./7-left-view";
+export * from "./8-load-save";
+export * from "./1-left-view";

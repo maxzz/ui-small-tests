@@ -1,11 +1,10 @@
-import { ThemeEditorState } from "./types-editor"; //"@/types/editor" 
-import { ThemeStyleProps, ThemeStyles } from "./types-theme"; //"@/types/theme"
-import { colorFormatter } from "./color-converter";
-import { setShadowVariables } from "./shadows";
-import { applyStyleToElement } from "./apply-style-to-element";
-import { COMMON_STYLES } from "./config/defaults-theme"; //"@/config/theme"
+import { type ThemeEditorState } from "./9-2-types-editor"; //"@/types/editor" 
+import { type ThemeMode, type ThemeStyles, type ThemeStyleProps } from "./9-1-types-theme"; //"@/types/theme"
+import { colorFormatter } from "./4-color-converter";
+import { setShadowVariables } from "./3-shadows";
+import { applyStyleToElement } from "./2-apply-style-to-element";
+import { COMMON_STYLES as COMMON_NON_COLOR_KEYS } from "../config/defaults-theme"; //"@/config/theme"
 
-// Exported function to apply theme styles to an element
 export const applyThemeToElement = (themeState: ThemeEditorState, rootElement: HTMLElement) => {
     if (!rootElement) {
         return;
@@ -20,12 +19,7 @@ export const applyThemeToElement = (themeState: ThemeEditorState, rootElement: H
     setShadowVariables(themeState); // Apply shadow variables
 };
 
-type Theme = "dark" | "light";
-
-const COMMON_NON_COLOR_KEYS = COMMON_STYLES;
-
-// Helper functions (not exported, used internally by applyThemeToElement)
-const updateThemeClass = (root: HTMLElement, mode: Theme) => {
+const updateThemeClass = (root: HTMLElement, mode: ThemeMode) => {
     if (mode === "light") {
         root.classList.remove("dark");
     } else {
@@ -48,7 +42,7 @@ const applyCommonStyles = (root: HTMLElement, themeStyles: ThemeStyleProps) => {
         );
 };
 
-const applyThemeColors = (root: HTMLElement, themeStyles: ThemeStyles, mode: Theme) => {
+const applyThemeColors = (root: HTMLElement, themeStyles: ThemeStyles, mode: ThemeMode) => {
     Object
         .entries(themeStyles[mode])
         .forEach(

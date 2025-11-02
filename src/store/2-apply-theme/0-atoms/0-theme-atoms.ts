@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { type ThemeEditorState, type ThemeStyles, defaultPresets, defaultThemeState } from "./utils";
+import { type ThemeEditorState, type ThemeStyles, defaultPresets, defaultThemeState } from "../utils";
 
 // Theme state
 

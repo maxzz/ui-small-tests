@@ -1,7 +1,7 @@
-import { colorFormatter } from "./color-converter";
-import { applyStyleToElement } from "./apply-style-to-element";
-import { ThemeEditorState } from "./types-editor"; //"../types/editor"
-import { defaultThemeState } from "./config/defaults-theme"; //"../config/theme"
+import { colorFormatter } from "./4-color-converter";
+import { applyStyleToElement } from "./2-apply-style-to-element";
+import { ThemeEditorState } from "./9-2-types-editor"; //"../types/editor"
+import { defaultThemeState } from "../config/defaults-theme"; //"../config/theme"
 
 export const getShadowMap = (themeEditorState: ThemeEditorState) => {
     const mode = themeEditorState.currentMode;
