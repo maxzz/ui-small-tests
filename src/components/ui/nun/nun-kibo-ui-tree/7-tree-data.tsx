@@ -1,4 +1,4 @@
-import { type NodeId } from "../0-local-storage";
+export type NodeId = "" | "Examples" | "no-demo-yet" | "Dashboard" | "Hero Title" | "Cards";
 
 export type TreeData<T = string> = {
     id: T;

@@ -5,7 +5,7 @@ import { useSnapshot } from "valtio";
 import { TreeExpander, TreeIcon, TreeLabel, TreeNode, TreeNodeContent, TreeNodeProps, TreeNodeTrigger, TreeProvider, TreeView, } from "@/components/ui/nun/nun-kibo-ui-tree/kibo-ui/tree";
 import { FileCode, FileJson, FileText } from "lucide-react";
 import { appSettings, type NodeId } from "@/store/0-local-storage";
-import { type TreeNodeData, initialTreeSpec } from "@/store/1-left-list";
+import { type TreeNodeData, initialTreeSpec } from "./7-tree-data";
 
 export function LeftList() {
     const { leftTree } = useSnapshot(appSettings.appUi);
