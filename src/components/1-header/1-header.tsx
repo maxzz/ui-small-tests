@@ -15,7 +15,7 @@ export function Section1_Header({ className, ...rest }: HTMLAttributes<HTMLDivEl
 }
 
 const sectionClasses = "\
-px-4 h-9 \
+px-4 h-10 \
 text-gray-500 dark:text-slate-600 \
 dark:bg-black border-border \
 border-b \

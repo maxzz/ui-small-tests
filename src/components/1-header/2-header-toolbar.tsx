@@ -10,7 +10,7 @@ export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElem
     return (
         <div className={classNames("text-xs flex items-center gap-2", className)} {...rest}>
             <Select defaultValue={themeName} onValueChange={setThemeName}>
-                <SelectTrigger className="px-2 h-8! text-xs rounded-sm" title="primary, accent, secondary, border">
+                <SelectTrigger className="px-2 h-7! text-xs rounded-sm" title="primary, accent, secondary, border">
                     <SelectValue placeholder="Select" />
                 </SelectTrigger>
 

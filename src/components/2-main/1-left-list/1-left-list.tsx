@@ -1,16 +1,20 @@
 "use client";
 import { useCallback } from "react";
 import { useSetAtom } from "jotai";
+import { useSnapshot } from "valtio";
 import { TreeExpander, TreeIcon, TreeLabel, TreeNode, TreeNodeContent, TreeNodeProps, TreeNodeTrigger, TreeProvider, TreeView, } from "@/components/ui/kibo-ui/tree";
 import { FileCode, FileJson, FileText } from "lucide-react";
-import { type NodeId, type TreeData, treeData, LeftItemAtom } from "@/store/1-left-list";
+import { appSettings, type NodeId } from "@/store/0-local-storage";
+import { type TreeNodeData, initialTreeSpec } from "@/store/1-left-list";
+
 
 export function LeftList() {
-    const setLeftItem = useSetAtom(LeftItemAtom);
+    // const { leftTree } = useSnapshot(appSettings.appUi);
+    
     const defaultClick = useCallback((nodeId: NodeId, e: React.MouseEvent<HTMLElement>) => {
         // console.log("Button clicked", e, "nodeid=", (e.currentTarget as HTMLElement).dataset["nodeid"]);
         // console.log(`node id="${nodeId}"`, e);
-        setLeftItem(nodeId);
+        appSettings.appUi.leftTree = nodeId;
     }, []);
 
     // console.log('render LeftList');
@@ -28,30 +32,12 @@ export function LeftList() {
     );
 }
 
-const initialTreeSpec: TreeSpec[] = [consvertTreeDataToTreeSpec(treeData, 0)];
-
-function consvertTreeDataToTreeSpec(data: TreeData, level = 0): TreeSpec {
-    return {
-        id: data.id,
-        level,
-        label: data.id,
-        children: data.children ? data.children.map(child => consvertTreeDataToTreeSpec(child, level + 1)) : [],
-    };
-}
-
-type TreeSpec = {
-    id: string;
-    label: React.ReactNode;
-    icon?: React.ReactNode;
-    level: number;
-    children: TreeSpec[];
-};
-
-function renderNodes(nodes: TreeSpec[], parentLevel = 0, options: { onItemClick?: (nodeId: NodeId, e: React.MouseEvent<HTMLElement>) => void; }) {
+function renderNodes(nodes: TreeNodeData[], parentLevel = 0, options: { onItemClick?: (nodeId: NodeId, e: React.MouseEvent<HTMLElement>) => void; }): React.JSX.Element[] {
     return nodes.map(
         (node, idx) => {
             const hasChildren = node.children.length > 0;
             const isLast = idx === nodes.length - 1;
+            
             return (
                 <TreeNode key={node.id} nodeId={node.id} level={node.level} isLast={isLast}>
 
