@@ -1,3 +1,4 @@
+import { type MouseEvent, useCallback, useRef } from "react";
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
 import { appSettings } from "@/store/0-local-storage";
@@ -18,8 +19,25 @@ import { GithubCard } from "./3-4-github-card";
 
 export function CardsDemo() {
     const { zoom } = useSnapshot(appSettings.appUi);
+    const hoverStackRef = useRef<string[]>([]);
+
+    const handleMouseMove = useCallback((event: MouseEvent<HTMLDivElement>) => {
+        const elementsAtPoint = document.elementsFromPoint(event.clientX, event.clientY);
+        const zOrderedElements = elementsAtPoint
+            .filter((element): element is HTMLElement => element instanceof HTMLElement)
+            .map(describeElement);
+
+        if (!areStacksEqual(hoverStackRef.current, zOrderedElements)) {
+            hoverStackRef.current = zOrderedElements;
+            console.log("hoverStack", zOrderedElements);
+        }
+    }, []);
+
     return (
-        <div className={classNames("@3xl:grids-col-2 grid p-2 **:data-[slot=card]:shadow-none md:p-4 @3xl:gap-4 @5xl:grid-cols-10 @7xl:grid-cols-11", zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100")}>
+        <div
+            className={classNames("@3xl:grids-col-2 grid p-2 **:data-[slot=card]:shadow-none md:p-4 @3xl:gap-4 @5xl:grid-cols-10 @7xl:grid-cols-11", zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100")}
+            onMouseMove={handleMouseMove}
+        >
 
             <div className="grid gap-4 @5xl:col-span-4 @7xl:col-span-6">
                 {/* <div className="grid gap-4 @xl:grid-cols-2 @5xl:grid-cols-1 @7xl:grid-cols-2">
@@ -80,4 +98,24 @@ export function CardsDemo() {
 
         </div>
     );
+}
+
+function describeElement(element: HTMLElement): string {
+    const id = element.id ? `#${element.id}` : "";
+    const classList = element.className ? `.${element.className.toString().trim().replace(/\s+/g, ".")}` : "";
+    return `${element.tagName.toLowerCase()}${id}${classList}`;
+}
+
+function areStacksEqual(prev: string[], next: string[]): boolean {
+    if (prev.length !== next.length) {
+        return false;
+    }
+
+    for (let index = 0; index < prev.length; index += 1) {
+        if (prev[index] !== next[index]) {
+            return false;
+        }
+    }
+
+    return true;
 }
