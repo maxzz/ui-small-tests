@@ -12,9 +12,8 @@ export const applyThemeToElement = (themeState: ThemeEditorState, rootElement: H
     const { currentMode: mode, styles: themeStyles } = themeState;
 
     updateThemeClass(rootElement, mode);
-
-    applyCommonStyles(rootElement, themeStyles.light); // Apply common styles (like border-radius) based on the 'light' mode definition
-    applyThemeColors(rootElement, themeStyles, mode); // Apply mode-specific colors
+    setCommonStyles(rootElement, themeStyles.light); // Apply common styles (like border-radius) based on the 'light' mode definition
+    setThemeColors(rootElement, themeStyles, mode); // Apply mode-specific colors
     setShadowVariables(themeState); // Apply shadow variables
 };
 
@@ -26,7 +25,7 @@ const updateThemeClass = (root: HTMLElement, mode: ThemeMode) => {
     }
 };
 
-function applyCommonStyles(root: HTMLElement, themeStyles: ThemeStyleProps): void {
+function setCommonStyles(root: HTMLElement, themeStyles: ThemeStyleProps): void {
     Object
         .entries(themeStyles)
         .filter(
@@ -41,7 +40,7 @@ function applyCommonStyles(root: HTMLElement, themeStyles: ThemeStyleProps): voi
         );
 };
 
-function applyThemeColors(root: HTMLElement, themeStyles: ThemeStyles, mode: ThemeMode): void {
+function setThemeColors(root: HTMLElement, themeStyles: ThemeStyles, mode: ThemeMode): void {
     Object
         .entries(themeStyles[mode])
         .forEach(
@@ -67,9 +66,6 @@ function setShadowVariables(themeEditorState: ThemeEditorState): void { // Funct
 
 function applyStyleToElement(element: HTMLElement, key: string, value: string): void {
     const currentStyle = element.getAttribute("style") || "";
-
-    // Remove the existing variable definitions with the same name
-    const cleanedStyle = currentStyle.replace(new RegExp(`--${key}:\\s*[^;]+;?`, "g"), "").trim();
-
+    const cleanedStyle = currentStyle.replace(new RegExp(`--${key}:\\s*[^;]+;?`, "g"), "").trim(); // Remove the existing variable definitions with the same name
     element.setAttribute("style", `${cleanedStyle}--${key}: ${value};`);
 }

@@ -7,6 +7,7 @@ import { getPresetThemeStyles, themeNameAtom, themeNamesAtom } from "@/store/2-a
 export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const [themeName, setThemeName] = useAtom(themeNameAtom);
     const themeNames = useAtomValue(themeNamesAtom);
+
     return (
         <div className={classNames("text-xs flex items-center gap-2", className)} {...rest}>
             <Select defaultValue={themeName} onValueChange={setThemeName}>
@@ -31,7 +32,8 @@ export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElem
 
 function ThemeColors({ presetName, mode }: { presetName: string; mode: "light" | "dark"; }) {
     const styles = getPresetThemeStyles(presetName)[mode];
-    console.log(presetName, mode, styles);
+    // console.log(presetName, mode, styles);
+
     return (
         <div className="flex gap-0.5">
             <ColorBox color={styles.primary} />

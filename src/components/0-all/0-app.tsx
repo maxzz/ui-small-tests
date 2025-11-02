@@ -1,9 +1,9 @@
 import { useMemo } from "react";
-import { useAtomValue } from "jotai";
+import { useSnapshot } from "valtio";
+import { appSettings } from "@/store/0-local-storage";
 import { Section1_Header } from "../1-header";
 import { Section3_Footer } from "../3-footer";
 import { LeftList } from "../2-main/1-left-list";
-import { LeftItemAtom } from "../../store/1-left-list/8-left-item-atom";
 import { HeroTitleText } from "../2-main/2-pages/3-controls/1-hero-title-text/0-all";
 import { Demo_Dashboard } from "../2-main/2-pages/2-dashboard";
 import { CardsDemo } from "../2-main/2-pages/1-cards";
@@ -30,7 +30,7 @@ export function App() {
 }
 
 function RenderDemoComponent() {
-    const leftItem = useAtomValue(LeftItemAtom);
+    const { leftTree } = useSnapshot(appSettings.appUi);
 
     const Dashboard = useMemo(
         () => {
@@ -40,7 +40,7 @@ function RenderDemoComponent() {
         }, []
     );
 
-    switch (leftItem) {
+    switch (leftTree) {
         case "Hero Title":
             return <HeroTitleText />;
         case "Dashboard":
