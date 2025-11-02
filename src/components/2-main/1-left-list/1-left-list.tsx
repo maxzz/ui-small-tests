@@ -16,8 +16,8 @@ export function LeftList() {
 
     return (
         <TreeProvider
-            defaultExpandedIds={[leftTree]}
-            selectedIds={[leftTree]}
+            // defaultExpandedIds={[leftTree]}
+            // selectedIds={[leftTree]}
             // defaultExpandedIds={["src", "components", "ui"]}
             // animateExpand={false}
             // onSelectionChange={(ids) => console.log("Selected:", ids)}

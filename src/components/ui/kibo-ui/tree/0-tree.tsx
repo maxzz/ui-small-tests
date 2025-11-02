@@ -73,13 +73,13 @@ export const TreeProvider = ({
     animateExpand = true,
     className,
 }: TreeProviderProps) => {
-    console.log(`tree provider render defExp:${JSON.stringify(defaultExpandedIds)} selIds:${JSON.stringify(selectedIds)}`);
-
     const [expandedIds, setExpandedIds] = useState<Set<string>>(() => new Set(defaultExpandedIds));
     const [internalSelectedIds, setInternalSelectedIds] = useState<string[]>(() => selectedIds ?? []);
 
     const isControlled = selectedIds !== undefined && onSelectionChange !== undefined;
     const currentSelectedIds = isControlled ? selectedIds : internalSelectedIds;
+
+    console.log(`tree provider render defExp:${JSON.stringify(defaultExpandedIds)} exp:${JSON.stringify([...expandedIds])} selIds:${JSON.stringify(selectedIds)} intSelIds:${JSON.stringify(internalSelectedIds)}`);
 
     const toggleExpanded = useCallback(
         (nodeId: string) => {
