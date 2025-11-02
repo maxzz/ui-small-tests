@@ -1,14 +1,35 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useSnapshot } from "valtio";
 import { appSettings } from "@/store/0-local-storage";
 import { HeroTitleText } from "../2-main/2-pages/3-controls/1-hero-title-text/0-all";
 import { Demo_Dashboard } from "../2-main/2-pages/2-dashboard";
 import { CardsDemo } from "../2-main/2-pages/1-cards";
 import { ScrollArea } from "../ui/shadcn/scroll-area";
+import { applyThemeToElement, type ThemeEditorState } from "@/store/2-apply-theme/utils";
+import { getPresetThemeStyles } from "@/store/2-apply-theme";
 
 export function RenderDemo() {
+    const { themePreseetName } = useSnapshot(appSettings.appUi);
+    const demoRef = useRef<HTMLDivElement>(null);
+
+    useEffect(
+        () => {
+            if (!demoRef.current) {
+                return;
+            }
+
+            const styles = getPresetThemeStyles(themePreseetName);
+            const theseState: ThemeEditorState = {
+                styles,
+                currentMode: "light",
+            };
+            
+            applyThemeToElement(theseState, demoRef.current);
+        }, [themePreseetName]
+    );
+
     return (
-        <div className="@container min-h-0 px-4 py-3 bg-gray-100 1scale-50 origin-top-left">
+        <div ref={demoRef} className="@container min-h-0 px-4 py-3 bg-gray-100 1scale-50 origin-top-left">
             <RenderDemoComponent />
         </div>
     );

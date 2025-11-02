@@ -1,16 +1,18 @@
 import { type HTMLAttributes } from "react";
 import { useAtom, useAtomValue } from "jotai";
+import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
+import { appSettings } from "@/store/0-local-storage";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/shadcn/select";
 import { getPresetThemeStyles, themeNameAtom, themeNamesAtom } from "@/store/2-apply-theme";
 
 export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
-    const [themeName, setThemeName] = useAtom(themeNameAtom);
+    const { themePreseetName } = useSnapshot(appSettings.appUi);
     const themeNames = useAtomValue(themeNamesAtom);
 
     return (
         <div className={classNames("text-xs flex items-center gap-2", className)} {...rest}>
-            <Select defaultValue={themeName} onValueChange={setThemeName}>
+            <Select defaultValue={themePreseetName} onValueChange={(name) => appSettings.appUi.themePreseetName = name}>
                 <SelectTrigger className="px-2 h-7! text-xs rounded-sm" title="primary, accent, secondary, border">
                     <SelectValue placeholder="Select" />
                 </SelectTrigger>
