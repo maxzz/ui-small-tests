@@ -1,5 +1,5 @@
 "use client";
-import { TreeExpander, TreeIcon, TreeLabel, TreeNode, TreeNodeContent, TreeNodeProps, TreeNodeTrigger, TreeProvider, TreeView, } from "@/components/ui/kibo-ui/tree";
+import { TreeExpander, TreeIcon, TreeLabel, TreeNode, TreeNodeContent, TreeNodeProps, TreeNodeTrigger, TreeProvider, TreeView, } from "./0-tree";
 import { FileCode, FileJson, FileText } from "lucide-react";
 
 export function TreeExample() {

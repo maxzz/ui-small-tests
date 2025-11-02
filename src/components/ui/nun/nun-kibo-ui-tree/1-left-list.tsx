@@ -2,7 +2,7 @@
 import { useCallback } from "react";
 import { useSetAtom } from "jotai";
 import { useSnapshot } from "valtio";
-import { TreeExpander, TreeIcon, TreeLabel, TreeNode, TreeNodeContent, TreeNodeProps, TreeNodeTrigger, TreeProvider, TreeView, } from "@/components/ui/kibo-ui/tree";
+import { TreeExpander, TreeIcon, TreeLabel, TreeNode, TreeNodeContent, TreeNodeProps, TreeNodeTrigger, TreeProvider, TreeView, } from "@/components/ui/nun/nun-kibo-ui-tree/kibo-ui/tree";
 import { FileCode, FileJson, FileText } from "lucide-react";
 import { appSettings, type NodeId } from "@/store/0-local-storage";
 import { type TreeNodeData, initialTreeSpec } from "@/store/1-left-list";
