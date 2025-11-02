@@ -1,7 +1,6 @@
-import { colorFormatter } from "./4-color-converter";
-import { applyStyleToElement } from "./2-apply-style-to-element";
-import { ThemeEditorState } from "./9-2-types-editor"; //"../types/editor"
+import { type ThemeEditorState } from "./9-2-types-editor"; //"../types/editor"
 import { defaultThemeState } from "../config/defaults-theme"; //"../config/theme"
+import { colorFormatter } from "./3-color-converter";
 
 export const getShadowMap = (themeEditorState: ThemeEditorState) => {
     const mode = themeEditorState.currentMode;
@@ -50,16 +49,3 @@ export const getShadowMap = (themeEditorState: ThemeEditorState) => {
 
     return shadowMap;
 };
-
-// Function to set shadow CSS variables
-export function setShadowVariables(themeEditorState: ThemeEditorState) {
-    const root = document.documentElement;
-    const shadows = getShadowMap(themeEditorState);
-    Object
-        .entries(shadows)
-        .forEach(
-            ([name, value]) => {
-                applyStyleToElement(root, name, value);
-            }
-        );
-}

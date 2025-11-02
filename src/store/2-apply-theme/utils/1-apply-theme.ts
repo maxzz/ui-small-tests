@@ -1,8 +1,7 @@
 import { type ThemeEditorState } from "./9-2-types-editor"; //"@/types/editor" 
 import { type ThemeMode, type ThemeStyles, type ThemeStyleProps } from "./9-1-types-theme"; //"@/types/theme"
-import { colorFormatter } from "./4-color-converter";
-import { setShadowVariables } from "./3-shadows";
-import { applyStyleToElement } from "./2-apply-style-to-element";
+import { colorFormatter } from "./3-color-converter";
+import { getShadowMap } from "./2-shadows";
 import { COMMON_STYLES as COMMON_NON_COLOR_KEYS } from "../config/defaults-theme"; //"@/config/theme"
 
 export const applyThemeToElement = (themeState: ThemeEditorState, rootElement: HTMLElement) => {
@@ -13,7 +12,7 @@ export const applyThemeToElement = (themeState: ThemeEditorState, rootElement: H
     const { currentMode: mode, styles: themeStyles } = themeState;
 
     updateThemeClass(rootElement, mode);
-    
+
     applyCommonStyles(rootElement, themeStyles.light); // Apply common styles (like border-radius) based on the 'light' mode definition
     applyThemeColors(rootElement, themeStyles, mode); // Apply mode-specific colors
     setShadowVariables(themeState); // Apply shadow variables
@@ -27,7 +26,7 @@ const updateThemeClass = (root: HTMLElement, mode: ThemeMode) => {
     }
 };
 
-const applyCommonStyles = (root: HTMLElement, themeStyles: ThemeStyleProps) => {
+function applyCommonStyles(root: HTMLElement, themeStyles: ThemeStyleProps): void {
     Object
         .entries(themeStyles)
         .filter(
@@ -42,7 +41,7 @@ const applyCommonStyles = (root: HTMLElement, themeStyles: ThemeStyleProps) => {
         );
 };
 
-const applyThemeColors = (root: HTMLElement, themeStyles: ThemeStyles, mode: ThemeMode) => {
+function applyThemeColors(root: HTMLElement, themeStyles: ThemeStyles, mode: ThemeMode): void {
     Object
         .entries(themeStyles[mode])
         .forEach(
@@ -53,4 +52,24 @@ const applyThemeColors = (root: HTMLElement, themeStyles: ThemeStyles, mode: The
                 }
             }
         );
-};
+}
+
+function setShadowVariables(themeEditorState: ThemeEditorState): void { // Function to set shadow CSS variables
+    const root = document.documentElement;
+    const shadows = getShadowMap(themeEditorState);
+    Object.entries(shadows)
+        .forEach(
+            ([name, value]) => {
+                applyStyleToElement(root, name, value);
+            }
+        );
+}
+
+function applyStyleToElement(element: HTMLElement, key: string, value: string): void {
+    const currentStyle = element.getAttribute("style") || "";
+
+    // Remove the existing variable definitions with the same name
+    const cleanedStyle = currentStyle.replace(new RegExp(`--${key}:\\s*[^;]+;?`, "g"), "").trim();
+
+    element.setAttribute("style", `${cleanedStyle}--${key}: ${value};`);
+}
