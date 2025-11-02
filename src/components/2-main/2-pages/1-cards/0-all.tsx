@@ -23,9 +23,28 @@ export function CardsDemo() {
 
     const handleMouseMove = useCallback((event: MouseEvent<HTMLDivElement>) => {
         const elementsAtPoint = document.elementsFromPoint(event.clientX, event.clientY);
-        const zOrderedElements = elementsAtPoint
-            .filter((element): element is HTMLElement => element instanceof HTMLElement)
-            .map(describeElement);
+        const zOrderedElements: string[] = [];
+        let reachedRoot = false;
+
+        for (const element of elementsAtPoint) {
+            if (!(element instanceof HTMLElement)) {
+                continue;
+            }
+
+            const slotValue = element.getAttribute("data-slot");
+            if (slotValue !== null) {
+                zOrderedElements.push(describeElement(element, slotValue));
+            }
+
+            if (element === event.currentTarget) {
+                reachedRoot = true;
+                break;
+            }
+        }
+
+        if (!reachedRoot) {
+            return;
+        }
 
         if (!areStacksEqual(hoverStackRef.current, zOrderedElements)) {
             hoverStackRef.current = zOrderedElements;
@@ -100,10 +119,10 @@ export function CardsDemo() {
     );
 }
 
-function describeElement(element: HTMLElement): string {
+function describeElement(element: HTMLElement, slotValue: string): string {
     const id = element.id ? `#${element.id}` : "";
     const classList = element.className ? `.${element.className.toString().trim().replace(/\s+/g, ".")}` : "";
-    return `${element.tagName.toLowerCase()}${id}${classList}`;
+    return `${element.tagName.toLowerCase()}${id}${classList} [slot=${slotValue}]`;
 }
 
 function areStacksEqual(prev: string[], next: string[]): boolean {
