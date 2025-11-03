@@ -1,4 +1,4 @@
-import { type MouseEvent, useCallback, useRef } from "react";
+import { type MouseEvent, useCallback, useMemo, useRef, useState } from "react";
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
 import { appSettings } from "@/store/0-local-storage";
@@ -17,31 +17,54 @@ import { CardsTeamMembers } from "./3-2-team-members";
 import { DatePickerWithRange } from "./3-7-date-picker-with-range";
 import { GithubCard } from "./3-4-github-card";
 import { type HoverStackEntry, printHoverStack, processHoverStack } from "./processHoverStack";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/shadcn/tooltip";
 
 export function CardsDemo() {
     const { zoom } = useSnapshot(appSettings.appUi);
     const hoverStackRef = useRef<HoverStackEntry[]>([]);
+    const [hoverStack, setHoverStack] = useState<HoverStackEntry[]>([]);
+    const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
 
     const handleMouseMove = useCallback(
         (event: MouseEvent<HTMLDivElement>) => {
-            const zOrderedElements = processHoverStack(
-                event.clientX,
-                event.clientY,
-                event.currentTarget,
-                hoverStackRef
-            );
-
-            if (zOrderedElements && zOrderedElements.length > 0) {
+            const zOrderedElements = processHoverStack(event.clientX, event.clientY, event.currentTarget, hoverStackRef);
+            setMousePos({ x: event.clientX, y: event.clientY });
+            if (zOrderedElements?.length) {
+                setHoverStack(zOrderedElements);
                 printHoverStack(zOrderedElements);
+            } else if (hoverStackRef.current.length === 0) {
+                setHoverStack([]);
             }
         }, []
     );
 
+    const handleMouseLeave = useCallback(() => {
+        hoverStackRef.current = [];
+        setHoverStack([]);
+        setMousePos(null);
+    }, []);
+
+    const tooltipContent = useMemo(() => {
+        if (hoverStack.length === 0) {
+            return "";
+        }
+
+        return hoverStack
+            .map((entry, index) => {
+                const classes = entry.classes.length > 0 ? entry.classes.join(" ") : "(no classes)";
+                return `${index + 1}. [${entry.dataSlot}] ${classes}`;
+            })
+            .join("\n");
+    }, [hoverStack]);
+
     return (
-        <div
-            className={classNames("@3xl:grids-col-2 grid p-2 **:data-[slot=card]:shadow-none md:p-4 @3xl:gap-4 @5xl:grid-cols-10 @7xl:grid-cols-11", zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100")}
-            onMouseMove={handleMouseMove}
-        >
+        <Tooltip open={hoverStack.length > 0 && !!mousePos}>
+            <TooltipTrigger asChild>
+                <div
+                    className={classNames("@3xl:grids-col-2 grid p-2 **:data-[slot=card]:shadow-none md:p-4 @3xl:gap-4 @5xl:grid-cols-10 @7xl:grid-cols-11", zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100")}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                >
 
             <div className="grid gap-4 @5xl:col-span-4 @7xl:col-span-6">
                 {/* <div className="grid gap-4 @xl:grid-cols-2 @5xl:grid-cols-1 @7xl:grid-cols-2">
@@ -100,7 +123,12 @@ export function CardsDemo() {
                 </div>
             </div>
 
-        </div>
+                </div>
+            </TooltipTrigger>
+            <TooltipContent side="right" align="start" className="whitespace-pre text-left">
+                {tooltipContent}
+            </TooltipContent>
+        </Tooltip>
     );
 }
 

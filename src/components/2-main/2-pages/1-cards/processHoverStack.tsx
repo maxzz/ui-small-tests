@@ -1,16 +1,11 @@
-import type { MutableRefObject } from "react";
+import type { RefObject } from "react";
 
 export type HoverStackEntry = {
     dataSlot: string;
     classes: string[];
 };
 
-export function processHoverStack(
-    x: number,
-    y: number,
-    currentTarget: HTMLElement,
-    hoverStackRef: MutableRefObject<HoverStackEntry[]>
-): HoverStackEntry[] | undefined {
+export function processHoverStack(x: number, y: number, currentTarget: HTMLElement, hoverStackRef: RefObject<HoverStackEntry[]>): HoverStackEntry[] | undefined {
     const elementsAtPoint = document.elementsFromPoint(x, y);
     const zOrderedElements: HoverStackEntry[] = [];
     let reachedRoot = false;
