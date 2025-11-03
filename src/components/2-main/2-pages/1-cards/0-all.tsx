@@ -1,4 +1,4 @@
-import { type MouseEvent, useCallback, useRef } from "react";
+import { type MouseEvent, useCallback, useRef, type RefObject } from "react";
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
 import { appSettings } from "@/store/0-local-storage";
@@ -27,34 +27,7 @@ export function CardsDemo() {
     const hoverStackRef = useRef<HoverStackEntry[]>([]);
 
     const handleMouseMove = useCallback((event: MouseEvent<HTMLDivElement>) => {
-        const elementsAtPoint = document.elementsFromPoint(event.clientX, event.clientY);
-        const zOrderedElements: HoverStackEntry[] = [];
-        let reachedRoot = false;
-
-        for (const element of elementsAtPoint) {
-            if (!(element instanceof HTMLElement)) {
-                continue;
-            }
-
-            const slotValue = element.getAttribute("data-slot");
-            if (slotValue !== null) {
-                zOrderedElements.push(describeElement(element, slotValue));
-            }
-
-            if (element === event.currentTarget) {
-                reachedRoot = true;
-                break;
-            }
-        }
-
-        if (!reachedRoot) {
-            return;
-        }
-
-        if (!areStacksEqual(hoverStackRef.current, zOrderedElements)) {
-            hoverStackRef.current = zOrderedElements;
-            console.log("hoverStack", JSON.stringify(zOrderedElements, null, 2));
-        }
+        processHoverStack(event, hoverStackRef);
     }, []);
 
     return (
@@ -124,12 +97,35 @@ export function CardsDemo() {
     );
 }
 
-function describeElement(element: HTMLElement, slotValue: string): HoverStackEntry {
-    const classes = Array.from(element.classList);
-    return {
-        dataSlot: slotValue,
-        classes,
-    };
+function processHoverStack(event: MouseEvent<HTMLDivElement>, hoverStackRef: RefObject<HoverStackEntry[]>): void {
+    const elementsAtPoint = document.elementsFromPoint(event.clientX, event.clientY);
+    const zOrderedElements: HoverStackEntry[] = [];
+    let reachedRoot = false;
+
+    for (const element of elementsAtPoint) {
+        if (!(element instanceof HTMLElement)) {
+            continue;
+        }
+
+        const slotValue = element.getAttribute("data-slot");
+        if (slotValue !== null) {
+            zOrderedElements.push(describeElement(element, slotValue));
+        }
+
+        if (element === event.currentTarget) {
+            reachedRoot = true;
+            break;
+        }
+    }
+
+    if (!reachedRoot) {
+        return;
+    }
+
+    if (!areStacksEqual(hoverStackRef.current, zOrderedElements)) {
+        hoverStackRef.current = zOrderedElements;
+        printHoverStack(zOrderedElements);
+    }
 }
 
 function areStacksEqual(prev: HoverStackEntry[], next: HoverStackEntry[]): boolean {
@@ -165,4 +161,25 @@ function areStacksEqual(prev: HoverStackEntry[], next: HoverStackEntry[]): boole
     }
 
     return true;
+}
+
+function describeElement(element: HTMLElement, slotValue: string): HoverStackEntry {
+    return {
+        dataSlot: slotValue,
+        classes: Array.from(element.classList),
+    };
+}
+
+function printHoverStack(stack: HoverStackEntry[]): void {
+    if (stack.length === 0) {
+        console.log("hoverStack (empty)");
+        return;
+    }
+
+    console.group("hoverStack");
+    for (const entry of stack) {
+        const classes = entry.classes.length > 0 ? `\n\t${entry.classes.join("\n\t")}` : "(no classes)";
+        console.log("%c%s%c %s", "color: red;", entry.dataSlot, "color: inherit;", classes);
+    }
+    console.groupEnd();
 }
