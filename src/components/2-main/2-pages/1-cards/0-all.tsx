@@ -53,14 +53,35 @@ export function CardsDemo() {
         return formatHoverStackTooltip(hoverStack);
     }, [hoverStack]);
 
+    const tooltipAnchorStyle = useMemo(() => {
+        if (!mousePos) {
+            return {
+                position: "fixed" as const,
+                top: -9999,
+                left: -9999,
+                width: 0,
+                height: 0,
+                pointerEvents: "none" as const,
+            };
+        }
+
+        return {
+            position: "fixed" as const,
+            top: mousePos.y + 12,
+            left: mousePos.x + 12,
+            width: 0,
+            height: 0,
+            pointerEvents: "none" as const,
+        };
+    }, [mousePos]);
+
     return (
         <Tooltip open={hoverStack.length > 0 && !!mousePos}>
-            <TooltipTrigger asChild>
-                <div
-                    className={classNames("@3xl:grids-col-2 grid p-2 **:data-[slot=card]:shadow-none md:p-4 @3xl:gap-4 @5xl:grid-cols-10 @7xl:grid-cols-11", zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100")}
-                    onMouseMove={handleMouseMove}
-                    onMouseLeave={handleMouseLeave}
-                >
+            <div
+                className={classNames("@3xl:grids-col-2 grid p-2 **:data-[slot=card]:shadow-none md:p-4 @3xl:gap-4 @5xl:grid-cols-10 @7xl:grid-cols-11", zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100")}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+            >
 
                     <div className="grid gap-4 @5xl:col-span-4 @7xl:col-span-6">
                         {/* <div className="grid gap-4 @xl:grid-cols-2 @5xl:grid-cols-1 @7xl:grid-cols-2">
@@ -119,8 +140,10 @@ export function CardsDemo() {
                         </div>
                     </div>
 
-                </div>
-            </TooltipTrigger>
+                    </div>
+                    <TooltipTrigger asChild>
+                        <span aria-hidden={true} style={tooltipAnchorStyle} />
+                    </TooltipTrigger>
             <TooltipContent side="right" align="start" className="max-h-dvh whitespace-pre text-left p-0">
                 <ScrollArea className="max-h-[80dvh] max-w-[320px] p-2">
                     {tooltipContent}
