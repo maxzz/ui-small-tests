@@ -18,6 +18,7 @@ import { DatePickerWithRange } from "./3-7-date-picker-with-range";
 import { GithubCard } from "./3-4-github-card";
 import { type HoverStackEntry, printHoverStack, processHoverStack } from "./processHoverStack";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/shadcn/tooltip";
+import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 
 export function CardsDemo() {
     const { zoom } = useSnapshot(appSettings.appUi);
@@ -120,8 +121,10 @@ export function CardsDemo() {
 
                 </div>
             </TooltipTrigger>
-            <TooltipContent side="right" align="start" className="whitespace-pre text-left">
-                {tooltipContent}
+            <TooltipContent side="right" align="start" className="max-h-dvh whitespace-pre text-left p-0">
+                <ScrollArea className="max-h-[80dvh] max-w-[320px] p-2">
+                    {tooltipContent}
+                </ScrollArea>
             </TooltipContent>
         </Tooltip>
     );
@@ -131,7 +134,9 @@ function formatHoverStackTooltip(stack: HoverStackEntry[]): string {
     return stack
         .map(
             (entry, index) => {
-                const classes = entry.classes.length > 0 ? `\n\t${entry.classes.join("\n\t")}` : "\n\t(no classes)";
+                const classes = entry.classes.length > 0
+                    ? `\n\t${entry.classes.join("\n\t")}`
+                    : "\n\t(no classes)";
                 return `${index + 1}. [${entry.dataSlot}]${classes}`;
             }
         )
