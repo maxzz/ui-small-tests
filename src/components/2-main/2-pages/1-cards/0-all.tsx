@@ -23,7 +23,7 @@ export function CardsDemo() {
     const { zoom } = useSnapshot(appSettings.appUi);
     const hoverStackRef = useRef<HoverStackEntry[]>([]);
     const [hoverStack, setHoverStack] = useState<HoverStackEntry[]>([]);
-    const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
+    const [mousePos, setMousePos] = useState<{ x: number; y: number; } | null>(null);
 
     const handleMouseMove = useCallback(
         (event: MouseEvent<HTMLDivElement>) => {
@@ -49,12 +49,7 @@ export function CardsDemo() {
             return "";
         }
 
-        return hoverStack
-            .map((entry, index) => {
-                const classes = entry.classes.length > 0 ? entry.classes.join(" ") : "(no classes)";
-                return `${index + 1}. [${entry.dataSlot}] ${classes}`;
-            })
-            .join("\n");
+        return formatHoverStackTooltip(hoverStack);
     }, [hoverStack]);
 
     return (
@@ -66,62 +61,62 @@ export function CardsDemo() {
                     onMouseLeave={handleMouseLeave}
                 >
 
-            <div className="grid gap-4 @5xl:col-span-4 @7xl:col-span-6">
-                {/* <div className="grid gap-4 @xl:grid-cols-2 @5xl:grid-cols-1 @7xl:grid-cols-2">
-                    <CardsStats />
-                </div> */}
+                    <div className="grid gap-4 @5xl:col-span-4 @7xl:col-span-6">
+                        {/* <div className="grid gap-4 @xl:grid-cols-2 @5xl:grid-cols-1 @7xl:grid-cols-2">
+                            <CardsStats />
+                        </div> */}
 
-                {/* <div className="grid gap-1 @2xl:grid-cols-[auto_1fr] @3xl:hidden">
-                    <CardsCalendar />
-                    <div className="@2xl:pt-0 @2xl:pl-3 @7xl:pl-4">
-                        <CardsActivityGoal />
-                    </div>
-                    <div className="pt-3 @2xl:col-span-2 @7xl:pt-4">
-                        <CardsExerciseMinutes />
-                    </div>
-                </div> */}
+                        {/* <div className="grid gap-1 @2xl:grid-cols-[auto_1fr] @3xl:hidden">
+                            <CardsCalendar />
+                            <div className="@2xl:pt-0 @2xl:pl-3 @7xl:pl-4">
+                                <CardsActivityGoal />
+                            </div>
+                            <div className="pt-3 @2xl:col-span-2 @7xl:pt-4">
+                                <CardsExerciseMinutes />
+                            </div>
+                        </div> */}
 
-                <div className="grid gap-4 @3xl:grid-cols-2 @5xl:grid-cols-1 @7xl:grid-cols-2">
-                    <div className="flex flex-col gap-4">
-                        <CardsForms />
-                        <CardsTeamMembers />
-                        <CardsCookieSettings />
-                        <div className="hidden flex-col gap-4 @7xl:flex">
-                            <GithubCard />
-                            <DatePickerWithRange />
+                        <div className="grid gap-4 @3xl:grid-cols-2 @5xl:grid-cols-1 @7xl:grid-cols-2">
+                            <div className="flex flex-col gap-4">
+                                <CardsForms />
+                                <CardsTeamMembers />
+                                <CardsCookieSettings />
+                                <div className="hidden flex-col gap-4 @7xl:flex">
+                                    <GithubCard />
+                                    <DatePickerWithRange />
+                                </div>
+                            </div>
+                            <div className="flex flex-col gap-4 pb-4">
+                                <CardsCreateAccount />
+                                <CardsChat />
+                                <GithubCard />
+                                <DatePickerWithRange />
+
+                                <div className="hidden @7xl:block">
+                                    <CardsReportIssue />
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className="flex flex-col gap-4 pb-4">
-                        <CardsCreateAccount />
-                        <CardsChat />
-                        <GithubCard />
-                        <DatePickerWithRange />
 
-                        <div className="hidden @7xl:block">
+                    <div className="flex flex-col gap-4 @5xl:col-span-6 @7xl:col-span-5">
+                        <div className="hidden gap-1 @2xl:grid-cols-[auto_1fr] @3xl:grid">
+                            <CardsCalendar />
+                            {/* <div className="pt-3 @2xl:pt-0 @2xl:pl-3 @7xl:pl-4">
+                                <CardsActivityGoal />
+                            </div>
+                            <div className="pt-3 @2xl:col-span-2 @7xl:pt-3">
+                                <CardsExerciseMinutes />
+                            </div> */}
+                        </div>
+                        <div className="hidden @3xl:block">
+                            <CardsPayments />
+                        </div>
+                        <CardsShare />
+                        <div className="@7xl:hidden">
                             <CardsReportIssue />
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div className="flex flex-col gap-4 @5xl:col-span-6 @7xl:col-span-5">
-                <div className="hidden gap-1 @2xl:grid-cols-[auto_1fr] @3xl:grid">
-                    <CardsCalendar />
-                    {/* <div className="pt-3 @2xl:pt-0 @2xl:pl-3 @7xl:pl-4">
-                        <CardsActivityGoal />
-                    </div>
-                    <div className="pt-3 @2xl:col-span-2 @7xl:pt-3">
-                        <CardsExerciseMinutes />
-                    </div> */}
-                </div>
-                <div className="hidden @3xl:block">
-                    <CardsPayments />
-                </div>
-                <CardsShare />
-                <div className="@7xl:hidden">
-                    <CardsReportIssue />
-                </div>
-            </div>
 
                 </div>
             </TooltipTrigger>
@@ -132,4 +127,13 @@ export function CardsDemo() {
     );
 }
 
-
+function formatHoverStackTooltip(stack: HoverStackEntry[]): string {
+    return stack
+        .map(
+            (entry, index) => {
+                const classes = entry.classes.length > 0 ? `\n\t${entry.classes.join("\n\t")}` : "\n\t(no classes)";
+                return `${index + 1}. [${entry.dataSlot}]${classes}`;
+            }
+        )
+        .join("\n");
+}
