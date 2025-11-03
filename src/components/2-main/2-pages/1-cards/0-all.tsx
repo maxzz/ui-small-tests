@@ -17,13 +17,18 @@ import { CardsTeamMembers } from "./3-2-team-members";
 import { DatePickerWithRange } from "./3-7-date-picker-with-range";
 import { GithubCard } from "./3-4-github-card";
 
+type HoverStackEntry = {
+    dataSlot: string;
+    classes: string[];
+};
+
 export function CardsDemo() {
     const { zoom } = useSnapshot(appSettings.appUi);
-    const hoverStackRef = useRef<string[]>([]);
+    const hoverStackRef = useRef<HoverStackEntry[]>([]);
 
     const handleMouseMove = useCallback((event: MouseEvent<HTMLDivElement>) => {
         const elementsAtPoint = document.elementsFromPoint(event.clientX, event.clientY);
-        const zOrderedElements: string[] = [];
+        const zOrderedElements: HoverStackEntry[] = [];
         let reachedRoot = false;
 
         for (const element of elementsAtPoint) {
@@ -48,7 +53,7 @@ export function CardsDemo() {
 
         if (!areStacksEqual(hoverStackRef.current, zOrderedElements)) {
             hoverStackRef.current = zOrderedElements;
-            console.log("hoverStack", zOrderedElements);
+            console.log("hoverStack", JSON.stringify(zOrderedElements, null, 2));
         }
     }, []);
 
@@ -119,19 +124,42 @@ export function CardsDemo() {
     );
 }
 
-function describeElement(element: HTMLElement, slotValue: string): string {
-    const id = element.id ? `#${element.id}` : "";
-    const classList = element.className ? `.${element.className.toString().trim().replace(/\s+/g, ".")}` : "";
-    return `${element.tagName.toLowerCase()}${id}${classList} [slot=${slotValue}]`;
+function describeElement(element: HTMLElement, slotValue: string): HoverStackEntry {
+    const classes = Array.from(element.classList);
+    return {
+        dataSlot: slotValue,
+        classes,
+    };
 }
 
-function areStacksEqual(prev: string[], next: string[]): boolean {
+function areStacksEqual(prev: HoverStackEntry[], next: HoverStackEntry[]): boolean {
     if (prev.length !== next.length) {
         return false;
     }
 
     for (let index = 0; index < prev.length; index += 1) {
-        if (prev[index] !== next[index]) {
+        const prevEntry = prev[index];
+        const nextEntry = next[index];
+
+        if (prevEntry.dataSlot !== nextEntry.dataSlot) {
+            return false;
+        }
+
+        if (prevEntry.classes.length !== nextEntry.classes.length) {
+            return false;
+        }
+
+        for (let classIndex = 0; classIndex < prevEntry.classes.length; classIndex += 1) {
+            if (prevEntry.classes[classIndex] !== nextEntry.classes[classIndex]) {
+                return false;
+            }
+        }
+
+        if (prevEntry.classes.length === 0 && nextEntry.classes.length === 0) {
+            continue;
+        }
+
+        if (prevEntry.classes.length === 0 || nextEntry.classes.length === 0) {
             return false;
         }
     }
