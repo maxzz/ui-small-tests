@@ -1,11 +1,16 @@
-import type { MouseEvent, RefObject } from "react";
+import type { MutableRefObject } from "react";
 
 export type HoverStackEntry = {
     dataSlot: string;
     classes: string[];
 };
 
-export function processHoverStack(x: number, y: number, currentTarget: HTMLElement, hoverStackRef: RefObject<HoverStackEntry[]>): void {
+export function processHoverStack(
+    x: number,
+    y: number,
+    currentTarget: HTMLElement,
+    hoverStackRef: MutableRefObject<HoverStackEntry[]>
+): HoverStackEntry[] | undefined {
     const elementsAtPoint = document.elementsFromPoint(x, y);
     const zOrderedElements: HoverStackEntry[] = [];
     let reachedRoot = false;
@@ -27,13 +32,17 @@ export function processHoverStack(x: number, y: number, currentTarget: HTMLEleme
     }
 
     if (!reachedRoot) {
-        return;
+        return undefined;
     }
 
-    if (!areStacksEqual(hoverStackRef.current, zOrderedElements)) {
+    const previousStack = hoverStackRef.current ?? [];
+
+    if (!areStacksEqual(previousStack, zOrderedElements)) {
         hoverStackRef.current = zOrderedElements;
-        printHoverStack(zOrderedElements);
+        return zOrderedElements;
     }
+
+    return undefined;
 }
 
 function areStacksEqual(prev: HoverStackEntry[], next: HoverStackEntry[]): boolean {
@@ -78,7 +87,7 @@ function describeElement(element: HTMLElement, slotValue: string): HoverStackEnt
     };
 }
 
-function printHoverStack(stack: HoverStackEntry[]): void {
+export function printHoverStack(stack: HoverStackEntry[]): void {
     if (stack.length === 0) {
         console.log("hoverStack (empty)");
         return;

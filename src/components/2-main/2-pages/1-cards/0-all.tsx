@@ -16,7 +16,7 @@ import { CardsStats } from "./1-1,2-stats";
 import { CardsTeamMembers } from "./3-2-team-members";
 import { DatePickerWithRange } from "./3-7-date-picker-with-range";
 import { GithubCard } from "./3-4-github-card";
-import { type HoverStackEntry, processHoverStack } from "./processHoverStack";
+import { type HoverStackEntry, printHoverStack, processHoverStack } from "./processHoverStack";
 
 export function CardsDemo() {
     const { zoom } = useSnapshot(appSettings.appUi);
@@ -24,7 +24,16 @@ export function CardsDemo() {
 
     const handleMouseMove = useCallback(
         (event: MouseEvent<HTMLDivElement>) => {
-            processHoverStack(event.clientX, event.clientY, event.currentTarget, hoverStackRef);
+            const zOrderedElements = processHoverStack(
+                event.clientX,
+                event.clientY,
+                event.currentTarget,
+                hoverStackRef
+            );
+
+            if (zOrderedElements && zOrderedElements.length > 0) {
+                printHoverStack(zOrderedElements);
+            }
         }, []
     );
 
