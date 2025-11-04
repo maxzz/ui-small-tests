@@ -7,6 +7,7 @@ import { CardsDemoWithTooltip } from "../2-main/2-pages/1-cards";
 import { ScrollArea } from "../ui/shadcn/scroll-area";
 import { applyThemeToElement, type ThemeEditorState } from "@/store/2-apply-theme/utils";
 import { getPresetThemeStyles } from "@/store/2-apply-theme";
+import { DemoContents } from "../2-main/2-pages/1-cards/0-demo-contents";
 
 export function RenderDemo() {
     const { themePreseetName } = useSnapshot(appSettings.appUi);
@@ -61,7 +62,9 @@ function RenderDemoComponent() {
 function CardsContainer() {
     return (
         <ScrollArea className="size-full bg-pink-100">
-            <CardsDemoWithTooltip />
+            <CardsDemoWithTooltip>
+                <DemoContents />
+            </CardsDemoWithTooltip>
         </ScrollArea>
     );
 }

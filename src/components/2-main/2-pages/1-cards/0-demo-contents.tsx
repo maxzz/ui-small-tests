@@ -16,7 +16,7 @@ import { CardsStats } from "./1-1,2-stats";
 import { CardsTeamMembers } from "./3-2-team-members";
 import { DatePickerWithRange } from "./3-7-date-picker-with-range";
 import { GithubCard } from "./3-4-github-card";
-import { type HoverStackEntry, printHoverStack, buildnewHoverStack } from "./0-process-hover-stack";
+import { type HoverStackEntry, printHoverStack, buildnewHoverStack } from "../8-mouse-tracker/0-process-hover-stack";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/shadcn/tooltip";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 
