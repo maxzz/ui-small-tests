@@ -2,7 +2,7 @@ import { type MouseEvent, useCallback, useMemo, useRef, useState } from "react";
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
 import { appSettings } from "@/store/0-local-storage";
-import { type HoverStackEntry, printHoverStack, processHoverStack } from "./0-process-hover-stack";
+import { formatHoverStackTooltip, type HoverStackEntry, printHoverStack, processHoverStack } from "./0-process-hover-stack";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/shadcn/tooltip";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import { DemoContents } from "./0-demo-contents";
@@ -15,15 +15,16 @@ export function CardsDemo() {
 
     const handleMouseMove = useCallback(
         (event: MouseEvent<HTMLDivElement>) => {
-            setMousePos({ x: event.clientX, y: event.clientY });
-
-            const zOrderedElements = processHoverStack(event.clientX, event.clientY, event.currentTarget, hoverStackRef);
+            const zOrderedElements = processHoverStack(event.clientX, event.clientY, event.currentTarget, hoverStackRef.current);
             if (zOrderedElements?.length) {
+                hoverStackRef.current = zOrderedElements;
                 setHoverStack(zOrderedElements);
                 printHoverStack(zOrderedElements);
             } else if (hoverStackRef.current.length === 0) {
                 setHoverStack([]);
             }
+
+            setMousePos({ x: event.clientX, y: event.clientY });
         }, []
     );
 
@@ -43,25 +44,7 @@ export function CardsDemo() {
 
     const tooltipAnchorStyle = useMemo(
         () => {
-            if (!mousePos) {
-                return {
-                    position: "fixed" as const,
-                    top: -9999,
-                    left: -9999,
-                    width: 0,
-                    height: 0,
-                    pointerEvents: "none" as const,
-                };
-            }
-
-            return {
-                position: "fixed" as const,
-                top: mousePos.y + 12,
-                left: mousePos.x + 12,
-                width: 0,
-                height: 0,
-                pointerEvents: "none" as const,
-            };
+            return tooltipPositionStyle(mousePos);
         }, [mousePos]
     );
 
@@ -90,15 +73,13 @@ export function CardsDemo() {
     );
 }
 
-function formatHoverStackTooltip(stack: HoverStackEntry[]): string {
-    return stack
-        .map(
-            (entry, index) => {
-                const classes = entry.classes.length > 0
-                    ? `\n\t${entry.classes.join("\n\t")}`
-                    : "\n\t(no classes)";
-                return `${index + 1}. [${entry.dataSlot}]${classes}`;
-            }
-        )
-        .join("\n");
+function tooltipPositionStyle(mousePos: { x: number; y: number; } | null): React.CSSProperties {
+    return {
+        position: "fixed",
+        top: !mousePos ? -9999 : mousePos.y + 12,
+        left: !mousePos ? -9999 : mousePos.x + 12,
+        width: 0,
+        height: 0,
+        pointerEvents: "none",
+    };
 }

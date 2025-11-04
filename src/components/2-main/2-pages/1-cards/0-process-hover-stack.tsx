@@ -1,11 +1,9 @@
-import type { RefObject } from "react";
-
 export type HoverStackEntry = {
     dataSlot: string;
     classes: string[];
 };
 
-export function processHoverStack(x: number, y: number, currentTarget: HTMLElement, hoverStackRef: RefObject<HoverStackEntry[]>): HoverStackEntry[] | undefined {
+export function processHoverStack(x: number, y: number, currentTarget: HTMLElement, hoverStack: HoverStackEntry[] | undefined): HoverStackEntry[] | undefined {
     const elementsAtPoint = document.elementsFromPoint(x, y);
     const zOrderedElements: HoverStackEntry[] = [];
     let reachedRoot = false;
@@ -30,18 +28,15 @@ export function processHoverStack(x: number, y: number, currentTarget: HTMLEleme
         return undefined;
     }
 
-    const previousStack = hoverStackRef.current ?? [];
-
-    if (!areStacksEqual(previousStack, zOrderedElements)) {
-        hoverStackRef.current = zOrderedElements;
+    if (!areStacksEqual(hoverStack, zOrderedElements)) {
         return zOrderedElements;
     }
 
     return undefined;
 }
 
-function areStacksEqual(prev: HoverStackEntry[], next: HoverStackEntry[]): boolean {
-    if (prev.length !== next.length) {
+function areStacksEqual(prev: HoverStackEntry[] | undefined, next: HoverStackEntry[]): boolean {
+    if (prev?.length !== next.length) {
         return false;
     }
 
@@ -94,4 +89,17 @@ export function printHoverStack(stack: HoverStackEntry[]): void {
         console.log("%c%s%c %s", "color: red;", entry.dataSlot, "color: inherit;", classes);
     }
     console.groupEnd();
+}
+
+export function formatHoverStackTooltip(stack: HoverStackEntry[]): string {
+    return stack
+        .map(
+            (entry, index) => {
+                const classes = entry.classes.length > 0
+                    ? `\n\t${entry.classes.join("\n\t")}`
+                    : "\n\t(no classes)";
+                return `${index + 1}. [${entry.dataSlot}]${classes}`;
+            }
+        )
+        .join("\n");
 }
