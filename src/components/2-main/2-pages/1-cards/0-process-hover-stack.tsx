@@ -3,11 +3,12 @@ export type HoverStackEntry = {
     classes: string[];
 };
 
-export function processHoverStack(x: number, y: number, currentTarget: HTMLElement, hoverStack: HoverStackEntry[] | undefined): HoverStackEntry[] | undefined {
+export function buildnewHoverStack(x: number, y: number, currentTarget: HTMLElement, hoverStack: HoverStackEntry[] | undefined): HoverStackEntry[] | undefined {
     const elementsAtPoint = document.elementsFromPoint(x, y);
-    const zOrderedElements: HoverStackEntry[] = [];
-    let reachedRoot = false;
 
+    const zOrderedElements: HoverStackEntry[] = [];
+    
+    let reachedRoot = false;
     for (const element of elementsAtPoint) {
         if (!(element instanceof HTMLElement)) {
             continue;
@@ -23,7 +24,6 @@ export function processHoverStack(x: number, y: number, currentTarget: HTMLEleme
             break;
         }
     }
-
     if (!reachedRoot) {
         return undefined;
     }
@@ -91,7 +91,10 @@ export function printHoverStack(stack: HoverStackEntry[]): void {
     console.groupEnd();
 }
 
-export function formatHoverStackTooltip(stack: HoverStackEntry[]): string {
+export function formatHoverStackTooltip(stack: HoverStackEntry[] | undefined): string {
+    if (!stack) {
+        return "";
+    }
     return stack
         .map(
             (entry, index) => {

@@ -2,7 +2,7 @@ import { type MouseEvent, useCallback, useMemo, useRef, useState } from "react";
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
 import { appSettings } from "@/store/0-local-storage";
-import { formatHoverStackTooltip, type HoverStackEntry, printHoverStack, processHoverStack } from "./0-process-hover-stack";
+import { formatHoverStackTooltip, type HoverStackEntry, printHoverStack, buildnewHoverStack } from "./0-process-hover-stack";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/shadcn/tooltip";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import { DemoContents } from "./0-demo-contents";
@@ -15,12 +15,14 @@ export function CardsDemo() {
 
     const handleMouseMove = useCallback(
         (event: MouseEvent<HTMLDivElement>) => {
-            const zOrderedElements = processHoverStack(event.clientX, event.clientY, event.currentTarget, hoverStackRef.current);
+            const zOrderedElements = buildnewHoverStack(event.clientX, event.clientY, event.currentTarget, hoverStackRef.current);
+
             if (zOrderedElements?.length) {
                 hoverStackRef.current = zOrderedElements;
                 setHoverStack(zOrderedElements);
                 printHoverStack(zOrderedElements);
-            } else if (hoverStackRef.current.length === 0) {
+            }
+            else if (hoverStackRef.current.length === 0) {
                 setHoverStack([]);
             }
 
@@ -36,17 +38,8 @@ export function CardsDemo() {
         }, []
     );
 
-    const tooltipContent = useMemo(
-        () => {
-            return !hoverStack.length ? "" : formatHoverStackTooltip(hoverStack);
-        }, [hoverStack]
-    );
-
-    const tooltipAnchorStyle = useMemo(
-        () => {
-            return tooltipPositionStyle(mousePos);
-        }, [mousePos]
-    );
+    const tooltipContent = useMemo(() => formatHoverStackTooltip(hoverStack), [hoverStack]);
+    const tooltipAnchorStyle = useMemo(() => tooltipPositionStyle(mousePos), [mousePos]);
 
     return (
         <Tooltip open={hoverStack.length > 0 && !!mousePos}>
