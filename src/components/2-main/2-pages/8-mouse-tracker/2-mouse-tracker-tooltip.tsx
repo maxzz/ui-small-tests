@@ -1,12 +1,11 @@
-import { type HTMLAttributes, useMemo } from "react";
+import { useMemo } from "react";
 import { useAtomValue } from "jotai";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/shadcn/tooltip";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import { type HoverStackEntry, formatHoverStackTooltip } from "./7-process-hover-stack";
 import { type MousePos } from "./8-hover-stack-atoms";
-import { MouseMoveTracker } from "./2-2-hoverStackAtom";
 
-export function CardsDemoWithState({ hoverStackAtom, mousePosAtom, className, children, ...rest }: HTMLAttributes<HTMLDivElement> & { hoverStackAtom: PA<HoverStackEntry[]>; mousePosAtom: PA<MousePos>; }) {
+export function CardsDemoWithState({ hoverStackAtom, mousePosAtom }: { hoverStackAtom: PA<HoverStackEntry[]>; mousePosAtom: PA<MousePos>; }) {
     const hoverStack = useAtomValue(hoverStackAtom);
     const mousePos = useAtomValue(mousePosAtom);
 
