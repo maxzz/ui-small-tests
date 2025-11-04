@@ -9,7 +9,9 @@ import { DemoContents } from "./0-demo-contents";
 
 export function CardsDemo() {
     const { zoom } = useSnapshot(appSettings.appUi);
+
     const hoverStackRef = useRef<HoverStackEntry[]>([]);
+
     const [hoverStack, setHoverStack] = useState<HoverStackEntry[]>([]);
     const [mousePos, setMousePos] = useState<{ x: number; y: number; } | null>(null);
 
@@ -21,9 +23,6 @@ export function CardsDemo() {
                 hoverStackRef.current = zOrderedElements;
                 setHoverStack(zOrderedElements);
                 printHoverStack(zOrderedElements);
-            }
-            else if (hoverStackRef.current.length === 0) {
-                setHoverStack([]);
             }
 
             setMousePos({ x: event.clientX, y: event.clientY });
