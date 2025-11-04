@@ -16,13 +16,8 @@ export function CardsDemoWithState({ className, children, ...rest }: HTMLAttribu
     const tooltipContent = useMemo(() => formatHoverStackTooltip(hoverStack), [hoverStack]);
     const tooltipAnchorStyle = useMemo(() => tooltipPositionStyle(mousePos), [mousePos?.x, mousePos?.y]);
 
-    return (
+    return (<>
         <Tooltip open={hoverStack.length > 0 && !!mousePos}>
-
-            <MouseMoveTracker className={className} {...rest}>
-                {children}
-            </MouseMoveTracker>
-
             <TooltipTrigger asChild>
                 <span aria-hidden={true} style={tooltipAnchorStyle} />
             </TooltipTrigger>
@@ -32,9 +27,12 @@ export function CardsDemoWithState({ className, children, ...rest }: HTMLAttribu
                     {tooltipContent}
                 </ScrollArea>
             </TooltipContent>
-
         </Tooltip>
-    );
+
+        <MouseMoveTracker className={className} {...rest}>
+            {children}
+        </MouseMoveTracker>
+    </>);
 }
 
 function tooltipPositionStyle(mousePos: { x: number; y: number; } | null): React.CSSProperties {
