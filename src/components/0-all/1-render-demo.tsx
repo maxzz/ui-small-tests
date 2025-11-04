@@ -10,6 +10,7 @@ import { CardsDemoWithTooltip } from "../2-main/2-pages/8-mouse-tracker/1-all-wr
 import { CardsDemoWithState } from "../2-main/2-pages/8-mouse-tracker/2-1-all-wrapper-w-state";
 import { DemoContents } from "../2-main/2-pages/1-cards/0-demo-contents";
 import { hoverStackAtom, mousePosAtom } from "../2-main/2-pages/8-mouse-tracker/8-hover-stack-atoms";
+import { MouseMoveTracker } from "../2-main/2-pages/8-mouse-tracker/2-2-hoverStackAtom";
 
 export function RenderDemo() {
     const { themePreseetName } = useSnapshot(appSettings.appUi);
@@ -69,6 +70,10 @@ function CardsContainer() {
                 <DemoContents />
             </CardsDemoWithTooltip>
              */}
+
+            <MouseMoveTracker className={""}>
+                <DemoContents />
+            </MouseMoveTracker>
 
             <CardsDemoWithState hoverStackAtom={hoverStackAtom} mousePosAtom={mousePosAtom}>
                 <DemoContents />

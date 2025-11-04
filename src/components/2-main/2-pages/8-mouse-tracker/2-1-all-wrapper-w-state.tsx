@@ -25,10 +25,6 @@ export function CardsDemoWithState({ hoverStackAtom, mousePosAtom, className, ch
                 </ScrollArea>
             </TooltipContent>
         </Tooltip>
-
-        <MouseMoveTracker className={className} {...rest}>
-            {children}
-        </MouseMoveTracker>
     </>);
 }
 
