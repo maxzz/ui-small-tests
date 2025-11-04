@@ -3,10 +3,10 @@ import { useSnapshot } from "valtio";
 import { appSettings } from "@/store/0-local-storage";
 import { HeroTitleText } from "../2-main/2-pages/3-controls/1-hero-title-text/0-all";
 import { Demo_Dashboard } from "../2-main/2-pages/2-dashboard";
-import { CardsDemoWithTooltip } from "../2-main/2-pages/1-cards";
 import { ScrollArea } from "../ui/shadcn/scroll-area";
 import { applyThemeToElement, type ThemeEditorState } from "@/store/2-apply-theme/utils";
 import { getPresetThemeStyles } from "@/store/2-apply-theme";
+import { CardsDemoWithTooltip } from "../2-main/2-pages/8-mouse-tracker/1-all-wrapper-w-tooltip";
 import { DemoContents } from "../2-main/2-pages/1-cards/0-demo-contents";
 
 export function RenderDemo() {

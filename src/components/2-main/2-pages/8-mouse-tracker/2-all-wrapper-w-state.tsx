@@ -2,11 +2,11 @@ import { type HTMLAttributes, type MouseEvent, useCallback, useMemo, useRef, use
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
 import { appSettings } from "@/store/0-local-storage";
-import { formatHoverStackTooltip, type HoverStackEntry, printHoverStack, buildnewHoverStack } from "./0-process-hover-stack";
+import { formatHoverStackTooltip, type HoverStackEntry, printHoverStack, buildnewHoverStack } from "./7-process-hover-stack";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/shadcn/tooltip";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 
-export function CardsDemoWithTooltip({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>) {
+export function CardsDemoWithState({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const { zoom } = useSnapshot(appSettings.appUi);
 
     const hoverStackRef = useRef<HoverStackEntry[]>([]);
