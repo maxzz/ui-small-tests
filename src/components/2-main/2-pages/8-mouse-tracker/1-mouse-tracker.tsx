@@ -6,7 +6,12 @@ import { hoverStackAtom, mousePosAtom } from "./7-hover-stack-atoms";
 import { printHoverStack } from "./8-utils-format";
 
 /**
- * //TODO: doc 
+ * Tracks mouse movement and builds a hover stack of elements under the cursor.
+ * This component wraps its children in a div that listens for mouse events and maintains:
+ * - A stack of elements currently under the mouse cursor (z-order aware)
+ * - The current mouse position coordinates
+ * - Automatic cleanup when the mouse leaves the component area
+ * ```
  */
 export function MouseTracker({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const setHoverStack = useSetAtom(hoverStackAtom);
