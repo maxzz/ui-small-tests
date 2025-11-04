@@ -7,7 +7,7 @@ import { ScrollArea } from "../ui/shadcn/scroll-area";
 import { applyThemeToElement, type ThemeEditorState } from "@/store/2-apply-theme/utils";
 import { getPresetThemeStyles } from "@/store/2-apply-theme";
 import { CardsDemoWithTooltip } from "../2-main/2-pages/8-mouse-tracker/1-all-wrapper-w-tooltip";
-import { CardsDemoWithState } from "../2-main/2-pages/8-mouse-tracker/2-all-wrapper-w-state";
+import { CardsDemoWithState } from "../2-main/2-pages/8-mouse-tracker/2-1-all-wrapper-w-state";
 import { DemoContents } from "../2-main/2-pages/1-cards/0-demo-contents";
 
 export function RenderDemo() {
