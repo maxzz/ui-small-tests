@@ -1,7 +1,3 @@
-import { type MouseEvent, useCallback, useMemo, useRef, useState } from "react";
-import { useSnapshot } from "valtio";
-import { classNames } from "@/utils";
-import { appSettings } from "@/store/0-local-storage";
 import { CardsActivityGoal } from "./2-2-activity-goal";
 import { CardsCalendar } from "./2-1-calendar";
 import { CardsChat } from "./3-6-chat";
@@ -16,9 +12,6 @@ import { CardsStats } from "./1-1,2-stats";
 import { CardsTeamMembers } from "./3-2-team-members";
 import { DatePickerWithRange } from "./3-7-date-picker-with-range";
 import { GithubCard } from "./3-4-github-card";
-import { type HoverStackEntry, printHoverStack, buildnewHoverStack } from "../8-mouse-tracker/7-process-hover-stack";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/shadcn/tooltip";
-import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 
 export function DemoContents() {
     return (<>
@@ -78,6 +71,5 @@ export function DemoContents() {
                 <CardsReportIssue />
             </div>
         </div>
-
     </>);
 }

@@ -6,10 +6,10 @@ import { Demo_Dashboard } from "../2-main/2-pages/2-dashboard";
 import { ScrollArea } from "../ui/shadcn/scroll-area";
 import { applyThemeToElement, type ThemeEditorState } from "@/store/2-apply-theme/utils";
 import { getPresetThemeStyles } from "@/store/2-apply-theme";
-import { CardsDemoWithTooltip } from "../2-main/2-pages/8-mouse-tracker/6-nun-all-wrapper-w-tooltip";
+import { CardsDemoWithTooltip } from "../2-main/2-pages/8-mouse-tracker/x-nun-all-wrapper-w-tooltip";
 import { MouseMoveTrackerTooltip } from "../2-main/2-pages/8-mouse-tracker/2-mouse-tracker-tooltip";
 import { DemoContents } from "../2-main/2-pages/1-cards/0-demo-contents";
-import { hoverStackAtom, mousePosAtom } from "../2-main/2-pages/8-mouse-tracker/8-hover-stack-atoms";
+import { hoverStackAtom, mousePosAtom } from "../2-main/2-pages/8-mouse-tracker/7-hover-stack-atoms";
 import { MouseTracker } from "../2-main/2-pages/8-mouse-tracker/1-mouse-tracker";
 
 export function RenderDemo() {

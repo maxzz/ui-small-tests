@@ -2,8 +2,9 @@ import { useMemo } from "react";
 import { useAtomValue } from "jotai";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/shadcn/tooltip";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
-import { type HoverStackEntry, formatHoverStackTooltip } from "./7-process-hover-stack";
-import { type MousePos } from "./8-hover-stack-atoms";
+import { type HoverStackEntry } from "./3-build-hover-stack";
+import { type MousePos } from "./7-hover-stack-atoms";
+import { formatHoverStackTooltip } from "./8-utils-format";
 
 export function MouseMoveTrackerTooltip({ hoverStackAtom, mousePosAtom }: { hoverStackAtom: PA<HoverStackEntry[]>; mousePosAtom: PA<MousePos>; }) {
     const hoverStack = useAtomValue(hoverStackAtom);

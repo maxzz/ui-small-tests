@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { type HoverStackEntry } from "./7-process-hover-stack";
+import { type HoverStackEntry } from "./3-build-hover-stack";
 
 export type MousePos = { x: number; y: number; } | null;
 
