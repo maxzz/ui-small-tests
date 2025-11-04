@@ -3,7 +3,7 @@ import { useSnapshot } from "valtio";
 import { appSettings } from "@/store/0-local-storage";
 import { HeroTitleText } from "../2-main/2-pages/3-controls/1-hero-title-text/0-all";
 import { Demo_Dashboard } from "../2-main/2-pages/2-dashboard";
-import { CardsDemo } from "../2-main/2-pages/1-cards";
+import { CardsDemoWithTooltip } from "../2-main/2-pages/1-cards";
 import { ScrollArea } from "../ui/shadcn/scroll-area";
 import { applyThemeToElement, type ThemeEditorState } from "@/store/2-apply-theme/utils";
 import { getPresetThemeStyles } from "@/store/2-apply-theme";
@@ -61,7 +61,7 @@ function RenderDemoComponent() {
 function CardsContainer() {
     return (
         <ScrollArea className="size-full bg-pink-100">
-            <CardsDemo />
+            <CardsDemoWithTooltip />
         </ScrollArea>
     );
 }

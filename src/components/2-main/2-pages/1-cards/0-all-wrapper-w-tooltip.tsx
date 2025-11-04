@@ -7,7 +7,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/shadcn/
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import { DemoContents } from "./0-demo-contents";
 
-export function CardsDemo() {
+export function CardsDemoWithTooltip() {
     const { zoom } = useSnapshot(appSettings.appUi);
 
     const hoverStackRef = useRef<HoverStackEntry[]>([]);
@@ -38,7 +38,7 @@ export function CardsDemo() {
     );
 
     const tooltipContent = useMemo(() => formatHoverStackTooltip(hoverStack), [hoverStack]);
-    const tooltipAnchorStyle = useMemo(() => tooltipPositionStyle(mousePos), [mousePos]);
+    const tooltipAnchorStyle = useMemo(() => tooltipPositionStyle(mousePos), [mousePos?.x, mousePos?.y]);
 
     return (
         <Tooltip open={hoverStack.length > 0 && !!mousePos}>
