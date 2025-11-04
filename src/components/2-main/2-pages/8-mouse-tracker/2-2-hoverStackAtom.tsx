@@ -1,12 +1,10 @@
 import { type HTMLAttributes, useRef, useCallback, type MouseEvent } from "react";
-import { atom, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
 import { appSettings } from "@/store/0-local-storage";
 import { type HoverStackEntry, buildnewHoverStack, printHoverStack } from "./7-process-hover-stack";
-
-export const hoverStackAtom = atom<HoverStackEntry[]>([]);
-export const mousePosAtom = atom<{ x: number; y: number; } | null>(null);
+import { hoverStackAtom, mousePosAtom } from "./8-hover-stack-atoms";
 
 export function MouseMoveTracker({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const { zoom } = useSnapshot(appSettings.appUi);

@@ -1,15 +1,12 @@
 import { type HTMLAttributes, useMemo } from "react";
 import { useAtomValue } from "jotai";
-import { useSnapshot } from "valtio";
-import { appSettings } from "@/store/0-local-storage";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/shadcn/tooltip";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
-import { formatHoverStackTooltip } from "./7-process-hover-stack";
-import { hoverStackAtom, mousePosAtom, MouseMoveTracker } from "./2-2-hoverStackAtom";
+import { type HoverStackEntry, formatHoverStackTooltip } from "./7-process-hover-stack";
+import { type MousePos } from "./8-hover-stack-atoms";
+import { MouseMoveTracker } from "./2-2-hoverStackAtom";
 
-export function CardsDemoWithState({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>) {
-    const { zoom } = useSnapshot(appSettings.appUi);
-
+export function CardsDemoWithState({ hoverStackAtom, mousePosAtom, className, children, ...rest }: HTMLAttributes<HTMLDivElement> & { hoverStackAtom: PA<HoverStackEntry[]>; mousePosAtom: PA<MousePos>; }) {
     const hoverStack = useAtomValue(hoverStackAtom);
     const mousePos = useAtomValue(mousePosAtom);
 

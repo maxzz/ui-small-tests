@@ -9,6 +9,7 @@ import { getPresetThemeStyles } from "@/store/2-apply-theme";
 import { CardsDemoWithTooltip } from "../2-main/2-pages/8-mouse-tracker/1-all-wrapper-w-tooltip";
 import { CardsDemoWithState } from "../2-main/2-pages/8-mouse-tracker/2-1-all-wrapper-w-state";
 import { DemoContents } from "../2-main/2-pages/1-cards/0-demo-contents";
+import { hoverStackAtom, mousePosAtom } from "../2-main/2-pages/8-mouse-tracker/8-hover-stack-atoms";
 
 export function RenderDemo() {
     const { themePreseetName } = useSnapshot(appSettings.appUi);
@@ -69,7 +70,7 @@ function CardsContainer() {
             </CardsDemoWithTooltip>
              */}
 
-            <CardsDemoWithState>
+            <CardsDemoWithState hoverStackAtom={hoverStackAtom} mousePosAtom={mousePosAtom}>
                 <DemoContents />
             </CardsDemoWithState>
         </ScrollArea>
