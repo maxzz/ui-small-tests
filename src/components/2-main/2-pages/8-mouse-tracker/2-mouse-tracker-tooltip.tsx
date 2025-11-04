@@ -5,7 +5,7 @@ import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import { type HoverStackEntry, formatHoverStackTooltip } from "./7-process-hover-stack";
 import { type MousePos } from "./8-hover-stack-atoms";
 
-export function CardsDemoWithState({ hoverStackAtom, mousePosAtom }: { hoverStackAtom: PA<HoverStackEntry[]>; mousePosAtom: PA<MousePos>; }) {
+export function MouseMoveTrackerTooltip({ hoverStackAtom, mousePosAtom }: { hoverStackAtom: PA<HoverStackEntry[]>; mousePosAtom: PA<MousePos>; }) {
     const hoverStack = useAtomValue(hoverStackAtom);
     const mousePos = useAtomValue(mousePosAtom);
 

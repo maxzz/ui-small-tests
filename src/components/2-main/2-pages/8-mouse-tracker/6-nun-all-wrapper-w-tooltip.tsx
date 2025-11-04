@@ -1,14 +1,18 @@
 import { type HTMLAttributes, type MouseEvent, useCallback, useMemo, useRef, useState } from "react";
-import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
-import { appSettings } from "@/store/0-local-storage";
 import { formatHoverStackTooltip, type HoverStackEntry, printHoverStack, buildnewHoverStack } from "./7-process-hover-stack";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/shadcn/tooltip";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 
+/**
+ * Usage: 
+ * import { useSnapshot } from "valtio";
+ * import { appSettings } from "@/store/0-local-storage";
+ * ...
+ * const { zoom } = useSnapshot(appSettings.appUi);
+ * <CardsDemoWithTooltip className={zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100"}> <DemoContents /> </CardsDemoWithTooltip>
+ */
 export function CardsDemoWithTooltip({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>) {
-    const { zoom } = useSnapshot(appSettings.appUi);
-
     const hoverStackRef = useRef<HoverStackEntry[]>([]);
 
     const [hoverStack, setHoverStack] = useState<HoverStackEntry[]>([]);
@@ -41,9 +45,8 @@ export function CardsDemoWithTooltip({ className, children, ...rest }: HTMLAttri
 
     return (
         <Tooltip open={hoverStack.length > 0 && !!mousePos}>
-
             <div
-                className={classNames("@3xl:grids-col-2 grid p-2 **:data-[slot=card]:shadow-none md:p-4 @3xl:gap-4 @5xl:grid-cols-10 @7xl:grid-cols-11", zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100", className)}
+                className={classNames("@3xl:grids-col-2 grid p-2 **:data-[slot=card]:shadow-none md:p-4 @3xl:gap-4 @5xl:grid-cols-10 @7xl:grid-cols-11", className)}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
                 {...rest}
@@ -60,7 +63,6 @@ export function CardsDemoWithTooltip({ className, children, ...rest }: HTMLAttri
                     {tooltipContent}
                 </ScrollArea>
             </TooltipContent>
-
         </Tooltip>
     );
 }
