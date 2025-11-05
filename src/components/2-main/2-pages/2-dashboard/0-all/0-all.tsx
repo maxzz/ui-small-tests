@@ -8,7 +8,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/shadcn/sidebar";
 import data from "../8-data.json";
 import { classNames } from "@/utils";
 
-export function Demo_Dashboard({className, ...rest}: React.ComponentProps<"iframe">) {
+export function Demo_Dashboard({ className, ...rest }: React.ComponentProps<"iframe">) {
     return (
         <iframe
             src="index-dashboard.html"
@@ -33,21 +33,27 @@ export function Dashboard() {
 
             <SidebarInset>
                 <SiteHeader />
+
                 <div className="flex flex-1 flex-col">
-                    
-                    <div className="@container/main flex flex-1 flex-col gap-2">
-                        <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-                            <SectionCards />
-                            <div className="px-4 lg:px-6">
-                                <ChartAreaInteractive />
-                            </div>
-                            <DataTable data={data} />
-                        </div>
-                    </div>
-                    
+                    <DashboardContents />
                 </div>
+
             </SidebarInset>
 
         </SidebarProvider>
+    );
+}
+
+function DashboardContents() {
+    return (
+        <div className="@container/main flex flex-1 flex-col gap-2">
+            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+                <SectionCards />
+                <div className="px-4 lg:px-6">
+                    <ChartAreaInteractive />
+                </div>
+                <DataTable data={data} />
+            </div>
+        </div>
     );
 }
