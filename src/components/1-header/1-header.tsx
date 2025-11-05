@@ -18,15 +18,16 @@ export function Section1_Header({ className, ...rest }: HTMLAttributes<HTMLDivEl
                 </div>
             </div>
 
-            <AnimatePresence>
-                <motion.div
-                    initial={{ opacity: 0, x: 100 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 100 }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <HeaderToolbar />
-                </motion.div>
+            <AnimatePresence initial={false}>
+                {leftTree === "Cards" &&
+                    <motion.div
+                        initial={{ opacity: 0, x: 100 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 100, transition: { duration: 0 } }}
+                        transition={{ duration: 0.2 }}
+                    >
+                        <HeaderToolbar />
+                    </motion.div>}
             </AnimatePresence>
         </header>
     );
