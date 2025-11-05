@@ -1,6 +1,6 @@
-import { SectionCards } from "@/components/2-main/2-pages/2-demo-contents/2-dashboard/2-2-right-section-cards";
-import { ChartAreaInteractive } from "@/components/2-main/2-pages/2-demo-contents/2-dashboard/2-3-right-chart-area-interactive";
-import { DataTable } from "@/components/2-main/2-pages/2-demo-contents/2-dashboard/2-4-right-data-table";
+import { SectionCards } from "./2-2-right-section-cards";
+import { ChartAreaInteractive } from "./2-3-right-chart-area-interactive";
+import { DataTable } from "./2-4-right-data-table";
 
 import data from "./8-data.json";
 

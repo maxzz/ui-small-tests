@@ -3,7 +3,7 @@ import { SiteHeader } from "@/components/2-main/2-pages/2-dashboard/2-1-right-si
 import { SidebarInset, SidebarProvider } from "@/components/ui/shadcn/sidebar";
 
 import { classNames } from "@/utils";
-import { DashboardContents } from "../../2-demo-contents/2-dashboard/0-dashboard-contents";
+import { DashboardContents } from "../../1-demo-contents/2-dashboard/0-dashboard-contents";
 
 export function Demo_Dashboard({ className, ...rest }: React.ComponentProps<"iframe">) {
     return (
