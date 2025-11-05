@@ -23,7 +23,7 @@ export function LeftList() {
 
     return (
         <Sidebar>
-            <SidebarContent>
+            <SidebarContent className="flex flex-col justify-between">
 
                 <SidebarGroup>
                     <SidebarGroupLabel>
@@ -53,6 +53,29 @@ export function LeftList() {
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
+
+                <SidebarGroup className="border-t border-border">
+                    <SidebarGroupLabel>
+                        Colors2
+                    </SidebarGroupLabel>
+
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton onClick={() => onItemClick("Dashboard")} isActive={leftTree === "Dashboard"}>
+                                    Dashboard
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton onClick={() => onItemClick("Effect Hero Title")} isActive={leftTree === "Effect Hero Title"}>
+                                    Effect Hero Title
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
+
+
 
             </SidebarContent>
         </Sidebar>
