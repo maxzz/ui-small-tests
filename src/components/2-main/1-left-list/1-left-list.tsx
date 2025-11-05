@@ -12,6 +12,7 @@ import {
     SidebarMenuItem,
     SidebarMenuButton,
 } from "@/components/ui/shadcn/sidebar";
+import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 
 export function LeftList() {
     const { leftTree } = useSnapshot(appSettings.appUi);
@@ -54,24 +55,15 @@ export function LeftList() {
                     </SidebarGroupContent>
                 </SidebarGroup>
 
-                <SidebarGroup className="border-t border-border">
+                <SidebarGroup className="border-t border-border h-1/2">
                     <SidebarGroupLabel>
-                        Colors2
+                        Tailwind CSS props
                     </SidebarGroupLabel>
 
                     <SidebarGroupContent>
-                        <SidebarMenu>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton onClick={() => onItemClick("Dashboard")} isActive={leftTree === "Dashboard"}>
-                                    Dashboard
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton onClick={() => onItemClick("Effect Hero Title")} isActive={leftTree === "Effect Hero Title"}>
-                                    Effect Hero Title
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                        </SidebarMenu>
+                        <ScrollArea className="size-full">
+                            <div className="">123</div>
+                        </ScrollArea>
                     </SidebarGroupContent>
                 </SidebarGroup>
 
