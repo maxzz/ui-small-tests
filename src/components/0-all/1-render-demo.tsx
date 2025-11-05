@@ -2,13 +2,13 @@ import { useEffect, useMemo, useRef } from "react";
 import { useSnapshot } from "valtio";
 import { appSettings } from "@/store/0-local-storage";
 import { HeroTitleText } from "../2-main/2-pages/3-controls/1-hero-title-text/0-all";
-import { Demo_Dashboard } from "../2-main/2-pages/2-dashboard";
+import { DashboardAsIframe } from "../2-main/2-pages/2-dashboard-iframe";
 import { ScrollArea } from "../ui/shadcn/scroll-area";
 import { applyThemeToElement, type ThemeEditorState } from "@/store/2-apply-theme/utils";
 import { getPresetThemeStyles } from "@/store/2-apply-theme";
 import { CardsDemoWithTooltip } from "../2-main/2-pages/8-mouse-tracker/x-nun-all-wrapper-w-tooltip";
 import { MouseMoveTrackerTooltip } from "../2-main/2-pages/8-mouse-tracker/2-mouse-tracker-tooltip";
-import { DemoContents } from "../2-main/2-pages/1-demo-contents/1-cards/0-demo-contents";
+import { CardsContents } from "../2-main/2-pages/1-demo-contents/1-cards/0-demo-contents";
 import { hoverStackAtom, mousePosAtom } from "../2-main/2-pages/8-mouse-tracker/7-hover-stack-atoms";
 import { MouseTracker } from "../2-main/2-pages/8-mouse-tracker/1-mouse-tracker";
 
@@ -45,7 +45,7 @@ function RenderDemoComponent() {
     const Dashboard = useMemo(
         () => {
             return <div className="size-full">
-                <Demo_Dashboard />
+                <DashboardAsIframe />
             </div>;
         }, []
     );
@@ -67,7 +67,7 @@ function CardsContainer() {
     return (
         <ScrollArea className="size-full">
             <MouseTracker className={zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100"}>
-                <DemoContents />
+                <CardsContents />
             </MouseTracker>
 
             <MouseMoveTrackerTooltip hoverStackAtom={hoverStackAtom} mousePosAtom={mousePosAtom} />

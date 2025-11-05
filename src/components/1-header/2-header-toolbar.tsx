@@ -2,7 +2,7 @@ import { type HTMLAttributes } from "react";
 import { useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
-import { type RightView, appSettings, rightViewType } from "@/store/0-local-storage";
+import { type RightView, appSettings, rightViewTypeGuard } from "@/store/0-local-storage";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/shadcn/select";
 import { Button } from "../ui/shadcn/button";
 import { getPresetThemeStyles, themeNamesAtom } from "@/store/2-apply-theme";
@@ -22,10 +22,10 @@ export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElem
                     <SelectValue placeholder="Select view" />
                 </SelectTrigger>
                 <SelectContent align="end" alignOffset={-4}>
-                    <SelectItem className="text-xs" value={rightViewType("Cards")}>
+                    <SelectItem className="text-xs" value={rightViewTypeGuard("Cards")}>
                         Cards
                     </SelectItem>
-                    <SelectItem className="text-xs" value={rightViewType("Dashboard")}>
+                    <SelectItem className="text-xs" value={rightViewTypeGuard("Dashboard")}>
                         Dashboard
                     </SelectItem>
                 </SelectContent>

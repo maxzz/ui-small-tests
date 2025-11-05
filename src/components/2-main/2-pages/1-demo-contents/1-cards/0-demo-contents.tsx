@@ -13,7 +13,7 @@ import { CardsTeamMembers } from "./3-2-team-members";
 import { DatePickerWithRange } from "./3-7-date-picker-with-range";
 import { GithubCard } from "./3-4-github-card";
 
-export function DemoContents() {
+export function CardsContents() {
     return (<>
         <div className="grid gap-4 @5xl:col-span-4 @7xl:col-span-6">
             {/* <div className="grid gap-4 @xl:grid-cols-2 @5xl:grid-cols-1 @7xl:grid-cols-2">

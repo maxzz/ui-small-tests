@@ -15,7 +15,7 @@ import {
 
 export function LeftList() {
     const { leftTree } = useSnapshot(appSettings.appUi);
-    
+
     const onItemClick = useCallback((nodeId: NodeId) => {
         appSettings.appUi.leftTree = nodeId;
         console.log('onItemClick', nodeId);
@@ -24,37 +24,36 @@ export function LeftList() {
     return (
         <Sidebar>
             <SidebarContent>
+
                 <SidebarGroup>
-                    <SidebarGroupLabel>Colors</SidebarGroupLabel>
+                    <SidebarGroupLabel>
+                        Colors
+                    </SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
+
                             <SidebarMenuItem>
-                                <SidebarMenuButton 
-                                    onClick={() => onItemClick("Cards")}
-                                    isActive={leftTree === "Cards"}
-                                >
+                                <SidebarMenuButton onClick={() => onItemClick("Cards")} isActive={leftTree === "Cards"}>
                                     Cards
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
+
                             <SidebarMenuItem>
-                                <SidebarMenuButton 
-                                    onClick={() => onItemClick("Dashboard")}
-                                    isActive={leftTree === "Dashboard"}
-                                >
+                                <SidebarMenuButton onClick={() => onItemClick("Dashboard")} isActive={leftTree === "Dashboard"}>
                                     Dashboard
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
+
                             <SidebarMenuItem>
-                                <SidebarMenuButton 
-                                    onClick={() => onItemClick("Hero Title")}
-                                    isActive={leftTree === "Hero Title"}
-                                >
+                                <SidebarMenuButton onClick={() => onItemClick("Hero Title")} isActive={leftTree === "Hero Title"}>
                                     Hero Title
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
+
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
+
             </SidebarContent>
         </Sidebar>
     );

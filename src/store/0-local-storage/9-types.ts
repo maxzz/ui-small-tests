@@ -2,6 +2,6 @@ export type NodeId = "Examples" | "no-demo-yet" | "Dashboard" | "Hero Title" | "
 
 export type RightView = "Cards" | "Dashboard";
 
-export function rightViewType(rightView: RightView): string {
+export function rightViewTypeGuard(rightView: RightView): string {
     return rightView;
 }

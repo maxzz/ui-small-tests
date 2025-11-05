@@ -1,11 +1,11 @@
-import { AppSidebar } from "@/components/2-main/2-pages/2-dashboard/1-1-left-app-sidebar";
-import { SiteHeader } from "@/components/2-main/2-pages/2-dashboard/2-1-right-site-header";
+import { AppSidebar } from "@/components/2-main/2-pages/2-dashboard-iframe/1-1-left-app-sidebar";
+import { SiteHeader } from "@/components/2-main/2-pages/2-dashboard-iframe/2-1-right-site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/shadcn/sidebar";
 
 import { classNames } from "@/utils";
-import { DashboardContents } from "../../1-demo-contents/2-dashboard/0-dashboard-contents";
+import { DashboardContents } from "../1-demo-contents/2-dashboard/0-dashboard-contents";
 
-export function Demo_Dashboard({ className, ...rest }: React.ComponentProps<"iframe">) {
+export function DashboardAsIframe({ className, ...rest }: React.ComponentProps<"iframe">) {
     return (
         <iframe
             src="index-dashboard.html"
@@ -16,7 +16,7 @@ export function Demo_Dashboard({ className, ...rest }: React.ComponentProps<"ifr
     );
 }
 
-export function Dashboard() {
+export function DashboardAsApp() {
     return (
         <SidebarProvider
             style={
