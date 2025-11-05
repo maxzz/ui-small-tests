@@ -45,8 +45,8 @@ export function LeftList() {
                             </SidebarMenuItem>
 
                             <SidebarMenuItem>
-                                <SidebarMenuButton onClick={() => onItemClick("Hero Title")} isActive={leftTree === "Hero Title"}>
-                                    Hero Title
+                                <SidebarMenuButton onClick={() => onItemClick("Effect Hero Title")} isActive={leftTree === "Effect Hero Title"}>
+                                    Effect Hero Title
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
 

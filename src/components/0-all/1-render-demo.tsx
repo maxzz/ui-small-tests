@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useSnapshot } from "valtio";
 import { appSettings } from "@/store/0-local-storage";
-import { HeroTitleText } from "../2-main/2-pages/3-controls/1-hero-title-text/0-all";
+import { HeroTitleText } from "../2-main/2-pages/3-controls/1-effect-hero-title/0-all";
 import { DashboardAsIframe } from "../2-main/2-pages/2-dashboard-iframe";
 import { ScrollArea } from "../ui/shadcn/scroll-area";
 import { applyThemeToElement, type ThemeEditorState } from "@/store/2-apply-theme/utils";
@@ -51,7 +51,7 @@ function RenderDemoComponent() {
     );
 
     switch (leftTree) {
-        case "Hero Title":
+        case "Effect Hero Title":
             return <HeroTitleText />;
         case "Dashboard":
             return <>{Dashboard}</>;
