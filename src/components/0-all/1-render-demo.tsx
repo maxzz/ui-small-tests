@@ -33,7 +33,7 @@ export function RenderDemo() {
     );
 
     return (
-        <div ref={demoRef} className="@container min-h-0 px-4 py-3 bg-gray-100 1scale-50 origin-top-left">
+        <div ref={demoRef} className="@container min-h-0">
             <RenderDemoComponent />
         </div>
     );
@@ -65,7 +65,7 @@ function RenderDemoComponent() {
 function CardsContainer() {
     const { zoom } = useSnapshot(appSettings.appUi);
     return (
-        <ScrollArea className="size-full bg-pink-100">
+        <ScrollArea className="size-full">
             <MouseTracker className={zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100"}>
                 <DemoContents />
             </MouseTracker>

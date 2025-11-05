@@ -1,9 +1,13 @@
 import { type HTMLAttributes } from "react";
+import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
-import { HeaderToolbar } from "./2-header-toolbar";
+import { AnimatePresence, motion } from "motion/react";
+import { appSettings } from "@/store/0-local-storage";
 import { SidebarTrigger } from "../ui/shadcn/sidebar";
+import { HeaderToolbar } from "./2-header-toolbar";
 
 export function Section1_Header({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
+    const { leftTree } = useSnapshot(appSettings.appUi);
     return (
         <header className={classNames(sectionClasses, className)} {...rest}>
             <div className="flex items-center">
@@ -14,7 +18,16 @@ export function Section1_Header({ className, ...rest }: HTMLAttributes<HTMLDivEl
                 </div>
             </div>
 
-            <HeaderToolbar />
+            <AnimatePresence>
+                <motion.div
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 100 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <HeaderToolbar />
+                </motion.div>
+            </AnimatePresence>
         </header>
     );
 }
