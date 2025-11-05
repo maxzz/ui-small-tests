@@ -1,14 +1,14 @@
 import { type HTMLAttributes } from "react";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
-import { appSettings } from "@/store/0-local-storage";
+import { type RightView, appSettings, rightViewType } from "@/store/0-local-storage";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/shadcn/select";
-import { getPresetThemeStyles, themeNameAtom, themeNamesAtom } from "@/store/2-apply-theme";
 import { Button } from "../ui/shadcn/button";
+import { getPresetThemeStyles, themeNamesAtom } from "@/store/2-apply-theme";
 
 export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
-    const { themePreseetName } = useSnapshot(appSettings.appUi);
+    const { themePreseetName, rightView } = useSnapshot(appSettings.appUi);
     const themeNames = useAtomValue(themeNamesAtom);
 
     return (
@@ -16,6 +16,20 @@ export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElem
             <Button size="sm" variant="outline" className="px-2 h-7! text-xs" onClick={() => appSettings.appUi.zoom = appSettings.appUi.zoom === 1 ? 0.5 : 1}>
                 Zoom
             </Button>
+
+            <Select defaultValue={rightView} onValueChange={(view) => appSettings.appUi.rightView = view as RightView}>
+                <SelectTrigger className="px-2 h-7! text-xs rounded-sm w-[120px]" title="Select view">
+                    <SelectValue placeholder="Select view" />
+                </SelectTrigger>
+                <SelectContent align="end" alignOffset={-4}>
+                    <SelectItem className="text-xs" value={rightViewType("Cards")}>
+                        Cards
+                    </SelectItem>
+                    <SelectItem className="text-xs" value={rightViewType("Dashboard")}>
+                        Dashboard
+                    </SelectItem>
+                </SelectContent>
+            </Select>
 
             <Select defaultValue={themePreseetName} onValueChange={(name) => appSettings.appUi.themePreseetName = name}>
                 <SelectTrigger className="px-2 h-7! text-xs rounded-sm" title="primary, accent, secondary, border">

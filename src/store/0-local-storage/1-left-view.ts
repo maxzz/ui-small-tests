@@ -1,1 +1,0 @@
-export type NodeId = "" | "Examples" | "no-demo-yet" | "Dashboard" | "Hero Title" | "Cards";
