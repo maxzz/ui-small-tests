@@ -20,7 +20,7 @@ export function GroupTwProps() {
 
             <SidebarGroupContent>
                 <ScrollArea className="size-full">
-                    <div className="max-h-dvh whitespace-pre text-left p-0">
+                    <div className="p-0 whitespace-pre">
                         {tooltipContent}
                     </div>
                 </ScrollArea>

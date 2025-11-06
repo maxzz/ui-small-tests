@@ -26,10 +26,10 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/shadcn/sidebar";
 
-import { NavDocuments } from "@/components/2-main/2-pages/2-dashboard-iframe/1-3-left-nav-documents";
-import { NavMain } from "@/components/2-main/2-pages/2-dashboard-iframe/1-2-left-nav-main";
-import { NavSecondary } from "@/components/2-main/2-pages/2-dashboard-iframe/1-4-left-nav-secondary";
-import { NavUser } from "@/components/2-main/2-pages/2-dashboard-iframe/1-5-left-nav-user";
+import { NavMain } from "./1-2-left-nav-main";
+import { NavDocuments } from "./1-3-left-nav-documents";
+import { NavSecondary } from "./1-4-left-nav-secondary";
+import { NavUser } from "./1-5-left-nav-user";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
@@ -37,9 +37,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
+                        <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:p-1.5!">
                             <a href="#">
-                                <IconInnerShadowTop className="!size-5" />
+                                <IconInnerShadowTop className="size-5!" />
                                 <span className="text-base font-semibold">Acme Inc.</span>
                             </a>
                         </SidebarMenuButton>
