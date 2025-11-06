@@ -13,7 +13,7 @@ export function GroupTwProps() {
     const tooltipContent = useMemo(() => formatHoverStackTooltip(hoverStack), [hoverStack]);
 
     return (
-        <SidebarGroup className="border-t border-border h-1/2 overflow-hidden flex flex-col">
+        <SidebarGroup className="1border-t border-border h-1/2 overflow-hidden flex flex-col">
             <SidebarGroupLabel>
                 Tailwind CSS props
             </SidebarGroupLabel>

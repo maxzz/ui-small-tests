@@ -4,7 +4,7 @@ import { RightView, type NodeId } from "./9-types";
 export type AppUISettings = {
     themeMode: ThemeMode;
     // accordionsOpened: Record<string, boolean>;
-    leftVerticalDivider: Record<string, string>; // PanelGroupStorage serialized layout
+    resizable: Record<string, string>; // PanelGroupStorage serialized layout
     leftTree: NodeId;
     rightView: RightView;
     themePreseetName: string;
@@ -14,7 +14,7 @@ export type AppUISettings = {
 export const defaultAppUISettings: AppUISettings = {
     themeMode: 'light',
     // accordionsOpened: {},
-    leftVerticalDivider: {},
+    resizable: {},
     leftTree: "Cards",
     rightView: "Cards",
     themePreseetName: "dafault",

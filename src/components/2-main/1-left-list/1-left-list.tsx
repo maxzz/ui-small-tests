@@ -5,8 +5,7 @@ import { GroupTwProps } from "./3-group-tw-props";
 import { IconRadix_DragHandleDots2 } from "@/components/ui/icons";
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/shadcn/resizable";
 import { classNames } from "@/utils";
-import { type PanelGroupStorage } from "react-resizable-panels";
-import { appSettings } from "@/store/0-local-storage";
+import { panelsStorage } from "@/store/0-local-storage";
 
 // export function LeftList() {
 //     return (
@@ -34,6 +33,8 @@ export function LeftList() {
 
                     {/* <ResizableHandle className="w-8 hover:size-8 active:size-8 1bg-blue-800 hover:bg-green-500 active:bg-red-500" /> */}
                     
+                    {/* <ResizableHandle className="my-[3px] h-0.5! 1pb-4 1items-end z-20" tabIndex={-1} withHandle /> */}
+
                     <ResizableHandle className="my-[3px] 1pb-4 1items-end z-20" tabIndex={-1} withHandle>
                         <div className="flex items-center gap-1">
                             {/* <button className={toysArrowClasses} onClick={() => togglePanels(refA, refB, true)}>
@@ -70,12 +71,3 @@ function ResizableHandleToys({ className, ...rest }: HTMLAttributes<HTMLDivEleme
 }
 
 const toysMiddleClasses = "invisible group-hover:visible transition-all delay-150";
-
-const panelsStorage: PanelGroupStorage = {
-    getItem(name: string): string {
-        return appSettings.appUi.leftVerticalDivider[name] || '';
-    },
-    setItem(name: string, value: string): void {
-        appSettings.appUi.leftVerticalDivider[name] = value; // {"{\"defaultSize\":25},{\"defaultSize\":50}":{"expandToSizes":{},"layout":[50,50]}}
-    }
-};
