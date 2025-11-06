@@ -1,5 +1,5 @@
 import { proxy, subscribe } from 'valtio';
-import { mergeDefaultAndLoaded, themeApplyMode } from '@/utils';
+import { mergeConfigRecursively, mergeDefaultAndLoaded, themeApplyMode } from '@/utils';
 import { type AppUISettings, defaultAppUISettings } from './0-default-store';
 
 const STORAGE_UI_KEY = 'ui-small-tests';
@@ -37,7 +37,7 @@ function loadUiInitialState(): AppUi {
         }
     }
 
-    const state = mergeDefaultAndLoaded({ defaults: initialAppUi, loaded: storageUi });
+    const state = mergeConfigRecursively(initialAppUi, storageUi);
     return state;
 }
 
