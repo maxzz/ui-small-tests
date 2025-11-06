@@ -3,11 +3,14 @@ import { Section3_Footer } from "../3-footer";
 import { LeftList } from "../2-main/1-left-list";
 import { RenderDemo } from "./1-render-demo";
 import { SidebarProvider, SidebarTrigger } from "../ui/shadcn/sidebar";
+import { ResizableDemo } from "../2-main/3-resizable";
 
 export function App() {
     return (
         <div className="h-screen grid grid-rows-[auto_1fr_auto]">
-            <SidebarProvider>
+            <ResizableDemo />
+            
+            {/* <SidebarProvider>
                 <LeftList />
 
                 <main className="size-full overflow-hidden 1min-h-0">
@@ -20,7 +23,7 @@ export function App() {
 
                     </div>
                 </main>
-            </SidebarProvider>
+            </SidebarProvider> */}
         </div>
     );
 }
