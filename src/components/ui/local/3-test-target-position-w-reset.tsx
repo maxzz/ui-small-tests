@@ -5,6 +5,7 @@ import { IconDndTarget } from "./27-dnd-target";
 import { debouncedSetNapiGetPosXY } from "./8-set-position";
 import { stateNapiPosTracker } from "./9-types";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
+import { PopoverContent } from "../shadcn/popover";
 
 export function TestTargetWindowPositionWReset({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     return (
@@ -25,30 +26,33 @@ function MovingIcon() {
 
     return (<>
         <PopoverPrimitive.Root data-slot="popover">
-            <PopoverPrimitive.Portal>
-                <PopoverPrimitive.Trigger>
-                    {/* {getPosProgress && ( */}
-                    <motion.div
-                        className="size-12"
-                        onPointerDown={(event) => { stateNapiPosTracker.dragIsRunning = true; dragControls.start(event, { snapToCursor: true }); }}
-                        // onPointerDown={() => { napiBuildProgress.dragIsRunning = true; debouncedSetNapiGetPosXY(0, 0); }}
-                        // onPointerMove={(event: React.PointerEvent<HTMLDivElement>) => napiBuildProgress.dragIsRunning && debouncedSetNapiGetPosXY(event.pageX, event.pageY)}
-                        onPointerUp={() => { stateNapiPosTracker.dragIsRunning = false; }}
-                        onDrag={onDrag}
-                        drag
-                        dragSnapToOrigin
-                        dragElastic={0.01}
-                        dragTransition={{ bounceStiffness: 600, bounceDamping: 50 }}
-                        dragControls={dragControls}
-                        dragListener={false}
-                    >
+            <PopoverPrimitive.Trigger>
+                {/* {getPosProgress && ( */}
+                <motion.div
+                    className="size-12"
+                    onPointerDown={(event) => { stateNapiPosTracker.dragIsRunning = true; dragControls.start(event, { snapToCursor: true }); }}
+                    // onPointerDown={() => { napiBuildProgress.dragIsRunning = true; debouncedSetNapiGetPosXY(0, 0); }}
+                    // onPointerMove={(event: React.PointerEvent<HTMLDivElement>) => napiBuildProgress.dragIsRunning && debouncedSetNapiGetPosXY(event.pageX, event.pageY)}
+                    onPointerUp={() => { stateNapiPosTracker.dragIsRunning = false; }}
+                    onDrag={onDrag}
+                    drag
+                    dragSnapToOrigin
+                    dragElastic={0.01}
+                    dragTransition={{ bounceStiffness: 600, bounceDamping: 50 }}
+                    dragControls={dragControls}
+                    dragListener={false}
+                >
+                    123
+                </motion.div>
+
+                    <PopoverContent>
                         {/* <PopoverPrimitive.Trigger> */}
                         <IconDndTarget className="size-12 z-1000 absolute top-0 left-0 flex items-center justify-center bg-primary-800 rounded-sm cursor-pointer" />
                         {/* </PopoverPrimitive.Trigger> */}
-                    </motion.div>
-                    {/* )} */}
-                </PopoverPrimitive.Trigger>
-            </PopoverPrimitive.Portal>
+                    </PopoverContent>
+
+                {/* )} */}
+            </PopoverPrimitive.Trigger>
         </PopoverPrimitive.Root>
     </>);
 }
