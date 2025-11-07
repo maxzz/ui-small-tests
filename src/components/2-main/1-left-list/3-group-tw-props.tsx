@@ -6,6 +6,7 @@ import { SidebarGroup, SidebarGroupLabel, SidebarGroupContent } from "@/componen
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import { hoverStackAtom } from "../2-pages/8-mouse-tracker/7-hover-stack-atoms";
 import { formatHoverStackTooltip } from "../2-pages/8-mouse-tracker/8-utils-format";
+import { TestTargetWindowPositionWReset } from "@/components/ui/local/3-test-target-position-w-reset";
 
 export function GroupTwProps() {
     const { leftTree } = useSnapshot(appSettings.appUi);
@@ -16,6 +17,7 @@ export function GroupTwProps() {
         <SidebarGroup className="1border-t border-border h-1/2 overflow-hidden flex flex-col">
             <SidebarGroupLabel>
                 Tailwind CSS props
+                <TestTargetWindowPositionWReset className="inline-block ml-2 align-middle" />
             </SidebarGroupLabel>
 
             <SidebarGroupContent>
