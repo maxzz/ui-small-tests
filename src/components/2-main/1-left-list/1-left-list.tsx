@@ -17,7 +17,7 @@ export function LeftList() {
                         <GroupDemos />
                     </ResizablePanel>
 
-                    <ResizableHandle className="my-[3px] h-0.5! hover:bg-sky-500 active:bg-sky-500 transition-colors  delay-150 z-20" tabIndex={-1} withHandle />
+                    <ResizableHandle className={resizableHandleClasses} tabIndex={-1} withHandle />
 
                     <ResizablePanel defaultSize={75}>
                         <GroupTwProps />
@@ -29,4 +29,14 @@ export function LeftList() {
     );
 }
 
-const toysMiddleClasses = "invisible group-hover:visible transition-all delay-150";
+const resizableHandleClasses = "\
+my-[3px] \
+1group \
+hover:bg-red-500 \
+active:bg-sky-500 \
+[&_div]:invisible \
+[&_div]:hover:visible \
+[&_div]:hover:bg-border/30 \
+1[&_div]:hover:bg-red-400 \
+[&_div]:active:bg-sky-400 \
+transition-all delay-150 z-20"; //"invisible group-hover:visible transition-all delay-150";
