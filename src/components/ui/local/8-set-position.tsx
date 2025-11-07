@@ -1,6 +1,10 @@
 import { debounce, roundInt } from "@/utils";
-import { stateNapiPosTracker } from "@/store/7-napi-atoms";
-import { PointXY } from "@/x-electron/xternal-to-renderer/7-napi-calls";
+import { stateNapiPosTracker } from "./9-types";
+
+type PointXY = {
+    x: number;
+    y: number;
+}
 
 /**
  * When call is coming from main, it is already debounced and rounded, but here we call it directly from pointer event handlers.
