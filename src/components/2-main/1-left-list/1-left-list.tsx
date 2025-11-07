@@ -1,11 +1,10 @@
 import { type HTMLAttributes } from "react";
+import { classNames } from "@/utils";
+import { panelsStorage } from "@/store/0-local-storage";
 import { Sidebar, SidebarContent } from "@/components/ui/shadcn/sidebar";
 import { GroupDemos } from "./2-group-demos";
 import { GroupTwProps } from "./3-group-tw-props";
-import { IconRadix_DragHandleDots2 } from "@/components/ui/icons";
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/shadcn/resizable";
-import { classNames } from "@/utils";
-import { panelsStorage } from "@/store/0-local-storage";
 
 export function LeftList() {
     return (
@@ -17,7 +16,8 @@ export function LeftList() {
                         <GroupDemos />
                     </ResizablePanel>
 
-                    <ResizableHandle className={resizableHandleClasses} tabIndex={-1} withHandle />
+                    <ResizableHandle tabIndex={-1} />
+                    {/* <ResizableHandle className={resizableHandleClasses} tabIndex={-1} withHandle /> */}
 
                     <ResizablePanel defaultSize={75}>
                         <GroupTwProps />
