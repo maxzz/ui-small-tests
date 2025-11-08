@@ -50,24 +50,19 @@ export function CardsForms() {
                             Select the plan that best fits your needs.
                         </p>
                         <RadioGroup defaultValue="starter" className="grid gap-3 @3xl:grid-cols-2">
-                            {plans.map((plan) => (
-                                <Label
-                                    className="has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-input/20 flex items-start gap-3 rounded-lg border p-3"
-                                    key={plan.id}
-                                >
-                                    <RadioGroupItem
-                                        value={plan.id}
-                                        id={plan.name}
-                                        className="data-[state=checked]:border-primary"
-                                    />
-                                    <div className="grid gap-1 font-normal">
-                                        <div className="font-medium">{plan.name}</div>
-                                        <div className="text-muted-foreground text-xs leading-snug text-balance">
-                                            {plan.description}
+                            {plans.map(
+                                (plan) => (
+                                    <Label className="has-data-[state=checked]:border-ring has-data-[state=checked]:bg-input/20 flex items-start gap-3 rounded-lg border p-3" key={plan.id}>
+                                        <RadioGroupItem className="data-[state=checked]:border-primary" value={plan.id} id={plan.name} />
+                                        <div className="grid gap-1 font-normal">
+                                            <div className="font-medium">{plan.name}</div>
+                                            <div className="text-muted-foreground text-xs leading-snug text-balance">
+                                                {plan.description}
+                                            </div>
                                         </div>
-                                    </div>
-                                </Label>
-                            ))}
+                                    </Label>
+                                )
+                            )}
                         </RadioGroup>
                     </fieldset>
 

@@ -37,25 +37,29 @@ export function CardsTeamMembers() {
                                         {member.role} <ChevronDown />
                                     </Button>
                                 </PopoverTrigger>
+
                                 <PopoverContent className="p-0" align="end">
                                     <Command>
                                         <CommandInput placeholder="Select role..." />
                                         <CommandList>
                                             <CommandEmpty>No roles found.</CommandEmpty>
                                             <CommandGroup>
-                                                {roles.map((role) => (
-                                                    <CommandItem key={role.name}>
-                                                        <div className="flex flex-col">
-                                                            <p className="text-sm font-medium">{role.name}</p>
-                                                            <p className="text-muted-foreground">{role.description}</p>
-                                                        </div>
-                                                    </CommandItem>
-                                                ))}
+                                                {roles.map(
+                                                    (role) => (
+                                                        <CommandItem key={role.name}>
+                                                            <div className="flex flex-col">
+                                                                <p className="text-sm font-medium">{role.name}</p>
+                                                                <p className="text-muted-foreground">{role.description}</p>
+                                                            </div>
+                                                        </CommandItem>
+                                                    )
+                                                )}
                                             </CommandGroup>
                                         </CommandList>
                                     </Command>
                                 </PopoverContent>
                             </Popover>
+                            
                         </div>
                     )
                 )}
