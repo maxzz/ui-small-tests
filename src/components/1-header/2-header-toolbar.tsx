@@ -18,7 +18,7 @@ export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElem
                 Zoom
             </Button>
 
-            <TestTargetWindowPositionWReset className="inline-block ml-2 align-middle z-1000" />
+            <TestTargetWindowPositionWReset className="inline-block ml-2 align-middle" style={{ zIndex: 9999 }} />
 
             <Select defaultValue={rightView} onValueChange={(view) => appSettings.appUi.rightView = view as RightView}>
                 <SelectTrigger className="px-2 h-7! text-xs rounded-sm w-[120px]" title="Select view">
