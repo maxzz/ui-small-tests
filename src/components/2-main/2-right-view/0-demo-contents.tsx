@@ -1,17 +1,17 @@
-import { CardsActivityGoal } from "./2-2-activity-goal";
-import { CardsCalendar } from "./2-1-calendar";
-import { CardsChat } from "./3-6-chat";
-import { CardsCookieSettings } from "./3-3-cookie-settings";
-import { CardsCreateAccount } from "./3-5-create-account";
-import { CardsExerciseMinutes } from "./2-3-exercise-minutes";
-import { CardsForms } from "./3-1-forms";
-import { CardsPayments } from "./4-1-payments";
-import { CardsReportIssue } from "./3-8-report-issue";
-import { CardsShare } from "./5-0-share";
-import { CardsStats } from "./1-1,2-stats";
-import { CardsTeamMembers } from "./3-2-team-members";
-import { DatePickerWithRange } from "./3-7-date-picker-with-range";
-import { GithubCard } from "./3-4-github-card";
+import { CardsActivityGoal } from "../3-pages/1-demo-contents/1-cards/2-2-activity-goal";
+import { CardsCalendar } from "../3-pages/1-demo-contents/1-cards/2-1-calendar";
+import { CardsChat } from "../3-pages/1-demo-contents/1-cards/3-6-chat";
+import { CardsCookieSettings } from "../3-pages/1-demo-contents/1-cards/3-3-cookie-settings";
+import { CardsCreateAccount } from "../3-pages/1-demo-contents/1-cards/3-5-create-account";
+import { CardsExerciseMinutes } from "../3-pages/1-demo-contents/1-cards/2-3-exercise-minutes";
+import { CardsForms } from "../3-pages/1-demo-contents/1-cards/3-1-forms";
+import { CardsPayments } from "../3-pages/1-demo-contents/1-cards/4-1-payments";
+import { CardsReportIssue } from "../3-pages/1-demo-contents/1-cards/3-8-report-issue";
+import { CardsShare } from "../3-pages/1-demo-contents/1-cards/5-0-share";
+import { CardsStats } from "../3-pages/1-demo-contents/1-cards/1-1,2-stats";
+import { CardsTeamMembers } from "../3-pages/1-demo-contents/1-cards/3-2-team-members";
+import { DatePickerWithRange } from "../3-pages/1-demo-contents/1-cards/3-7-date-picker-with-range";
+import { GithubCard } from "../3-pages/1-demo-contents/1-cards/3-4-github-card";
 
 export function CardsContents() {
     return (<>
