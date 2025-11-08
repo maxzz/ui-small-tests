@@ -1,12 +1,7 @@
 import { type HTMLAttributes } from "react";
-import { useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
-import { classNames } from "@/utils";
 import { type RightView, appSettings, rightViewTypeGuard } from "@/store/0-local-storage";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/shadcn/select";
-import { Button } from "../ui/shadcn/button";
-import { getPresetThemeStyles, themeNamesAtom } from "@/store/2-apply-theme";
-// import { TestTargetWindowPositionWReset } from "../ui/local/3-test-target-position-w-reset";
 
 export function SelectPatrs({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const { rightView } = useSnapshot(appSettings.appUi);
