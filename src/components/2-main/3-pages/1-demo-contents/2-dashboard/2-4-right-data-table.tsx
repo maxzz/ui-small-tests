@@ -401,21 +401,13 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
                     Reviewer
                 </Label>
                 <Select>
-                    <SelectTrigger
-                        className="w-38 **:data-[slot=select-value]:block **:data-[slot=select-value]:truncate"
-                        size="sm"
-                        id={`${row.original.id}-reviewer`}
-                    >
+                    <SelectTrigger className="w-38 **:data-[slot=select-value]:block **:data-[slot=select-value]:truncate" size="sm" id={`${row.original.id}-reviewer`}>
                         <SelectValue placeholder="Assign reviewer" />
                     </SelectTrigger>
 
                     <SelectContent align="end">
-                        <SelectItem value="Eddie Lake">
-                            Eddie Lake
-                        </SelectItem>
-                        <SelectItem value="Jamik Tashpulatov">
-                            Jamik Tashpulatov
-                        </SelectItem>
+                        <SelectItem value="Eddie Lake"> Eddie Lake </SelectItem>
+                        <SelectItem value="Jamik Tashpulatov"> Jamik Tashpulatov </SelectItem>
                     </SelectContent>
                 </Select>
             </>);
@@ -478,17 +470,17 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema>; }) {
         <Drawer direction={isMobile ? "bottom" : "right"}>
 
             <DrawerTrigger asChild>
-                <Button variant="link" className="text-foreground w-fit px-0 text-left">
+                <Button variant="link" className="px-0 w-fit text-left text-foreground">
                     {item.header}
                 </Button>
             </DrawerTrigger>
 
             <DrawerContent>
                 <DrawerHeader className="gap-1">
-                    <DrawerTitle>{item.header}</DrawerTitle>
-                    <DrawerDescription>
-                        Showing total visitors for the last 6 months
-                    </DrawerDescription>
+                    <DrawerTitle>
+                        {item.header}
+                    </DrawerTitle>
+                    <DrawerDescription>Showing total visitors for the last 6 months</DrawerDescription>
                 </DrawerHeader>
 
                 <div className="flex flex-col gap-4 overflow-y-auto px-4 text-sm">
@@ -532,8 +524,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema>; }) {
 
                         <div className="grid gap-2">
                             <div className="flex gap-2 leading-none font-medium">
-                                Trending up by 5.2% this month{" "}
-                                <IconTrendingUp className="size-4" />
+                                Trending up by 5.2% this month{" "} <IconTrendingUp className="size-4" />
                             </div>
                             <div className="text-muted-foreground">
                                 Showing total visitors for the last 6 months. This is just
