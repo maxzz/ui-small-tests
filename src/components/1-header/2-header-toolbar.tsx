@@ -6,10 +6,11 @@ import { type RightView, appSettings, rightViewTypeGuard } from "@/store/0-local
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/shadcn/select";
 import { Button } from "../ui/shadcn/button";
 import { getPresetThemeStyles, themeNamesAtom } from "@/store/2-apply-theme";
-import { TestTargetWindowPositionWReset } from "../ui/local/3-test-target-position-w-reset";
+import { SelectPatrs } from "./3-header-toolbar-select-parts";
+// import { TestTargetWindowPositionWReset } from "../ui/local/3-test-target-position-w-reset";
 
 export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
-    const { themePreseetName, rightView } = useSnapshot(appSettings.appUi);
+    const { themePreseetName } = useSnapshot(appSettings.appUi);
     const themeNames = useAtomValue(themeNamesAtom);
 
     return (
@@ -18,21 +19,9 @@ export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElem
                 Zoom
             </Button>
 
-            <TestTargetWindowPositionWReset className="inline-block ml-2 align-middle" style={{ zIndex: 9999 }} />
+            {/* <TestTargetWindowPositionWReset className="inline-block ml-2 align-middle" style={{ zIndex: 9999 }} /> */}
 
-            <Select defaultValue={rightView} onValueChange={(view) => appSettings.appUi.rightView = view as RightView}>
-                <SelectTrigger className="px-2 h-7! text-xs rounded-sm w-[120px]" title="Select view">
-                    <SelectValue placeholder="Select view" />
-                </SelectTrigger>
-                <SelectContent align="end" alignOffset={-4}>
-                    <SelectItem className="text-xs" value={rightViewTypeGuard("Cards")}>
-                        Cards
-                    </SelectItem>
-                    <SelectItem className="text-xs" value={rightViewTypeGuard("Dashboard")}>
-                        Dashboard
-                    </SelectItem>
-                </SelectContent>
-            </Select>
+            <SelectPatrs className="ml-2" />
 
             <Select defaultValue={themePreseetName} onValueChange={(name) => appSettings.appUi.themePreseetName = name}>
                 <SelectTrigger className="px-2 h-7! text-xs rounded-sm" title="primary, accent, secondary, border">
