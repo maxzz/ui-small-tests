@@ -1,7 +1,4 @@
-import { SectionCards } from "../3-pages/1-demo-contents/2-dashboard/2-2-right-section-cards";
-import { ChartAreaInteractive } from "../3-pages/1-demo-contents/2-dashboard/2-3-right-chart-area-interactive";
-import { DataTable } from "../3-pages/1-demo-contents/2-dashboard/2-4-right-data-table";
-
+import { SectionCards, ChartAreaInteractive, DataTable } from "../3-pages/1-demo-contents/2-dashboard";
 import data from "../3-pages/1-demo-contents/2-dashboard/8-data.json";
 
 export function DashboardContents() {
