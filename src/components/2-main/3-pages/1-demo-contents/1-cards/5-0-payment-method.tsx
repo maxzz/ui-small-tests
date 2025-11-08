@@ -21,7 +21,7 @@ export function CardsPaymentMethod() {
                     <Label htmlFor="name">Name</Label>
                     <Input id="name" placeholder="First Last" />
                 </div>
-                
+
                 <fieldset className="flex flex-col gap-3">
                     <legend className="text-sm font-medium">Plan</legend>
                     <p className="text-muted-foreground text-sm">
@@ -32,7 +32,7 @@ export function CardsPaymentMethod() {
                         {plans.map(
                             (plan) => (
                                 <Label
-                                    className="has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-primary/5 flex items-start gap-3 rounded-lg border p-3"
+                                    className="has-data-[state=checked]:border-ring has-data-[state=checked]:bg-primary/5 flex items-start gap-3 rounded-lg border p-3"
                                     key={plan.id}
                                 >
                                     <RadioGroupItem
@@ -58,11 +58,14 @@ export function CardsPaymentMethod() {
                 </div>
                 <div className="grid grid-cols-3 gap-4">
                     <div className="flex flex-col gap-3">
-                        <Label htmlFor="month">Expires</Label>
+                        <Label htmlFor="month">
+                            Expires
+                        </Label>
                         <Select>
                             <SelectTrigger id="month" aria-label="Month" className="w-full">
                                 <SelectValue placeholder="Month" />
                             </SelectTrigger>
+
                             <SelectContent>
                                 <SelectItem value="1">January</SelectItem>
                                 <SelectItem value="2">February</SelectItem>

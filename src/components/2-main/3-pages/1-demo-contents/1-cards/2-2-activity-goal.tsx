@@ -16,7 +16,9 @@ export function CardsActivityGoal() {
     return (
         <Card className="flex h-full flex-col">
             <CardHeader>
-                <CardTitle>Move Goal</CardTitle>
+                <CardTitle>
+                    Move Goal
+                </CardTitle>
                 <CardDescription>Set your daily activity goal.</CardDescription>
             </CardHeader>
 

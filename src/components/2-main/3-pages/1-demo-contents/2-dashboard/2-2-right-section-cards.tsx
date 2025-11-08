@@ -21,10 +21,7 @@ export function SectionCards() {
                         $1,250.00
                     </CardTitle>
                     <CardAction>
-                        <Badge variant="outline">
-                            <IconTrendingUp />
-                            +12.5%
-                        </Badge>
+                        <Badge variant="outline"> <IconTrendingUp /> +12.5% </Badge>
                     </CardAction>
                 </CardHeader>
                 <CardFooter className="flex-col items-start gap-1.5 text-sm">
@@ -44,10 +41,7 @@ export function SectionCards() {
                         1,234
                     </CardTitle>
                     <CardAction>
-                        <Badge variant="outline">
-                            <IconTrendingDown />
-                            -20%
-                        </Badge>
+                        <Badge variant="outline"> <IconTrendingDown /> -20% </Badge>
                     </CardAction>
                 </CardHeader>
                 <CardFooter className="flex-col items-start gap-1.5 text-sm">
@@ -67,10 +61,7 @@ export function SectionCards() {
                         45,678
                     </CardTitle>
                     <CardAction>
-                        <Badge variant="outline">
-                            <IconTrendingUp />
-                            +12.5%
-                        </Badge>
+                        <Badge variant="outline"> <IconTrendingUp /> +12.5% </Badge>
                     </CardAction>
                 </CardHeader>
                 <CardFooter className="flex-col items-start gap-1.5 text-sm">
@@ -88,10 +79,7 @@ export function SectionCards() {
                         4.5%
                     </CardTitle>
                     <CardAction>
-                        <Badge variant="outline">
-                            <IconTrendingUp />
-                            +4.5%
-                        </Badge>
+                        <Badge variant="outline"> <IconTrendingUp /> +4.5% </Badge>
                     </CardAction>
                 </CardHeader>
                 <CardFooter className="flex-col items-start gap-1.5 text-sm">

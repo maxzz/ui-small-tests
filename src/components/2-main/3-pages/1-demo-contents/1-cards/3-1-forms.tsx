@@ -34,18 +34,16 @@ export function CardsForms() {
                     <div className="flex flex-col gap-2">
                         <Label htmlFor="card-number">Card Number</Label>
                         <div className="grid grid-cols-2 gap-3 @3xl:grid-cols-[1fr_80px_60px]">
-                            <Input
-                                id="card-number"
-                                placeholder="1234 1234 1234 1234"
-                                className="col-span-2 @3xl:col-span-1"
-                            />
+                            <Input id="card-number" placeholder="1234 1234 1234 1234" className="col-span-2 @3xl:col-span-1" />
                             <Input id="card-number-expiry" placeholder="MM/YY" />
                             <Input id="card-number-cvc" placeholder="CVC" />
                         </div>
                     </div>
 
                     <fieldset className="flex flex-col gap-3">
-                        <legend className="text-sm font-medium">Plan</legend>
+                        <legend className="text-sm font-medium">
+                            Plan
+                        </legend>
                         <p className="text-muted-foreground text-sm">
                             Select the plan that best fits your needs.
                         </p>
