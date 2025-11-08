@@ -10,7 +10,6 @@ export function CardsExerciseMinutes() {
                 <CardTitle>
                     Exercise Minutes
                 </CardTitle>
-
                 <CardDescription>
                     Your exercise minutes are ahead of where you normally are.
                 </CardDescription>
@@ -68,39 +67,11 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 const data = [
-    {
-        average: 400,
-        today: 240,
-        day: "Monday",
-    },
-    {
-        average: 300,
-        today: 139,
-        day: "Tuesday",
-    },
-    {
-        average: 200,
-        today: 980,
-        day: "Wednesday",
-    },
-    {
-        average: 278,
-        today: 390,
-        day: "Thursday",
-    },
-    {
-        average: 189,
-        today: 480,
-        day: "Friday",
-    },
-    {
-        average: 239,
-        today: 380,
-        day: "Saturday",
-    },
-    {
-        average: 349,
-        today: 430,
-        day: "Sunday",
-    },
+    { average: 400, today: 240, day: "Monday", },
+    { average: 300, today: 139, day: "Tuesday", },
+    { average: 200, today: 980, day: "Wednesday", },
+    { average: 278, today: 390, day: "Thursday", },
+    { average: 189, today: 480, day: "Friday", },
+    { average: 239, today: 380, day: "Saturday", },
+    { average: 349, today: 430, day: "Sunday", },
 ];
