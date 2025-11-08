@@ -10,10 +10,12 @@ export function SelectPatrs({ className, ...rest }: HTMLAttributes<HTMLDivElemen
             <SelectTrigger className="px-2 h-7! text-xs rounded-sm w-[120px]" title="Select view">
                 <SelectValue placeholder="Select view" />
             </SelectTrigger>
+
             <SelectContent align="end" alignOffset={-4} {...rest}>
                 <SelectItem className="text-xs" value={rightViewTypeGuard("Cards")}>
                     Cards
                 </SelectItem>
+                
                 <SelectItem className="text-xs" value={rightViewTypeGuard("Dashboard")}>
                     Dashboard
                 </SelectItem>

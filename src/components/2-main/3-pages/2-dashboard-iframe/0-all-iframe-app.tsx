@@ -1,5 +1,5 @@
-import { AppSidebar } from "@/components/2-main/2-pages/2-dashboard-iframe/1-1-left-app-sidebar";
-import { SiteHeader } from "@/components/2-main/2-pages/2-dashboard-iframe/2-1-right-site-header";
+import { AppSidebar } from "@/components/2-main/3-pages/2-dashboard-iframe/1-1-left-app-sidebar";
+import { SiteHeader } from "@/components/2-main/3-pages/2-dashboard-iframe/2-1-right-site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/shadcn/sidebar";
 
 import { classNames } from "@/utils";
