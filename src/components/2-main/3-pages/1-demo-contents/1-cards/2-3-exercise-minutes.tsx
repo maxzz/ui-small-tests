@@ -10,9 +10,7 @@ export function CardsExerciseMinutes() {
                 <CardTitle>
                     Exercise Minutes
                 </CardTitle>
-                <CardDescription>
-                    Your exercise minutes are ahead of where you normally are.
-                </CardDescription>
+                <CardDescription>Your exercise minutes are ahead of where you normally are.</CardDescription>
             </CardHeader>
 
             <CardContent>
