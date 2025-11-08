@@ -6,6 +6,7 @@ import { type RightView, appSettings, rightViewTypeGuard } from "@/store/0-local
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/shadcn/select";
 import { Button } from "../ui/shadcn/button";
 import { getPresetThemeStyles, themeNamesAtom } from "@/store/2-apply-theme";
+import { TestTargetWindowPositionWReset } from "../ui/local/3-test-target-position-w-reset";
 
 export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const { themePreseetName, rightView } = useSnapshot(appSettings.appUi);
@@ -16,6 +17,8 @@ export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElem
             <Button size="sm" variant="outline" className="px-2 h-7! text-xs" onClick={() => appSettings.appUi.zoom = appSettings.appUi.zoom === 1 ? 0.5 : 1}>
                 Zoom
             </Button>
+
+            <TestTargetWindowPositionWReset className="inline-block ml-2 align-middle z-1000" />
 
             <Select defaultValue={rightView} onValueChange={(view) => appSettings.appUi.rightView = view as RightView}>
                 <SelectTrigger className="px-2 h-7! text-xs rounded-sm w-[120px]" title="Select view">

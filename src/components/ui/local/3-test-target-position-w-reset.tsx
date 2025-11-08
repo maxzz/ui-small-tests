@@ -29,7 +29,7 @@ function MovingIcon() {
             <PopoverPrimitive.Trigger>
                 {/* {getPosProgress && ( */}
                 <motion.div
-                    className="size-12"
+                    className="size-12 z-1001"
                     onPointerDown={(event) => { stateNapiPosTracker.dragIsRunning = true; dragControls.start(event, { snapToCursor: true }); }}
                     // onPointerDown={() => { napiBuildProgress.dragIsRunning = true; debouncedSetNapiGetPosXY(0, 0); }}
                     // onPointerMove={(event: React.PointerEvent<HTMLDivElement>) => napiBuildProgress.dragIsRunning && debouncedSetNapiGetPosXY(event.pageX, event.pageY)}
@@ -45,14 +45,16 @@ function MovingIcon() {
                     123
                 </motion.div>
 
+
+                {/* )} */}
+            </PopoverPrimitive.Trigger>
+
                     <PopoverContent>
                         {/* <PopoverPrimitive.Trigger> */}
                         <IconDndTarget className="size-12 z-1000 absolute top-0 left-0 flex items-center justify-center bg-primary-800 rounded-sm cursor-pointer" />
                         {/* </PopoverPrimitive.Trigger> */}
                     </PopoverContent>
 
-                {/* )} */}
-            </PopoverPrimitive.Trigger>
         </PopoverPrimitive.Root>
     </>);
 }
