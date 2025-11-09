@@ -9,6 +9,8 @@ export type AppUISettings = {
     rightView: RightView;
     themePreseetName: string;
     zoom: number;
+    sidebarLeftOpen: boolean;   // main sidebar
+    sidebarRightOpen: boolean;  // right inner iframe sidebar
 };
 
 export const defaultAppUISettings: AppUISettings = {
@@ -19,4 +21,6 @@ export const defaultAppUISettings: AppUISettings = {
     rightView: "Cards",
     themePreseetName: "dafault",
     zoom: 1,
+    sidebarLeftOpen: true,
+    sidebarRightOpen: true,
 };

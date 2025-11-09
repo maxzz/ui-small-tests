@@ -3,11 +3,16 @@ import { Section3_Footer } from "../3-footer";
 import { LeftList } from "../2-main/1-left-list";
 import { RenderDemo } from "./../2-main/2-right-view";
 import { SidebarProvider } from "../ui/shadcn/sidebar";
+import { useSnapshot } from "valtio";
+import { appSettings } from "@/store/0-local-storage";
+import { useCallback } from "react";
 
 export function App() {
+    const { sidebarLeftOpen } = useSnapshot(appSettings.appUi);
+    const onSidebarLeftOpenChange = useCallback((open: boolean) => appSettings.appUi.sidebarLeftOpen = open, []);
     return (
         <div className="h-screen grid grid-rows-[auto_1fr_auto] debug-screens">
-            <SidebarProvider>
+            <SidebarProvider defaultOpen={sidebarLeftOpen} open={sidebarLeftOpen} onOpenChange={onSidebarLeftOpenChange}>
                 <LeftList />
 
                 <main className="size-full overflow-hidden 1min-h-0">
