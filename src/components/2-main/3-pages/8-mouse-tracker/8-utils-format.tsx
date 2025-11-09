@@ -36,9 +36,17 @@ export function formatHoverStackTooltip(stack: HoverStackEntry[] | undefined): s
 
 function filterColorClasses(classes: string[]): string[] {
     // Filter to only include color-specific Tailwind classes
+    // Handles modifiers (dark:), variants (hover:), and custom selectors ([&>div]:)
     const colorPrefixes = [
         'text-', 'bg-', 'border-', 'fill-', 'stroke-',
         'ring-', 'accent-', 'caret-', 'divide-', 'outline-'
     ];
-    return classes.filter(cls => colorPrefixes.some(prefix => cls.startsWith(prefix)));
+    return classes.filter(cls => {
+        // Split by ':' to handle modifiers, variants, and custom selectors
+        const parts = cls.split(':');
+        // Get the last part (the actual class name after all modifiers)
+        const className = parts[parts.length - 1];
+        // Check if the class name starts with any color prefix
+        return colorPrefixes.some(prefix => className.startsWith(prefix));
+    });
 }
