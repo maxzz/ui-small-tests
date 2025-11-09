@@ -6,7 +6,7 @@ import { SidebarProvider } from "../ui/shadcn/sidebar";
 
 export function App() {
     return (
-        <div className="h-screen grid grid-rows-[auto_1fr_auto]">
+        <div className="h-screen grid grid-rows-[auto_1fr_auto] debug-screens">
             <SidebarProvider>
                 <LeftList />
 
