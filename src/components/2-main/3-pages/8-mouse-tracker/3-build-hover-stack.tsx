@@ -15,9 +15,9 @@ export function buildnewHoverStack(x: number, y: number, currentTarget: HTMLElem
         }
 
         const slotValue = element.getAttribute("data-slot");
-        if (slotValue !== null) {
-            zOrderedElements.push(describeElement(element, slotValue));
-        }
+        // if (slotValue !== null) {
+            zOrderedElements.push(describeElement(element, slotValue ?? ""));
+        // }
 
         if (element === currentTarget) {
             reachedRoot = true;
