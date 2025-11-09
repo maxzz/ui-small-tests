@@ -11,6 +11,7 @@ import { MouseMoveTrackerTooltip } from "../3-pages/8-mouse-tracker/2-mouse-trac
 import { CardsContents } from "./1-cards-contents";
 import { hoverStackAtom, mousePosAtom } from "../3-pages/8-mouse-tracker/7-hover-stack-atoms";
 import { MouseTracker } from "../3-pages/8-mouse-tracker/1-mouse-tracker";
+import { DashboardContents } from "./2-dashboard-contents";
 
 export function RenderDemo() {
     const { themePreseetName } = useSnapshot(appSettings.appUi);
@@ -63,14 +64,21 @@ function RenderDemoComponent() {
 }
 
 function CardsContainer() {
-    const { zoom } = useSnapshot(appSettings.appUi);
+    const { zoom, rightView } = useSnapshot(appSettings.appUi);
     return (
         <ScrollArea className="size-full">
-            <MouseTracker className={zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100"}>
-                <CardsContents />
-            </MouseTracker>
+            {rightView === "Cards"
+                ? (<>
+                    <MouseTracker className={zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100"}>
+                        <CardsContents />
+                    </MouseTracker>
 
-            <MouseMoveTrackerTooltip hoverStackAtom={hoverStackAtom} mousePosAtom={mousePosAtom} />
+                    <MouseMoveTrackerTooltip hoverStackAtom={hoverStackAtom} mousePosAtom={mousePosAtom} />
+                </>)
+                : (
+                    <DashboardContents />
+                )
+            }
         </ScrollArea>
     );
 }

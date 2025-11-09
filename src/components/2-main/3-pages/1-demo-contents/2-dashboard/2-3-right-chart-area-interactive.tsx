@@ -44,7 +44,7 @@ export function ChartAreaInteractive() {
                 <CardDescription><span className="hidden @[540px]/card:block">Total for the last 3 months</span><span className="@[540px]/card:hidden">Last 3 months</span></CardDescription>
                 <CardAction>
                     <ToggleGroup
-                        className="hidden *:data-[slot=toggle-group-item]:px-4! @[767px]/card:flex"
+                        className="hidden @[767px]/card:flex *:data-[slot=toggle-group-item]:px-4!"
                         type="single"
                         value={timeRange}
                         onValueChange={setTimeRange}
