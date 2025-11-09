@@ -2,12 +2,15 @@ import { type HoverStackEntry } from "./3-build-hover-stack";
 
 export function printHoverStack(stack: HoverStackEntry[] | undefined): void {
     if (!stack?.length) {
-        console.log("hoverStack (empty)");
+        //console.log("hoverStack (empty)");
         return;
     }
 
-    console.group("hoverStack");
+    console.group("Current:");
     for (const entry of stack) {
+        if (!entry.dataSlot || entry.classes.length === 0) {
+            continue;
+        }
         const filteredClasses = filterColorClasses(entry.classes);
         const classes = filteredClasses.length > 0
             ? `\n\t${filteredClasses.join("\n\t")}`
@@ -24,6 +27,9 @@ export function formatHoverStackTooltip(stack: HoverStackEntry[] | undefined): s
     return stack
         .map(
             (entry, index) => {
+                if (!entry.dataSlot || entry.classes.length === 0) {
+                    return;
+                }
                 const filteredClasses = filterColorClasses(entry.classes);
                 const classes = filteredClasses.length > 0
                     ? `\n\t${filteredClasses.join("\n\t")}`
@@ -31,6 +37,7 @@ export function formatHoverStackTooltip(stack: HoverStackEntry[] | undefined): s
                 return `${index + 1}. [${entry.dataSlot}]${classes}`;
             }
         )
+        .filter(Boolean)
         .join("\n");
 }
 
