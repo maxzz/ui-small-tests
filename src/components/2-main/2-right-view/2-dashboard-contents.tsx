@@ -1,4 +1,4 @@
-import { SectionCards, ChartAreaInteractive, DataTable } from "../3-pages/1-demo-contents/2-dashboard";
+import { ChartAreaInteractive, DataTable, TotalRevenueCard, ActiveAccountsCard, GrowthRateCard, NewCustomersCard } from "../3-pages/1-demo-contents/2-dashboard";
 import data from "../3-pages/1-demo-contents/2-dashboard/8-data.json";
 
 export function DashboardContents() {
@@ -13,6 +13,17 @@ export function DashboardContents() {
                 
                 <DataTable data={data} />
             </div>
+        </div>
+    );
+}
+
+function SectionCards() {
+    return (
+        <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-linear-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
+            <TotalRevenueCard />
+            <NewCustomersCard />
+            <ActiveAccountsCard />
+            <GrowthRateCard />
         </div>
     );
 }
