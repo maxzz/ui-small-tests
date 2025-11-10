@@ -11,18 +11,14 @@ export function isTwColorClass(cls: string): boolean {
         return false;
     }
 
-    // Check if it starts with a color prefix
-    const hasColorPrefix = colorPrefixes.some(prefix => className.startsWith(prefix));
-    if (!hasColorPrefix) {
+    // Check if it starts with a color prefix using the prebuilt regex
+    const prefixMatch = className.match(colorPrefixRegex);
+    if (!prefixMatch) {
         return false;
     }
 
-    // Extract the part after the prefix
-    const matchedPrefix = colorPrefixes.find(prefix => className.startsWith(prefix));
-    if (!matchedPrefix) {
-        return false;
-    }
-
+    // The matched prefix is the first match; slice it off to get the remainder
+    const matchedPrefix = prefixMatch[0];
     const afterPrefix = className.slice(matchedPrefix.length);
 
     // Check if it's an arbitrary value like text-[#ff0000] or bg-[rgb(255,0,0)]
@@ -49,6 +45,11 @@ const colorPrefixes = [
     'accent-', 'caret-', 'divide-', 'outline-',
     'shadow-', 'decoration-', 'from-', 'via-', 'to-'
 ];
+
+// Prebuilt regex for color prefixes (built from the `colorPrefixes` list).
+// This is faster than iterating the array for each check and keeps the
+// matching logic centralized.
+const colorPrefixRegex = /^(?:text-|bg-|border-|border-t-|border-r-|border-b-|border-l-|border-x-|border-y-|border-s-|border-e-|fill-|stroke-|ring-|ring-offset-|accent-|caret-|divide-|outline-|shadow-|decoration-|from-|via-|to-)/;
 
 // Tailwind color names
 const colorNames = [
