@@ -7,7 +7,7 @@ export function isTwColorClass(cls: string): boolean {
     const className = parts[parts.length - 1]; // text-red-500
 
     // Exclude known non-color text- classes (sizes, alignment, wrapping)
-    if (/^text-(xs|sm|base|lg|xl|[2-9]xl|left|center|right|justify|start|end|wrap|nowrap|balance|pretty|ellipsis|clip)$/.test(className)) {
+    if (nonColorTextRegex.test(className)) {
         return false;
     }
 
@@ -36,6 +36,9 @@ export function isTwColorClass(cls: string): boolean {
     return startsWithColorName;
 }
 
+
+// Regex for known non-color `text-` classes (sizes, alignment, wrapping)
+const nonColorTextRegex = /^text-(xs|sm|base|lg|xl|[2-9]xl|left|center|right|justify|start|end|wrap|nowrap|balance|pretty|ellipsis|clip)$/;
 
 // Filter to only include color-specific Tailwind classes
 // Handles modifiers (dark:), variants (hover:), and custom selectors ([&>div]:)
