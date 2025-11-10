@@ -34,19 +34,20 @@ function filterEntriesWithoutColorClasses(entries: HoverStackEntry[]): HoverStac
     const rv = entries
         .map(
             (entry, index) => {
-                if (!entry.dataSlot || entry.classes.length === 0) {
-                    return;
-                }
+                // console.log('entry', `<${entry.dataSlot}>`, JSON.stringify(entry.classes));
+
                 const filteredClasses = entry.classes.filter(isTwColorClass);
                 const classes = filteredClasses.length > 0
                     ? {
                         dataSlot: entry.dataSlot,
                         classes: filteredClasses,
                     }
-                    : undefined;
+                    : entry.dataSlot
+                        ? { dataSlot: entry.dataSlot, classes: [] }
+                        : undefined;
                 return classes;
             }
         )
-        .filter(Boolean)
+        .filter(Boolean);
     return rv;
 }
