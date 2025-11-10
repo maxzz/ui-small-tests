@@ -1,9 +1,4 @@
-export function filterTwClasses(classes: string[]): string[] {
-    const rv = classes.filter(isTwColorClass);
-    return rv;
-}
-
-function isTwColorClass(cls: string): boolean {
+export function isTwColorClass(cls: string): boolean {
     // Split by ':' to handle modifiers, variants, and custom selectors
     const parts = cls.split(':');
     // Get the last part (the actual class name after all modifiers)

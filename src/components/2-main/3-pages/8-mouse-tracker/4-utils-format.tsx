@@ -1,5 +1,5 @@
 import { type HoverStackEntry } from "./3-build-hover-stack";
-import { filterTwClasses } from "./5-filter-tw-classes";
+import { isTwColorClass } from "./5-filter-tw-classes";
 
 export function printHoverStack(stack: HoverStackEntry[] | undefined): void {
     if (!stack?.length) {
@@ -12,7 +12,7 @@ export function printHoverStack(stack: HoverStackEntry[] | undefined): void {
         if (!entry.dataSlot || entry.classes.length === 0) {
             continue;
         }
-        const filteredClasses = filterTwClasses(entry.classes);
+        const filteredClasses = entry.classes.filter(isTwColorClass);
         const classes = filteredClasses.length > 0
             ? `\n\t${filteredClasses.join("\n\t")}`
             : "(no classes)";
@@ -37,7 +37,7 @@ function filterEntriesWithoutColorClasses(entries: HoverStackEntry[]): HoverStac
                 if (!entry.dataSlot || entry.classes.length === 0) {
                     return;
                 }
-                const filteredClasses = filterTwClasses(entry.classes);
+                const filteredClasses = entry.classes.filter(isTwColorClass);
                 const classes = filteredClasses.length > 0
                     ? {
                         dataSlot: entry.dataSlot,
