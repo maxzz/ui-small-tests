@@ -1,4 +1,4 @@
-export function filteroutNonColorClasses(classes: string[]): string[] {
+export function filterTwClasses(classes: string[]): string[] {
     const rv = classes.filter(
         (cls) => {
             // Split by ':' to handle modifiers, variants, and custom selectors
