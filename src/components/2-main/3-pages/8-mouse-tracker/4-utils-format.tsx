@@ -13,7 +13,7 @@ export function printHoverStack(stack: HoverStackEntry[] | undefined): void {
             continue;
         }
 
-        isTwColorClass('bg-red-500 text-green-200');
+        isTwColorClass('bg-red-500');
 
         // const filteredClasses = entry.classes.filter((cls) => isTwColorClass(cls));
         // console.log('💻%s\n  %s\n  %s', `<${entry.dataSlot}>`, JSON.stringify(entry.classes), JSON.stringify(filteredClasses));

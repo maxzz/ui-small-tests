@@ -1,11 +1,13 @@
 export function isTwColorClass(cls: string): boolean {
-    // Split by ':' to handle modifiers, variants, and custom selectors
-    const parts = cls.split(':');
-    // Get the last part (the actual class name after all modifiers)
-    const className = parts[parts.length - 1];
+    if (!cls.includes('-') && cls !== 'shadow') { // Color classes must have '-', i.e. text-, bg-, one of shadow wo/ dash.
+        return false;
+    }
 
-    // Exclude known non-color classes
-    if (nonColorTextClasses.includes(className)) {
+    const parts = cls.split(':'); // dark:text-red-500
+    const className = parts[parts.length - 1]; // text-red-500
+
+    // Exclude known non-color text- classes (sizes, alignment, wrapping)
+    if (/^text-(xs|sm|base|lg|xl|[2-9]xl|left|center|right|justify|start|end|wrap|nowrap|balance|pretty|ellipsis|clip)$/.test(className)) {
         return false;
     }
 
@@ -51,14 +53,4 @@ const colorNames = [
     'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan',
     'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose',
     'transparent', 'current', 'inherit', 'black', 'white'
-];
-
-// Non-color text- classes to exclude
-const nonColorTextClasses = [
-    'text-xs', 'text-sm', 'text-base', 'text-lg', 'text-xl',
-    'text-2xl', 'text-3xl', 'text-4xl', 'text-5xl', 'text-6xl',
-    'text-7xl', 'text-8xl', 'text-9xl',
-    'text-left', 'text-center', 'text-right', 'text-justify', 'text-start', 'text-end',
-    'text-wrap', 'text-nowrap', 'text-balance', 'text-pretty',
-    'text-ellipsis', 'text-clip'
 ];
