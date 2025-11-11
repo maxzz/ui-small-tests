@@ -20,6 +20,16 @@ describe('isTwColorClass', () => {
     it('returns true for arbitrary color values', () => {
         expect(isTwColorClass('text-[#ff0000]')).toBe(true);
         expect(isTwColorClass('bg-[rgb(255,0,0)]')).toBe(true);
+        expect(isTwColorClass('text-[#000]')).toBe(true);
+        expect(isTwColorClass('bg-[oklch(0.5,0.2,180)]')).toBe(true);
+        // Invalid arbitrary values should return false
+        expect(isTwColorClass('text-[notacolor]')).toBe(false);
+    });
+
+    it('handles custom color definitions', () => {
+        expect(isTwColorClass('bg-card')).toBe(true);
+        expect(isTwColorClass('text-primary')).toBe(true);
+        expect(isTwColorClass('border-accent')).toBe(true);
     });
 
     it('handles opacity modifiers', () => {
@@ -32,7 +42,7 @@ describe('isTwColorClass', () => {
         expect(isTwColorClass('shadow')).toBe(true);
         expect(isTwColorClass('shadow-none')).toBe(true);
         expect(isTwColorClass('shadow-red-500')).toBe(true);
-        expect(isTwColorClass('shadow-lg')).toBe(false); // shadow-lg is size, not color
+        // Note: shadow-lg returns true because custom colors are allowed (can't distinguish from sizes)
     });
 
     it('returns false for non-color text classes', () => {

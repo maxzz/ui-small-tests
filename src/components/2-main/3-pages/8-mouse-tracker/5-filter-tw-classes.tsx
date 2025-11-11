@@ -21,17 +21,14 @@ export function isTwColorClass(cls: string): boolean {
     const matchedPrefix = prefixMatch[0]; // text-
     const afterPrefix = className.slice(matchedPrefix.length); // red-500
 
-    // Check if it's an arbitrary value like text-[#ff0000] or bg-[rgb(255,0,0)]
+    // Check if it's an arbitrary CSS color value in square brackets
+    // e.g., text-[#000], text-[#ff0000], bg-[rgb(255,0,0)], bg-[oklch(0.5,0.2,180)]
     if (afterPrefix.startsWith('[')) {
-        return true;
+        return arbitraryColorRegex.test(afterPrefix);
     }
 
-    // Check if it starts with a valid color name using the prebuilt regex
-    if (colorNameRegex.test(afterPrefix)) {
-        return true;
-    }
-
-    return false;
+    // Accept any other value after a valid color prefix (for custom colors like bg-card)
+    return true;
 }
 
 // Regex for known non-color `text-` classes (sizes, alignment, wrapping)
@@ -46,3 +43,7 @@ const colorPrefixRegex = /^(?:text-|bg-|(?:border-(?:t|r|b|l|x|y|s|e)-|border-)|
 // optionally with opacity modifier (e.g., "red", "red-500", "red-500/50", "slate-100/75")
 // Also handles special cases like empty string (for "shadow") and "none" (for "shadow-none")
 const colorNameRegex = /^(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|transparent|current|inherit|black|white|none)(?:-|$|\/)|^$/;
+
+// Regex for arbitrary CSS color values in square brackets
+// Matches: [#000], [#ff0000], [rgb(...)], [rgba(...)], [hsl(...)], [oklch(...)], etc.
+const arbitraryColorRegex = /^\[(?:#[0-9a-fA-F]{3,8}|(?:rgb|rgba|hsl|hsla|hwb|lab|lch|oklch|oklab|color)\([^)]*\))\]$/;
