@@ -32,24 +32,12 @@ export function isTwColorClass(cls: string): boolean {
     return startsWithColorName;
 }
 
-
 // Regex for known non-color `text-` classes (sizes, alignment, wrapping)
 const nonColorTextRegex = /^text-(xs|sm|base|lg|xl|[2-9]xl|left|center|right|justify|start|end|wrap|nowrap|balance|pretty|ellipsis|clip)$/;
 
 // Filter to only include color-specific Tailwind classes
 // Handles modifiers (dark:), variants (hover:), and custom selectors ([&>div]:)
-const colorPrefixes = [
-    'text-', 'bg-', 'border-', 'border-t-', 'border-r-', 'border-b-', 'border-l-',
-    'border-x-', 'border-y-', 'border-s-', 'border-e-',
-    'fill-', 'stroke-', 'ring-', 'ring-offset-',
-    'accent-', 'caret-', 'divide-', 'outline-',
-    'shadow-', 'decoration-', 'from-', 'via-', 'to-'
-];
-
-// Prebuilt regex for color prefixes (built from the `colorPrefixes` list).
-// This is faster than iterating the array for each check and keeps the
-// matching logic centralized.
-const colorPrefixRegex = /^(?:text-|bg-|border-|border-t-|border-r-|border-b-|border-l-|border-x-|border-y-|border-s-|border-e-|fill-|stroke-|ring-|ring-offset-|accent-|caret-|divide-|outline-|shadow-|decoration-|from-|via-|to-)/;
+const colorPrefixRegex = /^(?:text-|bg-|(?:border-(?:t|r|b|l|x|y|s|e)-|border-)|fill-|stroke-|ring-|ring-offset-|accent-|caret-|divide-|outline-|shadow-|decoration-|from-|via-|to-)/;
 
 // Tailwind color names
 const colorNames = [
