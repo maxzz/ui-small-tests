@@ -18,18 +18,16 @@ export function isTwColorClass(cls: string): boolean {
     }
 
     // The matched prefix is the first match; slice it off to get the remainder
-    const matchedPrefix = prefixMatch[0];
-    const afterPrefix = className.slice(matchedPrefix.length);
+    const matchedPrefix = prefixMatch[0]; // text-
+    const afterPrefix = className.slice(matchedPrefix.length); // red-500
 
     // Check if it's an arbitrary value like text-[#ff0000] or bg-[rgb(255,0,0)]
     if (afterPrefix.startsWith('[')) {
         return true;
     }
 
-    // Check if it starts with a valid color name
-    const startsWithColorName = colorNames.some((colorName) => afterPrefix === colorName || afterPrefix.startsWith(colorName + '-'));
-
-    return startsWithColorName;
+    // Check if it starts with a valid color name using the prebuilt regex
+    return colorNameRegex.test(afterPrefix);
 }
 
 // Regex for known non-color `text-` classes (sizes, alignment, wrapping)
@@ -46,3 +44,7 @@ const colorNames = [
     'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose',
     'transparent', 'current', 'inherit', 'black', 'white'
 ];
+
+// Regex for Tailwind color names: matches exact color names or color names followed by a dash and shade
+// e.g., "red", "red-500", "slate-100", but not "redish" or "red500"
+const colorNameRegex = /^(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|transparent|current|inherit|black|white)(?:-|$)/;
