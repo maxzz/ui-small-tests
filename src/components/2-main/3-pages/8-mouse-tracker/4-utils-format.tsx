@@ -28,8 +28,10 @@ export function printHoverStack(stack: HoverStackEntry[] | undefined): void {
 
     console.group("Current:");
     for (const entry of finalStack) {
+        const label = entry.dataSlot || entry.tag;
+        const labelColor = entry.dataSlot ? 'color: red;' : 'color: blue;';
         console.log(
-            '💻%s %s', `<${entry.dataSlot || entry.tag}>`,
+            '💻%c%s%c %s', labelColor, `<${label}>`, 'color: inherit;',
             entry.classes.map((cls) => `%c${cls}%c`).join(', '),
             ...entry.classes.flatMap(() => ['color: green;', 'color: inherit;'])
         );
