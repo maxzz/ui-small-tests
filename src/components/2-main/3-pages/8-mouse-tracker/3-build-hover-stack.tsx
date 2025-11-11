@@ -62,14 +62,6 @@ function areStacksEqual(prev: HoverStackEntry[] | undefined, next: HoverStackEnt
         if (!prevEntry.classes.every((cls, idx) => cls === nextEntry.classes[idx])) {
             return false;
         }
-
-        if (prevEntry.classes.length === 0 && nextEntry.classes.length === 0) {
-            continue;
-        }
-
-        if (prevEntry.classes.length === 0 || nextEntry.classes.length === 0) {
-            return false;
-        }
     }
 
     return true;
