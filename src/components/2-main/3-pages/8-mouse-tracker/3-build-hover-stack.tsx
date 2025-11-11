@@ -1,5 +1,6 @@
 export type HoverStackEntry = {
     dataSlot: string;
+    tag: string;
     classes: string[];
 };
 
@@ -7,17 +8,14 @@ export function buildnewHoverStack(x: number, y: number, currentTarget: HTMLElem
     const elementsAtPoint = document.elementsFromPoint(x, y);
 
     const zOrderedElements: HoverStackEntry[] = [];
-    
+
     let reachedRoot = false;
     for (const element of elementsAtPoint) {
         if (!(element instanceof HTMLElement)) {
             continue;
         }
 
-        const slotValue = element.getAttribute("data-slot");
-        // if (slotValue !== null) {
-            zOrderedElements.push(describeElement(element, slotValue ?? ""));
-        // }
+        zOrderedElements.push(describeElement(element));
 
         if (element === currentTarget) {
             reachedRoot = true;
@@ -70,9 +68,10 @@ function areStacksEqual(prev: HoverStackEntry[] | undefined, next: HoverStackEnt
     return true;
 }
 
-function describeElement(element: HTMLElement, slotValue: string): HoverStackEntry {
+function describeElement(element: HTMLElement): HoverStackEntry {
     return {
-        dataSlot: slotValue,
+        dataSlot: element.getAttribute("data-slot") ?? "",
+        tag: element.tagName.toLowerCase(),
         classes: Array.from(element.classList),
     };
 }

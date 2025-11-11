@@ -45,10 +45,15 @@ function filterEntriesWithoutColorClasses(entries: HoverStackEntry[]): HoverStac
                 const classes = filteredClasses.length > 0
                     ? {
                         dataSlot: entry.dataSlot,
+                        tag: entry.tag,
                         classes: filteredClasses,
                     }
                     : entry.dataSlot
-                        ? { dataSlot: entry.dataSlot, classes: [] }
+                        ? {
+                            dataSlot: entry.dataSlot,
+                            tag: entry.tag,
+                            classes: [],
+                        }
                         : undefined;
                 return classes;
             }
