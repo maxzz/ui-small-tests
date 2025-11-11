@@ -8,6 +8,15 @@ describe('isTwColorClass', () => {
         expect(isTwColorClass('border-slate-50')).toBe(true);
     });
 
+    it('handles border variants and grouped prefixes', () => {
+        // The tests confirm the grouped border-(?:t|r|b|l|x|y|s|e)- pattern and border- both match correctly.
+        // also ensure longer border variants match (border-t-, border-x-, etc.)
+        expect(isTwColorClass('border-t-blue-500')).toBe(true);
+        expect(isTwColorClass('border-x-red-200')).toBe(true);
+        // Plain `border-` color should still match
+        expect(isTwColorClass('border-blue-300')).toBe(true);
+    });
+
     it('returns true for arbitrary color values', () => {
         expect(isTwColorClass('text-[#ff0000]')).toBe(true);
         expect(isTwColorClass('bg-[rgb(255,0,0)]')).toBe(true);
