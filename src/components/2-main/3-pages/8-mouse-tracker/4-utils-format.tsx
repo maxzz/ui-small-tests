@@ -9,7 +9,7 @@ function buildFinalStack(stack: HoverStackEntry[] | undefined): HoverStackEntry[
     const rv = [];
     for (const entry of stack) {
         const filteredClasses = entry.classes.filter(isTwColorClass);
-        if (filteredClasses.length > 0) {
+        if (filteredClasses.length > 0 || entry.dataSlot) {
             rv.push({
                 dataSlot: entry.dataSlot,
                 tag: entry.tag,
@@ -26,18 +26,18 @@ export function printHoverStack(stack: HoverStackEntry[] | undefined): void {
         return;
     }
 
-    if (finalStack.length > 0) {
-        console.group("Current:");
-        for (const entry of finalStack) {
-            console.log(
-                '💻%s %s', `<${entry.dataSlot || entry.tag}>`, 
-                entry.classes.map((cls) => `%c${cls}%c`).join(', '),
-                ...entry.classes.flatMap(() => ['color: red;', 'color: inherit;'])
-            );
-        }
-        console.groupEnd();
+    console.group("Current:");
+    for (const entry of finalStack) {
+        console.log(
+            '💻%s %s', `<${entry.dataSlot || entry.tag}>`,
+            entry.classes.map((cls) => `%c${cls}%c`).join(', '),
+            ...entry.classes.flatMap(() => ['color: green;', 'color: inherit;'])
+        );
     }
+    console.groupEnd();
 }
+
+//
 
 export function formatHoverStackTooltip(stack: HoverStackEntry[] | undefined): string {
     if (!stack?.length) {
