@@ -1,49 +1,42 @@
 import { type HoverStackEntry } from "./3-build-hover-stack";
 import { isTwColorClass } from "./5-filter-tw-classes";
 
-export function printHoverStack(stack: HoverStackEntry[] | undefined): void {
+function buildFinalStack(stack: HoverStackEntry[] | undefined): HoverStackEntry[] | undefined {
     if (!stack?.length) {
-        //console.log("hoverStack (empty)");
         return;
     }
 
-    const finalStack = [];
+    const rv = [];
     for (const entry of stack) {
         const filteredClasses = entry.classes.filter(isTwColorClass);
         if (filteredClasses.length > 0) {
-            finalStack.push({
+            rv.push({
                 dataSlot: entry.dataSlot,
                 tag: entry.tag,
                 classes: filteredClasses,
             });
         }
     }
+    return rv.length > 0 ? rv : undefined;
+}
+
+export function printHoverStack(stack: HoverStackEntry[] | undefined): void {
+    const finalStack = buildFinalStack(stack);
+    if (!finalStack?.length) {
+        return;
+    }
 
     if (finalStack.length > 0) {
         console.group("Current:");
         for (const entry of finalStack) {
-            console.log('💻%s %s', `<${entry.dataSlot || entry.tag}>`, JSON.stringify(entry.classes));
+            console.log(
+                '💻%s %s', `<${entry.dataSlot || entry.tag}>`, 
+                entry.classes.map((cls) => `%c${cls}%c`).join(', '),
+                ...entry.classes.flatMap(() => ['color: red;', 'color: inherit;'])
+            );
         }
         console.groupEnd();
     }
-
-    // console.group("Current:");
-    // for (const entry of stack) {
-        // if (!entry.dataSlot || entry.classes.length === 0) {
-        //     continue;
-        // }
-
-        // isTwColorClass('bg-red-500');
-
-        // const filteredClasses = entry.classes.filter((cls) => isTwColorClass(cls));
-        // console.log('💻%s\n  %s\n  %s', `<${entry.dataSlot}>`, JSON.stringify(entry.classes), JSON.stringify(filteredClasses));
-
-        // const classes = filteredClasses.length > 0
-        //     ? `\n\t${filteredClasses.join("\n\t")}`
-        //     : "(no classes)";
-        // console.log("%c%s%c %s", "color: red;", entry.dataSlot, "color: inherit;", classes);
-    // }
-    // console.groupEnd();
 }
 
 export function formatHoverStackTooltip(stack: HoverStackEntry[] | undefined): string {
