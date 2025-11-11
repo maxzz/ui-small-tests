@@ -39,40 +39,41 @@ export function printHoverStack(stack: HoverStackEntry[] | undefined): void {
     console.groupEnd();
 }
 
-//
-
-export function formatHoverStackTooltip(stack: HoverStackEntry[] | undefined): string {
-    if (!stack?.length) {
-        return "";
+/* Build the following:
+<>
+  <div>
+    <div className="title">header</div>
+    <div className="text-xs">text-white</div>
+    <div className="text-xs">bg-blue-500</div>
+  </div>
+  <div>
+    <div className="title">div</div>
+    <div className="text-xs">flex</div>
+    <div className="text-xs">items-center</div>
+  </div>
+</>
+*/
+export function formatHoverStackTooltip(stack: HoverStackEntry[] | undefined): React.JSX.Element | string {
+    const finalStack = buildFinalStack(stack);
+    if (!finalStack?.length) {
+        return "No hover stack";
     }
-    return filterEntriesWithoutColorClasses(stack).map(
-        (entry) => `${entry.dataSlot}\n\t${entry.classes.join("\n\t")}`
-    ).join("\n");
-}
 
-function filterEntriesWithoutColorClasses(entries: HoverStackEntry[]): HoverStackEntry[] {
-    const rv = entries
-        .map(
-            (entry, index) => {
-                // console.log('entry', `<${entry.dataSlot}>`, JSON.stringify(entry.classes));
-
-                const filteredClasses = entry.classes.filter(isTwColorClass);
-                const classes = filteredClasses.length > 0
-                    ? {
-                        dataSlot: entry.dataSlot,
-                        tag: entry.tag,
-                        classes: filteredClasses,
-                    }
-                    : entry.dataSlot
-                        ? {
-                            dataSlot: entry.dataSlot,
-                            tag: entry.tag,
-                            classes: [],
-                        }
-                        : undefined;
-                return classes;
-            }
-        )
-        .filter(Boolean);
-    return rv;
+    return (
+    <div className="p-4">
+        {finalStack.map(
+            (entry, index) => (
+                <div key={index}>
+                    {entry.dataSlot && <div className="text-red-500 font-bold">{entry.dataSlot}</div>}
+                    {entry.tag && <div className="text-blue-500 font-bold">{entry.tag}</div>}
+                    {entry.classes.map(
+                        (cls, clsIndex) => (
+                            <div key={clsIndex} className="ml-4 text-xs">{cls}</div>
+                        )
+                    )}
+                </div>
+            )
+        )}
+    </div>
+    );
 }
