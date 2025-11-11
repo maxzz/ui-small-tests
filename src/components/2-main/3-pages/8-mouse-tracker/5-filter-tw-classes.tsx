@@ -39,11 +39,6 @@ const nonColorTextRegex = /^text-(xs|sm|base|lg|xl|[2-9]xl|left|center|right|jus
 // Note: shadow can be used with or without a dash (shadow, shadow-none, shadow-red-500)
 const colorPrefixRegex = /^(?:text-|bg-|(?:border-(?:t|r|b|l|x|y|s|e)-|border-)|fill-|stroke-|ring-|ring-offset-|accent-|caret-|divide-|outline-|shadow-?|decoration-|from-|via-|to-)/;
 
-// Regex for Tailwind color names: matches exact color names or color names followed by a dash and shade,
-// optionally with opacity modifier (e.g., "red", "red-500", "red-500/50", "slate-100/75")
-// Also handles special cases like empty string (for "shadow") and "none" (for "shadow-none")
-const colorNameRegex = /^(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|transparent|current|inherit|black|white|none)(?:-|$|\/)|^$/;
-
 // Regex for arbitrary CSS color values in square brackets
 // Matches: [#000], [#ff0000], [rgb(...)], [rgba(...)], [hsl(...)], [oklch(...)], etc.
 const arbitraryColorRegex = /^\[(?:#[0-9a-fA-F]{3,8}|(?:rgb|rgba|hsl|hsla|hwb|lab|lch|oklch|oklab|color)\([^)]*\))\]$/;
