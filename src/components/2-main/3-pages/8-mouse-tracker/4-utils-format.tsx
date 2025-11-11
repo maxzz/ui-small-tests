@@ -13,11 +13,41 @@ function buildFinalStack(stack: HoverStackEntry[] | undefined): HoverStackEntry[
             rv.push({
                 dataSlot: entry.dataSlot,
                 tag: entry.tag,
-                classes: filteredClasses,
+                classes: sortTwClasses(filteredClasses),
             });
         }
     }
     return rv.length > 0 ? rv : undefined;
+}
+
+function sortTwClasses(classes: string[]): string[] {
+    // Sort order: text/bg first, then border, then ring, then shadow (no dash), then shadow-, then with variant (:), then with prefix ([)
+    const getOrder = (cls: string): number => {
+        // Remove variant prefixes (hover:, dark:, etc.) for checking
+        const base = cls.split(':').pop() || cls;
+        
+        if (base.startsWith('text-')) return 0;
+        if (base.startsWith('bg-')) return 1;
+        if (base.startsWith('border-')) return 2;
+        if (base.startsWith('ring-')) return 3;
+        if (base === 'shadow') return 4;
+        if (base.startsWith('shadow-')) return 5;
+        if (cls.includes(':')) return 6; // Has variant modifier
+        if (cls.startsWith('[')) return 7; // Has custom selector prefix
+        return 8; // Everything else
+    };
+
+    return [...classes].sort((a, b) => {
+        const orderA = getOrder(a);
+        const orderB = getOrder(b);
+        
+        // If same order category, sort alphabetically
+        if (orderA === orderB) {
+            return a.localeCompare(b);
+        }
+        
+        return orderA - orderB;
+    });
 }
 
 export function printHoverStack(stack: HoverStackEntry[] | undefined): void {
