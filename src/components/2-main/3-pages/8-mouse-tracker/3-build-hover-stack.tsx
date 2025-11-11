@@ -15,7 +15,11 @@ export function buildnewHoverStack(x: number, y: number, currentTarget: HTMLElem
             continue;
         }
 
-        zOrderedElements.push(describeElement(element));
+        zOrderedElements.push({
+            dataSlot: element.getAttribute("data-slot") ?? "",
+            tag: element.tagName.toLowerCase(),
+            classes: Array.from(element.classList),
+        });
 
         if (element === currentTarget) {
             reachedRoot = true;
@@ -46,14 +50,17 @@ function areStacksEqual(prev: HoverStackEntry[] | undefined, next: HoverStackEnt
             return false;
         }
 
+        if (prevEntry.tag !== nextEntry.tag) {
+            return false;
+        }
+
         if (prevEntry.classes.length !== nextEntry.classes.length) {
             return false;
         }
 
-        for (let classIndex = 0; classIndex < prevEntry.classes.length; classIndex += 1) {
-            if (prevEntry.classes[classIndex] !== nextEntry.classes[classIndex]) {
-                return false;
-            }
+        // Compare class arrays efficiently using every()
+        if (!prevEntry.classes.every((cls, idx) => cls === nextEntry.classes[idx])) {
+            return false;
         }
 
         if (prevEntry.classes.length === 0 && nextEntry.classes.length === 0) {
@@ -66,12 +73,4 @@ function areStacksEqual(prev: HoverStackEntry[] | undefined, next: HoverStackEnt
     }
 
     return true;
-}
-
-function describeElement(element: HTMLElement): HoverStackEntry {
-    return {
-        dataSlot: element.getAttribute("data-slot") ?? "",
-        tag: element.tagName.toLowerCase(),
-        classes: Array.from(element.classList),
-    };
 }
