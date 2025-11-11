@@ -37,14 +37,6 @@ const nonColorTextRegex = /^text-(xs|sm|base|lg|xl|[2-9]xl|left|center|right|jus
 // Handles modifiers (dark:), variants (hover:), and custom selectors ([&>div]:)
 const colorPrefixRegex = /^(?:text-|bg-|(?:border-(?:t|r|b|l|x|y|s|e)-|border-)|fill-|stroke-|ring-|ring-offset-|accent-|caret-|divide-|outline-|shadow-|decoration-|from-|via-|to-)/;
 
-// Tailwind color names
-const colorNames = [
-    'slate', 'gray', 'zinc', 'neutral', 'stone',
-    'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan',
-    'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose',
-    'transparent', 'current', 'inherit', 'black', 'white'
-];
-
-// Regex for Tailwind color names: matches exact color names or color names followed by a dash and shade
-// e.g., "red", "red-500", "slate-100", but not "redish" or "red500"
-const colorNameRegex = /^(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|transparent|current|inherit|black|white)(?:-|$)/;
+// Regex for Tailwind color names: matches exact color names or color names followed by a dash and shade,
+// optionally with opacity modifier (e.g., "red", "red-500", "red-500/50", "slate-100/75")
+const colorNameRegex = /^(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|transparent|current|inherit|black|white)(?:-|$|\/)/;

@@ -22,6 +22,12 @@ describe('isTwColorClass', () => {
         expect(isTwColorClass('bg-[rgb(255,0,0)]')).toBe(true);
     });
 
+    it('handles opacity modifiers', () => {
+        expect(isTwColorClass('bg-red-500/50')).toBe(true);
+        expect(isTwColorClass('text-blue-300/75')).toBe(true);
+        expect(isTwColorClass('border-slate-100/25')).toBe(true);
+    });
+
     it('returns false for non-color text classes', () => {
         expect(isTwColorClass('text-xs')).toBe(false);
         expect(isTwColorClass('text-center')).toBe(false);
