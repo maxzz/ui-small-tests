@@ -58,7 +58,6 @@ function areStacksEqual(prev: HoverStackEntry[] | undefined, next: HoverStackEnt
             return false;
         }
 
-        // Compare class arrays efficiently using every()
         if (!prevEntry.classes.every((cls, idx) => cls === nextEntry.classes[idx])) {
             return false;
         }

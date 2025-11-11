@@ -7,13 +7,33 @@ export function printHoverStack(stack: HoverStackEntry[] | undefined): void {
         return;
     }
 
-    console.group("Current:");
+    const finalStack = [];
     for (const entry of stack) {
-        if (!entry.dataSlot || entry.classes.length === 0) {
-            continue;
+        const filteredClasses = entry.classes.filter(isTwColorClass);
+        if (filteredClasses.length > 0) {
+            finalStack.push({
+                dataSlot: entry.dataSlot,
+                tag: entry.tag,
+                classes: filteredClasses,
+            });
         }
+    }
 
-        isTwColorClass('bg-red-500');
+    if (finalStack.length > 0) {
+        console.group("Current:");
+        for (const entry of finalStack) {
+            console.log('💻%s %s', `<${entry.dataSlot || entry.tag}>`, JSON.stringify(entry.classes));
+        }
+        console.groupEnd();
+    }
+
+    // console.group("Current:");
+    // for (const entry of stack) {
+        // if (!entry.dataSlot || entry.classes.length === 0) {
+        //     continue;
+        // }
+
+        // isTwColorClass('bg-red-500');
 
         // const filteredClasses = entry.classes.filter((cls) => isTwColorClass(cls));
         // console.log('💻%s\n  %s\n  %s', `<${entry.dataSlot}>`, JSON.stringify(entry.classes), JSON.stringify(filteredClasses));
@@ -22,8 +42,8 @@ export function printHoverStack(stack: HoverStackEntry[] | undefined): void {
         //     ? `\n\t${filteredClasses.join("\n\t")}`
         //     : "(no classes)";
         // console.log("%c%s%c %s", "color: red;", entry.dataSlot, "color: inherit;", classes);
-    }
-    console.groupEnd();
+    // }
+    // console.groupEnd();
 }
 
 export function formatHoverStackTooltip(stack: HoverStackEntry[] | undefined): string {
