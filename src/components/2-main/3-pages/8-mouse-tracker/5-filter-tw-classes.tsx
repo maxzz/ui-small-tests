@@ -27,7 +27,11 @@ export function isTwColorClass(cls: string): boolean {
     }
 
     // Check if it starts with a valid color name using the prebuilt regex
-    return colorNameRegex.test(afterPrefix);
+    if (colorNameRegex.test(afterPrefix)) {
+        return true;
+    }
+
+    return false;
 }
 
 // Regex for known non-color `text-` classes (sizes, alignment, wrapping)
@@ -35,8 +39,10 @@ const nonColorTextRegex = /^text-(xs|sm|base|lg|xl|[2-9]xl|left|center|right|jus
 
 // Filter to only include color-specific Tailwind classes
 // Handles modifiers (dark:), variants (hover:), and custom selectors ([&>div]:)
-const colorPrefixRegex = /^(?:text-|bg-|(?:border-(?:t|r|b|l|x|y|s|e)-|border-)|fill-|stroke-|ring-|ring-offset-|accent-|caret-|divide-|outline-|shadow-|decoration-|from-|via-|to-)/;
+// Note: shadow can be used with or without a dash (shadow, shadow-none, shadow-red-500)
+const colorPrefixRegex = /^(?:text-|bg-|(?:border-(?:t|r|b|l|x|y|s|e)-|border-)|fill-|stroke-|ring-|ring-offset-|accent-|caret-|divide-|outline-|shadow-?|decoration-|from-|via-|to-)/;
 
 // Regex for Tailwind color names: matches exact color names or color names followed by a dash and shade,
 // optionally with opacity modifier (e.g., "red", "red-500", "red-500/50", "slate-100/75")
-const colorNameRegex = /^(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|transparent|current|inherit|black|white)(?:-|$|\/)/;
+// Also handles special cases like empty string (for "shadow") and "none" (for "shadow-none")
+const colorNameRegex = /^(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|transparent|current|inherit|black|white|none)(?:-|$|\/)|^$/;

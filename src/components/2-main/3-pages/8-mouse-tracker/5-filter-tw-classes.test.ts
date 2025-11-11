@@ -28,6 +28,13 @@ describe('isTwColorClass', () => {
         expect(isTwColorClass('border-slate-100/25')).toBe(true);
     });
 
+    it('handles shadow variants with and without dash', () => {
+        expect(isTwColorClass('shadow')).toBe(true);
+        expect(isTwColorClass('shadow-none')).toBe(true);
+        expect(isTwColorClass('shadow-red-500')).toBe(true);
+        expect(isTwColorClass('shadow-lg')).toBe(false); // shadow-lg is size, not color
+    });
+
     it('returns false for non-color text classes', () => {
         expect(isTwColorClass('text-xs')).toBe(false);
         expect(isTwColorClass('text-center')).toBe(false);
@@ -41,7 +48,5 @@ describe('isTwColorClass', () => {
 
     it('returns false for unrelated classes', () => {
         expect(isTwColorClass('flex')).toBe(false);
-        // `shadow` does not include a dash and the function ultimately rejects it, so expect false
-        expect(isTwColorClass('shadow')).toBe(false);
     });
 });
