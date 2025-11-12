@@ -2,7 +2,7 @@ import { type HTMLAttributes, useRef, useCallback, type MouseEvent } from "react
 import { useSetAtom } from "jotai";
 import { classNames } from "@/utils";
 import { type HoverStackEntry, buildnewHoverStack } from "./3-build-hover-stack";
-import { hoverStackAtom, mousePosAtom } from "./7-hover-stack-atoms";
+import { hoverStackAtom, mousePosAtom } from "./7-track-atoms";
 import { printHoverStack } from "./6-utils-format";
 
 /**

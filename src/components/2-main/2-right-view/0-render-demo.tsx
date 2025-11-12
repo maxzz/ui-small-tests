@@ -9,7 +9,7 @@ import { DashboardAsIframe } from "../3-pages/2-dashboard-iframe";
 import { CardsDemoWithTooltip } from "../3-pages/8-mouse-tracker/x-nun-all-wrapper-w-tooltip";
 import { MouseMoveTrackerTooltip } from "../3-pages/8-mouse-tracker/2-mouse-tracker-tooltip";
 import { CardsContents } from "./1-cards-contents";
-import { hoverStackAtom, mousePosAtom } from "../3-pages/8-mouse-tracker/7-hover-stack-atoms";
+import { hoverStackAtom, mousePosAtom } from "../3-pages/8-mouse-tracker/7-track-atoms";
 import { MouseTracker } from "../3-pages/8-mouse-tracker/1-mouse-tracker";
 import { DashboardContents } from "./2-dashboard-contents";
 
