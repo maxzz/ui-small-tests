@@ -33,20 +33,27 @@ Classes with variants (:)
 Classes with custom selector prefix ([)
 Everything else
 Classes with data-[...] selectors
-Classes with dark: prefix ← NEW
-Classes with aria- prefix ← NEW (always last)
+Classes with focus: and focus-visible: prefixes
+Classes with dark: prefix
+Classes with placeholder: prefix
+Classes with aria- prefix (always last)
 ```
 */
 function sortTwClasses(classes: string[]): string[] {
-    // Sort order: text/bg first, then border, then ring, then shadow (no dash), then shadow-, then with variant (:), then with prefix ([), then data-[...], then dark:, then aria- last
     const getOrder = (cls: string): number => {
         // Check for aria- prefix (should be last)
-        if (cls.includes('aria-')) return 11;
+        if (cls.includes('aria-')) return 13;
         
-        // Check for dark: prefix (before aria-, after data-[...])
-        if (cls.startsWith('dark:')) return 10;
+        // Check for placeholder: prefix (before aria-)
+        if (cls.startsWith('placeholder:')) return 12;
         
-        // Check for data-[...] attributes (before dark:)
+        // Check for dark: prefix (before placeholder:)
+        if (cls.startsWith('dark:')) return 11;
+        
+        // Check for focus: or focus-visible: prefix (before dark:)
+        if (cls.startsWith('focus:') || cls.startsWith('focus-visible:')) return 10;
+        
+        // Check for data-[...] attributes (before focus:)
         if (cls.includes('data-[')) return 9;
         
         // Remove variant prefixes (hover:, dark:, etc.) for checking
