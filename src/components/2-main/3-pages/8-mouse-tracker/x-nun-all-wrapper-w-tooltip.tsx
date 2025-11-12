@@ -1,6 +1,6 @@
 import { type HTMLAttributes, type MouseEvent, useCallback, useMemo, useRef, useState } from "react";
 import { classNames } from "@/utils";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/shadcn/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/shadcn/shadcn-modified/tooltip";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import { type HoverStackEntry, buildnewHoverStack } from "./3-build-hover-stack";
 import { formatHoverStackTooltip, printHoverStack } from "./6-utils-format";
