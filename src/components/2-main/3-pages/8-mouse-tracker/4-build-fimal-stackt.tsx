@@ -26,6 +26,7 @@ Sort order:
 text-*
 bg-*
 border-*
+outline-*
 ring-*
 shadow (plain)
 shadow-*
@@ -62,12 +63,13 @@ function sortTwClasses(classes: string[]): string[] {
         if (base.startsWith('text-')) return 0;
         if (base.startsWith('bg-')) return 1;
         if (base.startsWith('border-')) return 2;
-        if (base.startsWith('ring-')) return 3;
-        if (base === 'shadow') return 4;
-        if (base.startsWith('shadow-')) return 5;
-        if (cls.includes(':')) return 6; // Has variant modifier
-        if (cls.startsWith('[')) return 7; // Has custom selector prefix
-        return 8; // Everything else
+        if (base.startsWith('outline-')) return 3;
+        if (base.startsWith('ring-')) return 4;
+        if (base === 'shadow') return 5;
+        if (base.startsWith('shadow-')) return 6;
+        if (cls.includes(':')) return 7; // Has variant modifier
+        if (cls.startsWith('[')) return 8; // Has custom selector prefix
+        return 9; // Everything else (same as data-[...] now)
     };
 
     return [...classes].sort((a, b) => {
