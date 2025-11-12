@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useAtomValue } from "jotai";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/shadcn/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/shadcn/shadcn-modified/tooltip";
 // import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import { type HoverStackEntry } from "./3-build-hover-stack";
 import { type MousePos } from "./7-track-atoms";
@@ -22,7 +22,7 @@ export function MouseMoveTrackerTooltip({ hoverStackAtom, mousePosAtom }: { hove
                 <span aria-hidden={true} style={tooltipAnchorStyle} />
             </TooltipTrigger>
 
-            <TooltipContent side="right" align="start" className="p-0 max-h-dvh bg-muted border-foreground/20 border shadow">
+            <TooltipContent side="right" align="start" className="p-0 max-h-dvh bg-muted border-foreground/20 border shadow" hideTooltip>
                 {/* <ScrollArea className="max-h-[80dvh] max-w-[320px] p-2"> */}
                 {tooltipContent}
                 {/* </ScrollArea> */}

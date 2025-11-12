@@ -6,7 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/shadc
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, } from "@/components/ui/shadcn/command";
 import { Input } from "@/components/ui/shadcn/input";
 import { ResponsiveDialog, ResponsiveDialogContent, ResponsiveDialogDescription, ResponsiveDialogFooter, ResponsiveDialogHeader, ResponsiveDialogTitle, } from "@/components/ui/shadcn/revola";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/shadcn/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/shadcn/shadcn-modified/tooltip";
 import { cn } from "@/utils";
 import { ArrowUpIcon, CheckIcon, PlusIcon } from "lucide-react";
 
