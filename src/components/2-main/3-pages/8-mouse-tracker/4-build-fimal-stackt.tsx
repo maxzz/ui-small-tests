@@ -64,9 +64,12 @@ const getOrder = (cls: string): number => {
     // Check plain shadow (no dash)
     if (base === 'shadow') return 5;
 
-    // Check prefix mappings
-    for (const [prefix, order] of Object.entries(prefixOrder)) {
-        if (base.startsWith(prefix)) return order;
+    // Extract prefix (up to and including first dash) for O(1) lookup
+    const dashIndex = base.indexOf('-');
+    if (dashIndex !== -1) {
+        const prefix = base.slice(0, dashIndex + 1); // e.g., "text-", "bg-"
+        const order = prefixOrder[prefix];
+        if (order !== undefined) return order;
     }
 
     // Check for variant modifiers and custom selectors
