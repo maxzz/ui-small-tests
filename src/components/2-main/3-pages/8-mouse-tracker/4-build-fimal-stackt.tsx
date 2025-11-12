@@ -8,13 +8,12 @@ export function buildFinalStack(stack: HoverStackEntry[] | undefined): HoverStac
 
     const rv = [];
     for (const entry of stack) {
-        if (isEmptyEntry(entry)) {
+        if (!entry.dataSlot && !entry.classes.length) {
             continue;
         }
 
         const filteredClasses = entry.classes.filter(isTwColorClass);
-        if (filteredClasses.length > 0 || entry.dataSlot) {
-            console.log('filteredClasses', filteredClasses, 'entry', entry);
+        if (filteredClasses.length || entry.dataSlot) {
             rv.push({
                 dataSlot: entry.dataSlot,
                 tag: entry.tag,
@@ -22,7 +21,7 @@ export function buildFinalStack(stack: HoverStackEntry[] | undefined): HoverStac
             });
         }
     }
-    return rv.length > 0 ? rv : undefined;
+    return rv.length ? rv : undefined;
 }
 
 function sortTwClasses(classes: string[]): string[] {
@@ -33,10 +32,6 @@ function sortTwClasses(classes: string[]): string[] {
             return orderA !== orderB ? orderA - orderB : a.localeCompare(b);
         }
     );
-}
-
-function isEmptyEntry(entry: HoverStackEntry): boolean {
-    return !entry.dataSlot && !entry.classes.length;
 }
 
 /**
