@@ -22,7 +22,7 @@ export function MouseMoveTrackerTooltip({ hoverStackAtom, mousePosAtom }: { hove
                 <span aria-hidden={true} style={tooltipAnchorStyle} />
             </TooltipTrigger>
 
-            <TooltipContent side="right" align="start" className="max-h-dvh whitespace-pre text-left p-0">
+            <TooltipContent side="right" align="start" className="p-0 max-h-dvh bg-muted border-foreground/20 border shadow">
                 {/* <ScrollArea className="max-h-[80dvh] max-w-[320px] p-2"> */}
                 {tooltipContent}
                 {/* </ScrollArea> */}

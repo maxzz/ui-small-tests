@@ -46,10 +46,10 @@ export function formatHoverStackTooltip(stack: HoverStackEntry[] | undefined): R
             (entry, index) => (
                 <div key={index}>
                     {entry.dataSlot && <div className="text-red-500 font-bold">{entry.dataSlot}</div>}
-                    {entry.tag && <div className="text-blue-500 font-bold">{entry.tag}</div>}
+                    {entry.tag && <div className="text-blue-500">&lt;{entry.tag}&gt;</div>}
                     {entry.classes.map(
                         (cls, clsIndex) => (
-                            <div key={clsIndex} className="ml-4 text-xs">{cls}</div>
+                            <div key={clsIndex} className="ml-4 text-xs text-foreground">{cls}</div>
                         )
                     )}
                 </div>
