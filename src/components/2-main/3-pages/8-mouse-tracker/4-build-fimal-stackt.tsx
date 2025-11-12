@@ -41,46 +41,45 @@ Classes with aria- prefix (always last)
 ```
 */
 function sortTwClasses(classes: string[]): string[] {
+    // Prefix to order mapping for base classes
+    const prefixOrder: Record<string, number> = {
+        'text-': 0,
+        'bg-': 1,
+        'border-': 2,
+        'outline-': 3,
+        'ring-': 4,
+        'shadow-': 6,
+    };
+
     const getOrder = (cls: string): number => {
-        // Check for aria- prefix (should be last)
+        // Check special patterns first (highest priority)
         if (cls.includes('aria-')) return 13;
-        
-        // Check for placeholder: prefix (before aria-)
         if (cls.startsWith('placeholder:')) return 12;
-        
-        // Check for dark: prefix (before placeholder:)
         if (cls.startsWith('dark:')) return 11;
-        
-        // Check for focus: or focus-visible: prefix (before dark:)
         if (cls.startsWith('focus:') || cls.startsWith('focus-visible:')) return 10;
-        
-        // Check for data-[...] attributes (before focus:)
         if (cls.includes('data-[')) return 9;
-        
-        // Remove variant prefixes (hover:, dark:, etc.) for checking
+
+        // Extract base class (after last colon)
         const base = cls.split(':').pop() || cls;
-        
-        if (base.startsWith('text-')) return 0;
-        if (base.startsWith('bg-')) return 1;
-        if (base.startsWith('border-')) return 2;
-        if (base.startsWith('outline-')) return 3;
-        if (base.startsWith('ring-')) return 4;
+
+        // Check plain shadow (no dash)
         if (base === 'shadow') return 5;
-        if (base.startsWith('shadow-')) return 6;
-        if (cls.includes(':')) return 7; // Has variant modifier
-        if (cls.startsWith('[')) return 8; // Has custom selector prefix
-        return 9; // Everything else (same as data-[...] now)
+
+        // Check prefix mappings
+        for (const [prefix, order] of Object.entries(prefixOrder)) {
+            if (base.startsWith(prefix)) return order;
+        }
+
+        // Check for variant modifiers and custom selectors
+        if (cls.includes(':')) return 7;
+        if (cls.startsWith('[')) return 8;
+
+        return 9; // Everything else
     };
 
     return [...classes].sort((a, b) => {
         const orderA = getOrder(a);
         const orderB = getOrder(b);
-        
-        // If same order category, sort alphabetically
-        if (orderA === orderB) {
-            return a.localeCompare(b);
-        }
-        
-        return orderA - orderB;
+        return orderA !== orderB ? orderA - orderB : a.localeCompare(b);
     });
 }
