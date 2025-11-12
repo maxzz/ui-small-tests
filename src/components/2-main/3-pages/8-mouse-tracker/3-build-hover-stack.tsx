@@ -7,16 +7,6 @@ export type HoverStackEntry = {
 export function buildnewHoverStack(x: number, y: number, currentTarget: HTMLElement, hoverStack: HoverStackEntry[] | undefined): HoverStackEntry[] | undefined {
     const elementsAtPoint = document.elementsFromPoint(x, y);
     
-    console.log('Elements at point:', elementsAtPoint.map(
-        e => {
-            if (e instanceof HTMLElement) {
-                const dataSlot = e.getAttribute('data-slot') ?? '';
-                return `<${e.tagName.toLowerCase()}>${dataSlot ? ` slot="${dataSlot}"` : ''}`;
-            }
-            return e;
-        }
-    ).join('\n'));
-
     // Get the topmost element at the point
     const topElement = elementsAtPoint.find(e => e instanceof HTMLElement) as HTMLElement | undefined;
     if (!topElement) {
