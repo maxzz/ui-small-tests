@@ -1,5 +1,5 @@
 import { type HoverStackEntry } from "./3-build-hover-stack";
-import { buildFinalStack } from "./6-filter-srt";
+import { buildFinalStack } from "./4-build-fimal-stackt";
 
 export function printHoverStack(stack: HoverStackEntry[] | undefined): void {
     const finalStack = buildFinalStack(stack);

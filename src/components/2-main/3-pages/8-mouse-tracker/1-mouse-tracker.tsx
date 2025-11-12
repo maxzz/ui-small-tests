@@ -3,7 +3,7 @@ import { useSetAtom } from "jotai";
 import { classNames } from "@/utils";
 import { type HoverStackEntry, buildnewHoverStack } from "./3-build-hover-stack";
 import { hoverStackAtom, mousePosAtom } from "./7-hover-stack-atoms";
-import { printHoverStack } from "./4-utils-format";
+import { printHoverStack } from "./6-utils-format";
 
 /**
  * Tracks mouse movement and builds a hover stack of elements under the cursor.

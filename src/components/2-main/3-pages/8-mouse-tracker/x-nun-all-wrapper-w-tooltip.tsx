@@ -3,7 +3,7 @@ import { classNames } from "@/utils";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/shadcn/tooltip";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import { type HoverStackEntry, buildnewHoverStack } from "./3-build-hover-stack";
-import { formatHoverStackTooltip, printHoverStack } from "./4-utils-format";
+import { formatHoverStackTooltip, printHoverStack } from "./6-utils-format";
 
 /**
  * Usage: 
