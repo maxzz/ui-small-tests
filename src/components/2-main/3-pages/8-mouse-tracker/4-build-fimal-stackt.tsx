@@ -8,8 +8,13 @@ export function buildFinalStack(stack: HoverStackEntry[] | undefined): HoverStac
 
     const rv = [];
     for (const entry of stack) {
+        if (isEmptyEntry(entry)) {
+            continue;
+        }
+
         const filteredClasses = entry.classes.filter(isTwColorClass);
         if (filteredClasses.length > 0 || entry.dataSlot) {
+            console.log('filteredClasses', filteredClasses, 'entry', entry);
             rv.push({
                 dataSlot: entry.dataSlot,
                 tag: entry.tag,
@@ -28,6 +33,10 @@ function sortTwClasses(classes: string[]): string[] {
             return orderA !== orderB ? orderA - orderB : a.localeCompare(b);
         }
     );
+}
+
+function isEmptyEntry(entry: HoverStackEntry): boolean {
+    return !entry.dataSlot && !entry.classes.length;
 }
 
 /**

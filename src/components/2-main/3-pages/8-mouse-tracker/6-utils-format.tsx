@@ -41,20 +41,24 @@ export function formatHoverStackTooltip(stack: HoverStackEntry[] | undefined): R
     }
 
     return (
-    <div className="p-4">
-        {finalStack.map(
-            (entry, index) => (
-                <div key={index}>
-                    {entry.dataSlot && <div className="text-red-500 font-bold">{entry.dataSlot}</div>}
-                    {entry.tag && <div className="text-blue-500">&lt;{entry.tag}&gt;</div>}
-                    {entry.classes.map(
-                        (cls, clsIndex) => (
-                            <div key={clsIndex} className="ml-4 text-xs text-foreground">{cls}</div>
-                        )
-                    )}
-                </div>
-            )
-        )}
-    </div>
+        <div className="p-4">
+            {finalStack.map(
+                (entry, index) => {
+                    return (
+                        <div key={index}>
+                            {entry.dataSlot
+                                ? <div className="text-red-500 font-bold">{entry.dataSlot}</div>
+                                : <div className="text-blue-500">&lt;{entry.tag}&gt;</div>
+                            }
+                            {entry.classes.map(
+                                (cls, clsIndex) => (
+                                    <div key={clsIndex} className="ml-4 text-xs text-foreground">{cls}</div>
+                                )
+                            )}
+                        </div>
+                    );
+                }
+            )}
+        </div>
     );
 }
