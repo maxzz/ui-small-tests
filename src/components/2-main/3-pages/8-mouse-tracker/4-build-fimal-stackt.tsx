@@ -20,6 +20,16 @@ export function buildFinalStack(stack: HoverStackEntry[] | undefined): HoverStac
     return rv.length > 0 ? rv : undefined;
 }
 
+function sortTwClasses(classes: string[]): string[] {
+    return [...classes].sort(
+        (a, b) => {
+            const orderA = getOrder(a);
+            const orderB = getOrder(b);
+            return orderA !== orderB ? orderA - orderB : a.localeCompare(b);
+        }
+    );
+}
+
 /**
 Sort order:
 ```
@@ -40,46 +50,38 @@ Classes with placeholder: prefix
 Classes with aria- prefix (always last)
 ```
 */
-function sortTwClasses(classes: string[]): string[] {
-    // Prefix to order mapping for base classes
-    const prefixOrder: Record<string, number> = {
-        'text-': 0,
-        'bg-': 1,
-        'border-': 2,
-        'outline-': 3,
-        'ring-': 4,
-        'shadow-': 6,
-    };
+const getOrder = (cls: string): number => {
+    // Check special patterns first (highest priority)
+    if (cls.includes('aria-')) return 13;
+    if (cls.startsWith('placeholder:')) return 12;
+    if (cls.startsWith('dark:')) return 11;
+    if (cls.startsWith('focus:') || cls.startsWith('focus-visible:')) return 10;
+    if (cls.includes('data-[')) return 9;
 
-    const getOrder = (cls: string): number => {
-        // Check special patterns first (highest priority)
-        if (cls.includes('aria-')) return 13;
-        if (cls.startsWith('placeholder:')) return 12;
-        if (cls.startsWith('dark:')) return 11;
-        if (cls.startsWith('focus:') || cls.startsWith('focus-visible:')) return 10;
-        if (cls.includes('data-[')) return 9;
+    // Extract base class (after last colon)
+    const base = cls.split(':').pop() || cls;
 
-        // Extract base class (after last colon)
-        const base = cls.split(':').pop() || cls;
+    // Check plain shadow (no dash)
+    if (base === 'shadow') return 5;
 
-        // Check plain shadow (no dash)
-        if (base === 'shadow') return 5;
+    // Check prefix mappings
+    for (const [prefix, order] of Object.entries(prefixOrder)) {
+        if (base.startsWith(prefix)) return order;
+    }
 
-        // Check prefix mappings
-        for (const [prefix, order] of Object.entries(prefixOrder)) {
-            if (base.startsWith(prefix)) return order;
-        }
+    // Check for variant modifiers and custom selectors
+    if (cls.includes(':')) return 7;
+    if (cls.startsWith('[')) return 8;
 
-        // Check for variant modifiers and custom selectors
-        if (cls.includes(':')) return 7;
-        if (cls.startsWith('[')) return 8;
+    return 9; // Everything else
+};
 
-        return 9; // Everything else
-    };
-
-    return [...classes].sort((a, b) => {
-        const orderA = getOrder(a);
-        const orderB = getOrder(b);
-        return orderA !== orderB ? orderA - orderB : a.localeCompare(b);
-    });
-}
+// Prefix to order mapping for base classes
+const prefixOrder: Record<string, number> = {
+    'text-': 0,
+    'bg-': 1,
+    'border-': 2,
+    'outline-': 3,
+    'ring-': 4,
+    'shadow-': 6,
+};
