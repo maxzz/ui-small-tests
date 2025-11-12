@@ -21,8 +21,11 @@ function buildFinalStack(stack: HoverStackEntry[] | undefined): HoverStackEntry[
 }
 
 function sortTwClasses(classes: string[]): string[] {
-    // Sort order: text/bg first, then border, then ring, then shadow (no dash), then shadow-, then with variant (:), then with prefix ([)
+    // Sort order: text/bg first, then border, then ring, then shadow (no dash), then shadow-, then with variant (:), then with prefix ([), then data-[...] selectors last
     const getOrder = (cls: string): number => {
+        // Check for data-[...] attributes first (should be last)
+        if (cls.includes('data-[')) return 9;
+        
         // Remove variant prefixes (hover:, dark:, etc.) for checking
         const base = cls.split(':').pop() || cls;
         
