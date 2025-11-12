@@ -26,7 +26,7 @@ export function MouseTracker({ className, children, ...rest }: HTMLAttributes<HT
             if (zOrderedElements?.length) {
                 hoverStackRef.current = zOrderedElements;
                 setHoverStack(zOrderedElements);
-                printHoverStack(zOrderedElements);
+                //printHoverStack(zOrderedElements);
             }
 
             setMousePos({ x: event.clientX, y: event.clientY });
