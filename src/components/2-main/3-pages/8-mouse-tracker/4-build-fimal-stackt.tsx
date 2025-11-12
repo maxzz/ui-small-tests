@@ -20,10 +20,33 @@ export function buildFinalStack(stack: HoverStackEntry[] | undefined): HoverStac
     return rv.length > 0 ? rv : undefined;
 }
 
+/**
+Sort order:
+```
+text-*
+bg-*
+border-*
+ring-*
+shadow (plain)
+shadow-*
+Classes with variants (:)
+Classes with custom selector prefix ([)
+Everything else
+Classes with data-[...] selectors
+Classes with dark: prefix ← NEW
+Classes with aria- prefix ← NEW (always last)
+```
+*/
 function sortTwClasses(classes: string[]): string[] {
-    // Sort order: text/bg first, then border, then ring, then shadow (no dash), then shadow-, then with variant (:), then with prefix ([), then data-[...] selectors last
+    // Sort order: text/bg first, then border, then ring, then shadow (no dash), then shadow-, then with variant (:), then with prefix ([), then data-[...], then dark:, then aria- last
     const getOrder = (cls: string): number => {
-        // Check for data-[...] attributes first (should be last)
+        // Check for aria- prefix (should be last)
+        if (cls.includes('aria-')) return 11;
+        
+        // Check for dark: prefix (before aria-, after data-[...])
+        if (cls.startsWith('dark:')) return 10;
+        
+        // Check for data-[...] attributes (before dark:)
         if (cls.includes('data-[')) return 9;
         
         // Remove variant prefixes (hover:, dark:, etc.) for checking
