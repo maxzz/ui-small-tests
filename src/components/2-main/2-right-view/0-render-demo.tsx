@@ -68,18 +68,14 @@ function CardsContainer() {
     const { zoom, rightView } = useSnapshot(appSettings.appUi);
     return (
         <ScrollArea className="size-full">
-            {rightView === "Cards"
-                ? (<>
-                    <MouseTracker className={zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100"}>
-                        <CardsContents />
-                    </MouseTracker>
+            <MouseTracker className={zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100"}>
+                {rightView === "Cards"
+                    ? <CardsContents />
+                    : <DashboardContents />
+                }
+            </MouseTracker>
 
-                    <MouseMoveTrackerTooltip hoverStackAtom={hoverStackAtom} mousePosAtom={mousePosAtom} />
-                </>)
-                : (
-                    <DashboardContents />
-                )
-            }
+            <MouseMoveTrackerTooltip hoverStackAtom={hoverStackAtom} mousePosAtom={mousePosAtom} />
         </ScrollArea>
     );
 }
