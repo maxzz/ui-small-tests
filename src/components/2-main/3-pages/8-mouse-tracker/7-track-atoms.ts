@@ -11,6 +11,6 @@ export const hoverStackAtom = atom(
     (get, set, newHoverStack: HoverStackEntry[] | ((prev: HoverStackEntry[]) => HoverStackEntry[])) => {
         const newStack = typeof newHoverStack === "function" ? newHoverStack(get(_hoverStackAtom)) : newHoverStack;
         set(_hoverStackAtom, newStack);
-        printHoverStack(newStack);
+        //printHoverStack(newStack);
     }
 );

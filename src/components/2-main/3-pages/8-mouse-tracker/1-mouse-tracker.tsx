@@ -3,7 +3,6 @@ import { useSetAtom } from "jotai";
 import { classNames } from "@/utils";
 import { type HoverStackEntry, buildnewHoverStack } from "./3-build-hover-stack";
 import { hoverStackAtom, mousePosAtom } from "./7-track-atoms";
-import { printHoverStack } from "./6-utils-format";
 
 /**
  * Tracks mouse movement and builds a hover stack of elements under the cursor.
@@ -26,7 +25,6 @@ export function MouseTracker({ className, children, ...rest }: HTMLAttributes<HT
             if (zOrderedElements?.length) {
                 hoverStackRef.current = zOrderedElements;
                 setHoverStack(zOrderedElements);
-                //printHoverStack(zOrderedElements);
             }
 
             setMousePos({ x: event.clientX, y: event.clientY });
