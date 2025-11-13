@@ -47,6 +47,12 @@ export function GroupDemos() {
                         </SidebarMenuButton>
                     </SidebarMenuItem>
 
+                    <SidebarMenuItem>
+                        <SidebarMenuButton onClick={() => onItemClick("ListView")} isActive={leftTree === "ListView"}>
+                             List View
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+
                 </SidebarMenu>
             </SidebarGroupContent>
         </SidebarGroup>

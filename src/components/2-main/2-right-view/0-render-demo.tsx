@@ -9,6 +9,7 @@ import { DashboardAsIframe } from "../3-pages/2-dashboard-iframe";
 import { CardsContents } from "./1-cards-contents";
 import { DashboardContents } from "./2-dashboard-contents";
 import { hoverStackAtom, MouseMoveTrackerTooltip, mousePosAtom, MouseTracker } from "@/components/ui/local/8-mouse-tracker";
+import { UserItemList } from "../3-pages/3-controls/2-listview-commands/1-users-list";
 // import { CardsDemoWithTooltip } from "../../ui/local/8-mouse-tracker/x-nun-all-wrapper-w-tooltip";
 
 export function RenderDemo() {
@@ -56,6 +57,8 @@ function RenderDemoComponent() {
             return <>{Dashboard}</>;
         case "Cards":
             return <CardsContainer />;
+        case "ListView":
+            return <UserItemList />;
         default:
             return <div className="px-4 py-2 h-full text-xs text-green-950 bg-green-500/10 uppercase">Space for rent</div>;
     }

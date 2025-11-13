@@ -1,4 +1,4 @@
-export type NodeId = "Examples" | "no-demo-yet" | "Dashboard" | "Effect Hero Title" | "Cards";
+export type NodeId = "Examples" | "no-demo-yet" | "Dashboard" | "Effect Hero Title" | "Cards" | "ListView";
 
 export type RightView = "Cards" | "Dashboard";
 
