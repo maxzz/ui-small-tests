@@ -51,13 +51,13 @@ function RenderDemoComponent() {
     );
 
     switch (leftTree) {
-        case "Effect Hero Title":
+        case "hero-text":
             return <HeroTitleText />;
-        case "Dashboard":
+        case "dashboard":
             return <>{Dashboard}</>;
-        case "Cards":
+        case "cards":
             return <CardsContainer />;
-        case "ListView":
+        case "listview":
             return <UserItemList />;
         default:
             return <div className="px-4 py-2 h-full text-xs text-green-950 bg-green-500/10 uppercase">Space for rent</div>;
