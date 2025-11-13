@@ -6,12 +6,10 @@ import { applyThemeToElement, type ThemeEditorState } from "@/store/2-apply-them
 import { ScrollArea } from "../../ui/shadcn/scroll-area";
 import { HeroTitleText } from "../3-pages/3-controls/1-effect-hero-title/0-all";
 import { DashboardAsIframe } from "../3-pages/2-dashboard-iframe";
-import { CardsDemoWithTooltip } from "../3-pages/8-mouse-tracker/x-nun-all-wrapper-w-tooltip";
-import { MouseMoveTrackerTooltip } from "../3-pages/8-mouse-tracker/2-mouse-tracker-tooltip";
 import { CardsContents } from "./1-cards-contents";
-import { hoverStackAtom, mousePosAtom } from "../3-pages/8-mouse-tracker/7-track-atoms";
-import { MouseTracker } from "../3-pages/8-mouse-tracker/1-mouse-tracker";
 import { DashboardContents } from "./2-dashboard-contents";
+import { hoverStackAtom, MouseMoveTrackerTooltip, mousePosAtom, MouseTracker } from "@/components/ui/local/8-mouse-tracker";
+// import { CardsDemoWithTooltip } from "../../ui/local/8-mouse-tracker/x-nun-all-wrapper-w-tooltip";
 
 export function RenderDemo() {
     const { themePreseetName } = useSnapshot(appSettings.appUi);
