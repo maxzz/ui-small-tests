@@ -34,12 +34,12 @@ export function RenderDemo() {
 
     return (
         <div ref={demoRef} className="@container min-h-0">
-            <RenderDemoComponent />
+            <LeftViewChildren />
         </div>
     );
 }
 
-function RenderDemoComponent() {
+function LeftViewChildren() {
     const { leftTree } = useSnapshot(appSettings.appUi);
 
     const Dashboard = useMemo(
@@ -59,8 +59,12 @@ function RenderDemoComponent() {
             return <HeroTitleText />;
         case "listview":
             return <UserItemList />;
-        default:
+        case "not-yet":
             return <div className="px-4 py-2 h-full text-xs text-green-950 bg-green-500/10 uppercase">Space for rent</div>;
+        default: {
+            const _exhaustiveCheck: never = leftTree;
+            return null;
+        }
     }
 }
 
@@ -69,11 +73,24 @@ function RightViewWithMouseTracking() {
     return (
         <ScrollArea className="size-full">
             <MouseTracker className={zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100"}>
-                {rightView === "Cards" && <CardsContents />}
-                {rightView === "Dashboard" && <DashboardContents />}
+                <RightViewChildren />
             </MouseTracker>
 
             <MouseMoveTrackerTooltip hoverStackAtom={hoverStackAtom} mousePosAtom={mousePosAtom} />
         </ScrollArea>
     );
+}
+
+function RightViewChildren() {
+    const { rightView } = useSnapshot(appSettings.appUi);
+    switch (rightView) {
+        case "simple-cards":
+            return <CardsContents />;
+        case "simple-dashboard":
+            return <DashboardContents />;
+        default: {
+            const _exhaustiveCheck: never = rightView;
+            return null;
+        }
+    }
 }

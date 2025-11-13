@@ -22,7 +22,7 @@ export const LeftViewItems = [
 
 // Right view
 
-export type RightViewId = "Cards" | "Dashboard";
+export type RightViewId = "simple-cards" | "simple-dashboard";
 
 export function rightViewTypeGuard(rightView: RightViewId): string {
     return rightView;
