@@ -12,7 +12,7 @@ import { hoverStackAtom, MouseMoveTrackerTooltip, mousePosAtom, MouseTracker } f
 import { UserItemList } from "../3-pages/3-controls/2-listview-commands/1-users-list";
 // import { CardsDemoWithTooltip } from "../../ui/local/8-mouse-tracker/x-nun-all-wrapper-w-tooltip";
 
-export function RenderDemo() {
+export function Section2_RenderContents() {
     const { themePreseetName } = useSnapshot(appSettings.appUi);
     const demoRef = useRef<HTMLDivElement>(null);
 

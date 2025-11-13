@@ -1,1 +1,1 @@
-export * from "./0-render-demo";
+export * from "./0-render-contents-all";
