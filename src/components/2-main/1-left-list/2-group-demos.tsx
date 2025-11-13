@@ -24,8 +24,9 @@ export function GroupDemos() {
     return (
         <SidebarGroup>
             <SidebarGroupLabel>
-                Colors
+                Demos
             </SidebarGroupLabel>
+
             <SidebarGroupContent>
                 <SidebarMenu>
                     {LeftViewItems.map(

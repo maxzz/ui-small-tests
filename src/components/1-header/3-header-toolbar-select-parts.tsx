@@ -1,12 +1,12 @@
 import { type HTMLAttributes } from "react";
 import { useSnapshot } from "valtio";
-import { type RightView, appSettings, rightViewTypeGuard } from "@/store/0-local-storage";
+import { type RightViewId, appSettings, rightViewTypeGuard } from "@/store/0-local-storage";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/shadcn/select";
 
 export function SelectPatrs({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const { rightView } = useSnapshot(appSettings.appUi);
     return (
-        <Select defaultValue={rightView} onValueChange={(view) => appSettings.appUi.rightView = view as RightView}>
+        <Select defaultValue={rightView} onValueChange={(view) => appSettings.appUi.rightView = view as RightViewId}>
             <SelectTrigger className="px-2 h-7! text-xs rounded-sm w-[120px]" title="Select view">
                 <SelectValue placeholder="Select view" />
             </SelectTrigger>

@@ -1,6 +1,6 @@
 // Left view
 
-export type LeftViewId = "not-yet" | "dashboard" | "hero-text" | "cards" | "listview";
+export type LeftViewId = "cards" | "dashboard" | "hero-text" | "listview" | "not-yet";
 
 export type LeftViewItem = {
     id: LeftViewId;
@@ -10,20 +10,20 @@ export type LeftViewItem = {
 };
 
 export const LeftViewItems = [
-    // { id: "Examples", title: "Examples", description: "Example notes demonstrating various features", icon: "📚" },
-    // { id: "no-demo-yet", title: "No Demo Yet", description: "This note is not yet demoed", icon: "🚧" },
     { id: "cards", title: "Cards", description: "Cards demo", icon: "📊" },
     { id: "dashboard", title: "Dashboard", description: "Dashboard demo", icon: "📊" },
     { id: "hero-text", title: "Effect Hero Title", description: "Effect Hero Title demo", icon: "📊" },
     { id: "listview", title: "List View", description: "List View demo", icon: "📊" },
+    // { id: "examples", title: "Examples", description: "Example notes demonstrating various features", icon: "📚" },
+    // { id: "not-yet", title: "No Demo Yet", description: "This note is not yet demoed", icon: "🚧" },
 ] as const satisfies readonly LeftViewItem[];
 
 //export type LeftViewId = typeof LeftViewItems[number]["id"];
 
 // Right view
 
-export type RightView = "Cards" | "Dashboard";
+export type RightViewId = "Cards" | "Dashboard";
 
-export function rightViewTypeGuard(rightView: RightView): string {
+export function rightViewTypeGuard(rightView: RightViewId): string {
     return rightView;
 }

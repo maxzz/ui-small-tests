@@ -1,12 +1,12 @@
 import { type ThemeMode } from "@/utils";
-import { RightView, type LeftViewId } from "./9-types";
+import { RightViewId, type LeftViewId } from "./9-types";
 
 export type AppUISettings = {
     themeMode: ThemeMode;
     // accordionsOpened: Record<string, boolean>;
     resizable: Record<string, string>; // PanelGroupStorage serialized layout
     leftTree: LeftViewId;
-    rightView: RightView;
+    rightView: RightViewId;
     themePreseetName: string;
     zoom: number;
     sidebarLeftOpen: boolean;   // main sidebar
