@@ -51,12 +51,12 @@ function RenderDemoComponent() {
     );
 
     switch (leftTree) {
-        case "hero-text":
-            return <HeroTitleText />;
+        case "cards":
+            return <RightViewWithMouseTracking />;
         case "dashboard":
             return <>{Dashboard}</>;
-        case "cards":
-            return <CardsContainer />;
+        case "hero-text":
+            return <HeroTitleText />;
         case "listview":
             return <UserItemList />;
         default:
@@ -64,15 +64,13 @@ function RenderDemoComponent() {
     }
 }
 
-function CardsContainer() {
+function RightViewWithMouseTracking() {
     const { zoom, rightView } = useSnapshot(appSettings.appUi);
     return (
         <ScrollArea className="size-full">
             <MouseTracker className={zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100"}>
-                {rightView === "Cards"
-                    ? <CardsContents />
-                    : <DashboardContents />
-                }
+                {rightView === "Cards" && <CardsContents />}
+                {rightView === "Dashboard" && <DashboardContents />}
             </MouseTracker>
 
             <MouseMoveTrackerTooltip hoverStackAtom={hoverStackAtom} mousePosAtom={mousePosAtom} />
