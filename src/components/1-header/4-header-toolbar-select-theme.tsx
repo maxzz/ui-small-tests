@@ -13,7 +13,7 @@ export function SelectTheme({ className, ...rest }: HTMLAttributes<HTMLDivElemen
     const themeNames = useAtomValue(themeNamesAtom);
 
     return (
-        <Tooltip>
+        <Tooltip open={true}>
             <Select defaultValue={themePreseetName} onValueChange={(name) => appSettings.appUi.themePreseetName = name}>
                 <TooltipTrigger asChild>
                     <SelectTrigger className="px-2 h-7! text-xs rounded-sm" title="primary, accent, secondary, border">

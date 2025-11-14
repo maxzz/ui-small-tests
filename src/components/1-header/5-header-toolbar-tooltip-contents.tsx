@@ -9,8 +9,11 @@ export function ThemeTooltipContent({ presetName }: { presetName: string; }) {
     const numRows = Math.ceil(entries.length / 2);
 
     return (
-        <TooltipContent side="bottom" sideOffset={5} className="bg-muted border-foreground/20 border shadow">
-            <div className="text-xs text-foreground font-semibold border-b border-foreground/20 pb-1">{presetName}</div>
+        <TooltipContent className="mx-4 py-0 bg-muted border-foreground/20 border shadow cursor-default" side="bottom" sideOffset={5} hideTooltip>
+            <div className="-mx-3 py-2 text-xs text-foreground text-center font-semibold border-foreground/20 border-b">
+                {presetName}
+            </div>
+
             <div className="relative">
                 <div className="py-2 grid grid-flow-col gap-x-12 gap-y-1 text-[10px]" style={{ gridTemplateRows: `repeat(${numRows}, minmax(0, 1fr))` }}>
                     {entries.map(
@@ -30,10 +33,11 @@ export function ThemeTooltipContent({ presetName }: { presetName: string; }) {
 function ThemeStyleItem({ name, value }: { name: string; value: string; }) {
     const isColor = isColorValue(value);
     const isFont = name.startsWith("font-");
+    const isHighlighted = ["primary", "accent", "secondary", "border"].includes(name);
 
     return (
         <div className="flex items-center justify-between gap-2">
-            <span className="text-foreground/70 truncate">{name}:</span>
+            <span className={`text-foreground/70 truncate ${isHighlighted ? "font-bold" : ""}`}>{name}:</span>
             {isColor
                 ? (
                     <ColorBox color={value} />
