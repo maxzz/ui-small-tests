@@ -88,7 +88,7 @@ function RightViewChildren() {
         case "simple-cards":
             return <CardsContents />;
         case "simple-dashboard":
-            return <DashboardContents />;
+            return <DashboardContents className="col-span-full" />;
         case "original-cards":
             return <RootComponents className="col-span-full" />;
         default: {

@@ -1,9 +1,10 @@
+import { classNames } from "@/utils";
 import { ChartAreaInteractive, DataTable, TotalRevenueCard, ActiveAccountsCard, GrowthRateCard, NewCustomersCard } from "../3-pages/1-demo-contents/2-dashboard";
 import data from "../3-pages/1-demo-contents/2-dashboard/8-data.json";
 
-export function DashboardContents() {
+export function DashboardContents({ className }: { className?: string }) {
     return (
-        <div className="@container/main flex-1 flex flex-col gap-2">
+        <div className={classNames("@container/main flex-1 flex flex-col gap-2", className)}>
             <div className="py-4 md:py-6 flex flex-col gap-4 md:gap-6">
 
                 <div className={cardsClasses}>
