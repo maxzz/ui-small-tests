@@ -31,12 +31,7 @@ export function SelectTheme({ className, ...rest }: HTMLAttributes<HTMLDivElemen
                 </SelectContent>
             </Select>
 
-            <TooltipContent side="bottom" sideOffset={5}>
-                <div className="flex flex-col gap-1">
-                    <div className="text-xs font-semibold">{themePreseetName}</div>
-                    <ThemeColors presetName={themePreseetName} mode="light" />
-                </div>
-            </TooltipContent>
+            <ThemeTooltipContent presetName={themePreseetName} />
         </Tooltip>
     );
 }
@@ -56,5 +51,16 @@ function ThemeColors({ presetName, mode }: { presetName: string; mode: "light" |
 function ColorBox({ color }: { color: string; }) {
     return (
         <div className="size-4 rounded-sm border-foreground/30 border" style={{ backgroundColor: color }} />
+    );
+}
+
+function ThemeTooltipContent({ presetName }: { presetName: string; }) {
+    return (
+        <TooltipContent side="bottom" sideOffset={5}>
+            <div className="flex flex-col gap-1">
+                <div className="text-xs font-semibold">{presetName}</div>
+                <ThemeColors presetName={presetName} mode="light" />
+            </div>
+        </TooltipContent>
     );
 }
