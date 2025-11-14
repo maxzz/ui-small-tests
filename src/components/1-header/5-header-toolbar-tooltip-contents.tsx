@@ -76,6 +76,23 @@ function sortThemeStyleEntries(styles: Record<string, string>): [string, string]
                 if (aIsFont && !bIsFont) return 1;
             }
 
+            // Within the same category, group items with their -foreground variants
+            const aBaseName = keyA.replace(/-foreground$/, "");
+            const bBaseName = keyB.replace(/-foreground$/, "");
+            const aHasForeground = keyA.endsWith("-foreground");
+            const bHasForeground = keyB.endsWith("-foreground");
+
+            // If same base name, -foreground comes before base
+            if (aBaseName === bBaseName) {
+                if (aHasForeground && !bHasForeground) return -1;
+                if (!aHasForeground && bHasForeground) return 1;
+            }
+
+            // Otherwise, sort by base name
+            if (aBaseName !== bBaseName) {
+                return aBaseName.localeCompare(bBaseName);
+            }
+
             return 0;
         }
     );
