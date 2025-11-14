@@ -9,13 +9,13 @@ export function ThemeTooltipContent({ presetName }: { presetName: string; }) {
     const numRows = Math.ceil(entries.length / 2);
 
     return (
-        <TooltipContent className="mx-4 py-0 bg-muted border-foreground/20 border shadow cursor-default" side="bottom" sideOffset={5} hideTooltip>
-            <div className="-mx-3 py-2 text-xs text-foreground text-center font-semibold border-foreground/20 border-b">
+        <TooltipContent className="mx-4 py-0 bg-muted border-foreground/10 border-[1.5px] shadow cursor-default" side="bottom" sideOffset={5} hideTooltip>
+            <div className="-mx-3 py-2 text-xs text-center text-foreground font-semibold border-foreground/10 border-b-[1.5px]">
                 {presetName}
             </div>
 
             <div className="relative">
-                <div className="py-2 grid grid-flow-col gap-x-12 gap-y-1 text-[10px]" style={{ gridTemplateRows: `repeat(${numRows}, minmax(0, 1fr))` }}>
+                <div className="py-2 text-[10px] grid grid-flow-col gap-x-12 gap-y-1" style={{ gridTemplateRows: `repeat(${numRows}, minmax(0, 1fr))` }}>
                     {entries.map(
                         ([key, value]) => (
                             <ThemeStyleItem key={key} name={key} value={value as string} />
@@ -24,7 +24,7 @@ export function ThemeTooltipContent({ presetName }: { presetName: string; }) {
                 </div>
 
                 {/* Column separator */}
-                <div className="absolute top-0 bottom-0 w-px bg-foreground/20" style={{ left: '50%' }} />
+                <div className="absolute top-0 bottom-0 w-px bg-foreground/10" style={{ left: '50%' }} />
             </div>
         </TooltipContent>
     );
@@ -37,18 +37,15 @@ function ThemeStyleItem({ name, value }: { name: string; value: string; }) {
 
     return (
         <div className="flex items-center justify-between gap-2">
-            <span className={`text-foreground/70 truncate ${isHighlighted ? "font-bold" : ""}`}>{name}:</span>
+            <span className={`text-foreground/70 truncate ${isHighlighted ? "font-bold" : ""}`}>
+                {name}:
+            </span>
             {isColor
-                ? (
-                    <ColorBox color={value} />
-                ) : isFont
-                    ? (
-                        <span className="max-w-12 text-[9px] text-foreground font-mono truncate" title={value}>
-                            {value}
-                        </span>
-                    ) : (
-                        <span className="text-[9px] text-foreground font-mono truncate">{value}</span>
-                    )}
+                ? <ColorBox color={value} />
+                : isFont
+                    ? <span className="max-w-12 text-[9px] text-foreground font-mono truncate" title={value}>{value}</span>
+                    : <span className="text-[9px] text-foreground font-mono truncate">{value}</span>
+            }
         </div>
     );
 }

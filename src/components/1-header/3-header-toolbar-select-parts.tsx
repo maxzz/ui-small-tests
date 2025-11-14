@@ -1,6 +1,6 @@
 import { type HTMLAttributes } from "react";
 import { useSnapshot } from "valtio";
-import { type RightViewId, RightViewItems, appSettings, rightViewTypeGuard } from "@/store/0-local-storage";
+import { type RightViewId, RightViewItems, appSettings } from "@/store/0-local-storage";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/shadcn/select";
 
 export function SelectPatrs({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
@@ -12,7 +12,6 @@ export function SelectPatrs({ className, ...rest }: HTMLAttributes<HTMLDivElemen
             </SelectTrigger>
 
             <SelectContent align="end" alignOffset={-4} {...rest}>
-
                 {RightViewItems.map(
                     ({ id, title, description, icon }) => (
                         <SelectItem key={id} className="text-xs" value={id}>
@@ -20,14 +19,6 @@ export function SelectPatrs({ className, ...rest }: HTMLAttributes<HTMLDivElemen
                         </SelectItem>
                     )
                 )}
-
-                {/* <SelectItem className="text-xs" value={rightViewTypeGuard("simple-cards")}>
-                    Cards
-                </SelectItem>
-                
-                <SelectItem className="text-xs" value={rightViewTypeGuard("simple-dashboard")}>
-                    Dashboard
-                </SelectItem> */}
             </SelectContent>
         </Select>
     );
