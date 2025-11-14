@@ -55,12 +55,42 @@ function ColorBox({ color }: { color: string; }) {
 }
 
 function ThemeTooltipContent({ presetName }: { presetName: string; }) {
+    const mode = "light";
+    const styles = getPresetThemeStyles(presetName)[mode];
+    
     return (
         <TooltipContent side="bottom" sideOffset={5}>
-            <div className="flex flex-col gap-1">
-                <div className="text-xs font-semibold">{presetName}</div>
-                <ThemeColors presetName={presetName} mode="light" />
+            <div className="flex flex-col gap-1.5 max-w-xs">
+                <div className="text-xs font-semibold border-b border-foreground/20 pb-1">{presetName}</div>
+                <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[10px]">
+                    {Object.entries(styles).map(([key, value]) => (
+                        <ThemeStyleItem key={key} name={key} value={value as string} />
+                    ))}
+                </div>
             </div>
         </TooltipContent>
     );
+}
+
+function ThemeStyleItem({ name, value }: { name: string; value: string; }) {
+    const isColor = isColorValue(value);
+    
+    return (
+        <div className="flex items-center justify-between gap-2">
+            <span className="text-foreground/70 truncate">{name}:</span>
+            {isColor ? (
+                <ColorBox color={value} />
+            ) : (
+                <span className="text-foreground font-mono text-[9px] truncate">{value}</span>
+            )}
+        </div>
+    );
+}
+
+function isColorValue(value: string): boolean {
+    if (!value) return false;
+    return value.startsWith("#") || 
+           value.startsWith("rgb") || 
+           value.startsWith("hsl") || 
+           value.includes("var(--");
 }
