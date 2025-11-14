@@ -17,9 +17,9 @@ import { NotionPromptForm } from "./notion-prompt-form"
 import { SpinnerBadge } from "./spinner-badge"
 import { SpinnerEmpty } from "./spinner-empty"
 
-export function RootComponents() {
+export function RootComponents({className}: {className?: string}) {
   return (
-    <div className="theme-container mx-auto grid gap-8 py-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-6 2xl:gap-8">
+    <div className={"theme-container mx-auto grid gap-8 py-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-6 2xl:gap-8" + (className ? ` ${className}` : "")}>
       <div className="flex flex-col gap-6 *:[div]:w-full *:[div]:max-w-full">
         <FieldDemo />
       </div>

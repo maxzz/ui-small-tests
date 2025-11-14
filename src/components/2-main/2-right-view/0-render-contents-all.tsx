@@ -90,7 +90,7 @@ function RightViewChildren() {
         case "simple-dashboard":
             return <DashboardContents />;
         case "original-cards":
-            return <RootComponents />;
+            return <RootComponents className="col-span-full" />;
         default: {
             const _exhaustiveCheck: never = rightView;
             return null;
