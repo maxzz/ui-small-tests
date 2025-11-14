@@ -22,7 +22,20 @@ export const LeftViewItems = [
 
 // Right view
 
-export type RightViewId = "simple-cards" | "simple-dashboard";
+export type RightViewId = "simple-cards" | "simple-dashboard" | "original-cards";
+
+export type RightViewItem = {
+    id: RightViewId;
+    title: string;
+    description?: string;
+    icon?: string;
+};
+
+export const RightViewItems = [
+    { id: "simple-cards", title: "Cards", description: "Cards demo", icon: "💻" },
+    { id: "simple-dashboard", title: "Dashboard", description: "Dashboard demo", icon: "💻" },
+    { id: "original-cards", title: "Original Cards", description: "Original Cards demo", icon: "💻" },
+] as const satisfies readonly RightViewItem[];
 
 export function rightViewTypeGuard(rightView: RightViewId): string {
     return rightView;

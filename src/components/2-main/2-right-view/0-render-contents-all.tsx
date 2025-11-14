@@ -10,6 +10,7 @@ import { CardsContents } from "./1-cards-contents";
 import { DashboardContents } from "./2-dashboard-contents";
 import { hoverStackAtom, MouseMoveTrackerTooltip, mousePosAtom, MouseTracker } from "@/components/ui/local/8-mouse-tracker";
 import { UserItemList } from "../3-pages/3-controls/2-listview-commands/1-users-list";
+import { RootComponents } from "../3-pages/shadcn-frontpage";
 // import { CardsDemoWithTooltip } from "../../ui/local/8-mouse-tracker/x-nun-all-wrapper-w-tooltip";
 
 export function Section2_RenderContents() {
@@ -88,6 +89,8 @@ function RightViewChildren() {
             return <CardsContents />;
         case "simple-dashboard":
             return <DashboardContents />;
+        case "original-cards":
+            return <RootComponents />;
         default: {
             const _exhaustiveCheck: never = rightView;
             return null;
