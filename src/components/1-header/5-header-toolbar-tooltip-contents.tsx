@@ -50,12 +50,10 @@ function ThemeStyleItem({ name, value }: { name: string; value: string; }) {
     );
 }
 
+const colorValueRegex = /^(#|rgb|hsl)|var\(--/;
+
 function isColorValue(value: string): boolean {
-    if (!value) return false;
-    return value.startsWith("#") ||
-        value.startsWith("rgb") ||
-        value.startsWith("hsl") ||
-        value.includes("var(--");
+    return !!value && colorValueRegex.test(value);
 }
 
 function sortThemeStyleEntries(styles: Record<string, string>): [string, string][] {
@@ -63,6 +61,7 @@ function sortThemeStyleEntries(styles: Record<string, string>): [string, string]
         ([keyA, valueA], [keyB, valueB]) => {
             const aIsColor = isColorValue(valueA);
             const bIsColor = isColorValue(valueB);
+            
             const aIsFont = keyA.startsWith("font-");
             const bIsFont = keyB.startsWith("font-");
 
@@ -79,11 +78,11 @@ function sortThemeStyleEntries(styles: Record<string, string>): [string, string]
             // Within the same category, group items with their -foreground variants
             const aBaseName = keyA.replace(/-foreground$/, "");
             const bBaseName = keyB.replace(/-foreground$/, "");
-            const aHasForeground = keyA.endsWith("-foreground");
-            const bHasForeground = keyB.endsWith("-foreground");
 
             // If same base name, -foreground comes before base
             if (aBaseName === bBaseName) {
+                const aHasForeground = keyA.endsWith("-foreground");
+                const bHasForeground = keyB.endsWith("-foreground");
                 if (aHasForeground && !bHasForeground) return -1;
                 if (!aHasForeground && bHasForeground) return 1;
             }
@@ -97,3 +96,6 @@ function sortThemeStyleEntries(styles: Record<string, string>): [string, string]
         }
     );
 }
+
+//TODO: add checkbox into heder next to theme name to show names grouped by name and name-foreground and show colors for such items 
+// as bigger square for color without -foreground and smaller square for color with -foreground centered in the bigger square.
