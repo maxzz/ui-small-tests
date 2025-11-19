@@ -16,7 +16,7 @@
         "@types/node": "^24.10.1",
         "@types/react": "^19.2.5",
         "@types/react-dom": "^19.2.3",
-        "@vitejs/plugin-react": "^5.1.0",
+        "@vitejs/plugin-react": "^5.1.1",
         "globals": "^16.4.0",
         "tailwindcss": "^4.1.17",
         "tailwindcss-plugin-debug-screens-tw4": "^1.0.4",
