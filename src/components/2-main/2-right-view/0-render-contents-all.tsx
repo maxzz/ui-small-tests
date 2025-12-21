@@ -11,6 +11,7 @@ import { DashboardContents } from "./2-dashboard-contents";
 import { hoverStackAtom, MouseMoveTrackerTooltip, mousePosAtom, MouseTracker } from "@/components/ui/local/8-mouse-tracker";
 import { UserItemList } from "../3-pages/3-controls/2-listview-commands/1-users-list";
 import { RootComponents } from "../3-pages/shadcn-frontpage";
+import { MotionVariantsRace } from "./3-motion-variants-race";
 // import { CardsDemoWithTooltip } from "../../ui/local/8-mouse-tracker/x-nun-all-wrapper-w-tooltip";
 
 export function Section2_RenderContents() {
@@ -60,6 +61,8 @@ function LeftViewChildren() {
             return <HeroTitleText />;
         case "listview":
             return <UserItemList />;
+        case "motion-variants-race":
+            return <MotionVariantsRace />;
         case "not-yet":
             return <div className="px-4 py-2 h-full text-xs text-green-950 bg-green-500/10 uppercase">Space for rent</div>;
         default: {
@@ -91,6 +94,8 @@ function RightViewChildren() {
             return <DashboardContents className="col-span-full" />;
         case "original-cards":
             return <RootComponents className="col-span-full" />;
+        case "motion-variants-race":
+            return <MotionVariantsRace />;
         default: {
             const _exhaustiveCheck: never = rightView;
             return null;
