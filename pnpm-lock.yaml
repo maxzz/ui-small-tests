@@ -128,9 +128,6 @@ importers:
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1
-      upen:
-        specifier: ^1.0.2
-        version: 1.0.2
       valtio:
         specifier: ^2.2.0
         version: 2.2.0(@types/react@19.2.7)(react@19.2.0)
@@ -177,6 +174,9 @@ importers:
       typescript:
         specifier: ~5.9.3
         version: 5.9.3
+      upen:
+        specifier: ^1.0.2
+        version: 1.0.2
       vite:
         specifier: ^7.2.4
         version: 7.2.4(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.20.6)

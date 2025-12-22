@@ -26,7 +26,7 @@ export function AnimationKeyframesDemo() {
             onClick={() => cycle()}
             transition={{
                 duration: 2,
-                easings: ["circOut", "circOut", "circOut"],
+                ease: ["circOut", "circOut", "circOut"],
                 times: [0, 0.1, 0.9, 1],
             }}
             style={style}

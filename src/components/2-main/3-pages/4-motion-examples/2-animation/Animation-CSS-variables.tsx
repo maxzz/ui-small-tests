@@ -16,7 +16,7 @@ const style = {
 export function AnimationCssVariablesDemo() {
     const transition = {
         type: "tween" as const,
-        ease: "anticipate",
+        ease: "anticipate" as const,
         duration: 1,
     };
 

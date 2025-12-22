@@ -50,14 +50,18 @@ export function AnimationStaggerDemo() {
             opacity: 1,
             transition: {
                 scale: {
-                    type: "spring",
+                    type: "spring" as const,
                     stiffness: 400,
                     velocity: 40,
                     damping: 20,
                 },
             },
         },
-        closed: { scale: 0.5, opacity: 0.1, duration: 1 },
+        closed: { 
+            scale: 0.5, 
+            opacity: 0.1, 
+            transition: { duration: 1 } 
+        },
     };
 
     return (

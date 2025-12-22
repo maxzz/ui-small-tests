@@ -25,6 +25,6 @@ export default defineConfig({
                 demo: resolve(__dirname, 'index-dashboard.html'),
             },
         },
-        chunkSizeWarningLimit: 1000,
+        chunkSizeWarningLimit: 900,
     },
 });
