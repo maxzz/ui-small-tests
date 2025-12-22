@@ -6,23 +6,6 @@ import { motion, AnimatePresence, wrap } from "motion/react";
  * An example of a single-image, single-child image gallery using AnimatePresence
  */
 
-const variants = {
-    enter: (delta: number) => ({
-        x: delta > 0 ? 1000 : -1000,
-        opacity: 0,
-    }),
-    center: {
-        zIndex: 1,
-        x: 0,
-        opacity: 1,
-    },
-    exit: (delta: number) => ({
-        zIndex: 0,
-        x: delta < 0 ? 1000 : -1000,
-        opacity: 0,
-    }),
-};
-
 export function AnimatePresenceImageGalleryDemo() {
     const [[page, delta], setPage] = useState([0, 0]);
     const imageIndex = wrap(0, images.length, page);
@@ -49,6 +32,23 @@ export function AnimatePresenceImageGalleryDemo() {
         </div>
     );
 }
+
+const variants = {
+    enter: (delta: number) => ({
+        x: delta > 0 ? 1000 : -1000,
+        opacity: 0,
+    }),
+    center: {
+        zIndex: 1,
+        x: 0,
+        opacity: 1,
+    },
+    exit: (delta: number) => ({
+        zIndex: 0,
+        x: delta < 0 ? 1000 : -1000,
+        opacity: 0,
+    }),
+};
 
 function Image({ src, paginate, delta }: any) {
     return (

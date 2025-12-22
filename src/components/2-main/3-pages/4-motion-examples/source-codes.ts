@@ -33,6 +33,34 @@ import eventsWhileHover from "./4-events/Events-whileHover.tsx?raw";
 import eventsWhileTap from "./4-events/Events-whileTap.tsx?raw";
 import eventsOnTap from "./4-events/Events-onTap.tsx?raw";
 
+// Layout examples
+import layoutRotate from "./5-layout/Layout-rotate.tsx?raw";
+import layoutSkew from "./5-layout/Layout-skew.tsx?raw";
+import layoutProjectionScalePosition from "./5-layout/Layout-Projection-scale-position.tsx?raw";
+
+// Shared Layout examples
+import sharedLayoutContinuity from "./6-shared-layout/Shared-layout-continuity.tsx?raw";
+import sharedLayoutLightbox from "./6-shared-layout/Shared-layout-lightbox.tsx?raw";
+import sharedLayoutLists from "./6-shared-layout/Shared-layout-lists.tsx?raw";
+import sharedLayoutToggleDetails from "./6-shared-layout/Shared-layout-toggle-details.tsx?raw";
+
+// SVG examples
+import svgPath from "./7-svg/SVG-path.tsx?raw";
+import svgLayoutAnimation from "./7-svg/SVG-layout-animation.tsx?raw";
+
+// Hooks examples
+import hooksUseScroll from "./8-hooks/useScroll.tsx?raw";
+import hooksUseSpring from "./8-hooks/useSpring.tsx?raw";
+import hooksUseAnimation from "./8-hooks/useAnimation.tsx?raw";
+
+// WAAPI examples
+import waapiBackgroundColor from "./9-waapi/WAAPI-background-color.tsx?raw";
+import waapiOpacity from "./9-waapi/WAAPI-opacity.tsx?raw";
+
+// Misc examples
+import miscMotionCustomTag from "./10-misc/motion-custom-tag.tsx?raw";
+import miscLazyMotionAsync from "./10-misc/LazyMotion-async.tsx?raw";
+
 // Export as a map
 export const demoSourceCodes: Record<string, string> = {
     // AnimatePresence examples
@@ -65,6 +93,28 @@ export const demoSourceCodes: Record<string, string> = {
     "events-while-hover": eventsWhileHover,
     "events-while-tap": eventsWhileTap,
     "events-on-tap": eventsOnTap,
+    // Layout examples
+    "layout-rotate": layoutRotate,
+    "layout-skew": layoutSkew,
+    "layout-projection-scale-position": layoutProjectionScalePosition,
+    // Shared Layout examples
+    "shared-layout-continuity": sharedLayoutContinuity,
+    "shared-layout-lightbox": sharedLayoutLightbox,
+    "shared-layout-lists": sharedLayoutLists,
+    "shared-layout-toggle-details": sharedLayoutToggleDetails,
+    // SVG examples
+    "svg-path": svgPath,
+    "svg-layout-animation": svgLayoutAnimation,
+    // Hooks examples
+    "hooks-use-scroll": hooksUseScroll,
+    "hooks-use-spring": hooksUseSpring,
+    "hooks-use-animation": hooksUseAnimation,
+    // WAAPI examples
+    "waapi-background-color": waapiBackgroundColor,
+    "waapi-opacity": waapiOpacity,
+    // Misc examples
+    "misc-motion-custom-tag": miscMotionCustomTag,
+    "misc-lazy-motion-async": miscLazyMotionAsync,
 };
 
 // Debug: Log available keys to console

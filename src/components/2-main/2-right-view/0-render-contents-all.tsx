@@ -281,6 +281,22 @@ function LeftViewChildren() {
             return <DemoWithTabs demoId="events-while-tap"><MotionExamples.EventsWhileTapDemo /></DemoWithTabs>;
         case "events-on-tap":
             return <DemoWithTabs demoId="events-on-tap"><MotionExamples.EventsOnTapDemo /></DemoWithTabs>;
+        // Layout examples
+        case "layout-rotate":
+            return <DemoWithTabs demoId="layout-rotate"><MotionExamples.LayoutRotateDemo /></DemoWithTabs>;
+        case "layout-skew":
+            return <DemoWithTabs demoId="layout-skew"><MotionExamples.LayoutSkewDemo /></DemoWithTabs>;
+        case "layout-projection-scale-position":
+            return <DemoWithTabs demoId="layout-projection-scale-position"><MotionExamples.LayoutProjectionScalePositionDemo /></DemoWithTabs>;
+        // Shared Layout examples
+        case "shared-layout-continuity":
+            return <DemoWithTabs demoId="shared-layout-continuity"><MotionExamples.SharedLayoutContinuityDemo /></DemoWithTabs>;
+        case "shared-layout-lightbox":
+            return <DemoWithTabs demoId="shared-layout-lightbox"><MotionExamples.SharedLayoutLightboxDemo /></DemoWithTabs>;
+        case "shared-layout-lists":
+            return <DemoWithTabs demoId="shared-layout-lists"><MotionExamples.SharedLayoutListsDemo /></DemoWithTabs>;
+        case "shared-layout-toggle-details":
+            return <DemoWithTabs demoId="shared-layout-toggle-details"><MotionExamples.SharedLayoutToggleDetailsDemo /></DemoWithTabs>;
         case "not-yet":
             return <div className="px-4 py-2 h-full text-xs text-green-950 bg-green-500/10 uppercase">Space for rent</div>;
         default: {
@@ -316,60 +332,98 @@ function RightViewChildren() {
             return <MotionVariantsRace />;
         // AnimatePresence examples
         case "animate-presence":
-            return <MotionExamples.AnimatePresenceDemo />;
+            return <DemoWithTabs demoId="animate-presence"><MotionExamples.AnimatePresenceDemo /></DemoWithTabs>;
         case "animate-presence-image-gallery":
-            return <MotionExamples.AnimatePresenceImageGalleryDemo />;
+            return <DemoWithTabs demoId="animate-presence-image-gallery"><MotionExamples.AnimatePresenceImageGalleryDemo /></DemoWithTabs>;
         case "animate-presence-layout-animations-siblings":
-            return <MotionExamples.AnimatePresenceLayoutAnimationsSiblingsDemo />;
+            return <DemoWithTabs demoId="animate-presence-layout-animations-siblings"><MotionExamples.AnimatePresenceLayoutAnimationsSiblingsDemo /></DemoWithTabs>;
         case "animate-presence-notifications-list":
-            return <MotionExamples.AnimatePresenceNotificationsListDemo />;
+            return <DemoWithTabs demoId="animate-presence-notifications-list"><MotionExamples.AnimatePresenceNotificationsListDemo /></DemoWithTabs>;
         case "animate-presence-notifications-list-pop":
-            return <MotionExamples.AnimatePresenceNotificationsListPopDemo />;
+            return <DemoWithTabs demoId="animate-presence-notifications-list-pop"><MotionExamples.AnimatePresenceNotificationsListPopDemo /></DemoWithTabs>;
         case "animate-presence-parallel-children":
-            return <MotionExamples.AnimatePresenceParallelChildrenDemo />;
+            return <DemoWithTabs demoId="animate-presence-parallel-children"><MotionExamples.AnimatePresenceParallelChildrenDemo /></DemoWithTabs>;
         case "animate-presence-siblings":
-            return <MotionExamples.AnimatePresenceSiblingsDemo />;
+            return <DemoWithTabs demoId="animate-presence-siblings"><MotionExamples.AnimatePresenceSiblingsDemo /></DemoWithTabs>;
         case "animate-presence-switch":
-            return <MotionExamples.AnimatePresenceSwitchDemo />;
+            return <DemoWithTabs demoId="animate-presence-switch"><MotionExamples.AnimatePresenceSwitchDemo /></DemoWithTabs>;
         case "animate-presence-variants":
-            return <MotionExamples.AnimatePresenceVariantsDemo />;
+            return <DemoWithTabs demoId="animate-presence-variants"><MotionExamples.AnimatePresenceVariantsDemo /></DemoWithTabs>;
         case "animate-presence-wait":
-            return <MotionExamples.AnimatePresenceWaitDemo />;
+            return <DemoWithTabs demoId="animate-presence-wait"><MotionExamples.AnimatePresenceWaitDemo /></DemoWithTabs>;
         // Animation examples
         case "animation-animate":
-            return <MotionExamples.AnimationAnimateDemo />;
+            return <DemoWithTabs demoId="animation-animate"><MotionExamples.AnimationAnimateDemo /></DemoWithTabs>;
         case "animation-keyframes":
-            return <MotionExamples.AnimationKeyframesDemo />;
+            return <DemoWithTabs demoId="animation-keyframes"><MotionExamples.AnimationKeyframesDemo /></DemoWithTabs>;
         case "animation-spring-css":
-            return <MotionExamples.AnimationSpringCssDemo />;
+            return <DemoWithTabs demoId="animation-spring-css"><MotionExamples.AnimationSpringCssDemo /></DemoWithTabs>;
         case "animation-stagger":
-            return <MotionExamples.AnimationStaggerDemo />;
+            return <DemoWithTabs demoId="animation-stagger"><MotionExamples.AnimationStaggerDemo /></DemoWithTabs>;
         case "animation-variants":
-            return <MotionExamples.AnimationVariantsDemo />;
+            return <DemoWithTabs demoId="animation-variants"><MotionExamples.AnimationVariantsDemo /></DemoWithTabs>;
         case "animation-css-variables":
-            return <MotionExamples.AnimationCssVariablesDemo />;
+            return <DemoWithTabs demoId="animation-css-variables"><MotionExamples.AnimationCssVariablesDemo /></DemoWithTabs>;
         case "animation-filter":
-            return <MotionExamples.AnimationFilterDemo />;
+            return <DemoWithTabs demoId="animation-filter"><MotionExamples.AnimationFilterDemo /></DemoWithTabs>;
         case "animation-height-auto-padding":
-            return <MotionExamples.AnimationHeightAutoPaddingDemo />;
+            return <DemoWithTabs demoId="animation-height-auto-padding"><MotionExamples.AnimationHeightAutoPaddingDemo /></DemoWithTabs>;
         // Drag examples
         case "drag-draggable":
-            return <MotionExamples.DragDraggableDemo />;
+            return <DemoWithTabs demoId="drag-draggable"><MotionExamples.DragDraggableDemo /></DemoWithTabs>;
         case "drag-constraints-ref":
-            return <MotionExamples.DragConstraintsRefDemo />;
+            return <DemoWithTabs demoId="drag-constraints-ref"><MotionExamples.DragConstraintsRefDemo /></DemoWithTabs>;
         case "drag-to-reorder":
-            return <MotionExamples.DragToReorderDemo />;
+            return <DemoWithTabs demoId="drag-to-reorder"><MotionExamples.DragToReorderDemo /></DemoWithTabs>;
         case "drag-use-drag-controls":
-            return <MotionExamples.DragUseDragControlsDemo />;
+            return <DemoWithTabs demoId="drag-use-drag-controls"><MotionExamples.DragUseDragControlsDemo /></DemoWithTabs>;
         case "drag-nested":
-            return <MotionExamples.DragNestedDemo />;
+            return <DemoWithTabs demoId="drag-nested"><MotionExamples.DragNestedDemo /></DemoWithTabs>;
         // Events examples
         case "events-while-hover":
-            return <MotionExamples.EventsWhileHoverDemo />;
+            return <DemoWithTabs demoId="events-while-hover"><MotionExamples.EventsWhileHoverDemo /></DemoWithTabs>;
         case "events-while-tap":
-            return <MotionExamples.EventsWhileTapDemo />;
+            return <DemoWithTabs demoId="events-while-tap"><MotionExamples.EventsWhileTapDemo /></DemoWithTabs>;
         case "events-on-tap":
-            return <MotionExamples.EventsOnTapDemo />;
+            return <DemoWithTabs demoId="events-on-tap"><MotionExamples.EventsOnTapDemo /></DemoWithTabs>;
+        // Layout examples
+        case "layout-rotate":
+            return <DemoWithTabs demoId="layout-rotate"><MotionExamples.LayoutRotateDemo /></DemoWithTabs>;
+        case "layout-skew":
+            return <DemoWithTabs demoId="layout-skew"><MotionExamples.LayoutSkewDemo /></DemoWithTabs>;
+        case "layout-projection-scale-position":
+            return <DemoWithTabs demoId="layout-projection-scale-position"><MotionExamples.LayoutProjectionScalePositionDemo /></DemoWithTabs>;
+        // Shared Layout examples
+        case "shared-layout-continuity":
+            return <DemoWithTabs demoId="shared-layout-continuity"><MotionExamples.SharedLayoutContinuityDemo /></DemoWithTabs>;
+        case "shared-layout-lightbox":
+            return <DemoWithTabs demoId="shared-layout-lightbox"><MotionExamples.SharedLayoutLightboxDemo /></DemoWithTabs>;
+        case "shared-layout-lists":
+            return <DemoWithTabs demoId="shared-layout-lists"><MotionExamples.SharedLayoutListsDemo /></DemoWithTabs>;
+        case "shared-layout-toggle-details":
+            return <DemoWithTabs demoId="shared-layout-toggle-details"><MotionExamples.SharedLayoutToggleDetailsDemo /></DemoWithTabs>;
+        // SVG examples
+        case "svg-path":
+            return <DemoWithTabs demoId="svg-path"><MotionExamples.SvgPathDemo /></DemoWithTabs>;
+        case "svg-layout-animation":
+            return <DemoWithTabs demoId="svg-layout-animation"><MotionExamples.SvgLayoutAnimationDemo /></DemoWithTabs>;
+        // Hooks examples
+        case "hooks-use-scroll":
+            return <DemoWithTabs demoId="hooks-use-scroll"><MotionExamples.HooksUseScrollDemo /></DemoWithTabs>;
+        case "hooks-use-spring":
+            return <DemoWithTabs demoId="hooks-use-spring"><MotionExamples.HooksUseSpringDemo /></DemoWithTabs>;
+        case "hooks-use-animation":
+            return <DemoWithTabs demoId="hooks-use-animation"><MotionExamples.HooksUseAnimationDemo /></DemoWithTabs>;
+        // WAAPI examples
+        case "waapi-background-color":
+            return <DemoWithTabs demoId="waapi-background-color"><MotionExamples.WaapiBackgroundColorDemo /></DemoWithTabs>;
+        case "waapi-opacity":
+            return <DemoWithTabs demoId="waapi-opacity"><MotionExamples.WaapiOpacityDemo /></DemoWithTabs>;
+        // Misc examples
+        case "misc-motion-custom-tag":
+            return <DemoWithTabs demoId="misc-motion-custom-tag"><MotionExamples.MotionCustomTagDemo /></DemoWithTabs>;
+        case "misc-lazy-motion-async":
+            return <DemoWithTabs demoId="misc-lazy-motion-async"><MotionExamples.LazyMotionAsyncDemo /></DemoWithTabs>;
         default: {
             const _exhaustiveCheck: never = rightView;
             return null;

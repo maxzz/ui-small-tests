@@ -36,6 +36,28 @@ export type LeftViewId =
     | "events-while-hover"
     | "events-while-tap"
     | "events-on-tap"
+    // Layout
+    | "layout-rotate"
+    | "layout-skew"
+    | "layout-projection-scale-position"
+    // Shared Layout
+    | "shared-layout-continuity"
+    | "shared-layout-lightbox"
+    | "shared-layout-lists"
+    | "shared-layout-toggle-details"
+    // SVG
+    | "svg-path"
+    | "svg-layout-animation"
+    // Hooks
+    | "hooks-use-scroll"
+    | "hooks-use-spring"
+    | "hooks-use-animation"
+    // WAAPI
+    | "waapi-background-color"
+    | "waapi-opacity"
+    // Misc
+    | "misc-motion-custom-tag"
+    | "misc-lazy-motion-async"
     | "not-yet";
 
 export type LeftViewItem = {
@@ -81,6 +103,28 @@ export const LeftViewItems = [
     { id: "events-while-hover", title: "While Hover", description: "Hover interactions", icon: "🖱️" },
     { id: "events-while-tap", title: "While Tap", description: "Tap interactions", icon: "👆" },
     { id: "events-on-tap", title: "On Tap", description: "Tap event handling", icon: "👆" },
+    // Layout examples
+    { id: "layout-rotate", title: "Layout Rotate", description: "Layout animation with rotation", icon: "📐" },
+    { id: "layout-skew", title: "Layout Skew", description: "Layout animation with skew", icon: "📐" },
+    { id: "layout-projection-scale-position", title: "Scale Position", description: "Projection based layout animation", icon: "📏" },
+    // Shared Layout examples
+    { id: "shared-layout-continuity", title: "Shared Layout Continuity", description: "Shared layout continuity", icon: "🔗" },
+    { id: "shared-layout-lightbox", title: "Lightbox", description: "Shared layout lightbox", icon: "🖼️" },
+    { id: "shared-layout-lists", title: "Lists", description: "Shared layout lists", icon: "📝" },
+    { id: "shared-layout-toggle-details", title: "Toggle Details", description: "Shared layout toggle details", icon: "🔽" },
+    // SVG examples
+    { id: "svg-path", title: "SVG Path", description: "SVG path animation", icon: "✏️" },
+    { id: "svg-layout-animation", title: "SVG Layout", description: "SVG layout animation", icon: "📐" },
+    // Hooks examples
+    { id: "hooks-use-scroll", title: "useScroll", description: "Scroll animation hook", icon: "📜" },
+    { id: "hooks-use-spring", title: "useSpring", description: "Spring animation hook", icon: "🌀" },
+    { id: "hooks-use-animation", title: "useAnimation", description: "Animation control hook", icon: "🎮" },
+    // WAAPI examples
+    { id: "waapi-background-color", title: "WAAPI Color", description: "Web Animations API color", icon: "🎨" },
+    { id: "waapi-opacity", title: "WAAPI Opacity", description: "Web Animations API opacity", icon: "👻" },
+    // Misc examples
+    { id: "misc-motion-custom-tag", title: "Custom Tag", description: "Custom motion component", icon: "🏷️" },
+    { id: "misc-lazy-motion-async", title: "Lazy Motion", description: "Async lazy loading", icon: "💤" },
 ] as const satisfies readonly LeftViewItem[];
 
 //export type LeftViewId = typeof LeftViewItems[number]["id"];
@@ -121,7 +165,29 @@ export type RightViewId =
     // Events
     | "events-while-hover"
     | "events-while-tap"
-    | "events-on-tap";
+    | "events-on-tap"
+    // Layout
+    | "layout-rotate"
+    | "layout-skew"
+    | "layout-projection-scale-position"
+    // Shared Layout
+    | "shared-layout-continuity"
+    | "shared-layout-lightbox"
+    | "shared-layout-lists"
+    | "shared-layout-toggle-details"
+    // SVG
+    | "svg-path"
+    | "svg-layout-animation"
+    // Hooks
+    | "hooks-use-scroll"
+    | "hooks-use-spring"
+    | "hooks-use-animation"
+    // WAAPI
+    | "waapi-background-color"
+    | "waapi-opacity"
+    // Misc
+    | "misc-motion-custom-tag"
+    | "misc-lazy-motion-async";
 
 export type RightViewItem = {
     id: RightViewId;
@@ -165,6 +231,28 @@ export const RightViewItems = [
     { id: "events-while-hover", title: "While Hover", description: "Hover interactions", icon: "🖱️" },
     { id: "events-while-tap", title: "While Tap", description: "Tap interactions", icon: "👆" },
     { id: "events-on-tap", title: "On Tap", description: "Tap event handling", icon: "👆" },
+    // Layout examples
+    { id: "layout-rotate", title: "Layout Rotate", description: "Layout animation with rotation", icon: "📐" },
+    { id: "layout-skew", title: "Layout Skew", description: "Layout animation with skew", icon: "📐" },
+    { id: "layout-projection-scale-position", title: "Scale Position", description: "Projection based layout animation", icon: "📏" },
+    // Shared Layout examples
+    { id: "shared-layout-continuity", title: "Shared Layout Continuity", description: "Shared layout continuity", icon: "🔗" },
+    { id: "shared-layout-lightbox", title: "Lightbox", description: "Shared layout lightbox", icon: "🖼️" },
+    { id: "shared-layout-lists", title: "Lists", description: "Shared layout lists", icon: "📝" },
+    { id: "shared-layout-toggle-details", title: "Toggle Details", description: "Shared layout toggle details", icon: "🔽" },
+    // SVG examples
+    { id: "svg-path", title: "SVG Path", description: "SVG path animation", icon: "✏️" },
+    { id: "svg-layout-animation", title: "SVG Layout", description: "SVG layout animation", icon: "📐" },
+    // Hooks examples
+    { id: "hooks-use-scroll", title: "useScroll", description: "Scroll animation hook", icon: "📜" },
+    { id: "hooks-use-spring", title: "useSpring", description: "Spring animation hook", icon: "🌀" },
+    { id: "hooks-use-animation", title: "useAnimation", description: "Animation control hook", icon: "🎮" },
+    // WAAPI examples
+    { id: "waapi-background-color", title: "WAAPI Color", description: "Web Animations API color", icon: "🎨" },
+    { id: "waapi-opacity", title: "WAAPI Opacity", description: "Web Animations API opacity", icon: "👻" },
+    // Misc examples
+    { id: "misc-motion-custom-tag", title: "Custom Tag", description: "Custom motion component", icon: "🏷️" },
+    { id: "misc-lazy-motion-async", title: "Lazy Motion", description: "Async lazy loading", icon: "💤" },
 ] as const satisfies readonly RightViewItem[];
 
 export function rightViewTypeGuard(rightView: RightViewId): string {
