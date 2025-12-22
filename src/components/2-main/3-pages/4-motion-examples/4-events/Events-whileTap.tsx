@@ -1,12 +1,6 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/Events-whileTap.tsx
 import { motion } from "motion/react";
 
-const style = {
-    width: 100,
-    height: 100,
-    background: "rgba(255, 0, 0, 1)",
-};
-
 export function EventsWhileTapDemo() {
     return (
         <motion.div
@@ -27,3 +21,8 @@ export function EventsWhileTapDemo() {
     );
 }
 
+const style = {
+    width: 100,
+    height: 100,
+    background: "rgba(255, 0, 0, 1)",
+};

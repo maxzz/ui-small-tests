@@ -5,6 +5,27 @@ import { motion, useDragControls } from "motion/react";
  * This is an example of triggering drag from an external element using useDragControls
  */
 
+export function DragUseDragControlsDemo() {
+    const dragControls = useDragControls();
+
+    return (<>
+        <div
+            style={container}
+            onPointerDown={(e) => dragControls.start(e)}
+        />
+        
+        <motion.div
+            drag
+            dragControls={dragControls}
+            onDrag={() => console.log("onDrag")}
+            onDragStart={() => console.log("onDragStart")}
+            onDragEnd={() => console.log("onDragEnd")}
+            whileTap={{ scale: 0.95 }}
+            style={child}
+        />
+    </>);
+}
+
 const container = {
     width: 200,
     height: 200,
@@ -19,26 +40,3 @@ const child = {
     background: "white",
     borderRadius: 20,
 };
-
-export function DragUseDragControlsDemo() {
-    const dragControls = useDragControls();
-
-    return (
-        <>
-            <div
-                style={container}
-                onPointerDown={(e) => dragControls.start(e)}
-            />
-            <motion.div
-                drag
-                dragControls={dragControls}
-                onDrag={() => console.log("onDrag")}
-                onDragStart={() => console.log("onDragStart")}
-                onDragEnd={() => console.log("onDragEnd")}
-                whileTap={{ scale: 0.95 }}
-                style={child}
-            />
-        </>
-    );
-}
-

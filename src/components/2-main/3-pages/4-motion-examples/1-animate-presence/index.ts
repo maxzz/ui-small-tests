@@ -8,4 +8,3 @@ export { AnimatePresenceSiblingsDemo } from "./AnimatePresence-siblings";
 export { AnimatePresenceSwitchDemo } from "./AnimatePresence-switch";
 export { AnimatePresenceVariantsDemo } from "./AnimatePresence-variants";
 export { AnimatePresenceWaitDemo } from "./AnimatePresence-wait";
-

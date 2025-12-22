@@ -1,13 +1,6 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/Drag-draggable.tsx
-import { motion } from "motion/react";
 import { useRef, useState } from "react";
-
-const styleA = {
-    width: 200,
-    height: 200,
-    background: "white",
-    borderRadius: 20,
-};
+import { motion } from "motion/react";
 
 export function DragDraggableDemo() {
     const ref = useRef(null);
@@ -42,3 +35,9 @@ export function DragDraggableDemo() {
     );
 }
 
+const styleA = {
+    width: 200,
+    height: 200,
+    background: "white",
+    borderRadius: 20,
+};

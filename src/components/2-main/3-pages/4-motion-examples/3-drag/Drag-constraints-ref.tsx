@@ -2,22 +2,25 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 
-const container = {
-    width: "50%",
-    height: 300,
-    background: "rgba(255,255,255,0.5)",
-    borderRadius: 20,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-};
+export function DragConstraintsRefDemo() {
+    const ref = useRef(null);
+    const [count, setCount] = useState(0);
+    return (<>
+        <div ref={ref} style={containerStyles}>
+            <motion.div
+                drag
+                dragConstraints={ref}
+                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.1 }}
+                style={childStyles}
+                onClick={() => setCount(count + 1)}
+                id="draggable"
+            />
+        </div>
 
-const child = {
-    width: 200,
-    height: 200,
-    background: "white",
-    borderRadius: 20,
-};
+        <SiblingLayoutAnimation />
+    </>);
+}
 
 /**
  * This sibling layout animation is designed to fuzz/stress the drag constraints
@@ -29,7 +32,6 @@ const SiblingLayoutAnimation = () => {
 
     useEffect(() => {
         const timer = setTimeout(() => setState(!state), 500);
-
         return () => clearTimeout(timer);
     }, [state]);
 
@@ -37,33 +39,28 @@ const SiblingLayoutAnimation = () => {
         <motion.div
             layout
             style={{
-                ...child,
+                ...childStyles,
                 background: "blue",
-                position: "relative" as const,
+                position: "relative",
                 left: state ? "100px" : "0",
             }}
         />
     );
 };
 
-export function DragConstraintsRefDemo() {
-    const ref = useRef(null);
-    const [count, setCount] = useState(0);
-    return (
-        <>
-            <div ref={ref} style={container}>
-                <motion.div
-                    drag
-                    dragConstraints={ref}
-                    whileTap={{ scale: 0.95 }}
-                    whileHover={{ scale: 1.1 }}
-                    style={child}
-                    onClick={() => setCount(count + 1)}
-                    id="draggable"
-                />
-            </div>
-            <SiblingLayoutAnimation />
-        </>
-    );
-}
+const containerStyles = {
+    width: "50%",
+    height: 300,
+    background: "rgba(255,255,255,0.5)",
+    borderRadius: 20,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+};
 
+const childStyles = {
+    width: 200,
+    height: 200,
+    background: "white",
+    borderRadius: 20,
+};
