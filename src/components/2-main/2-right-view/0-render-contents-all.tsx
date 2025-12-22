@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useSnapshot } from "valtio";
 import { appSettings, type LeftViewId } from "@/store/0-local-storage";
 import { getPresetThemeStyles } from "@/store/2-apply-theme";
@@ -13,82 +13,72 @@ import { UserItemList } from "../3-pages/3-controls/2-listview-commands/1-users-
 import { RootComponents } from "../3-pages/shadcn-frontpage";
 import { MotionVariantsRace } from "./3-motion-variants-race";
 import * as MotionExamples from "../3-pages/4-motion-examples";
+import { demoSourceCodes } from "../3-pages/4-motion-examples/source-codes";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn/tabs";
 // import { CardsDemoWithTooltip } from "../../ui/local/8-mouse-tracker/x-nun-all-wrapper-w-tooltip";
 
-// Mapping of demo IDs to their source file paths
-const demoSourceFiles: Record<string, string> = {
-    // AnimatePresence examples
-    "animate-presence": "src/components/2-main/3-pages/4-motion-examples/1-animate-presence/AnimatePresence.tsx",
-    "animate-presence-image-gallery": "src/components/2-main/3-pages/4-motion-examples/1-animate-presence/AnimatePresence-image-gallery.tsx",
-    "animate-presence-layout-animations-siblings": "src/components/2-main/3-pages/4-motion-examples/1-animate-presence/AnimatePresence-layout-animations-siblings.tsx",
-    "animate-presence-notifications-list": "src/components/2-main/3-pages/4-motion-examples/1-animate-presence/AnimatePresence-notifications-list.tsx",
-    "animate-presence-notifications-list-pop": "src/components/2-main/3-pages/4-motion-examples/1-animate-presence/AnimatePresence-notifications-list-pop.tsx",
-    "animate-presence-parallel-children": "src/components/2-main/3-pages/4-motion-examples/1-animate-presence/AnimatePresence-parallel-children.tsx",
-    "animate-presence-siblings": "src/components/2-main/3-pages/4-motion-examples/1-animate-presence/AnimatePresence-siblings.tsx",
-    "animate-presence-switch": "src/components/2-main/3-pages/4-motion-examples/1-animate-presence/AnimatePresence-switch.tsx",
-    "animate-presence-variants": "src/components/2-main/3-pages/4-motion-examples/1-animate-presence/AnimatePresence-variants.tsx",
-    "animate-presence-wait": "src/components/2-main/3-pages/4-motion-examples/1-animate-presence/AnimatePresence-wait.tsx",
-    // Animation examples
-    "animation-animate": "src/components/2-main/3-pages/4-motion-examples/2-animation/Animation-animate.tsx",
-    "animation-keyframes": "src/components/2-main/3-pages/4-motion-examples/2-animation/Animation-keyframes.tsx",
-    "animation-spring-css": "src/components/2-main/3-pages/4-motion-examples/2-animation/Animation-spring-css.tsx",
-    "animation-stagger": "src/components/2-main/3-pages/4-motion-examples/2-animation/Animation-stagger.tsx",
-    "animation-variants": "src/components/2-main/3-pages/4-motion-examples/2-animation/Animation-variants.tsx",
-    "animation-css-variables": "src/components/2-main/3-pages/4-motion-examples/2-animation/Animation-CSS-variables.tsx",
-    "animation-filter": "src/components/2-main/3-pages/4-motion-examples/2-animation/Animation-filter.tsx",
-    "animation-height-auto-padding": "src/components/2-main/3-pages/4-motion-examples/2-animation/Animation-height-auto-padding.tsx",
-    // Drag examples
-    "drag-draggable": "src/components/2-main/3-pages/4-motion-examples/3-drag/Drag-draggable.tsx",
-    "drag-constraints-ref": "src/components/2-main/3-pages/4-motion-examples/3-drag/Drag-constraints-ref.tsx",
-    "drag-to-reorder": "src/components/2-main/3-pages/4-motion-examples/3-drag/Drag-to-reorder.tsx",
-    "drag-use-drag-controls": "src/components/2-main/3-pages/4-motion-examples/3-drag/Drag-useDragControls.tsx",
-    "drag-nested": "src/components/2-main/3-pages/4-motion-examples/3-drag/Drag-nested.tsx",
-    // Events examples
-    "events-while-hover": "src/components/2-main/3-pages/4-motion-examples/4-events/Events-whileHover.tsx",
-    "events-while-tap": "src/components/2-main/3-pages/4-motion-examples/4-events/Events-whileTap.tsx",
-    "events-on-tap": "src/components/2-main/3-pages/4-motion-examples/4-events/Events-onTap.tsx",
-};
+// Simple syntax highlighter for TSX code
+function highlightCode(code: string): React.ReactNode[] {
+    const lines = code.split('\n');
+    
+    return lines.map((line, lineIndex) => {
+        // First escape HTML entities
+        let highlighted = line
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+        
+        highlighted = highlighted
+            // Comments (must be before strings to avoid conflicts)
+            .replace(/(\/\/.*$)/g, '<span class="text-emerald-600 dark:text-emerald-400">$1</span>')
+            // Strings
+            .replace(/(&quot;(?:[^&]|&(?!quot;))*&quot;)/g, '<span class="text-amber-600 dark:text-amber-400">$1</span>')
+            .replace(/(&#39;(?:[^&]|&(?!#39;))*&#39;)/g, '<span class="text-amber-600 dark:text-amber-400">$1</span>')
+            .replace(/("(?:[^"\\]|\\.)*")/g, '<span class="text-amber-600 dark:text-amber-400">$1</span>')
+            .replace(/('(?:[^'\\]|\\.)*')/g, '<span class="text-amber-600 dark:text-amber-400">$1</span>')
+            .replace(/(`(?:[^`\\]|\\.)*`)/g, '<span class="text-amber-600 dark:text-amber-400">$1</span>')
+            // Keywords
+            .replace(/\b(import|export|from|const|let|var|function|return|if|else|switch|case|default|break|continue|for|while|do|try|catch|finally|throw|new|typeof|instanceof|class|extends|implements|interface|type|enum|async|await|yield|static|get|set|public|private|protected|readonly|as|is)\b/g, '<span class="text-purple-600 dark:text-purple-400 font-medium">$1</span>')
+            // React/JSX hooks and utils
+            .replace(/\b(React|useState|useEffect|useRef|useMemo|useCallback|useContext|useReducer|forwardRef)\b/g, '<span class="text-cyan-600 dark:text-cyan-400">$1</span>')
+            // Types
+            .replace(/\b(string|number|boolean|null|undefined|void|any|never|unknown|object|Array|Promise|Record)\b/g, '<span class="text-sky-600 dark:text-sky-400">$1</span>')
+            // JSX Component tags (capitalized)
+            .replace(/(&lt;\/?)([A-Z][a-zA-Z0-9.]*)/g, '$1<span class="text-rose-600 dark:text-rose-400">$2</span>')
+            // JSX HTML tags (lowercase)
+            .replace(/(&lt;\/?)([a-z][a-zA-Z0-9-]*)/g, '$1<span class="text-blue-600 dark:text-blue-400">$2</span>')
+            // Numbers
+            .replace(/\b(\d+\.?\d*)\b/g, '<span class="text-orange-500 dark:text-orange-400">$1</span>')
+            // Booleans
+            .replace(/\b(true|false)\b/g, '<span class="text-orange-600 dark:text-orange-400 font-medium">$1</span>');
+        
+        return (
+            <div key={lineIndex} className="flex hover:bg-muted/50">
+                <span className="w-12 text-right pr-4 text-muted-foreground/50 select-none border-r border-border/50 mr-4">{lineIndex + 1}</span>
+                <span dangerouslySetInnerHTML={{ __html: highlighted }} />
+            </div>
+        );
+    });
+}
 
 // Wrapper component for demos with tabs (Demo + Source Code)
 function DemoWithTabs({ demoId, children }: { demoId: LeftViewId; children: React.ReactNode }) {
-    const [sourceCode, setSourceCode] = useState<string>("");
-    const [loading, setLoading] = useState(false);
-
-    const loadSourceCode = async () => {
-        const filePath = demoSourceFiles[demoId];
-        if (!filePath || sourceCode) return; // Don't reload if already loaded
-        
-        setLoading(true);
-        try {
-            const response = await fetch(`/${filePath}`);
-            const code = await response.text();
-            setSourceCode(code);
-        } catch (error) {
-            setSourceCode(`// Error loading source code\n// ${error}`);
-        } finally {
-            setLoading(false);
-        }
-    };
+    const sourceCode = demoSourceCodes[demoId] || "// Source code not found";
 
     return (
         <Tabs defaultValue="demo" className="h-full flex flex-col">
-            <TabsList className="grid w-full grid-cols-2">
+            <TabsList className="grid w-full grid-cols-2 mx-2 mt-1">
                 <TabsTrigger value="demo">Demo</TabsTrigger>
-                <TabsTrigger value="source" onClick={loadSourceCode}>Source Code</TabsTrigger>
+                <TabsTrigger value="source">Source Code</TabsTrigger>
             </TabsList>
-            <TabsContent value="demo" className="flex-1 overflow-auto">
+            <TabsContent value="demo" className="flex-1 overflow-auto mt-0">
                 {children}
             </TabsContent>
-            <TabsContent value="source" className="flex-1 overflow-auto">
+            <TabsContent value="source" className="flex-1 overflow-auto mt-0">
                 <ScrollArea className="h-full">
-                    {loading ? (
-                        <div className="p-4">Loading...</div>
-                    ) : (
-                        <pre className="p-4 text-xs">
-                            <code>{sourceCode}</code>
-                        </pre>
-                    )}
+                    <pre className="p-4 text-xs font-mono bg-muted/30 leading-relaxed">
+                        <code>{highlightCode(sourceCode)}</code>
+                    </pre>
                 </ScrollArea>
             </TabsContent>
         </Tabs>
