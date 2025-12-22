@@ -12,14 +12,14 @@ export function LeftList() {
             <SidebarContent className="flex flex-col justify-between">
 
                 <ResizablePanelGroup className="1md:min-w-[450px] 1min-h-[200px] max-w-md rounded-lg border" direction="vertical" autoSaveId="main" storage={panelsStorage}>
-                    <ResizablePanel defaultSize={25}>
+                    <ResizablePanel defaultSize={25} className="overflow-hidden">
                         <GroupDemos />
                     </ResizablePanel>
 
                     <ResizableHandle tabIndex={-1} />
                     {/* <ResizableHandle className={resizableHandleClasses} tabIndex={-1} withHandle /> */}
 
-                    <ResizablePanel defaultSize={75}>
+                    <ResizablePanel defaultSize={75} className="overflow-hidden">
                         <GroupTwProps />
                     </ResizablePanel>
                 </ResizablePanelGroup>
