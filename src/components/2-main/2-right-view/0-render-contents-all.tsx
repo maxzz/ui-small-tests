@@ -63,7 +63,16 @@ function highlightCode(code: string): React.ReactNode[] {
 
 // Wrapper component for demos with tabs (Demo + Source Code)
 function DemoWithTabs({ demoId, children }: { demoId: LeftViewId; children: React.ReactNode }) {
-    const sourceCode = demoSourceCodes[demoId] || "// Source code not found";
+    const sourceCode = demoSourceCodes[demoId];
+    
+    // Debug logging
+    useEffect(() => {
+        console.log("DemoWithTabs - demoId:", demoId);
+        console.log("Available keys:", Object.keys(demoSourceCodes));
+        console.log("Has source:", !!sourceCode, "Length:", sourceCode?.length);
+    }, [demoId, sourceCode]);
+
+    const displayCode = sourceCode || `// Source code not found for: ${demoId}\n// Available: ${Object.keys(demoSourceCodes).join(", ")}`;
 
     return (
         <Tabs defaultValue="demo" className="h-full flex flex-col">
@@ -77,7 +86,7 @@ function DemoWithTabs({ demoId, children }: { demoId: LeftViewId; children: Reac
             <TabsContent value="source" className="flex-1 overflow-auto mt-0">
                 <ScrollArea className="h-full">
                     <pre className="p-4 text-xs font-mono bg-muted/30 leading-relaxed">
-                        <code>{highlightCode(sourceCode)}</code>
+                        <code>{highlightCode(displayCode)}</code>
                     </pre>
                 </ScrollArea>
             </TabsContent>
