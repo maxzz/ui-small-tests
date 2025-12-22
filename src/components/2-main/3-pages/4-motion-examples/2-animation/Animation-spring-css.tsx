@@ -1,17 +1,12 @@
-// Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/Animation-spring-css.tsx
-// Note: Simplified version without spring() CSS utility as it's not available in motion/react
-import { motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { motion } from "motion/react";
+import { spring } from "motion";
+
+// Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/Animation-spring-css.tsx
 
 /**
  * An example of the spring transition type
  */
-
-const style = {
-    width: 100,
-    height: 100,
-    background: "white",
-};
 
 export function AnimationSpringCssDemo() {
     const [state, setState] = useState(false);
@@ -20,60 +15,90 @@ export function AnimationSpringCssDemo() {
     const [bounce, setBounce] = useState(0.2);
 
     useEffect(() => {
-        setTimeout(() => {
-            setState(true);
-        }, 300);
+        setTimeout(() => { setState(true); }, 300);
     }, [state]);
 
+    return (<>
+        <div
+            style={{
+                ...style,
+                transform: state ? "translateX(200px)" : "none",
+                transition: "transform " + spring(duration, bounce),
+            }}
+        />
+
+        <motion.div
+            animate={{
+                transform: state ? "translateX(200px)" : "translateX(0)",
+            }}
+            transition={{ visualDuration: duration, bounce, type: "spring", }}
+            style={style}
+        />
+        
+        <SpringVisualiser transition={{ duration, type: "spring", bounce, durationBasedSpring: true, }} />
+
+        <div className="text-sm text-gray-500">Bounce: {bounce}</div>
+        <input type="range" min="0" max="1" step="0.01" value={bounce} onChange={(e) => setBounce(Number(e.target.value))} />
+
+        <div className="">Duration: {duration}</div>
+        <input type="range" min="0" max="10" step="0.1" value={duration} onChange={(e) => setDuration(Number(e.target.value))} />
+    </>);
+}
+
+export function SpringVisualiser({ transition }: any) {
+    const { duration, bounce } = {
+        duration: transition.duration * 1000,
+        bounce: transition.bounce,
+    };
+
+    const springResolver = spring({
+        bounce,
+        visualDuration: duration,
+        keyframes: [0, 1],
+    });
+
+    let curveLine = `M${margin} ${margin + height}`;
+    let perceptualMarker = "";
+
+    const step = 10;
+    for (let i = 0; i <= width; i++) {
+        const t = i * step;
+
+        if (t > duration && perceptualMarker === "") {
+            perceptualMarker = `M${margin + i} ${margin} L${margin + i} ${margin + height}`;
+        }
+
+        curveLine += `L${margin + i} ${margin + (height - springResolver.next(t).value * (height / 2))}`;
+    }
+
     return (
-        <div className="p-4">
-            <motion.div
-                animate={{
-                    transform: state ? "translateX(200px)" : "translateX(0)",
-                }}
-                transition={{
-                    duration,
-                    bounce,
-                    type: "spring",
-                }}
-                style={style}
+        <svg xmlns="http://www.w3.org/2000/svg" width={width + margin * 2} height={height + margin * 2}        >
+            <path
+                d={curveLine}
+                fill="transparent"
+                strokeWidth="2"
+                stroke="#AAAAAA"
+                strokeLinecap="round"
+                strokeLinejoin="round"
             />
-            <div className="mt-4 space-y-2">
-                <div>
-                    <label className="block text-sm">
-                        Bounce: {bounce.toFixed(2)}
-                    </label>
-                    <input
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                        value={bounce}
-                        onChange={(e) => setBounce(Number(e.target.value))}
-                        className="w-full"
-                    />
-                </div>
-                <div>
-                    <label className="block text-sm">
-                        Duration: {duration.toFixed(1)}s
-                    </label>
-                    <input
-                        type="range"
-                        min="0"
-                        max="10"
-                        step="0.1"
-                        value={duration}
-                        onChange={(e) => setDuration(Number(e.target.value))}
-                        className="w-full"
-                    />
-                </div>
-                <button
-                    onClick={() => setState(!state)}
-                    className="px-4 py-2 bg-blue-500 text-white rounded"
-                >
-                    Toggle
-                </button>
-            </div>
-        </div>
+            <path
+                d={perceptualMarker}
+                fill="transparent"
+                strokeWidth="2"
+                stroke="#AAAAAA"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
     );
 }
+
+const height = 100;
+const width = 500;
+const margin = 10;
+
+const style = {
+    width: 100,
+    height: 100,
+    background: "white",
+};
