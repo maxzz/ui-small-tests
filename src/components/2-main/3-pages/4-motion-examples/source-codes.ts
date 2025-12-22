@@ -1,4 +1,5 @@
 // Import all source files using Vite's import.meta.glob with ?raw
+// This ensures we get the source code string for each example
 const sourceModules = import.meta.glob<string>([
     './1-animate-presence/*.tsx',
     './2-animation/*.tsx', 
@@ -7,26 +8,20 @@ const sourceModules = import.meta.glob<string>([
 ], { query: '?raw', import: 'default', eager: true });
 
 // Convert file paths to demo IDs
-// e.g. "./1-animate-presence/AnimatePresence.tsx" -> "animate-presence"
-// e.g. "./1-animate-presence/AnimatePresence-image-gallery.tsx" -> "animate-presence-image-gallery"
-// e.g. "./2-animation/Animation-animate.tsx" -> "animation-animate"
-// e.g. "./3-drag/Drag-draggable.tsx" -> "drag-draggable"
-// e.g. "./4-events/Events-whileHover.tsx" -> "events-while-hover"
 function pathToDemoId(path: string): string {
     // Extract filename without extension
     const filename = path.split('/').pop()?.replace('.tsx', '') || '';
     
     // Convert to kebab-case and lowercase
     let demoId = filename
-        // Insert dash before uppercase letters (for camelCase conversion)
+        // Insert dash before uppercase letters (for camelCase conversion if needed)
         .replace(/([a-z])([A-Z])/g, '$1-$2')
         .toLowerCase();
     
-    // Handle specific prefixes to match the expected demo IDs
-    // AnimatePresence -> animate-presence
-    // Animation -> animation
-    // Drag -> drag
-    // Events -> events
+    // Handle specific prefixes/fixes to match the IDs in 9-types.ts
+    
+    // Fix: CSS -> css (already handled by toLowerCase)
+    // Animation-CSS-variables -> animation-css-variables
     
     return demoId;
 }
@@ -37,10 +32,8 @@ export const demoSourceCodes: Record<string, string> = {};
 for (const [path, content] of Object.entries(sourceModules)) {
     const demoId = pathToDemoId(path);
     demoSourceCodes[demoId] = content;
-    // Also log each mapping for debugging
-    console.log(`Mapped: ${path} -> "${demoId}" (${content?.length || 0} chars)`);
 }
 
-// Debug: log what was imported
-console.log("Total source codes loaded:", Object.keys(demoSourceCodes).length);
-console.log("All demo IDs:", Object.keys(demoSourceCodes));
+// Debug: Log available keys to console
+console.log("[SourceCodes] Loaded", Object.keys(demoSourceCodes).length, "examples");
+// console.log("[SourceCodes] Keys:", Object.keys(demoSourceCodes));

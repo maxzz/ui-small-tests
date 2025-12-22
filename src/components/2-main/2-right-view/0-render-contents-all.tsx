@@ -65,14 +65,11 @@ function highlightCode(code: string): React.ReactNode[] {
 function DemoWithTabs({ demoId, children }: { demoId: LeftViewId; children: React.ReactNode }) {
     const sourceCode = demoSourceCodes[demoId];
     
-    // Debug logging
-    useEffect(() => {
-        console.log("DemoWithTabs - demoId:", demoId);
-        console.log("Available keys:", Object.keys(demoSourceCodes));
-        console.log("Has source:", !!sourceCode, "Length:", sourceCode?.length);
-    }, [demoId, sourceCode]);
-
-    const displayCode = sourceCode || `// Source code not found for: ${demoId}\n// Available: ${Object.keys(demoSourceCodes).join(", ")}`;
+    const displayCode = sourceCode || `// Source code not found for ID: "${demoId}"
+//
+// Debug info:
+// Available keys:
+// ${Object.keys(demoSourceCodes).filter(k => k.includes(demoId.split('-')[0])).join('\n// ')}`;
 
     return (
         <Tabs defaultValue="demo" className="h-full flex flex-col">
