@@ -5,13 +5,6 @@ import { motion } from "motion/react";
  * An example of animating the filter property.
  */
 
-const style = {
-    width: 100,
-    height: 100,
-    background: "white",
-    opacity: 1,
-};
-
 export function AnimationFilterDemo() {
     return (
         <motion.div
@@ -22,3 +15,9 @@ export function AnimationFilterDemo() {
     );
 }
 
+const style = {
+    width: 100,
+    height: 100,
+    background: "white",
+    opacity: 1,
+};

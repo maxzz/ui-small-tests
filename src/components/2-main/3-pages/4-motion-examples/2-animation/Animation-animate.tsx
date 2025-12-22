@@ -6,18 +6,11 @@ import { useEffect, useState } from "react";
  * An example of the tween transition type
  */
 
-const style = {
-    width: 100,
-    height: 100,
-    background: "white",
-};
-
 export function AnimationAnimateDemo() {
     const [state, setState] = useState(false);
+
     useEffect(() => {
-        setTimeout(() => {
-            setState(true);
-        }, 300);
+        setTimeout(() => { setState(true); }, 300);
     }, [state]);
 
     return (
@@ -29,3 +22,8 @@ export function AnimationAnimateDemo() {
     );
 }
 
+const style = {
+    width: 100,
+    height: 100,
+    background: "white",
+};

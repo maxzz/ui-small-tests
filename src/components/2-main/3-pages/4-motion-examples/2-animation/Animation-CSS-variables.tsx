@@ -6,39 +6,23 @@ import { motion } from "motion/react";
  * An example of Motion's CSS variable support, including fallback support
  */
 
-const style = {
-    width: 100,
-    height: 100,
-    background: "var(--from)",
-    x: "var(--x)",
-};
-
 export function AnimationCssVariablesDemo() {
-    const transition = {
-        type: "tween" as const,
-        ease: "anticipate" as const,
-        duration: 1,
-    };
-
     const ref = useRef<HTMLDivElement>(null);
+
     useEffect(() => {
         function changeToVar() {
             ref.current!.style.setProperty("--to", "cyan");
         }
         const timer = setTimeout(changeToVar, 2000);
+
         return () => clearTimeout(timer);
     });
 
     return (
         <div ref={ref}>
             <motion.div
-                initial={{
-                    background: `var(--token-31a8b72b-4f05-4fb3-b778-63a7fb0d9454, hsl(224, 78%, 54%))`,
-                }}
-                animate={{
-                    background: `var(--token-666a5765-0e05-4d0e-b396-a6c555d9cdb3, hsl(125, 74%, 43%))`,
-                    "--x": "100px",
-                }}
+                initial={{ background: `var(--token-31a8b72b-4f05-4fb3-b778-63a7fb0d9454, hsl(224, 78%, 54%))`, }}
+                animate={{ background: `var(--token-666a5765-0e05-4d0e-b396-a6c555d9cdb3, hsl(125, 74%, 43%))`, "--x": "100px", }}
                 transition={transition}
                 onUpdate={(v) => console.log(v)}
                 style={style as any}
@@ -47,3 +31,15 @@ export function AnimationCssVariablesDemo() {
     );
 }
 
+const transition = {
+    type: "tween" as const,
+    ease: "anticipate" as const,
+    duration: 1,
+};
+
+const style = {
+    width: 100,
+    height: 100,
+    background: "var(--from)",
+    x: "var(--x)",
+};

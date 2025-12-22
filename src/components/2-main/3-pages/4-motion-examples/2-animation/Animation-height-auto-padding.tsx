@@ -8,41 +8,31 @@ export function AnimationHeightAutoPaddingDemo() {
     return (
         <div className="example-container">
             <AnimatePresence>
-                {isExpanded ? (
-                    <motion.div
-                        animate={{
-                            height: "auto",
-                            opacity: 1,
-                            paddingTop: 30,
-                            paddingBottom: 30,
-                        }}
-                        exit={{
-                            height: 0,
-                            opacity: 0,
-                            paddingTop: 0,
-                            paddingBottom: 0,
-                        }}
-                        initial={{
-                            height: 0,
-                            opacity: 0,
-                            paddingTop: 0,
-                            paddingBottom: 0,
-                        }}
-                        style={{ background: "white", width: 200 }}
-                    >
-                        Test
-                    </motion.div>
-                ) : null}
+                {isExpanded
+                    ? (
+                        <motion.div
+                            animate={{  /**/ height: "auto", /**/ opacity: 1, paddingTop: 30, paddingBottom: 30, }}
+                            exit={{     /**/ height: 0,      /**/ opacity: 0, paddingTop: 0, paddingBottom: 0, }}
+                            initial={{  /**/ height: 0,      /**/ opacity: 0, paddingTop: 0, paddingBottom: 0, }}
+                            style={{ background: "white", width: 200 }}
+                        >
+                            Test
+                        </motion.div>
+                    )
+                    : null
+                }
             </AnimatePresence>
+
             <button style={{}} onClick={() => setExpanded(!isExpanded)}>
                 Toggle
             </button>
+
             <style>{styles}</style>
         </div>
     );
 }
 
-const styles = `body {
+const styles = `1body {
   background: white!important;
   background-repeat: no-repeat;
   padding: 0;
@@ -56,4 +46,3 @@ const styles = `body {
   width: 320px;
   padding: 20px;
 }`;
-
