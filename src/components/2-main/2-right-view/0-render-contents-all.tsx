@@ -64,12 +64,21 @@ function highlightCode(code: string): React.ReactNode[] {
 // Wrapper component for demos with tabs (Demo + Source Code)
 function DemoWithTabs({ demoId, children }: { demoId: LeftViewId; children: React.ReactNode }) {
     const sourceCode = demoSourceCodes[demoId];
+    const isMissing = !sourceCode;
     
-    const displayCode = sourceCode || `// Source code not found for ID: "${demoId}"
-//
-// Debug info:
-// Available keys:
-// ${Object.keys(demoSourceCodes).filter(k => k.includes(demoId.split('-')[0])).join('\n// ')}`;
+    // Debug info header
+    const debugInfo = `// [DEBUG INFO]
+// Requested Demo ID: "${demoId}"
+// Found in map: ${isMissing ? "NO" : "YES"}
+// Content type: ${typeof sourceCode}
+// Content length: ${sourceCode?.length || 0}
+// Content preview: ${sourceCode?.slice(0, 50).replace(/\n/g, '\\n')}...
+// ----------------------------------------
+`;
+
+    const displayCode = isMissing
+        ? `${debugInfo}\n// Available keys:\n// ${Object.keys(demoSourceCodes).filter(k => k.includes(demoId.split('-')[0])).join('\n// ')}`
+        : `${debugInfo}\n${sourceCode}`;
 
     return (
         <Tabs defaultValue="demo" className="h-full flex flex-col">
