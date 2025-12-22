@@ -12,6 +12,7 @@ import { hoverStackAtom, MouseMoveTrackerTooltip, mousePosAtom, MouseTracker } f
 import { UserItemList } from "../3-pages/3-controls/2-listview-commands/1-users-list";
 import { RootComponents } from "../3-pages/shadcn-frontpage";
 import { MotionVariantsRace } from "./3-motion-variants-race";
+import * as MotionExamples from "../3-pages/4-motion-examples";
 // import { CardsDemoWithTooltip } from "../../ui/local/8-mouse-tracker/x-nun-all-wrapper-w-tooltip";
 
 export function Section2_RenderContents() {
@@ -63,6 +64,62 @@ function LeftViewChildren() {
             return <UserItemList />;
         case "motion-variants-race":
             return <MotionVariantsRace />;
+        // AnimatePresence examples
+        case "animate-presence":
+            return <MotionExamples.AnimatePresenceDemo />;
+        case "animate-presence-image-gallery":
+            return <MotionExamples.AnimatePresenceImageGalleryDemo />;
+        case "animate-presence-layout-animations-siblings":
+            return <MotionExamples.AnimatePresenceLayoutAnimationsSiblingsDemo />;
+        case "animate-presence-notifications-list":
+            return <MotionExamples.AnimatePresenceNotificationsListDemo />;
+        case "animate-presence-notifications-list-pop":
+            return <MotionExamples.AnimatePresenceNotificationsListPopDemo />;
+        case "animate-presence-parallel-children":
+            return <MotionExamples.AnimatePresenceParallelChildrenDemo />;
+        case "animate-presence-siblings":
+            return <MotionExamples.AnimatePresenceSiblingsDemo />;
+        case "animate-presence-switch":
+            return <MotionExamples.AnimatePresenceSwitchDemo />;
+        case "animate-presence-variants":
+            return <MotionExamples.AnimatePresenceVariantsDemo />;
+        case "animate-presence-wait":
+            return <MotionExamples.AnimatePresenceWaitDemo />;
+        // Animation examples
+        case "animation-animate":
+            return <MotionExamples.AnimationAnimateDemo />;
+        case "animation-keyframes":
+            return <MotionExamples.AnimationKeyframesDemo />;
+        case "animation-spring-css":
+            return <MotionExamples.AnimationSpringCssDemo />;
+        case "animation-stagger":
+            return <MotionExamples.AnimationStaggerDemo />;
+        case "animation-variants":
+            return <MotionExamples.AnimationVariantsDemo />;
+        case "animation-css-variables":
+            return <MotionExamples.AnimationCssVariablesDemo />;
+        case "animation-filter":
+            return <MotionExamples.AnimationFilterDemo />;
+        case "animation-height-auto-padding":
+            return <MotionExamples.AnimationHeightAutoPaddingDemo />;
+        // Drag examples
+        case "drag-draggable":
+            return <MotionExamples.DragDraggableDemo />;
+        case "drag-constraints-ref":
+            return <MotionExamples.DragConstraintsRefDemo />;
+        case "drag-to-reorder":
+            return <MotionExamples.DragToReorderDemo />;
+        case "drag-use-drag-controls":
+            return <MotionExamples.DragUseDragControlsDemo />;
+        case "drag-nested":
+            return <MotionExamples.DragNestedDemo />;
+        // Events examples
+        case "events-while-hover":
+            return <MotionExamples.EventsWhileHoverDemo />;
+        case "events-while-tap":
+            return <MotionExamples.EventsWhileTapDemo />;
+        case "events-on-tap":
+            return <MotionExamples.EventsOnTapDemo />;
         case "not-yet":
             return <div className="px-4 py-2 h-full text-xs text-green-950 bg-green-500/10 uppercase">Space for rent</div>;
         default: {
@@ -96,6 +153,62 @@ function RightViewChildren() {
             return <RootComponents className="col-span-full" />;
         case "motion-variants-race":
             return <MotionVariantsRace />;
+        // AnimatePresence examples
+        case "animate-presence":
+            return <MotionExamples.AnimatePresenceDemo />;
+        case "animate-presence-image-gallery":
+            return <MotionExamples.AnimatePresenceImageGalleryDemo />;
+        case "animate-presence-layout-animations-siblings":
+            return <MotionExamples.AnimatePresenceLayoutAnimationsSiblingsDemo />;
+        case "animate-presence-notifications-list":
+            return <MotionExamples.AnimatePresenceNotificationsListDemo />;
+        case "animate-presence-notifications-list-pop":
+            return <MotionExamples.AnimatePresenceNotificationsListPopDemo />;
+        case "animate-presence-parallel-children":
+            return <MotionExamples.AnimatePresenceParallelChildrenDemo />;
+        case "animate-presence-siblings":
+            return <MotionExamples.AnimatePresenceSiblingsDemo />;
+        case "animate-presence-switch":
+            return <MotionExamples.AnimatePresenceSwitchDemo />;
+        case "animate-presence-variants":
+            return <MotionExamples.AnimatePresenceVariantsDemo />;
+        case "animate-presence-wait":
+            return <MotionExamples.AnimatePresenceWaitDemo />;
+        // Animation examples
+        case "animation-animate":
+            return <MotionExamples.AnimationAnimateDemo />;
+        case "animation-keyframes":
+            return <MotionExamples.AnimationKeyframesDemo />;
+        case "animation-spring-css":
+            return <MotionExamples.AnimationSpringCssDemo />;
+        case "animation-stagger":
+            return <MotionExamples.AnimationStaggerDemo />;
+        case "animation-variants":
+            return <MotionExamples.AnimationVariantsDemo />;
+        case "animation-css-variables":
+            return <MotionExamples.AnimationCssVariablesDemo />;
+        case "animation-filter":
+            return <MotionExamples.AnimationFilterDemo />;
+        case "animation-height-auto-padding":
+            return <MotionExamples.AnimationHeightAutoPaddingDemo />;
+        // Drag examples
+        case "drag-draggable":
+            return <MotionExamples.DragDraggableDemo />;
+        case "drag-constraints-ref":
+            return <MotionExamples.DragConstraintsRefDemo />;
+        case "drag-to-reorder":
+            return <MotionExamples.DragToReorderDemo />;
+        case "drag-use-drag-controls":
+            return <MotionExamples.DragUseDragControlsDemo />;
+        case "drag-nested":
+            return <MotionExamples.DragNestedDemo />;
+        // Events examples
+        case "events-while-hover":
+            return <MotionExamples.EventsWhileHoverDemo />;
+        case "events-while-tap":
+            return <MotionExamples.EventsWhileTapDemo />;
+        case "events-on-tap":
+            return <MotionExamples.EventsOnTapDemo />;
         default: {
             const _exhaustiveCheck: never = rightView;
             return null;

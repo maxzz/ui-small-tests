@@ -1,0 +1,35 @@
+// Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/Animation-variants.tsx
+import { Fragment, useState } from "react";
+import { motion, useMotionValue } from "motion/react";
+
+const MotionFragment = motion.create(Fragment);
+
+export function AnimationVariantsDemo() {
+    const backgroundColor = useMotionValue("#f00");
+    const [isActive, setIsActive] = useState(true);
+    return (
+        <MotionFragment initial="initial" animate={isActive ? "to" : "initial"}>
+            <motion.div>
+                <motion.div
+                    variants={{
+                        initial: {
+                            backgroundColor: "#f00",
+                        },
+                        to: {
+                            backgroundColor: "#00f",
+                        },
+                    }}
+                    onClick={() => setIsActive(!isActive)}
+                    style={{ ...box, backgroundColor }}
+                />
+            </motion.div>
+        </MotionFragment>
+    );
+}
+
+const box = {
+    width: 100,
+    height: 100,
+    backgroundColor: "#fff",
+};
+
