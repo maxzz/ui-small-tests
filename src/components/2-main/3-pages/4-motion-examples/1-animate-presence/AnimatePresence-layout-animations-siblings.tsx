@@ -41,7 +41,7 @@ export function AnimatePresenceLayoutAnimationsSiblingsDemo() {
 
     return (
         <LayoutGroup>
-            <AnimatePresence initial={false} onRest={() => console.log("rest")}>
+            <AnimatePresence initial={false} onExitComplete={() => console.log("rest")}>
                 {isVisible && <ExitComponent />}
             </AnimatePresence>
             <motion.div layout style={style} id="a" />

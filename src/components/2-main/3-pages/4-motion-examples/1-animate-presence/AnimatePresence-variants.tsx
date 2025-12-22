@@ -48,7 +48,7 @@ export function AnimatePresenceVariantsDemo() {
     });
 
     return (
-        <AnimatePresence initial={false} onRest={() => console.log("rest")}>
+        <AnimatePresence initial={false} onExitComplete={() => console.log("rest")}>
             {isVisible && (
                 <motion.ul
                     key="a"
