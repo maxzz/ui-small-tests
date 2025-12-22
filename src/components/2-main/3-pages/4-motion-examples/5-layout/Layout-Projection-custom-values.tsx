@@ -42,7 +42,6 @@ export function LayoutProjectionCustomValuesDemo() {
     const [isOn, setOn] = useState(false);
 
     useEffect(() => {
-        // @ts-expect-error - addScaleCorrector might be internal/deprecated
         if (typeof addScaleCorrector === 'function') {
              // @ts-expect-error - addScaleCorrector might be internal/deprecated
             addScaleCorrector(border);

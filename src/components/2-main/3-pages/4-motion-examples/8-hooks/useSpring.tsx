@@ -27,9 +27,7 @@ function DragExample() {
         <motion.div
             drag
             dragMomentum={false}
-            // @ts-expect-error - internal props used in example
             _dragX={dragX}
-            // @ts-expect-error - internal props used in example
             _dragY={dragY}
             style={{ width: 100, height: 100, background: "red", x, y, display: "flex", alignItems: "center", justifyContent: "center", color: "white" }}
         >

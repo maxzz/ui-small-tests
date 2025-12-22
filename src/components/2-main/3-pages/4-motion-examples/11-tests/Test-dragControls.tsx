@@ -9,7 +9,7 @@ export function TestDragControlsDemo() {
         <div
             className="p-10"
             style={container}
-            onMouseDown={(e) => {
+            onPointerDown={(e) => {
                 dragControls.start(e, { snapToCursor: true });
             }}
         >

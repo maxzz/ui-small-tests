@@ -6,7 +6,7 @@ import { motion, useCycle } from "motion/react";
  */
 
 export function AnimationBetweenValueTypesXDemo() {
-    const [x, cycleX] = useCycle(0, "calc(3 * var(--width))");
+    const [x, cycleX] = useCycle<string | number>(0, "calc(3 * var(--width))");
 
     return (
         <motion.div
@@ -17,7 +17,6 @@ export function AnimationBetweenValueTypesXDemo() {
                 width: 100,
                 height: 100,
                 background: "white",
-                // @ts-expect-error - Custom property
                 "--width": "100px",
             }}
             onClick={() => cycleX()}

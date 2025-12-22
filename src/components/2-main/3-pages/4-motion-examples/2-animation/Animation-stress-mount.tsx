@@ -23,7 +23,6 @@ const Box = () => {
                 x: "50%",
                 y: "50%",
                 filter: [null, "blur(1px)"],
-                // @ts-expect-error - Custom property animation
                 "--number": 1,
             }}
             initial={{ x: 1, y: 0 }}
@@ -40,7 +39,6 @@ export function AnimationStressMountDemo() {
                 width: 1000,
                 display: "flex",
                 flexWrap: "wrap",
-                // @ts-expect-error - Custom property
                 "--color": "#f00",
             }}
         >

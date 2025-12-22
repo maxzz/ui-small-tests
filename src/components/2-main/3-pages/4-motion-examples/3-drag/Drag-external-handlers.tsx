@@ -36,7 +36,7 @@ export function DragExternalHandlersDemo() {
     );
 
     useEffect(() => {
-        // @ts-expect-error - on method exists on motion value
+        // @ ts-expect-error - on method exists on motion value
         return transform.on("change", (v) => console.log(v));
     });
 
@@ -44,9 +44,7 @@ export function DragExternalHandlersDemo() {
         <motion.div ref={ref} style={container}>
             <motion.div
                 drag={"x"}
-                // @ts-expect-error - internal props
                 _dragX={x}
-                // @ts-expect-error - internal props
                 _dragY={y}
                 dragConstraints={ref}
                 onMeasureDragConstraints={(constraints) => constraints}

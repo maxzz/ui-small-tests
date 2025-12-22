@@ -10,7 +10,6 @@ const style = {
 export function EventsWhileTapGlobalDemo() {
     return (
         <motion.div 
-            // @ts-expect-error - globalTapTarget might be deprecated/removed
             globalTapTarget 
             whileTap="pressed"
         >

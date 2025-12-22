@@ -15,7 +15,6 @@ export function AnimationReverseDemo() {
                 className="px-2 py-1 bg-white text-black rounded"
                 onClick={() => {
                     const animation = animate([
-                        // @ts-expect-error - testing label
                         "my label",
                         [".four", { x: 90 }, { duration: 2 }],
                     ]);
