@@ -49,7 +49,7 @@ export function AnimatePresenceNotificationsListPopDemo() {
             <button onClick={() => setNotifications(add(notifications))}>
                 +
             </button>
-            <style>{styles}</style>
+            {/* <style>{styles}</style> */}
         </div>
     );
 }
