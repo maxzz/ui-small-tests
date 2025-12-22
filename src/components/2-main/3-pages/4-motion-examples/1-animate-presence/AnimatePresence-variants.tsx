@@ -1,50 +1,16 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/AnimatePresence-variants.tsx
-import { AnimatePresence, motion, stagger } from "motion/react";
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion, stagger } from "motion/react";
 
 /**
  * An example of AnimatePresence with exit defined as a variant through a tree.
  */
 
-const style = {
-    width: 200,
-    height: 200,
-    background: "white",
-    opacity: 1,
-};
-
-const item = {
-    width: 100,
-    height: 100,
-    background: "red",
-};
-
-const itemVariants = {
-    open: { opacity: 1 },
-    closed: { opacity: 0 },
-};
-
-const listVariants = {
-    open: {
-        opacity: 1,
-        transition: { delayChildren: stagger(1), when: "beforeChildren" },
-    },
-    closed: {
-        opacity: 0,
-        transition: {
-            when: "afterChildren",
-            delayChildren: stagger(0.3, { from: "last" }),
-        },
-    },
-};
-
 export function AnimatePresenceVariantsDemo() {
     const [isVisible, setVisible] = useState(true);
 
     useEffect(() => {
-        setTimeout(() => {
-            setVisible(!isVisible);
-        }, 3000);
+        setTimeout(() => { setVisible(!isVisible); }, 3000);
     });
 
     return (
@@ -74,3 +40,38 @@ export function AnimatePresenceVariantsDemo() {
     );
 }
 
+// Variants
+
+const listVariants = {
+    open: {
+        opacity: 1,
+        transition: { delayChildren: stagger(1), when: "beforeChildren" },
+    },
+    closed: {
+        opacity: 0,
+        transition: {
+            when: "afterChildren",
+            delayChildren: stagger(0.3, { from: "last" }),
+        },
+    },
+};
+
+const itemVariants = {
+    open: { opacity: 1 },
+    closed: { opacity: 0 },
+};
+
+// Item styles
+
+const item = {
+    width: 100,
+    height: 100,
+    background: "red",
+};
+
+const style = {
+    width: 200,
+    height: 200,
+    background: "white",
+    opacity: 1,
+};

@@ -2,10 +2,35 @@
 import { forwardRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
-const Notification = forwardRef(function (
-    { id, notifications, setNotifications, style }: any,
-    ref: any
-) {
+export function AnimatePresenceNotificationsListPopDemo() {
+    const [notifications, setNotifications] = useState([0]);
+
+    return (
+        <div className="container">
+            <ul>
+                <AnimatePresence mode="popLayout" initial={false}>
+                    {notifications.map(
+                        (id) => (
+                            <Notification
+                                id={id}
+                                key={id}
+                                notifications={notifications}
+                                setNotifications={setNotifications}
+                            />
+                        )
+                    )}
+                </AnimatePresence>
+            </ul>
+
+            <button onClick={() => setNotifications(add(notifications))}>
+                +
+            </button>
+            {/* <style>{styles}</style> */}
+        </div>
+    );
+}
+
+const Notification = forwardRef(function ({ id, notifications, setNotifications, style }: any, ref: any) {
     return (
         <motion.li
             id={id}
@@ -29,34 +54,10 @@ const Notification = forwardRef(function (
     );
 });
 
-export function AnimatePresenceNotificationsListPopDemo() {
-    const [notifications, setNotifications] = useState([0]);
-
-    return (
-        <div className="container">
-            <ul>
-                <AnimatePresence mode="popLayout" initial={false}>
-                    {notifications.map((id) => (
-                        <Notification
-                            id={id}
-                            key={id}
-                            notifications={notifications}
-                            setNotifications={setNotifications}
-                        />
-                    ))}
-                </AnimatePresence>
-            </ul>
-            <button onClick={() => setNotifications(add(notifications))}>
-                +
-            </button>
-            {/* <style>{styles}</style> */}
-        </div>
-    );
-}
+// Helper functions
 
 const remove = (arr: number[], item: number) => {
     const itemIndex = arr.findIndex((i) => i === item);
-
     const newArr = [...arr];
     newArr.splice(itemIndex, 1);
     return newArr;
@@ -129,4 +130,3 @@ body {
     border-radius: 20px;
   }
   `;
-

@@ -1,30 +1,19 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/AnimatePresence.tsx
-import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 
 /**
  * An example of a single-child AnimatePresence animation
  */
 
-const style = {
-    width: 100,
-    height: 100,
-    background: "red",
-    opacity: 1,
-};
-
 export function AnimatePresenceDemo() {
     const [isVisible, setVisible] = useState(true);
-
     return (
         <div
             onClick={() => setVisible(!isVisible)}
             style={{ width: 1000, height: 1000, background: "green" }}
         >
-            <AnimatePresence
-                initial={false}
-                onExitComplete={() => console.log("rest")}
-            >
+            <AnimatePresence initial={false} onExitComplete={() => console.log("rest")}>
                 {isVisible && (
                     <motion.div
                         key="a"
@@ -39,11 +28,7 @@ export function AnimatePresenceDemo() {
                                 key="b"
                                 exit={{ x: 100 }}
                                 transition={{ duration: 1 }}
-                                style={{
-                                    width: 50,
-                                    height: 50,
-                                    background: "blue",
-                                }}
+                                style={{ width: 50, height: 50, background: "blue", }}
                             >
                                 Hello
                             </motion.div>
@@ -55,3 +40,9 @@ export function AnimatePresenceDemo() {
     );
 }
 
+const style = {
+    width: 100,
+    height: 100,
+    background: "red",
+    opacity: 1,
+};

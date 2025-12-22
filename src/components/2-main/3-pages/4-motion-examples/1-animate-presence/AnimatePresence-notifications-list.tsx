@@ -7,28 +7,6 @@ import { motion, AnimatePresence } from "motion/react";
  * that correctly animate into their new positions as others are added/removed.
  */
 
-function Notification({ id, notifications, setNotifications }: any) {
-    return (
-        <motion.li
-            id={id}
-            layout
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            initial={{ opacity: 0, y: 50, scale: 0 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{
-                opacity: 0,
-                scale: 0.5,
-                transition: { duration: 0.2 },
-            }}
-            onDrag={(e, { offset }) => {
-                offset.x > 50 && setNotifications(remove(notifications, id));
-            }}
-            onClick={() => setNotifications(remove(notifications, id))}
-        />
-    );
-}
-
 export function AnimatePresenceNotificationsListDemo() {
     const [notifications, setNotifications] = useState([0]);
 
@@ -54,9 +32,32 @@ export function AnimatePresenceNotificationsListDemo() {
     );
 }
 
+function Notification({ id, notifications, setNotifications }: any) {
+    return (
+        <motion.li
+            id={id}
+            layout
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            initial={{ opacity: 0, y: 50, scale: 0 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{
+                opacity: 0,
+                scale: 0.5,
+                transition: { duration: 0.2 },
+            }}
+            onDrag={(e, { offset }) => {
+                offset.x > 50 && setNotifications(remove(notifications, id));
+            }}
+            onClick={() => setNotifications(remove(notifications, id))}
+        />
+    );
+}
+
+// Helper functions
+
 const remove = (arr: number[], item: number) => {
     const itemIndex = arr.findIndex((i) => i === item);
-
     const newArr = [...arr];
     newArr.splice(itemIndex, 1);
     return newArr;

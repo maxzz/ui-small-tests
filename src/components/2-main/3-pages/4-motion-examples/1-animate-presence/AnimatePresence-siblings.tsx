@@ -1,22 +1,35 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/AnimatePresence-siblings.tsx
-import { motion, AnimatePresence, LayoutGroup } from "motion/react";
 import { useState } from "react";
+import { motion, AnimatePresence, LayoutGroup } from "motion/react";
 
 /**
  * An example of an AnimatePresence child animating in and out with shared layout
  * ensuring that layout update is shared with the sibling `motion.div layout`
  */
 
-const style = {
-    width: 100,
-    height: 100,
-    background: "white",
-    opacity: 1,
-    borderRadius: 20,
-    margin: 20,
-};
+export function AnimatePresenceSiblingsDemo() {
+    const [isVisible, setVisible] = useState(true);
+    return (
+        <LayoutGroup>
+            <AnimatePresence initial={false} onExitComplete={() => console.log("rest a")}>
+                {isVisible && <ExitComponent id="a" />}
+            </AnimatePresence>
 
-function ExitComponent({ id }: { id: string }) {
+            <AnimatePresence initial={false} onExitComplete={() => console.log("rest b")}>
+                {isVisible && <ExitComponent id="b" />}
+            </AnimatePresence>
+
+            <motion.div
+                layout
+                style={style}
+                id="c"
+                onClick={() => setVisible(!isVisible)}
+            />
+        </LayoutGroup>
+    );
+}
+
+function ExitComponent({ id }: { id: string; }) {
     return (
         <motion.div
             key={id}
@@ -30,30 +43,11 @@ function ExitComponent({ id }: { id: string }) {
     );
 }
 
-export function AnimatePresenceSiblingsDemo() {
-    const [isVisible, setVisible] = useState(true);
-
-    return (
-        <LayoutGroup>
-            <AnimatePresence
-                initial={false}
-                onExitComplete={() => console.log("rest a")}
-            >
-                {isVisible && <ExitComponent id="a" />}
-            </AnimatePresence>
-            <AnimatePresence
-                initial={false}
-                onExitComplete={() => console.log("rest b")}
-            >
-                {isVisible && <ExitComponent id="b" />}
-            </AnimatePresence>
-            <motion.div
-                layout
-                style={style}
-                id="c"
-                onClick={() => setVisible(!isVisible)}
-            />
-        </LayoutGroup>
-    );
-}
-
+const style = {
+    width: 100,
+    height: 100,
+    background: "white",
+    opacity: 1,
+    borderRadius: 20,
+    margin: 20,
+};
