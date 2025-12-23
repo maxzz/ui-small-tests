@@ -1,19 +1,21 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useSnapshot } from "valtio";
-import { appSettings, type LeftViewId } from "@/store/0-local-storage";
+import { appSettings } from "@/store/0-local-storage";
 import { getPresetThemeStyles } from "@/store/2-apply-theme";
 import { applyThemeToElement, type ThemeEditorState } from "@/store/2-apply-theme/utils";
 import { ScrollArea } from "../../ui/shadcn/scroll-area";
-import { HeroTitleText } from "../3-pages/3-controls/1-effect-hero-title/0-all";
-import { DashboardAsIframe } from "../3-pages/2-dashboard-iframe";
-import { CardsContents } from "./10-cards-contents";
-import { DashboardContents } from "./20-dashboard-contents";
-import { hoverStackAtom, MouseMoveTrackerTooltip, mousePosAtom, MouseTracker } from "@/components/ui/local/8-mouse-tracker";
+
 import { UserItemList } from "../3-pages/3-controls/2-listview-commands/1-users-list";
+import { DashboardContents } from "./20-dashboard-contents";
 import { RootComponents } from "../3-pages/shadcn-frontpage";
 import { MotionVariantsRace } from "./30-motion-variants-race";
-import { MotionExampleRenderer, isMotionExampleId } from "./40-render-motion-example";
+import { CardsContents } from "./10-cards-contents";
 // import { CardsDemoWithTooltip } from "../../ui/local/8-mouse-tracker/x-nun-all-wrapper-w-tooltip";
+import { hoverStackAtom, MouseMoveTrackerTooltip, mousePosAtom, MouseTracker } from "@/components/ui/local/8-mouse-tracker";
+import { HeroTitleText } from "../3-pages/3-controls/1-effect-hero-title/0-all";
+import { DashboardAsIframe } from "../3-pages/2-dashboard-iframe";
+
+import { MotionExampleRenderer, isMotionExampleId } from "../3-pages/4-motion-examples/motion-example-render";
 
 export function Section2_RenderContents() {
     const { themePreseetName } = useSnapshot(appSettings.appUi);

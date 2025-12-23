@@ -1,6 +1,6 @@
-import * as MotionExamples from "../3-pages/4-motion-examples";
-import { MotionExampleId, MotionExampleItems } from "@/store/0-local-storage";
-import { DemoWithTabs } from "./1-demo-with-tabs";
+import * as MotionExamples from ".";
+import { type MotionExampleId, MotionExampleItems } from "@/store/0-local-storage";
+import { DemoWithTabs } from "../../2-right-view/1-demo-with-tabs";
 
 export function isMotionExampleId(id: string): id is MotionExampleId {
     return motionExampleIds.has(id as MotionExampleId);
