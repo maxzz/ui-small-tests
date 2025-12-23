@@ -2,11 +2,12 @@ import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import { demoSourceCodes } from "../3-pages/4-motion-examples/motion-examples-source-codes";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn/tabs";
 import { highlightTsxCode } from "@/utils/syntax-highlight-tsx";
+import { type MotionExampleId } from "@/store/0-local-storage/9-types";
 
 /**
  * Wrapper component for demos with tabs (Demo + Source Code)
  */
-export function DemoWithTabs({ demoId, children }: { demoId: string; children: React.ReactNode; }) {
+export function DemoWithTabs({ demoId, children }: { demoId: MotionExampleId; children: React.ReactNode; }) {
     
     const sourceCode = demoSourceCodes[demoId as keyof typeof demoSourceCodes];
     const isMissing = !sourceCode;
