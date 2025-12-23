@@ -6,13 +6,13 @@ import { applyThemeToElement, type ThemeEditorState } from "@/store/2-apply-them
 import { ScrollArea } from "../../ui/shadcn/scroll-area";
 import { HeroTitleText } from "../3-pages/3-controls/1-effect-hero-title/0-all";
 import { DashboardAsIframe } from "../3-pages/2-dashboard-iframe";
-import { CardsContents } from "./1-cards-contents";
-import { DashboardContents } from "./2-dashboard-contents";
+import { CardsContents } from "./10-cards-contents";
+import { DashboardContents } from "./20-dashboard-contents";
 import { hoverStackAtom, MouseMoveTrackerTooltip, mousePosAtom, MouseTracker } from "@/components/ui/local/8-mouse-tracker";
 import { UserItemList } from "../3-pages/3-controls/2-listview-commands/1-users-list";
 import { RootComponents } from "../3-pages/shadcn-frontpage";
-import { MotionVariantsRace } from "./3-motion-variants-race";
-import { MotionExampleRenderer, isMotionExampleId } from "./0-render-motion-example";
+import { MotionVariantsRace } from "./30-motion-variants-race";
+import { MotionExampleRenderer, isMotionExampleId } from "./40-render-motion-example";
 // import { CardsDemoWithTooltip } from "../../ui/local/8-mouse-tracker/x-nun-all-wrapper-w-tooltip";
 
 export function Section2_RenderContents() {

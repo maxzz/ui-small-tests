@@ -1,6 +1,6 @@
 import * as MotionExamples from "../3-pages/4-motion-examples";
 import { MotionExampleId, MotionExampleItems } from "@/store/0-local-storage";
-import { DemoWithTabs } from "./0-demo-with-tabs";
+import { DemoWithTabs } from "./1-demo-with-tabs";
 
 const motionExampleIds = new Set(MotionExampleItems.map(item => item.id));
 
