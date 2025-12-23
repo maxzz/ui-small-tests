@@ -15,133 +15,14 @@ import { MotionVariantsRace } from "./3-motion-variants-race";
 import * as MotionExamples from "../3-pages/4-motion-examples";
 import { demoSourceCodes } from "../3-pages/4-motion-examples/source-codes";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn/tabs";
+import { highlightTsxCode } from "@/utils/syntax-highlight-tsx";
 // import { CardsDemoWithTooltip } from "../../ui/local/8-mouse-tracker/x-nun-all-wrapper-w-tooltip";
 
-// Simple syntax highlighter for TSX code
-function highlightCode(code: string): React.ReactNode[] {
-    const lines = code.split('\n');
-    
-    return lines.map((line, lineIndex) => {
-        // Step 1: Escape HTML to prevent XSS and confusion
-        let safeLine = line
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;');
-
-        // Step 2: Extract strings and comments to placeholders so they aren't processed by other regexes
-        const tokens: { type: string, content: string }[] = [];
-        const placeholders: string[] = [];
-        
-        const storeToken = (type: string, content: string) => {
-            const id = `__TOKEN_${tokens.length}__`;
-            tokens.push({ type, content });
-            placeholders.push(id);
-            return id;
-        };
-
-        // Replace comments first
-        let processedLine = safeLine
-            .replace(/(\/\/.*$)/g, (match) => storeToken('comment', match))
-            .replace(/(\/\*[\s\S]*?\*\/)/g, (match) => storeToken('comment', match));
-
-        // Replace strings
-        processedLine = processedLine
-            .replace(/(&quot;(?:[^&]|&(?!quot;))*&quot;)/g, (match) => storeToken('string', match))
-            .replace(/(&#39;(?:[^&]|&(?!#39;))*&#39;)/g, (match) => storeToken('string', match))
-            .replace(/(`(?:[^`\\]|\\.)*`)/g, (match) => storeToken('string', match));
-
-        // Step 3: Highlight keywords and other elements in the remaining text
-        // (Now safe because strings/comments are hidden)
-        
-        processedLine = processedLine
-            // Keywords
-            .replace(/\b(import|export|from|const|let|var|function|return|if|else|switch|case|default|break|continue|for|while|do|try|catch|finally|throw|new|typeof|instanceof|class|extends|implements|interface|type|enum|async|await|yield|static|get|set|public|private|protected|readonly|as|is)\b/g, 
-                '<span class="text-purple-600 dark:text-purple-400 font-medium">$1</span>')
-            // React/JSX hooks
-            .replace(/\b(React|useState|useEffect|useRef|useMemo|useCallback|useContext|useReducer|forwardRef)\b/g, 
-                '<span class="text-cyan-600 dark:text-cyan-400">$1</span>')
-            // Types
-            .replace(/\b(string|number|boolean|null|undefined|void|any|never|unknown|object|Array|Promise|Record)\b/g, 
-                '<span class="text-sky-600 dark:text-sky-400">$1</span>')
-            // Numbers (careful not to match inside existing tags, though tags should mostly be class names now)
-            // We use a lookahead to ensure we aren't inside a tag attribute if possible, but placeholders help.
-            // Actually, we inserted HTML tags above. "text-purple-600" contains "600".
-            // So we MUST mask the HTML tags we just added too!
-            
-            // Wait, simpler approach: Don't add HTML tags yet. Add placeholders for EVERYTHING.
-            
-        // ... (Re-thinking strategy to be fully safe) ...
-        
-        // Let's go back to single-pass replacements but be very careful about order and matches.
-        // OR better: Just use the placeholders for the HTML tags too?
-        
-        // Let's refine the placeholder strategy:
-        // 1. Comments -> PLACEHOLDER
-        // 2. Strings -> PLACEHOLDER
-        // 3. Keywords -> PLACEHOLDER
-        // 4. ...
-        // 5. Restore all placeholders with their final HTML.
-        
-        // Actually, the "600" inside "text-purple-600" is the main culprit visible in the screenshot.
-        // If I perform all replacements and *then* re-insert them, I avoid matching inside the HTML.
-        
-        // Let's do the "Mask everything then Unmask" approach.
-        
-        return (
-            <div key={lineIndex} className="flex hover:bg-muted/50">
-                <span className="w-12 text-right pr-4 text-muted-foreground/50 select-none border-r border-border/50 mr-4">{lineIndex + 1}</span>
-                <span dangerouslySetInnerHTML={{ __html: simpleHighlight(safeLine) }} />
-            </div>
-        );
-    });
-}
-
-function simpleHighlight(line: string): string {
-    // 1. Mask strings and comments
-    const tokens: string[] = [];
-    const mask = (str: string) => {
-        const id = `___TOKEN_${tokens.length}___`;
-        tokens.push(str);
-        return id;
-    };
-
-    let temp = line
-        .replace(/(\/\/.*$)/g, m => mask(`<span class="text-emerald-600 dark:text-emerald-400">${m}</span>`))
-        .replace(/(&quot;.*?&quot;|&#39;.*?&#39;|`.*?`)/g, m => mask(`<span class="text-amber-600 dark:text-amber-400">${m}</span>`));
-
-    // 2. Highlight Keywords (now safe from strings/comments)
-    temp = temp
-        .replace(/\b(import|export|from|const|let|var|function|return|if|else|switch|case|default|break|continue|for|while|do|try|catch|finally|throw|new|typeof|instanceof|class|extends|implements|interface|type|enum|async|await|yield|static|get|set|public|private|protected|readonly|as|is)\b/g, 
-            m => mask(`<span class="text-purple-600 dark:text-purple-400 font-medium">${m}</span>`))
-        .replace(/\b(React|useState|useEffect|useRef|useMemo|useCallback|useContext|useReducer|forwardRef)\b/g, 
-            m => mask(`<span class="text-cyan-600 dark:text-cyan-400">${m}</span>`))
-        .replace(/\b(string|number|boolean|null|undefined|void|any|never|unknown|object|Array|Promise|Record)\b/g, 
-            m => mask(`<span class="text-sky-600 dark:text-sky-400">${m}</span>`))
-        .replace(/\b(\d+)\b/g, 
-            m => mask(`<span class="text-orange-500 dark:text-orange-400">${m}</span>`))
-        .replace(/\b(true|false)\b/g, 
-            m => mask(`<span class="text-orange-600 dark:text-orange-400 font-medium">${m}</span>`));
-
-    // 3. Restore all tokens
-    // We need to restore recursively or loop because we replaced with masks that contain the content?
-    // No, we stored the *final HTML* in the tokens array.
-    // So we just replace the placeholder IDs with the stored HTML.
-    
-    // Reverse order restoration isn't strictly necessary if IDs are unique, but good practice.
-    // However, since we masked sequentially, we can just replace all occurrences.
-    
-    tokens.forEach((content, i) => {
-        temp = temp.replace(`___TOKEN_${i}___`, content);
-    });
-
-    return temp;
-}
-
 // Wrapper component for demos with tabs (Demo + Source Code)
-function DemoWithTabs({ demoId, children }: { demoId: LeftViewId; children: React.ReactNode }) {
+function DemoWithTabs({ demoId, children }: { demoId: LeftViewId; children: React.ReactNode; }) {
     const sourceCode = demoSourceCodes[demoId];
     const isMissing = !sourceCode;
-    
+
     // Debug info header
     const debugInfo = `// [DEBUG INFO]
 // Requested Demo ID: "${demoId}"
@@ -168,7 +49,7 @@ function DemoWithTabs({ demoId, children }: { demoId: LeftViewId; children: Reac
             <TabsContent value="source" className="flex-1 overflow-auto mt-0">
                 <ScrollArea className="h-full">
                     <pre className="p-4 text-xs font-mono bg-muted/30 leading-relaxed">
-                        <code>{highlightCode(displayCode)}</code>
+                        <code>{highlightTsxCode(displayCode)}</code>
                     </pre>
                 </ScrollArea>
             </TabsContent>
@@ -215,54 +96,31 @@ function LeftViewChildren() {
     );
 
     switch (leftTree) {
-        case "cards":
-            return <RightViewWithMouseTracking />;
-        case "dashboard":
-            return <>{Dashboard}</>;
-        case "hero-text":
-            return <HeroTitleText />;
-        case "listview":
-            return <UserItemList />;
-        case "motion-variants-race":
-            return <MotionVariantsRace />;
+        case "cards": return <RightViewWithMouseTracking />;
+        case "dashboard": return <>{Dashboard}</>;
+        case "hero-text": return <HeroTitleText />;
+        case "listview": return <UserItemList />;
+        case "motion-variants-race": return <MotionVariantsRace />;
         // AnimatePresence examples
-        case "animate-presence":
-            return <DemoWithTabs demoId="animate-presence"><MotionExamples.AnimatePresenceDemo /></DemoWithTabs>;
-        case "animate-presence-image-gallery":
-            return <DemoWithTabs demoId="animate-presence-image-gallery"><MotionExamples.AnimatePresenceImageGalleryDemo /></DemoWithTabs>;
-        case "animate-presence-layout-animations-siblings":
-            return <DemoWithTabs demoId="animate-presence-layout-animations-siblings"><MotionExamples.AnimatePresenceLayoutAnimationsSiblingsDemo /></DemoWithTabs>;
-        case "animate-presence-notifications-list":
-            return <DemoWithTabs demoId="animate-presence-notifications-list"><MotionExamples.AnimatePresenceNotificationsListDemo /></DemoWithTabs>;
-        case "animate-presence-notifications-list-pop":
-            return <DemoWithTabs demoId="animate-presence-notifications-list-pop"><MotionExamples.AnimatePresenceNotificationsListPopDemo /></DemoWithTabs>;
-        case "animate-presence-parallel-children":
-            return <DemoWithTabs demoId="animate-presence-parallel-children"><MotionExamples.AnimatePresenceParallelChildrenDemo /></DemoWithTabs>;
-        case "animate-presence-siblings":
-            return <DemoWithTabs demoId="animate-presence-siblings"><MotionExamples.AnimatePresenceSiblingsDemo /></DemoWithTabs>;
-        case "animate-presence-switch":
-            return <DemoWithTabs demoId="animate-presence-switch"><MotionExamples.AnimatePresenceSwitchDemo /></DemoWithTabs>;
-        case "animate-presence-variants":
-            return <DemoWithTabs demoId="animate-presence-variants"><MotionExamples.AnimatePresenceVariantsDemo /></DemoWithTabs>;
-        case "animate-presence-wait":
-            return <DemoWithTabs demoId="animate-presence-wait"><MotionExamples.AnimatePresenceWaitDemo /></DemoWithTabs>;
+        case "animate-presence": return <DemoWithTabs demoId="animate-presence"><MotionExamples.AnimatePresenceDemo /></DemoWithTabs>;
+        case "animate-presence-image-gallery": return <DemoWithTabs demoId="animate-presence-image-gallery"><MotionExamples.AnimatePresenceImageGalleryDemo /></DemoWithTabs>;
+        case "animate-presence-layout-animations-siblings": return <DemoWithTabs demoId="animate-presence-layout-animations-siblings"><MotionExamples.AnimatePresenceLayoutAnimationsSiblingsDemo /></DemoWithTabs>;
+        case "animate-presence-notifications-list": return <DemoWithTabs demoId="animate-presence-notifications-list"><MotionExamples.AnimatePresenceNotificationsListDemo /></DemoWithTabs>;
+        case "animate-presence-notifications-list-pop": return <DemoWithTabs demoId="animate-presence-notifications-list-pop"><MotionExamples.AnimatePresenceNotificationsListPopDemo /></DemoWithTabs>;
+        case "animate-presence-parallel-children": return <DemoWithTabs demoId="animate-presence-parallel-children"><MotionExamples.AnimatePresenceParallelChildrenDemo /></DemoWithTabs>;
+        case "animate-presence-siblings": return <DemoWithTabs demoId="animate-presence-siblings"><MotionExamples.AnimatePresenceSiblingsDemo /></DemoWithTabs>;
+        case "animate-presence-switch": return <DemoWithTabs demoId="animate-presence-switch"><MotionExamples.AnimatePresenceSwitchDemo /></DemoWithTabs>;
+        case "animate-presence-variants": return <DemoWithTabs demoId="animate-presence-variants"><MotionExamples.AnimatePresenceVariantsDemo /></DemoWithTabs>;
+        case "animate-presence-wait": return <DemoWithTabs demoId="animate-presence-wait"><MotionExamples.AnimatePresenceWaitDemo /></DemoWithTabs>;
         // Animation examples
-        case "animation-animate":
-            return <DemoWithTabs demoId="animation-animate"><MotionExamples.AnimationAnimateDemo /></DemoWithTabs>;
-        case "animation-keyframes":
-            return <DemoWithTabs demoId="animation-keyframes"><MotionExamples.AnimationKeyframesDemo /></DemoWithTabs>;
-        case "animation-spring-css":
-            return <DemoWithTabs demoId="animation-spring-css"><MotionExamples.AnimationSpringCssDemo /></DemoWithTabs>;
-        case "animation-stagger":
-            return <DemoWithTabs demoId="animation-stagger"><MotionExamples.AnimationStaggerDemo /></DemoWithTabs>;
-        case "animation-variants":
-            return <DemoWithTabs demoId="animation-variants"><MotionExamples.AnimationVariantsDemo /></DemoWithTabs>;
-        case "animation-css-variables":
-            return <DemoWithTabs demoId="animation-css-variables"><MotionExamples.AnimationCssVariablesDemo /></DemoWithTabs>;
-        case "animation-filter":
-            return <DemoWithTabs demoId="animation-filter"><MotionExamples.AnimationFilterDemo /></DemoWithTabs>;
-        case "animation-height-auto-padding":
-            return <DemoWithTabs demoId="animation-height-auto-padding"><MotionExamples.AnimationHeightAutoPaddingDemo /></DemoWithTabs>;
+        case "animation-animate": return <DemoWithTabs demoId="animation-animate"><MotionExamples.AnimationAnimateDemo /></DemoWithTabs>;
+        case "animation-keyframes": return <DemoWithTabs demoId="animation-keyframes"><MotionExamples.AnimationKeyframesDemo /></DemoWithTabs>;
+        case "animation-spring-css": return <DemoWithTabs demoId="animation-spring-css"><MotionExamples.AnimationSpringCssDemo /></DemoWithTabs>;
+        case "animation-stagger": return <DemoWithTabs demoId="animation-stagger"><MotionExamples.AnimationStaggerDemo /></DemoWithTabs>;
+        case "animation-variants": return <DemoWithTabs demoId="animation-variants"><MotionExamples.AnimationVariantsDemo /></DemoWithTabs>;
+        case "animation-css-variables": return <DemoWithTabs demoId="animation-css-variables"><MotionExamples.AnimationCssVariablesDemo /></DemoWithTabs>;
+        case "animation-filter": return <DemoWithTabs demoId="animation-filter"><MotionExamples.AnimationFilterDemo /></DemoWithTabs>;
+        case "animation-height-auto-padding": return <DemoWithTabs demoId="animation-height-auto-padding"><MotionExamples.AnimationHeightAutoPaddingDemo /></DemoWithTabs>;
         // New Animation
         case "animation-batch-read-writes": return <DemoWithTabs demoId="animation-batch-read-writes"><MotionExamples.AnimationBatchReadWritesDemo /></DemoWithTabs>;
         case "animation-between-value-types": return <DemoWithTabs demoId="animation-between-value-types"><MotionExamples.AnimationBetweenValueTypesDemo /></DemoWithTabs>;
@@ -286,18 +144,13 @@ function LeftViewChildren() {
         case "animation-stress-mount": return <DemoWithTabs demoId="animation-stress-mount"><MotionExamples.AnimationStressMountDemo /></DemoWithTabs>;
         case "animation-transition-tween": return <DemoWithTabs demoId="animation-transition-tween"><MotionExamples.AnimationTransitionTweenDemo /></DemoWithTabs>;
         case "animation-use-animate-initial-transform": return <DemoWithTabs demoId="animation-use-animate-initial-transform"><MotionExamples.AnimationUseAnimateInitialTransformDemo /></DemoWithTabs>;
-        
+
         // Drag examples
-        case "drag-draggable":
-            return <DemoWithTabs demoId="drag-draggable"><MotionExamples.DragDraggableDemo /></DemoWithTabs>;
-        case "drag-constraints-ref":
-            return <DemoWithTabs demoId="drag-constraints-ref"><MotionExamples.DragConstraintsRefDemo /></DemoWithTabs>;
-        case "drag-to-reorder":
-            return <DemoWithTabs demoId="drag-to-reorder"><MotionExamples.DragToReorderDemo /></DemoWithTabs>;
-        case "drag-use-drag-controls":
-            return <DemoWithTabs demoId="drag-use-drag-controls"><MotionExamples.DragUseDragControlsDemo /></DemoWithTabs>;
-        case "drag-nested":
-            return <DemoWithTabs demoId="drag-nested"><MotionExamples.DragNestedDemo /></DemoWithTabs>;
+        case "drag-draggable": return <DemoWithTabs demoId="drag-draggable"><MotionExamples.DragDraggableDemo /></DemoWithTabs>;
+        case "drag-constraints-ref": return <DemoWithTabs demoId="drag-constraints-ref"><MotionExamples.DragConstraintsRefDemo /></DemoWithTabs>;
+        case "drag-to-reorder": return <DemoWithTabs demoId="drag-to-reorder"><MotionExamples.DragToReorderDemo /></DemoWithTabs>;
+        case "drag-use-drag-controls": return <DemoWithTabs demoId="drag-use-drag-controls"><MotionExamples.DragUseDragControlsDemo /></DemoWithTabs>;
+        case "drag-nested": return <DemoWithTabs demoId="drag-nested"><MotionExamples.DragNestedDemo /></DemoWithTabs>;
         // New Drag
         case "drag-block-viewport-conditionally": return <DemoWithTabs demoId="drag-block-viewport-conditionally"><MotionExamples.DragBlockViewportConditionallyDemo /></DemoWithTabs>;
         case "drag-constraints-ref-small-container": return <DemoWithTabs demoId="drag-constraints-ref-small-container"><MotionExamples.DragConstraintsRefSmallContainerDemo /></DemoWithTabs>;
@@ -310,12 +163,9 @@ function LeftViewChildren() {
         case "drag-use-drag-controls-snap-to-cursor": return <DemoWithTabs demoId="drag-use-drag-controls-snap-to-cursor"><MotionExamples.DragUseDragControlsSnapToCursorDemo /></DemoWithTabs>;
 
         // Events examples
-        case "events-while-hover":
-            return <DemoWithTabs demoId="events-while-hover"><MotionExamples.EventsWhileHoverDemo /></DemoWithTabs>;
-        case "events-while-tap":
-            return <DemoWithTabs demoId="events-while-tap"><MotionExamples.EventsWhileTapDemo /></DemoWithTabs>;
-        case "events-on-tap":
-            return <DemoWithTabs demoId="events-on-tap"><MotionExamples.EventsOnTapDemo /></DemoWithTabs>;
+        case "events-while-hover": return <DemoWithTabs demoId="events-while-hover"><MotionExamples.EventsWhileHoverDemo /></DemoWithTabs>;
+        case "events-while-tap": return <DemoWithTabs demoId="events-while-tap"><MotionExamples.EventsWhileTapDemo /></DemoWithTabs>;
+        case "events-on-tap": return <DemoWithTabs demoId="events-on-tap"><MotionExamples.EventsOnTapDemo /></DemoWithTabs>;
         // New Events
         case "events-pan": return <DemoWithTabs demoId="events-pan"><MotionExamples.EventsPanDemo /></DemoWithTabs>;
         case "events-while-focus": return <DemoWithTabs demoId="events-while-focus"><MotionExamples.EventsWhileFocusDemo /></DemoWithTabs>;
@@ -341,14 +191,10 @@ function LeftViewChildren() {
         case "layout-svg": return <DemoWithTabs demoId="layout-svg"><MotionExamples.LayoutSvgDemo /></DemoWithTabs>;
 
         // Shared Layout examples
-        case "shared-layout-continuity":
-            return <DemoWithTabs demoId="shared-layout-continuity"><MotionExamples.SharedLayoutContinuityDemo /></DemoWithTabs>;
-        case "shared-layout-lightbox":
-            return <DemoWithTabs demoId="shared-layout-lightbox"><MotionExamples.SharedLayoutLightboxDemo /></DemoWithTabs>;
-        case "shared-layout-lists":
-            return <DemoWithTabs demoId="shared-layout-lists"><MotionExamples.SharedLayoutListsDemo /></DemoWithTabs>;
-        case "shared-layout-toggle-details":
-            return <DemoWithTabs demoId="shared-layout-toggle-details"><MotionExamples.SharedLayoutToggleDetailsDemo /></DemoWithTabs>;
+        case "shared-layout-continuity": return <DemoWithTabs demoId="shared-layout-continuity"><MotionExamples.SharedLayoutContinuityDemo /></DemoWithTabs>;
+        case "shared-layout-lightbox": return <DemoWithTabs demoId="shared-layout-lightbox"><MotionExamples.SharedLayoutLightboxDemo /></DemoWithTabs>;
+        case "shared-layout-lists": return <DemoWithTabs demoId="shared-layout-lists"><MotionExamples.SharedLayoutListsDemo /></DemoWithTabs>;
+        case "shared-layout-toggle-details": return <DemoWithTabs demoId="shared-layout-toggle-details"><MotionExamples.SharedLayoutToggleDetailsDemo /></DemoWithTabs>;
         // New Shared Layout
         case "shared-layout-continuity-crossfade": return <DemoWithTabs demoId="shared-layout-continuity-crossfade"><MotionExamples.SharedLayoutContinuityCrossfadeDemo /></DemoWithTabs>;
         case "shared-layout-lightbox-crossfade": return <DemoWithTabs demoId="shared-layout-lightbox-crossfade"><MotionExamples.SharedLayoutLightboxCrossfadeDemo /></DemoWithTabs>;
@@ -362,10 +208,8 @@ function LeftViewChildren() {
         case "shared-layout-skew": return <DemoWithTabs demoId="shared-layout-skew"><MotionExamples.SharedLayoutSkewDemo /></DemoWithTabs>;
 
         // SVG examples
-        case "svg-path":
-            return <DemoWithTabs demoId="svg-path"><MotionExamples.SvgPathDemo /></DemoWithTabs>;
-        case "svg-layout-animation":
-            return <DemoWithTabs demoId="svg-layout-animation"><MotionExamples.SvgLayoutAnimationDemo /></DemoWithTabs>;
+        case "svg-path": return <DemoWithTabs demoId="svg-path"><MotionExamples.SvgPathDemo /></DemoWithTabs>;
+        case "svg-layout-animation": return <DemoWithTabs demoId="svg-layout-animation"><MotionExamples.SvgLayoutAnimationDemo /></DemoWithTabs>;
         // New SVG
         case "svg-motion-value": return <DemoWithTabs demoId="svg-motion-value"><MotionExamples.SvgMotionValueDemo /></DemoWithTabs>;
         case "svg-text-motion-value-child": return <DemoWithTabs demoId="svg-text-motion-value-child"><MotionExamples.SvgTextMotionValueChildDemo /></DemoWithTabs>;
@@ -373,12 +217,9 @@ function LeftViewChildren() {
         case "svg-without-initial-values": return <DemoWithTabs demoId="svg-without-initial-values"><MotionExamples.SvgWithoutInitialValuesDemo /></DemoWithTabs>;
 
         // Hooks examples
-        case "hooks-use-scroll":
-            return <DemoWithTabs demoId="hooks-use-scroll"><MotionExamples.HooksUseScrollDemo /></DemoWithTabs>;
-        case "hooks-use-spring":
-            return <DemoWithTabs demoId="hooks-use-spring"><MotionExamples.HooksUseSpringDemo /></DemoWithTabs>;
-        case "hooks-use-animation":
-            return <DemoWithTabs demoId="hooks-use-animation"><MotionExamples.HooksUseAnimationDemo /></DemoWithTabs>;
+        case "hooks-use-scroll": return <DemoWithTabs demoId="hooks-use-scroll"><MotionExamples.HooksUseScrollDemo /></DemoWithTabs>;
+        case "hooks-use-spring": return <DemoWithTabs demoId="hooks-use-spring"><MotionExamples.HooksUseSpringDemo /></DemoWithTabs>;
+        case "hooks-use-animation": return <DemoWithTabs demoId="hooks-use-animation"><MotionExamples.HooksUseAnimationDemo /></DemoWithTabs>;
         // New Hooks
         case "hooks-use-animated-state": return <DemoWithTabs demoId="hooks-use-animated-state"><MotionExamples.HooksUseAnimatedStateDemo /></DemoWithTabs>;
         case "hooks-use-instant-transition": return <DemoWithTabs demoId="hooks-use-instant-transition"><MotionExamples.HooksUseInstantTransitionDemo /></DemoWithTabs>;
@@ -389,19 +230,15 @@ function LeftViewChildren() {
         case "hooks-use-viewport-scroll": return <DemoWithTabs demoId="hooks-use-viewport-scroll"><MotionExamples.HooksUseViewportScrollDemo /></DemoWithTabs>;
 
         // WAAPI examples
-        case "waapi-background-color":
-            return <DemoWithTabs demoId="waapi-background-color"><MotionExamples.WaapiBackgroundColorDemo /></DemoWithTabs>;
-        case "waapi-opacity":
-            return <DemoWithTabs demoId="waapi-opacity"><MotionExamples.WaapiOpacityDemo /></DemoWithTabs>;
+        case "waapi-background-color": return <DemoWithTabs demoId="waapi-background-color"><MotionExamples.WaapiBackgroundColorDemo /></DemoWithTabs>;
+        case "waapi-opacity": return <DemoWithTabs demoId="waapi-opacity"><MotionExamples.WaapiOpacityDemo /></DemoWithTabs>;
         // New WAAPI
         case "waapi-interrupt": return <DemoWithTabs demoId="waapi-interrupt"><MotionExamples.WaapiInterruptDemo /></DemoWithTabs>;
         case "waapi-opacity-orchestration": return <DemoWithTabs demoId="waapi-opacity-orchestration"><MotionExamples.WaapiOpacityOrchestrationDemo /></DemoWithTabs>;
 
         // Misc examples
-        case "misc-motion-custom-tag":
-            return <DemoWithTabs demoId="misc-motion-custom-tag"><MotionExamples.MotionCustomTagDemo /></DemoWithTabs>;
-        case "misc-lazy-motion-async":
-            return <DemoWithTabs demoId="misc-lazy-motion-async"><MotionExamples.LazyMotionAsyncDemo /></DemoWithTabs>;
+        case "misc-motion-custom-tag": return <DemoWithTabs demoId="misc-motion-custom-tag"><MotionExamples.MotionCustomTagDemo /></DemoWithTabs>;
+        case "misc-lazy-motion-async": return <DemoWithTabs demoId="misc-lazy-motion-async"><MotionExamples.LazyMotionAsyncDemo /></DemoWithTabs>;
         // New Misc
         case "misc-lazy-motion-sync": return <DemoWithTabs demoId="misc-lazy-motion-sync"><MotionExamples.LazyMotionSyncDemo /></DemoWithTabs>;
         case "misc-motion-config-is-static": return <DemoWithTabs demoId="misc-motion-config-is-static"><MotionExamples.MotionConfigIsStaticDemo /></DemoWithTabs>;
@@ -503,7 +340,7 @@ function RightViewChildren() {
         case "animation-stress-mount": return <DemoWithTabs demoId="animation-stress-mount"><MotionExamples.AnimationStressMountDemo /></DemoWithTabs>;
         case "animation-transition-tween": return <DemoWithTabs demoId="animation-transition-tween"><MotionExamples.AnimationTransitionTweenDemo /></DemoWithTabs>;
         case "animation-use-animate-initial-transform": return <DemoWithTabs demoId="animation-use-animate-initial-transform"><MotionExamples.AnimationUseAnimateInitialTransformDemo /></DemoWithTabs>;
-        
+
         // Drag examples
         case "drag-draggable":
             return <DemoWithTabs demoId="drag-draggable"><MotionExamples.DragDraggableDemo /></DemoWithTabs>;

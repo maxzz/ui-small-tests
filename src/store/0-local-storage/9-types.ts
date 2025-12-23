@@ -1,4 +1,4 @@
-export type MotionViewId = 
+export type MotionExampleId = 
     // AnimatePresence
     | "animate-presence"
     | "animate-presence-image-gallery"
@@ -141,7 +141,7 @@ export type LeftViewId =
     | "hero-text" 
     | "listview"
     | "motion-variants-race"
-    | MotionViewId
+    | MotionExampleId
     | "not-yet";
 
 export type LeftViewItem = {
@@ -301,7 +301,7 @@ export type RightViewId =
     | "simple-dashboard" 
     | "original-cards"
     | "motion-variants-race"
-    | MotionViewId;
+    | MotionExampleId;
 
 export type RightViewItem = {
     id: RightViewId;
