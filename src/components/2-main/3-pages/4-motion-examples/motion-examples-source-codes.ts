@@ -1,4 +1,6 @@
 // Import raw source files using Vite's ?raw feature
+import { type MotionExampleId } from "@/store/0-local-storage/9-types";
+
 // AnimatePresence examples
 import animatePresence from "./1-animate-presence/AnimatePresence.tsx?raw";
 import animatePresenceImageGallery from "./1-animate-presence/AnimatePresence-image-gallery.tsx?raw";
@@ -143,7 +145,7 @@ import miscPropRef from "./10-misc/Prop-ref.tsx?raw";
 import miscPropStyle from "./10-misc/Prop-style.tsx?raw";
 
 // Export as a map
-export const demoSourceCodes: Record<string, string> = {
+export const demoSourceCodes: Record<MotionExampleId, string> = {
     // AnimatePresence examples
     "animate-presence": animatePresence,
     "animate-presence-image-gallery": animatePresenceImageGallery,
@@ -272,9 +274,11 @@ export const demoSourceCodes: Record<string, string> = {
 
 // Debug: Log available keys to console
 console.log("[SourceCodes] Loaded", Object.keys(demoSourceCodes).length, "examples");
+
 if (Object.keys(demoSourceCodes).length > 0) {
     const firstKey = Object.keys(demoSourceCodes)[0];
-    const firstContent = demoSourceCodes[firstKey];
+    const firstContent = demoSourceCodes[firstKey as MotionExampleId];
+    
     console.log("[SourceCodes] Sample key:", firstKey);
     console.log("[SourceCodes] Content type:", typeof firstContent);
     console.log("[SourceCodes] Content start:", firstContent?.slice(0, 100));
