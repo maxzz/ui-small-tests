@@ -4,7 +4,7 @@ import { classNames } from "@/utils";
 import { AnimatePresence, motion } from "motion/react";
 import { appSettings } from "@/store/0-local-storage";
 import { SidebarTrigger } from "../ui/shadcn/sidebar";
-import { HeaderToolbar } from "./2-header-toolbar";
+import { HeaderToolbarForCards } from "./2-header-toolbar";
 import { PanelLeftIcon } from "lucide-react";
 
 export function Section1_Header({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
@@ -14,7 +14,7 @@ export function Section1_Header({ className, ...rest }: HTMLAttributes<HTMLDivEl
             <div className="relative flex items-center">
                 <SidebarTrigger />
                 <PanelLeftIcon className="absolute left-0.5 fill-sky-50 stroke-1 pointer-events-none" />
-                
+
                 <div className="text-[.5rem] hover:scale-150 transition-transform origin-left">
                     ... the time is gone, the song is over, thought I'd something more to say.
                 </div>
@@ -28,8 +28,9 @@ export function Section1_Header({ className, ...rest }: HTMLAttributes<HTMLDivEl
                         exit={{ opacity: 0, x: 100, transition: { duration: 0 } }}
                         transition={{ duration: 0.2 }}
                     >
-                        <HeaderToolbar />
-                    </motion.div>}
+                        <HeaderToolbarForCards />
+                    </motion.div>
+                }
             </AnimatePresence>
         </header>
     );

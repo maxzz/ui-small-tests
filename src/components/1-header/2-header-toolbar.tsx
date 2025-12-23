@@ -9,7 +9,7 @@ import { SelectPatrs } from "./3-header-toolbar-select-parts";
 import { SelectTheme } from "./4-header-toolbar-select-theme";
 //import { TestTargetWindowPositionWReset } from "../ui/local/3-test-target-position-w-reset";
 
-export function HeaderToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
+export function HeaderToolbarForCards({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const { themePreseetName } = useSnapshot(appSettings.appUi);
     const themeNames = useAtomValue(themeNamesAtom);
 
