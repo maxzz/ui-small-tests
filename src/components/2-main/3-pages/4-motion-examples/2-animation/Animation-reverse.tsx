@@ -6,11 +6,12 @@ export function AnimationReverseDemo() {
 
     return (
         <div className="App" ref={scope}>
-            <div
-                className="four"
-                style={{ width: 50, height: 50, backgroundColor: "blue" }}
-            ></div>
-            <p>reverse</p>
+            <div className="four" style={{ width: 50, height: 50, backgroundColor: "blue" }} />
+
+            <p>
+                reverse
+            </p>
+
             <button
                 className="px-2 py-1 bg-white text-black rounded"
                 onClick={() => {
@@ -18,7 +19,6 @@ export function AnimationReverseDemo() {
                         "my label",
                         [".four", { x: 90 }, { duration: 2 }],
                     ]);
-
                     animation.time = animation.duration;
                     animation.speed = -1;
                 }}

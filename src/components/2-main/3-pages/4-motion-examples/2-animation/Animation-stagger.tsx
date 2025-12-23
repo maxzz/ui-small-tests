@@ -1,30 +1,31 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/Animation-stagger.tsx
-import * as React from "react";
 import { useState } from "react";
 import { motion } from "motion/react";
 
 export function AnimationStaggerDemo() {
     const [isOpen, setIsOpen] = useState(true);
-    const [items, setItems] = React.useState([0, 1, 2, 3, 4, 5]);
-    
+    const [items, setItems] = useState(() => [0, 1, 2, 3, 4, 5]);
+
     return (
         <motion.ul
-            variants={sidebarPoses}
+            variants={sidebarPosesVariants}
             initial="closed"
             animate={isOpen ? "open" : "closed"}
             style={sidebarStyle}
             onClick={() => setIsOpen(!isOpen)}
         >
-            {shuffle(items).map((i) => {
-                return (
-                    <motion.li key={i} variants={itemPoses} style={itemStyle} />
-                );
-            })}
+            {shuffle(items).map(
+                (i) => {
+                    return (
+                        <motion.li key={i} variants={itemPosesVariants} style={itemStyle} />
+                    );
+                }
+            )}
         </motion.ul>
     );
 }
 
-const sidebarPoses = {
+const sidebarPosesVariants = {
     open: {
         x: 0,
         transition: {
@@ -42,7 +43,7 @@ const sidebarPoses = {
     },
 };
 
-const itemPoses = {
+const itemPosesVariants = {
     open: {
         scale: 1,
         opacity: 1,
@@ -55,12 +56,14 @@ const itemPoses = {
             },
         },
     },
-    closed: { 
-        scale: 0.5, 
-        opacity: 0.1, 
-        transition: { duration: 1 } 
+    closed: {
+        scale: 0.5,
+        opacity: 0.1,
+        transition: { duration: 1 }
     },
 };
+
+// Simple Durstenfeld shuffle
 
 function shuffle(array: any[]) {
     let currentIndex = array.length;
@@ -81,6 +84,8 @@ function shuffle(array: any[]) {
 
     return array;
 }
+
+// Styles
 
 const sidebarStyle = {
     width: 100,

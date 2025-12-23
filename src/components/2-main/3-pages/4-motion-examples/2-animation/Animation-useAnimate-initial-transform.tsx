@@ -16,7 +16,11 @@ export function AnimationUseAnimateInitialTransformDemo() {
                     transform: "scale(0.1)",
                 }}
             ></div>
-            <p className="text-white">Take in original transform</p>
+
+            <p className="text-white">
+                Take in original transform
+            </p>
+
             <button
                 className="px-2 py-1 bg-white text-black rounded"
                 onClick={() => {

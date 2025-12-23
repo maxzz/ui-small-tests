@@ -6,12 +6,6 @@ import { MotionConfig, motion } from "motion/react";
  * An example of the tween transition type
  */
 
-const style = {
-    width: 100,
-    height: 100,
-    background: "white",
-};
-
 export function AnimationDisplayVisibilityDemo() {
     const [state, setState] = useState(true);
 
@@ -27,7 +21,16 @@ export function AnimationDisplayVisibilityDemo() {
                 onUpdate={(latest: any) => console.log(latest)}
                 style={style}
             />
-            <button className="bg-white text-black px-2 py-1 rounded mt-4" onClick={() => setState(!state)}>Toggle</button>
+            
+            <button className="bg-white text-black px-2 py-1 rounded mt-4" onClick={() => setState(!state)}>
+                Toggle
+            </button>
         </MotionConfig>
     );
 }
+
+const style = {
+    width: 100,
+    height: 100,
+    background: "white",
+};

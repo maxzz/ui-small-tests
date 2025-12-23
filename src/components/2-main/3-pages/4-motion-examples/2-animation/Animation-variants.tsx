@@ -4,7 +4,7 @@ import { motion, useMotionValue } from "motion/react";
 
 export function AnimationVariantsDemo() {
     const [isActive, setIsActive] = useState(true);
-    
+
     const backgroundColor = useMotionValue("#f00");
 
     return (

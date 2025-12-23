@@ -34,7 +34,7 @@ export function AnimationSpringCssDemo() {
             transition={{ visualDuration: duration, bounce, type: "spring", }}
             style={style}
         />
-        
+
         <SpringVisualiser transition={{ duration, type: "spring", bounce, durationBasedSpring: true, }} />
 
         <div className="text-sm text-gray-500">Bounce: {bounce}</div>
@@ -75,19 +75,11 @@ export function SpringVisualiser({ transition }: any) {
         <svg xmlns="http://www.w3.org/2000/svg" width={width + margin * 2} height={height + margin * 2}        >
             <path
                 d={curveLine}
-                fill="transparent"
-                strokeWidth="2"
-                stroke="#AAAAAA"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                fill="transparent" strokeWidth="2" stroke="#AAAAAA" strokeLinecap="round" strokeLinejoin="round"
             />
             <path
                 d={perceptualMarker}
-                fill="transparent"
-                strokeWidth="2"
-                stroke="#AAAAAA"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                fill="transparent" strokeWidth="2" stroke="#AAAAAA" strokeLinecap="round" strokeLinejoin="round"
             />
         </svg>
     );

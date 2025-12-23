@@ -2,33 +2,16 @@
 import { useState, useEffect } from "react";
 import { useAnimation, motion } from "motion/react";
 
-// Utilities
-const distance2D = (a: { x: number; y: number }, b: { x: number; y: number }) => Math.hypot(a.x - b.x, a.y - b.y);
-const wrap = (min: number, max: number, v: number) => {
-    const rangeSize = max - min;
-    return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
-};
-
-const count = 100;
-const len = Math.floor(Math.sqrt(count));
-const max = Math.hypot(len, len);
-const col = (v: number) => wrap(0, len, v);
-const row = (i: number) => Math.floor(i / len);
-const stagger = 0.1;
-
 export function AnimationStaggerCustomDemo() {
     const [center, setCenter] = useState({ x: len / 2, y: len / 2 });
 
-    const cells = Array.from(Array(count).keys()).map((i) => {
-        return (
-            <Cell
-                key={i}
-                center={center}
-                i={i}
-                onClick={() => setCenter({ x: col(i), y: row(i) })}
-            />
-        );
-    });
+    const cells = Array.from(Array(count).keys()).map(
+        (i) => {
+            return (
+                <Cell key={i} center={center} i={i} onClick={() => setCenter({ x: col(i), y: row(i) })} />
+            );
+        }
+    );
 
     return (
         <div className="flex flex-col items-center justify-center h-full">
@@ -49,7 +32,7 @@ export function AnimationStaggerCustomDemo() {
     );
 }
 
-const Cell = ({ center, i, onClick }: { center: { x: number, y: number }, i: number, onClick: () => void }) => {
+function Cell({ center, i, onClick }: { center: { x: number; y: number; }; i: number; onClick: () => void; }) {
     const x = col(i);
     const y = row(i);
     const d = distance2D({ x, y }, center);
@@ -57,7 +40,7 @@ const Cell = ({ center, i, onClick }: { center: { x: number, y: number }, i: num
 
     const animation = useAnimation();
 
-    const animate = async () => {
+    async function animate() {
         await animation.start({
             scale: 1,
             y: 0,
@@ -78,7 +61,7 @@ const Cell = ({ center, i, onClick }: { center: { x: number, y: number }, i: num
                 repeatType: "reverse",
             },
         });
-    };
+    }
 
     useEffect(() => {
         animate();
@@ -93,8 +76,23 @@ const Cell = ({ center, i, onClick }: { center: { x: number, y: number }, i: num
                     borderRadius: "50%",
                     background: "white",
                 }}
-                animate={animation}
-            />
+                animate={animation} />
         </div>
     );
+}
+
+// Utilities
+
+const distance2D = (a: { x: number; y: number; }, b: { x: number; y: number; }) => Math.hypot(a.x - b.x, a.y - b.y);
+
+const wrap = (min: number, max: number, v: number) => {
+    const rangeSize = max - min;
+    return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
 };
+
+const count = 100;
+const len = Math.floor(Math.sqrt(count));
+const max = Math.hypot(len, len);
+const col = (v: number) => wrap(0, len, v);
+const row = (i: number) => Math.floor(i / len);
+const stagger = 0.1;

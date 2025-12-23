@@ -4,13 +4,6 @@ import { motion, useCycle } from "motion/react";
 /**
  * An example of animating the boxShadow property.
  */
-
-const style = {
-    width: 100,
-    height: 100,
-    background: "white",
-};
-
 export function AnimationLayoutSizeDemo() {
     const [open, cycle] = useCycle(false, true);
 
@@ -40,3 +33,9 @@ export function AnimationLayoutSizeDemo() {
         </div>
     );
 }
+
+const style = {
+    width: 100,
+    height: 100,
+    background: "white",
+};

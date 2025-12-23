@@ -5,13 +5,6 @@ import { motion } from "motion/react";
 /**
  * An example of the tween transition type
  */
-
-const style = {
-    width: 100,
-    height: 100,
-    background: "white",
-};
-
 export function AnimationTransitionTweenDemo() {
     const [count, setCount] = useState(0);
     const transition = {
@@ -31,3 +24,9 @@ export function AnimationTransitionTweenDemo() {
         />
     );
 }
+
+const style = {
+    width: 100,
+    height: 100,
+    background: "white",
+};

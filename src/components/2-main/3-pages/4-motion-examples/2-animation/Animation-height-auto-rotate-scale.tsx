@@ -2,11 +2,31 @@
 import { useState } from "react";
 import { motion, mix } from "motion/react";
 
+export function AnimationHeightAutoRotateScaleDemo() {
+    // This approach is if you only want max one section open at a time. If you want multiple
+    // sections to potentially be open simultaneously, they can all be given their own `useState`.
+    const [expanded, setExpanded] = useState<false | number>(0);
+
+    return (
+        <div className="example-container">
+            {[0, 1, 2, 3].map((i) => (
+                <Accordion
+                    key={i}
+                    i={i}
+                    expanded={expanded}
+                    setExpanded={setExpanded}
+                />
+            ))}
+            <style>{styles}</style>
+        </div>
+    );
+}
+
 /**
  * This is an example of animating height: auto while also animation scale and rotate on the same element
  */
 
-const Accordion = ({ i, expanded, setExpanded }: { i: number, expanded: false | number, setExpanded: any }) => {
+const Accordion = ({ i, expanded, setExpanded }: { i: number, expanded: false | number, setExpanded: any; }) => {
     const isOpen = i === expanded;
 
     // By using `AnimatePresence` to mount and unmount the contents, we can animate
@@ -38,25 +58,38 @@ const Accordion = ({ i, expanded, setExpanded }: { i: number, expanded: false | 
     );
 };
 
-export function AnimationHeightAutoRotateScaleDemo() {
-    // This approach is if you only want max one section open at a time. If you want multiple
-    // sections to potentially be open simultaneously, they can all be given their own `useState`.
-    const [expanded, setExpanded] = useState<false | number>(0);
+// Randomly generate some paragraphs of word lengths
 
+function ContentPlaceholder() {
     return (
-        <div className="example-container">
-            {[0, 1, 2, 3].map((i) => (
-                <Accordion
-                    key={i}
-                    i={i}
-                    expanded={expanded}
-                    setExpanded={setExpanded}
-                />
+        <motion.div transition={{ duration: 0.8 }} className="content-placeholder">
+            {paragraphs.map((words, i) => (
+                <Paragraph key={i} words={words} />
             ))}
-            <style>{styles}</style>
+        </motion.div>
+    );
+}
+
+function Paragraph({ words }: { words: number[]; }) {
+    return (
+        <div className="paragraph">
+            {words.map((width, i) => (
+                <Word key={i} width={width} />
+            ))}
         </div>
     );
 }
+
+function Word({ width }: { width: number; }) {
+    return <div className="word" style={{ width }} />;
+}
+
+const paragraphs = Array(3).fill(1).map(() => Array(generateParagraphLength()).fill(1).map(generateWordLength));
+
+
+const randomInt = (min: number, max: number) => Math.round(mix(min, max, Math.random()));
+const generateParagraphLength = () => randomInt(5, 20);
+const generateWordLength = () => randomInt(20, 100);
 
 const styles = `
 .example-container {
@@ -116,32 +149,3 @@ section {
     margin-bottom: 20px;
   }
 }`;
-
-const randomInt = (min: number, max: number) => Math.round(mix(min, max, Math.random()));
-const generateParagraphLength = () => randomInt(5, 20);
-const generateWordLength = () => randomInt(20, 100);
-
-// Randomly generate some paragraphs of word lengths
-const paragraphs = Array(3)
-    .fill(1)
-    .map(() => {
-        return Array(generateParagraphLength()).fill(1).map(generateWordLength);
-    });
-
-const Word = ({ width }: { width: number }) => <div className="word" style={{ width }} />;
-
-const Paragraph = ({ words }: { words: number[] }) => (
-    <div className="paragraph">
-        {words.map((width, i) => (
-            <Word key={i} width={width} />
-        ))}
-    </div>
-);
-
-const ContentPlaceholder = () => (
-    <motion.div transition={{ duration: 0.8 }} className="content-placeholder">
-        {paragraphs.map((words, i) => (
-            <Paragraph key={i} words={words} />
-        ))}
-    </motion.div>
-);

@@ -2,12 +2,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 
-const styleA = {
-    width: 200,
-    height: 200,
-    borderRadius: 20,
-};
-
 export function DragConstraintsResizeDemo() {
     const [backgroundColor, setBackgroundColor] = useState("darkgray");
     useEffect(() => {
@@ -27,3 +21,9 @@ export function DragConstraintsResizeDemo() {
         />
     );
 }
+
+const styleA = {
+    width: 200,
+    height: 200,
+    borderRadius: 20,
+};

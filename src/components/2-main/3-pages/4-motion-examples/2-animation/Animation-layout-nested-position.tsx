@@ -1,12 +1,10 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/Animation-layout-nested-position.tsx
-import { motion, useCycle } from "motion/react";
 import * as React from "react";
+import { motion, useCycle } from "motion/react";
 
 /**
  * This example demonstrates that nested components automatically factor in parent size deltas
  */
-const transition = { duration: 3, ease: "circIn" as const };
-
 export function AnimationLayoutNestedPositionDemo() {
     const [isOpen, toggleIsOpen] = useCycle(true, false);
     const childStyles = isOpen ? openChild : closedChild;
@@ -43,6 +41,8 @@ export function AnimationLayoutNestedPositionDemo() {
         </div>
     );
 }
+
+const transition = { duration: 3, ease: "circIn" as const };
 
 const parent: React.CSSProperties = {
     position: "absolute",

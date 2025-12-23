@@ -8,37 +8,6 @@ import { mix, motion } from "motion/react";
  * Currently broken
  */
 
-const Accordion = ({ i, expanded, setExpanded }: { i: number, expanded: false | number, setExpanded: any }) => {
-    const isOpen = i === expanded;
-
-    // By using `AnimatePresence` to mount and unmount the contents, we can animate
-    // them in and out while also only rendering the contents of open accordions
-    return (
-        <>
-            <motion.header
-                initial={false}
-                animate={{ backgroundColor: isOpen ? "#FF0088" : "#0055FF" }}
-                onClick={() => setExpanded(isOpen ? false : i)}
-            />
-            <motion.section
-                initial="collapsed"
-                animate={isOpen ? "open" : "collapsed"}
-                variants={{
-                    open: { display: "block", opacity: 1, height: "auto" },
-                    collapsed: {
-                        opacity: 0,
-                        height: 0,
-                        transitionEnd: { display: "none" },
-                    },
-                }}
-                transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
-            >
-                <ContentPlaceholder />
-            </motion.section>
-        </>
-    );
-};
-
 export function AnimationHeightAutoDisplayNoneDemo() {
     // This approach is if you only want max one section open at a time. If you want multiple
     // sections to potentially be open simultaneously, they can all be given their own `useState`.
@@ -46,18 +15,75 @@ export function AnimationHeightAutoDisplayNoneDemo() {
 
     return (
         <div className="example-container">
-            {[0, 1, 2, 3].map((i) => (
-                <Accordion
-                    key={i}
-                    i={i}
-                    expanded={expanded}
-                    setExpanded={setExpanded}
-                />
-            ))}
-            <style>{styles}</style>
+            {[0, 1, 2, 3].map(
+                (i) => (
+                    <Accordion key={i} i={i} expanded={expanded} setExpanded={setExpanded} />
+                )
+            )}
+            {/* <style>{styles}</style> */}
         </div>
     );
 }
+
+function Accordion({ i, expanded, setExpanded }: { i: number; expanded: false | number; setExpanded: any; }) {
+    const isOpen = i === expanded;
+
+    // By using `AnimatePresence` to mount and unmount the contents, we can animate
+    // them in and out while also only rendering the contents of open accordions
+    return (<>
+        <motion.header
+            initial={false}
+            animate={{ backgroundColor: isOpen ? "#FF0088" : "#0055FF" }}
+            onClick={() => setExpanded(isOpen ? false : i)} />
+        <motion.section
+            initial="collapsed"
+            animate={isOpen ? "open" : "collapsed"}
+            variants={{
+                open: { display: "block", opacity: 1, height: "auto" },
+                collapsed: { opacity: 0, height: 0, transitionEnd: { display: "none" }, },
+            }}
+            transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
+        >
+            <ContentPlaceholder />
+        </motion.section>
+    </>);
+}
+
+// Randomly generate some paragraphs of word lengths
+
+function ContentPlaceholder() {
+    return (
+        <motion.div
+            className="content-placeholder"
+            variants={{ collapsed: { scale: 0.8 }, open: { scale: 1 } }}
+            transition={{ duration: 0.8 }}
+        >
+            {paragraphs.map((words, i) => (
+                <Paragraph key={i} words={words} />
+            ))}
+        </motion.div>
+    );
+}
+
+const paragraphs = Array(3).fill(1).map(() => Array(generateParagraphLength()).fill(1).map(generateWordLength));
+
+function Paragraph({ words }: { words: number[]; }) {
+    return (
+        <div className="paragraph">
+            {words.map((width, i) => (
+                <Word key={i} width={width} />
+            ))}
+        </div>
+    );
+}
+
+function Word({ width }: { width: number; }) {
+    return <div className="word" style={{ width }} />;
+}
+
+const randomInt = (min: number, max: number) => Math.round(mix(min, max, Math.random()));
+const generateParagraphLength = () => randomInt(5, 20);
+const generateWordLength = () => randomInt(20, 100);
 
 const styles = `
 .example-container {
@@ -117,36 +143,3 @@ section {
     margin-bottom: 20px;
   }
 }`;
-
-const randomInt = (min: number, max: number) => Math.round(mix(min, max, Math.random()));
-const generateParagraphLength = () => randomInt(5, 20);
-const generateWordLength = () => randomInt(20, 100);
-
-// Randomly generate some paragraphs of word lengths
-const paragraphs = Array(3)
-    .fill(1)
-    .map(() => {
-        return Array(generateParagraphLength()).fill(1).map(generateWordLength);
-    });
-
-const Word = ({ width }: { width: number }) => <div className="word" style={{ width }} />;
-
-const Paragraph = ({ words }: { words: number[] }) => (
-    <div className="paragraph">
-        {words.map((width, i) => (
-            <Word key={i} width={width} />
-        ))}
-    </div>
-);
-
-const ContentPlaceholder = () => (
-    <motion.div
-        variants={{ collapsed: { scale: 0.8 }, open: { scale: 1 } }}
-        transition={{ duration: 0.8 }}
-        className="content-placeholder"
-    >
-        {paragraphs.map((words, i) => (
-            <Paragraph key={i} words={words} />
-        ))}
-    </motion.div>
-);

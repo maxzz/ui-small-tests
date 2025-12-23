@@ -1,28 +1,6 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/Drag-external-handlers.tsx
-import * as React from "react";
 import { useEffect, useRef } from "react";
-import {
-    motion,
-    useMotionValue,
-    useMotionTemplate,
-    useTransform,
-} from "motion/react";
-
-const container: React.CSSProperties = {
-    width: 600,
-    height: 300,
-    background: "rgba(255,255,255,0.5)",
-    borderRadius: 20,
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "center",
-};
-
-const child: React.CSSProperties = {
-    width: 200,
-    height: 200,
-    borderRadius: 20,
-};
+import { motion, useMotionValue, useMotionTemplate, useTransform, } from "motion/react";
 
 export function DragExternalHandlersDemo() {
     const ref = useRef(null);
@@ -65,3 +43,19 @@ export function DragExternalHandlersDemo() {
         </motion.div>
     );
 }
+
+const container: React.CSSProperties = {
+    width: 600,
+    height: 300,
+    background: "rgba(255,255,255,0.5)",
+    borderRadius: 20,
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+};
+
+const child: React.CSSProperties = {
+    width: 200,
+    height: 200,
+    borderRadius: 20,
+};

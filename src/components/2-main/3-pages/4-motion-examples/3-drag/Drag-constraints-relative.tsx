@@ -1,13 +1,6 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/Drag-constraints-relative.tsx
 import { motion } from "motion/react";
 
-const styleA = {
-    width: 100,
-    height: 100,
-    background: "white",
-    borderRadius: 20,
-};
-
 export function DragConstraintsRelativeDemo() {
     return (
         <motion.div
@@ -20,3 +13,10 @@ export function DragConstraintsRelativeDemo() {
         />
     );
 }
+
+const styleA = {
+    width: 100,
+    height: 100,
+    background: "white",
+    borderRadius: 20,
+};
