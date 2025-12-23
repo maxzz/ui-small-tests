@@ -1,11 +1,4 @@
-// Left view
-
-export type LeftViewId = 
-    | "cards" 
-    | "dashboard" 
-    | "hero-text" 
-    | "listview" 
-    | "motion-variants-race"
+export type MotionViewId = 
     // AnimatePresence
     | "animate-presence"
     | "animate-presence-image-gallery"
@@ -138,7 +131,17 @@ export type LeftViewId =
     | "misc-motion-config-is-static"
     | "misc-motion-config-nonce"
     | "misc-prop-ref"
-    | "misc-prop-style"
+    | "misc-prop-style";
+
+// Left view
+
+export type LeftViewId = 
+    | "cards" 
+    | "dashboard" 
+    | "hero-text" 
+    | "listview"
+    | "motion-variants-race"
+    | MotionViewId
     | "not-yet";
 
 export type LeftViewItem = {
@@ -296,141 +299,9 @@ export const LeftViewItems = [
 export type RightViewId = 
     | "simple-cards" 
     | "simple-dashboard" 
-    | "original-cards" 
+    | "original-cards"
     | "motion-variants-race"
-    // AnimatePresence
-    | "animate-presence"
-    | "animate-presence-image-gallery"
-    | "animate-presence-layout-animations-siblings"
-    | "animate-presence-notifications-list"
-    | "animate-presence-notifications-list-pop"
-    | "animate-presence-parallel-children"
-    | "animate-presence-siblings"
-    | "animate-presence-switch"
-    | "animate-presence-variants"
-    | "animate-presence-wait"
-    // Animation
-    | "animation-animate"
-    | "animation-keyframes"
-    | "animation-spring-css"
-    | "animation-stagger"
-    | "animation-variants"
-    | "animation-css-variables"
-    | "animation-filter"
-    | "animation-height-auto-padding"
-    // New Animation
-    | "animation-batch-read-writes"
-    | "animation-between-value-types"
-    | "animation-between-value-types-x"
-    | "animation-box-shadow"
-    | "animation-cleanup"
-    | "animation-display-visibility"
-    | "animation-height-auto-display-none"
-    | "animation-height-auto-rotate-scale"
-    | "animation-layout-delay-children"
-    | "animation-layout-nested-position"
-    | "animation-layout-scale-correction"
-    | "animation-layout-separate-children"
-    | "animation-layout-size"
-    | "animation-layout-text-size"
-    | "animation-layout-transform-template"
-    | "animation-layout-update-stress"
-    | "animation-repeat-spring"
-    | "animation-reverse"
-    | "animation-stagger-custom"
-    | "animation-stress-mount"
-    | "animation-transition-tween"
-    | "animation-use-animate-initial-transform"
-    // Drag
-    | "drag-draggable"
-    | "drag-constraints-ref"
-    | "drag-to-reorder"
-    | "drag-use-drag-controls"
-    | "drag-nested"
-    // New Drag
-    | "drag-block-viewport-conditionally"
-    | "drag-constraints-ref-small-container"
-    | "drag-constraints-ref-small-container-layout"
-    | "drag-constraints-relative"
-    | "drag-constraints-resize"
-    | "drag-external-handlers"
-    | "drag-shared-layout"
-    | "drag-svg"
-    | "drag-use-drag-controls-snap-to-cursor"
-    // Events
-    | "events-while-hover"
-    | "events-while-tap"
-    | "events-on-tap"
-    // New Events
-    | "events-pan"
-    | "events-while-focus"
-    | "events-while-focus-variants"
-    | "events-while-hover-unit-conversion"
-    | "events-while-tap-cancel-on-scroll"
-    | "events-while-tap-global"
-    | "events-while-tap-variants"
-    // Layout
-    | "layout-rotate"
-    | "layout-skew"
-    | "layout-projection-scale-position"
-    // New Layout
-    | "layout-projection-correct-style-border-radius"
-    | "layout-projection-custom-values"
-    | "layout-projection-scale-correction-border-radius"
-    | "layout-projection-scale-correction-shadow"
-    | "layout-projection-scale-size"
-    | "layout-svg"
-    // Shared Layout
-    | "shared-layout-continuity"
-    | "shared-layout-lightbox"
-    | "shared-layout-lists"
-    | "shared-layout-toggle-details"
-    // New Shared Layout
-    | "shared-layout-continuity-crossfade"
-    | "shared-layout-lightbox-crossfade"
-    | "shared-layout-motion-value-continuity"
-    | "shared-layout-nested-inset-elements"
-    | "shared-layout-nested-inset-elements-no-layout"
-    | "shared-layout-reparenting"
-    | "shared-layout-reparenting-transform-template"
-    | "shared-layout-rotate"
-    | "shared-layout-sibling-to-child"
-    | "shared-layout-skew"
-    // SVG
-    | "svg-path"
-    | "svg-layout-animation"
-    // New SVG
-    | "svg-motion-value"
-    | "svg-text-motion-value-child"
-    | "svg-transform"
-    | "svg-without-initial-values"
-    // Hooks
-    | "hooks-use-scroll"
-    | "hooks-use-spring"
-    | "hooks-use-animation"
-    // New Hooks
-    | "hooks-use-animated-state"
-    | "hooks-use-instant-transition"
-    | "hooks-use-presence"
-    | "hooks-use-reduced-motion"
-    | "hooks-use-transform-with-use-layout-effect"
-    | "hooks-use-velocity"
-    | "hooks-use-viewport-scroll"
-    // WAAPI
-    | "waapi-background-color"
-    | "waapi-opacity"
-    // New WAAPI
-    | "waapi-interrupt"
-    | "waapi-opacity-orchestration"
-    // Misc
-    | "misc-motion-custom-tag"
-    | "misc-lazy-motion-async"
-    // New Misc
-    | "misc-lazy-motion-sync"
-    | "misc-motion-config-is-static"
-    | "misc-motion-config-nonce"
-    | "misc-prop-ref"
-    | "misc-prop-style";
+    | MotionViewId;
 
 export type RightViewItem = {
     id: RightViewId;
