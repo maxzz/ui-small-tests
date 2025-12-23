@@ -3,7 +3,13 @@ import * as MotionExamples from "../3-pages/4-motion-examples";
 import { demoSourceCodes } from "../3-pages/4-motion-examples/source-codes";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn/tabs";
 import { highlightTsxCode } from "@/utils/syntax-highlight-tsx";
-import { MotionExampleId } from "@/store/0-local-storage";
+import { MotionExampleId, MotionExampleItems } from "@/store/0-local-storage";
+
+const motionExampleIds = new Set(MotionExampleItems.map(item => item.id));
+
+export function isMotionExampleId(id: string): id is MotionExampleId {
+    return motionExampleIds.has(id as MotionExampleId);
+}
 
 // Wrapper component for demos with tabs (Demo + Source Code)
 export function DemoWithTabs({ demoId, children }: { demoId: string; children: React.ReactNode; }) {
@@ -44,10 +50,7 @@ export function DemoWithTabs({ demoId, children }: { demoId: string; children: R
     );
 }
 
-export function MotionExampleRenderer({ viewId }: { viewId: string }) {
-    // Type guard to check if viewId is a MotionExampleId could be useful, 
-    // but for now we just switch on the string.
-    
+export function MotionExampleRenderer({ viewId }: { viewId: MotionExampleId }) {
     switch (viewId) {
         // AnimatePresence examples
         case "animate-presence": return <DemoWithTabs demoId="animate-presence"><MotionExamples.AnimatePresenceDemo /></DemoWithTabs>;
@@ -191,6 +194,9 @@ export function MotionExampleRenderer({ viewId }: { viewId: string }) {
         case "misc-prop-ref": return <DemoWithTabs demoId="misc-prop-ref"><MotionExamples.PropRefDemo /></DemoWithTabs>;
         case "misc-prop-style": return <DemoWithTabs demoId="misc-prop-style"><MotionExamples.PropStyleDemo /></DemoWithTabs>;
 
-        default: return null;
+        default: {
+            const _exhaustiveCheck: never = viewId;
+            return null;
+        }
     }
 }

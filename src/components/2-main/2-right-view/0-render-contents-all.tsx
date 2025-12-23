@@ -12,7 +12,7 @@ import { hoverStackAtom, MouseMoveTrackerTooltip, mousePosAtom, MouseTracker } f
 import { UserItemList } from "../3-pages/3-controls/2-listview-commands/1-users-list";
 import { RootComponents } from "../3-pages/shadcn-frontpage";
 import { MotionVariantsRace } from "./3-motion-variants-race";
-import { MotionExampleRenderer } from "./0-render-motion-example";
+import { MotionExampleRenderer, isMotionExampleId } from "./0-render-motion-example";
 // import { CardsDemoWithTooltip } from "../../ui/local/8-mouse-tracker/x-nun-all-wrapper-w-tooltip";
 
 export function Section2_RenderContents() {
@@ -53,9 +53,8 @@ function LeftViewChildren() {
         }, []
     );
 
-    const motionContent = MotionExampleRenderer({ viewId: leftTree });
-    if (motionContent) {
-        return motionContent;
+    if (isMotionExampleId(leftTree)) {
+        return <MotionExampleRenderer viewId={leftTree} />;
     }
 
     switch (leftTree) {
@@ -90,9 +89,8 @@ function RightViewWithMouseTracking() {
 function RightViewChildren() {
     const { rightView } = useSnapshot(appSettings.appUi);
 
-    const motionContent = MotionExampleRenderer({ viewId: rightView });
-    if (motionContent) {
-        return motionContent;
+    if (isMotionExampleId(rightView)) {
+        return <MotionExampleRenderer viewId={rightView} />;
     }
 
     switch (rightView) {
