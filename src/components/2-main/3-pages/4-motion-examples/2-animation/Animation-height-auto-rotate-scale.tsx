@@ -83,9 +83,17 @@ function Word({ width }: { width: number; }) {
 const paragraphs = Array(3).fill(1).map(() => Array(generateParagraphLength()).fill(1).map(generateWordLength));
 
 
-const randomInt = (min: number, max: number) => Math.round(mix(min, max, Math.random()));
-const generateParagraphLength = () => randomInt(5, 20);
-const generateWordLength = () => randomInt(20, 100);
+function randomInt(min: number, max: number) {
+    return Math.round(mix(min, max, Math.random()));
+}
+
+function generateParagraphLength() {
+    return randomInt(5, 20);
+}
+
+function generateWordLength() {
+    return randomInt(20, 100);
+}
 
 const styles = `
 .example-container {

@@ -80,9 +80,17 @@ function Word({ width }: { width: number; }) {
     return <div className="word" style={{ width }} />;
 }
 
-const randomInt = (min: number, max: number) => Math.round(mix(min, max, Math.random()));
-const generateParagraphLength = () => randomInt(5, 20);
-const generateWordLength = () => randomInt(20, 100);
+function randomInt(min: number, max: number) {
+    return Math.round(mix(min, max, Math.random()));
+}
+
+function generateParagraphLength() {
+    return randomInt(5, 20);
+}
+
+function generateWordLength() {
+    return randomInt(20, 100);
+}
 
 const styles = `
 .example-container {
