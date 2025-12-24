@@ -4,19 +4,13 @@ import { motion, MotionConfig } from "motion/react";
 /**
  * An example of a motion tree set to static mode, like on the Framer canvas
  */
-
-const style = {
-    width: 100,
-    height: 100,
-    background: "white",
-    x: 30,
-    borderRadius: 20,
-};
-
 export function MotionConfigIsStaticDemo() {
     return (
         <div className="p-10 bg-blue-500 h-full">
-            <p className="mb-4 text-white">Static mode (no animation)</p>
+            <p className="mb-4 text-white">
+                Static mode (no animation)
+            </p>
+            
             <MotionConfig isStatic>
                 <motion.div
                     animate={{
@@ -33,3 +27,11 @@ export function MotionConfigIsStaticDemo() {
         </div>
     );
 }
+
+const style = {
+    width: 100,
+    height: 100,
+    background: "white",
+    x: 30,
+    borderRadius: 20,
+};

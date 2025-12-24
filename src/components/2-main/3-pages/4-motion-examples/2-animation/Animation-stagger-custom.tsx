@@ -27,7 +27,10 @@ export function AnimationStaggerCustomDemo() {
             >
                 {cells}
             </div>
-            <p className="text-white">click to ripple</p>
+
+            <p className="text-white">
+                click to ripple
+            </p>
         </div>
     );
 }
@@ -83,12 +86,14 @@ function Cell({ center, i, onClick }: { center: { x: number; y: number; }; i: nu
 
 // Utilities
 
-const distance2D = (a: { x: number; y: number; }, b: { x: number; y: number; }) => Math.hypot(a.x - b.x, a.y - b.y);
+function distance2D(a: { x: number; y: number; }, b: { x: number; y: number; }) {
+    return Math.hypot(a.x - b.x, a.y - b.y);
+}
 
-const wrap = (min: number, max: number, v: number) => {
+function wrap(min: number, max: number, v: number) {
     const rangeSize = max - min;
     return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
-};
+}
 
 const count = 100;
 const len = Math.floor(Math.sqrt(count));

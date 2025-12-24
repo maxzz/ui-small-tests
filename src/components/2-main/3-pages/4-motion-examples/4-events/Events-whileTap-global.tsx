@@ -1,18 +1,9 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/Events-whileTap-global.tsx
 import { motion } from "motion/react";
 
-const style = {
-    width: 100,
-    height: 100,
-    background: "rgba(255, 0, 0, 1)",
-};
-
 export function EventsWhileTapGlobalDemo() {
     return (
-        <motion.div 
-            globalTapTarget 
-            whileTap="pressed"
-        >
+        <motion.div globalTapTarget  whileTap="pressed">
             <motion.div
                 variants={{
                     pressed: {
@@ -25,3 +16,9 @@ export function EventsWhileTapGlobalDemo() {
         </motion.div>
     );
 }
+
+const style = {
+    width: 100,
+    height: 100,
+    background: "rgba(255, 0, 0, 1)",
+};

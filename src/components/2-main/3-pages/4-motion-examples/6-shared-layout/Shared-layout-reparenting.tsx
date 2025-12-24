@@ -3,33 +3,35 @@ import { motion, useCycle } from "motion/react";
 
 /**
  * This example demonstrates using shared layout
- * to animate between two sets of two components with a different
- * hierarchy
+ * to animate between two sets of two components with a different hierarchy
  */
+export function SharedLayoutReparentingDemo() {
+    const [isOn, toggleOn] = useCycle(false, true);
+    return (<>
+        <style>{style}</style>
 
-const Child = () => {
+        <div className="container" onClick={() => toggleOn()}>
+            {isOn ? <Child /> : <Sibling />}
+        </div>
+    </>);
+}
+
+function Child() {
     return (
         <motion.div className="big" layoutId="big">
             <motion.div className="small" layoutId="small" />
         </motion.div>
     );
-};
+}
 
-const Sibling = () => {
-    return (
-        <>
-            <motion.div className="big purple" layoutId="big" />
-            <motion.div className="small purple" layoutId="small" />
-        </>
-    );
-};
+function Sibling() {
+    return (<>
+        <motion.div className="big purple" layoutId="big" />
+        <motion.div className="small purple" layoutId="small" />
+    </>);
+}
 
-export function SharedLayoutReparentingDemo() {
-    const [isOn, toggleOn] = useCycle(false, true);
-
-    return (
-        <>
-        <style>{`
+const style = `
 .container {
     width: 200px;
     height: 340px;
@@ -72,11 +74,4 @@ export function SharedLayoutReparentingDemo() {
     left: 26px;
     background-color: rgba(136, 85, 255, 0.3);
 }
-        `}</style>
-        <div className="container" onClick={() => toggleOn()}>
-            {isOn ? <Child /> : <Sibling />}
-        </div>
-        </>
-    );
-}
-
+`;

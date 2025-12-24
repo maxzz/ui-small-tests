@@ -7,11 +7,8 @@ import { motion } from "motion/react";
  */
 export function AnimationTransitionTweenDemo() {
     const [count, setCount] = useState(0);
-    const transition = {
-        type: "spring" as const,
-        duration: 0.4,
-        dampingRatio: 0.4,
-    };
+
+    const transition = { type: "spring" as const, duration: 0.4, dampingRatio: 0.4, };
 
     return (
         <motion.div

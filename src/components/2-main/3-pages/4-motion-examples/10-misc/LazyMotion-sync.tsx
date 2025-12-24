@@ -5,14 +5,15 @@ import { m, LazyMotion, domAnimation } from "motion/react";
 /**
  * An example of dynamically loading features from a different entry point.
  */
-
-const style = {
-    width: 100,
-    height: 100,
-    background: "white",
-    x: 0,
-    borderRadius: 20,
-};
+export function LazyMotionSyncDemo() {
+    return (
+        <div className="p-10 bg-purple-600 h-full">
+            <LazyMotion features={domAnimation}>
+                <Component />
+            </LazyMotion>
+        </div>
+    );
+}
 
 const Component = memo(() => {
     return (
@@ -30,12 +31,10 @@ const Component = memo(() => {
     );
 });
 
-export function LazyMotionSyncDemo() {
-    return (
-        <div className="p-10 bg-purple-600 h-full">
-            <LazyMotion features={domAnimation}>
-                <Component />
-            </LazyMotion>
-        </div>
-    );
-}
+const style = {
+    width: 100,
+    height: 100,
+    background: "white",
+    x: 0,
+    borderRadius: 20,
+};

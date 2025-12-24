@@ -8,36 +8,37 @@ import { motion, useCycle } from "motion/react";
 export function AnimationLayoutNestedPositionDemo() {
     const [isOpen, toggleIsOpen] = useCycle(true, false);
     const childStyles = isOpen ? openChild : closedChild;
+
     return (
         <div className="relative w-full h-full bg-slate-100 overflow-hidden">
-        <motion.div
-            layout
-            transition={transition}
-            style={isOpen ? openParent : closedParent}
-            onClick={() => toggleIsOpen()}
-            onLayoutAnimationStart={() => console.log("start")}
-            onLayoutAnimationComplete={() => console.log("complete")}
-            id="parent"
-        >
             <motion.div
                 layout
                 transition={transition}
-                style={childStyles}
-                id="child"
+                style={isOpen ? openParent : closedParent}
+                onClick={() => toggleIsOpen()}
+                onLayoutAnimationStart={() => console.log("start")}
+                onLayoutAnimationComplete={() => console.log("complete")}
+                id="parent"
             >
                 <motion.div
                     layout
                     transition={transition}
-                    style={{
-                        ...childStyles,
-                        height: "30%",
-                        backgroundColor: isOpen ? "yellow" : "red",
-                        width: isOpen ? "50%" : "100%",
-                    }}
-                    id="yr"
-                ></motion.div>
+                    style={childStyles}
+                    id="child"
+                >
+                    <motion.div
+                        layout
+                        transition={transition}
+                        style={{
+                            ...childStyles,
+                            height: "30%",
+                            backgroundColor: isOpen ? "yellow" : "red",
+                            width: isOpen ? "50%" : "100%",
+                        }}
+                        id="yr"
+                    />
+                </motion.div>
             </motion.div>
-        </motion.div>
         </div>
     );
 }

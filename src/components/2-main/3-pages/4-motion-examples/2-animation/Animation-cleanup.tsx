@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 
 export function AnimationCleanupDemo() {
     const [open, setOpen] = useState(true);
+    
     return (
         <div>
             {open && (
@@ -21,9 +22,12 @@ export function AnimationCleanupDemo() {
                         times: [0, 0.5, 1],
                         ease: "easeInOut",
                     }}
-                ></motion.div>
+                />
             )}
-            <button className="bg-white text-black px-2 py-1 rounded mt-20" onClick={() => setOpen(false)}>Disable animation</button>
+
+            <button className="bg-white text-black px-2 py-1 rounded mt-20" onClick={() => setOpen(false)}>
+                Disable animation
+            </button>
         </div>
     );
 }

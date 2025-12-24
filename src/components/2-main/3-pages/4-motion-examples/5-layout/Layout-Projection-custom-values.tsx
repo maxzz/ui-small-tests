@@ -1,50 +1,19 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/Layout-Projection-custom-values.tsx
-import { addScaleCorrector, motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { addScaleCorrector, motion } from "motion/react";
 
 /**
- * This demo is called "Framer border" because it demonstrates border animations as Framer
- * implements borders, by positioning the inner div separately to the sized outer Frame using `inset`
+ * This demo is called "Framer border" because it demonstrates border animations as Framer implements borders,
+ * by positioning the inner div separately to the sized outer Frame using `inset`
  * and defining additional values with handlers passed to `autoValues`.
  */
-
-interface ScaleCorrectorContext {
-    targetDelta: { x: { scale: number }; y: { scale: number } }
-    treeScale: { x: number; y: number }
-}
-
-type ScaleCorrector = (
-    latest: string | number,
-    context: ScaleCorrectorContext
-) => string
-
-const borderWidth = (axis: "x" | "y"): { correct: ScaleCorrector } => ({
-    correct: (
-        latest: string | number,
-        { targetDelta, treeScale }: ScaleCorrectorContext
-    ) => {
-        const value = typeof latest === "string" ? parseFloat(latest) : latest
-        return value / targetDelta[axis].scale / treeScale[axis] + "px"
-    },
-})
-
-const xBorder = () => borderWidth("x")
-const yBorder = () => borderWidth("y")
-
-const border = {
-    borderTopWidth: yBorder(),
-    borderLeftWidth: xBorder(),
-    borderRightWidth: xBorder(),
-    borderBottomWidth: yBorder(),
-}
-
 export function LayoutProjectionCustomValuesDemo() {
     const [isOn, setOn] = useState(false);
 
     useEffect(() => {
         if (typeof addScaleCorrector === 'function') {
-             // @ts-expect-error - addScaleCorrector might be internal/deprecated
-            addScaleCorrector(border);
+            // @ts-expect-error - addScaleCorrector might be internal/deprecated
+            addScaleCorrector(borderScaleCorrector);
         }
     }, []);
 
@@ -67,19 +36,19 @@ export function LayoutProjectionCustomValuesDemo() {
                 animate={
                     isOn
                         ? {
-                              borderColor: "#000",
-                              borderTopWidth: 5,
-                              borderRightWidth: 5,
-                              borderLeftWidth: 5,
-                              borderBottomWidth: 30,
-                          }
+                            borderColor: "#000",
+                            borderTopWidth: 5,
+                            borderRightWidth: 5,
+                            borderLeftWidth: 5,
+                            borderBottomWidth: 30,
+                        }
                         : {
-                              borderColor: "#90f",
-                              borderTopWidth: 50,
-                              borderRightWidth: 50,
-                              borderLeftWidth: 50,
-                              borderBottomWidth: 50,
-                          }
+                            borderColor: "#90f",
+                            borderTopWidth: 50,
+                            borderRightWidth: 50,
+                            borderLeftWidth: 50,
+                            borderBottomWidth: 50,
+                        }
                 }
                 transition={{ duration: 3, ease: "circIn" }}
                 style={{
@@ -91,3 +60,32 @@ export function LayoutProjectionCustomValuesDemo() {
         </motion.div>
     );
 }
+
+function borderWidth(axis: "x" | "y"): { correct: ScaleCorrector; } {
+    return ({
+        correct: (latest: string | number, { targetDelta, treeScale }: ScaleCorrectorContext) => {
+            const value = typeof latest === "string" ? parseFloat(latest) : latest;
+            return value / targetDelta[axis].scale / treeScale[axis] + "px";
+        },
+    });
+}
+
+interface ScaleCorrectorContext {
+    targetDelta: { x: { scale: number; }; y: { scale: number; }; };
+    treeScale: { x: number; y: number; };
+}
+
+type ScaleCorrector = (
+    latest: string | number,
+    context: ScaleCorrectorContext
+) => string;
+
+const xBorder = () => borderWidth("x");
+const yBorder = () => borderWidth("y");
+
+const borderScaleCorrector = {
+    borderTopWidth: yBorder(),
+    borderLeftWidth: xBorder(),
+    borderRightWidth: xBorder(),
+    borderBottomWidth: yBorder(),
+};

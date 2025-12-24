@@ -2,23 +2,6 @@
 import { useRef } from "react";
 import { motion, MotionConfig } from "motion/react";
 
-const dragContainer = {
-    width: "50%",
-    height: "60vh",
-    background: "#F30552",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: "10px",
-    transform: "scale(1.2)",
-};
-
-const draggable = {
-    width: 100,
-    height: 100,
-    background: "white",
-    borderRadius: "10px",
-};
 export function TestDragConstraintsRefScaleDemo() {
     const ref = useRef(null);
 
@@ -43,3 +26,20 @@ export function TestDragConstraintsRefScaleDemo() {
     );
 }
 
+const dragContainer = {
+    width: "50%",
+    height: "60vh",
+    background: "#F30552",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "10px",
+    transform: "scale(1.2)",
+};
+
+const draggable = {
+    width: 100,
+    height: 100,
+    background: "white",
+    borderRadius: "10px",
+};

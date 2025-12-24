@@ -4,6 +4,25 @@ import { motion, useDragControls } from "motion/react";
 /**
  * This is an example of triggering drag from an external element using useDragControls
  */
+export function DragUseDragControlsSnapToCursorDemo() {
+    const dragControls = useDragControls();
+
+    return (<>
+        <div
+            style={container}
+            onPointerDown={(e) =>
+                dragControls.start(e, { snapToCursor: true })
+            }
+        />
+
+        <motion.div
+            drag
+            dragControls={dragControls}
+            whileTap={{ scale: 0.95 }}
+            style={child}
+        />
+    </>);
+}
 
 const container = {
     width: 200,
@@ -19,24 +38,3 @@ const child = {
     background: "white",
     borderRadius: 20,
 };
-
-export function DragUseDragControlsSnapToCursorDemo() {
-    const dragControls = useDragControls();
-
-    return (
-        <>
-            <div
-                style={container}
-                onPointerDown={(e) =>
-                    dragControls.start(e, { snapToCursor: true })
-                }
-            />
-            <motion.div
-                drag
-                dragControls={dragControls}
-                whileTap={{ scale: 0.95 }}
-                style={child}
-            />
-        </>
-    );
-}

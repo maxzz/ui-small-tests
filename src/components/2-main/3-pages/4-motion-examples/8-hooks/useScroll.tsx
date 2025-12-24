@@ -1,85 +1,37 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/useScroll.tsx
 import { useState, useRef } from "react";
-import {
-    motion,
-    useScroll,
-    useSpring,
-} from "motion/react";
+import { motion, useScroll, useSpring, } from "motion/react";
 
-// Helper functions (mocked mix as it's not exported from motion/react directly easily, or available in framer-motionutils)
-// Simple linear interpolation
-const mix = (from: number, to: number, progress: number) => -progress * from + progress * to + from;
+export function HooksUseScrollDemo() {
+    return (<>
+        <style>{styles}</style>
 
-const randomInt = (min: number, max: number) => Math.round(mix(min, max, Math.random()));
-const generateParagraphLength = () => randomInt(10, 40);
-const generateWordLength = () => randomInt(20, 100);
-
-// Randomly generate some paragraphs of word lengths
-const paragraphs = Array.from(Array(40)).map(() => {
-    return Array.from(Array(generateParagraphLength())).map(generateWordLength);
-});
-
-const Word = ({ width }: { width: number }) => <div className="word" style={{ width }} />;
-
-const Paragraph = ({ words }: { words: number[] }) => (
-    <div className="paragraph">
-        {words.map((width, i) => (
-            <Word key={i} width={width} />
-        ))}
-    </div>
-);
-
-export const ContentPlaceholder = () => (
-    <div className="content-placeholder">
-        <div className="header">
-            <Word width={75} />
-            <Word width={245} />
-            <Word width={120} />
+        <div className="example-container bg-[#7700ff] h-full relative">
+            <Example />
         </div>
-        {paragraphs.map((words, i) => (
-            <Paragraph key={i} words={words} />
-        ))}
-    </div>
-);
+    </>);
+}
 
 function Example() {
     const [isComplete, setIsComplete] = useState(false);
     const containerRef = useRef(null);
-    
+
     // useElementScroll is deprecated/removed in newer motion versions, replaced by useScroll({ container: ref })
     const { scrollYProgress } = useScroll({ container: containerRef });
-    
-    const scaleX = useSpring(scrollYProgress, {
-        stiffness: 100,
-        damping: 30,
-        restDelta: 0.001,
-        restSpeed: 0.001,
-    });
+
+    const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001, restSpeed: 0.001, });
 
     return (
         <div
             ref={containerRef}
-            style={{
-                overflow: "scroll",
-                height: "50vh",
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-            }}
+            style={{ position: "absolute", left: 0, top: 0, right: 0, height: "50vh", overflow: "scroll", }}
         >
             <motion.div
-                style={{
-                    left: 0,
-                    position: "fixed",
-                    width: "100%",
-                    height: 10,
-                    background: "white",
-                    scaleX,
-                    transformOrigin: "0% 0%",
-                }}
+                style={{ position: "fixed", left: 0, width: "100%", height: 10, background: "white", scaleX, transformOrigin: "0% 0%", }}
             />
+
             <ContentPlaceholder />
+
             <svg className="progress-icon" viewBox="0 0 60 60">
                 <motion.path
                     fill="none"
@@ -109,10 +61,57 @@ function Example() {
     );
 }
 
-export function HooksUseScrollDemo() {
+export function ContentPlaceholder() {
     return (
-        <>
-            <style>{`
+        <div className="content-placeholder">
+            <div className="header">
+                <Word width={75} />
+                <Word width={245} />
+                <Word width={120} />
+            </div>
+
+            {paragraphsArray.map(
+                (words, i) => (
+                    <Paragraph key={i} words={words} />
+                )
+            )}
+        </div>
+    );
+}
+
+function Paragraph({ words }: { words: number[]; }) {
+    return (
+        <div className="paragraph">
+            {words.map(
+                (width, i) => (
+                    <Word key={i} width={width} />
+                )
+            )}
+        </div>
+    );
+}
+
+function Word({ width }: { width: number; }) {
+    return <div className="word" style={{ width }} />;
+}
+
+// Helper functions (mocked mix as it's not exported from motion/react directly easily, or available in framer-motionutils)
+
+// Simple linear interpolation
+const mix = (from: number, to: number, progress: number) => -progress * from + progress * to + from;
+
+const randomInt = (min: number, max: number) => Math.round(mix(min, max, Math.random()));
+const generateParagraphLength = () => randomInt(10, 40);
+const generateWordLength = () => randomInt(20, 100);
+
+// Randomly generate some paragraphs of word lengths
+const paragraphsArray = Array.from(Array(40)).map(
+    () => Array.from(Array(generateParagraphLength())).map(generateWordLength)
+);
+
+// Styles
+
+const styles = `
 .refresh {
   padding: 10px;
   position: absolute;
@@ -195,11 +194,4 @@ export function HooksUseScrollDemo() {
     margin-bottom: 20px;
   }
 }
-`}</style>
-            <div className="example-container bg-[#7700ff] h-full relative">
-                <Example />
-            </div>
-        </>
-    );
-}
-
+`;

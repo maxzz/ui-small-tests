@@ -5,7 +5,6 @@ import { motion } from "motion/react";
 /**
  * An example of Motion's CSS variable support, including fallback support
  */
-
 export function AnimationCssVariablesDemo() {
     const ref = useRef<HTMLDivElement>(null);
 

@@ -7,7 +7,10 @@ export function AnimationLayoutDelayChildrenDemo() {
 
     return (
         <div style={overlay}>
-            <h1 style={label}>After</h1>
+            <h1 style={label}>
+                After
+            </h1>
+
             <motion.div
                 id="parent"
                 layout

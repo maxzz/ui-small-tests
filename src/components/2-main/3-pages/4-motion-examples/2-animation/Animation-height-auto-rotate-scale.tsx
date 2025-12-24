@@ -2,6 +2,9 @@
 import { useState } from "react";
 import { motion, mix } from "motion/react";
 
+/**
+ * This is an example of animating height: auto while also animation scale and rotate on the same element
+ */
 export function AnimationHeightAutoRotateScaleDemo() {
     // This approach is if you only want max one section open at a time. If you want multiple
     // sections to potentially be open simultaneously, they can all be given their own `useState`.
@@ -9,22 +12,15 @@ export function AnimationHeightAutoRotateScaleDemo() {
 
     return (
         <div className="example-container">
-            {[0, 1, 2, 3].map((i) => (
-                <Accordion
-                    key={i}
-                    i={i}
-                    expanded={expanded}
-                    setExpanded={setExpanded}
-                />
-            ))}
+            {[0, 1, 2, 3].map(
+                (i) => (
+                    <Accordion key={i} i={i} expanded={expanded} setExpanded={setExpanded} />
+                )
+            )}
             <style>{styles}</style>
         </div>
     );
 }
-
-/**
- * This is an example of animating height: auto while also animation scale and rotate on the same element
- */
 
 const Accordion = ({ i, expanded, setExpanded }: { i: number, expanded: false | number, setExpanded: any; }) => {
     const isOpen = i === expanded;

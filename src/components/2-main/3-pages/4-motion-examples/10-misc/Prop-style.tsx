@@ -4,24 +4,17 @@ import { motion } from "motion/react";
 /**
  * An example of using the style prop with special Motion shorthands like x and rotate
  */
-
-const style = {
-    width: 100,
-    height: 100,
-    background: "red",
-    opacity: 1,
-    rotate: 45,
-};
-
 export function PropStyleDemo() {
     return (
         <div className="p-10">
             <motion.div>
                 <motion.div
-                    transformTemplate={(_, generated) => {
-                        console.log("firing template");
-                        return generated + " translateX(-200px)";
-                    }}
+                    transformTemplate={
+                        (_, generated) => {
+                            console.log("firing template");
+                            return generated + " translateX(-200px)";
+                        }
+                    }
                     variants={{ show: { backgroundColor: "green", x: 10 } }}
                     initial="show"
                     style={style}
@@ -30,3 +23,11 @@ export function PropStyleDemo() {
         </div>
     );
 }
+
+const style = {
+    width: 100,
+    height: 100,
+    background: "red",
+    opacity: 1,
+    rotate: 45,
+};

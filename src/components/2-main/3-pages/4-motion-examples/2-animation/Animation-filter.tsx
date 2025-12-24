@@ -4,7 +4,6 @@ import { motion } from "motion/react";
 /**
  * An example of animating the filter property.
  */
-
 export function AnimationFilterDemo() {
     return (
         <motion.div

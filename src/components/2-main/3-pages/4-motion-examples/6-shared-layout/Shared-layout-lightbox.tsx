@@ -1,122 +1,109 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/Shared-layout-lightbox.tsx
 import { type CSSProperties, useState } from "react";
-import {
-    motion,
-    AnimatePresence,
-    useIsPresent,
-    type Transition,
-} from "motion/react";
+import { motion, AnimatePresence, useIsPresent, type Transition, } from "motion/react";
 
 /**
- * This demonstrates children with layoutId animating
- * back to their origin components
+ * This demonstrates children with layoutId animating back to their origin components
  */
-
-const params = new URLSearchParams(window.location.search);
-const instant = params.get("instant") || false;
-const partialEase = params.get("partial-ease") || false;
-let transition: Transition = instant ? { type: false } : { duration: 3 };
-if (partialEase) {
-    transition = {
-        duration: 0.15,
-        ease: () => 0.1,
-    };
-}
-
-function Gallery({ items, setIndex }: any) {
-    return (
-        <ul style={container}>
-            {items.map((color: string, i: number) => (
-                <motion.li
-                    key={color}
-                    onClick={() => setIndex(i)}
-                    style={{ ...item, backgroundColor: color, borderRadius: 0 }}
-                    layoutId={color}
-                    transition={transition}
-                    id={i === 0 ? `item-parent` : undefined}
-                >
-                    <motion.div
-                        style={child}
-                        id={i === 0 ? `item-child` : undefined}
-                        layoutId={`child-${color}`}
-                        transition={transition}
-                    />
-                </motion.li>
-            ))}
-        </ul>
-    );
-}
-
-function SingleImage({ color, setIndex }: any) {
-    const isPresent = useIsPresent();
-
-    return (
-        <>
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                style={{
-                    ...overlay,
-                    pointerEvents: isPresent ? "auto" : "none",
-                }}
-                id="overlay"
-                transition={transition}
-                onClick={() => setIndex(false)}
-            />
-            <div style={singleImageContainer}>
-                <motion.div
-                    id="parent"
-                    layoutId={color}
-                    style={{
-                        ...singleImage,
-                        backgroundColor: "#fff",
-                        borderRadius: 50,
-                    }}
-                    transition={transition}
-                >
-                    <motion.div
-                        style={{ ...child, backgroundColor: "black" }}
-                        id="child"
-                        layoutId={`child-${color}`}
-                        transition={transition}
-                    />
-                </motion.div>
-            </div>
-        </>
-    );
-}
-
 export function SharedLayoutLightboxDemo() {
     const [index, setIndex] = useState<false | number>(false);
 
     if (partialEase) {
         if (index === 0) {
-            // @ts-ignore
             transition.ease = () => 0.1;
         } else {
-            // @ts-ignore
             transition.ease = (t: number) => (t === 1 ? 1 : 0.9);
         }
     }
 
     return (
         <div style={background}>
-            <Gallery items={colors} setIndex={setIndex} />
+            <Gallery items={colorsArray} setIndex={setIndex} />
+
             <AnimatePresence>
                 {index !== false && (
-                    <SingleImage color={colors[index]} setIndex={setIndex} />
+                    <SingleImage color={colorsArray[index]} setIndex={setIndex} />
                 )}
             </AnimatePresence>
         </div>
     );
 }
 
+const params = new URLSearchParams(window.location.search);
+const partialEase = params.get("partial-ease") || false;
+const instant = params.get("instant") || false;
+
+let transition: Transition = instant ? { type: false } : { duration: 3 };
+if (partialEase) {
+    transition = { duration: 0.15, ease: () => 0.1, };
+}
+
+function Gallery({ items, setIndex }: any) {
+    return (
+        <ul style={container}>
+            {items.map(
+                (color: string, i: number) => (
+                    <motion.li
+                        layoutId={color}
+                        transition={transition}
+                        style={{ ...item, backgroundColor: color, borderRadius: 0 }}
+                        key={color}
+                        id={i === 0 ? `item-parent` : undefined}
+                        onClick={() => setIndex(i)}
+                    >
+                        <motion.div
+                            layoutId={`child-${color}`}
+                            transition={transition}
+                            style={child}
+                            id={i === 0 ? `item-child` : undefined}
+                        />
+                    </motion.li>
+                )
+            )}
+        </ul>
+    );
+}
+
+function SingleImage({ color, setIndex }: any) {
+    const isPresent = useIsPresent();
+    return (<>
+        <motion.div
+            id="overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={transition}
+            style={{ ...overlay, pointerEvents: isPresent ? "auto" : "none", }}
+            onClick={() => setIndex(false)}
+        />
+        <div style={singleImageContainer}>
+            <motion.div
+                id="parent"
+                layoutId={color}
+                transition={transition}
+                style={{ ...singleImage, backgroundColor: "#fff", borderRadius: 50, }}
+            >
+                <motion.div
+                    id="child"
+                    layoutId={`child-${color}`}
+                    transition={transition}
+                    style={{ ...child, backgroundColor: "black" }}
+                />
+            </motion.div>
+        </div>
+    </>);
+}
+
+// Utilities
+
 const numColors = 3; // 4 * 4
 const makeColor = (hue: number) => `hsl(${hue}, 100%, 50%)`;
-const colors = Array.from(Array(numColors)).map((_, i) =>
-    makeColor(Math.round((360 / numColors) * i))
+
+const colorsArray = Array.from(Array(numColors)).map(
+    (_, i) => makeColor(Math.round((360 / numColors) * i))
 );
+
+//Styles
 
 const background: CSSProperties = {
     position: "absolute",
@@ -188,4 +175,3 @@ const child: CSSProperties = {
     backgroundColor: "white",
     opacity: 0.5,
 };
-

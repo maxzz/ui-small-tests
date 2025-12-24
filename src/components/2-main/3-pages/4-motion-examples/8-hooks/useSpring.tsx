@@ -1,19 +1,20 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/useSpring.tsx
-import {
-    frame,
-    motion,
-    useMotionValue,
-    useSpring,
-    useTransform,
-} from "motion/react";
+import { frame, motion, useMotionValue, useSpring, useTransform, } from "motion/react";
 import { useRef, useState } from "react";
 
-const spring = {
-    stiffness: 300,
-    damping: 28,
-    restDelta: 0.00001,
-    restSpeed: 0.00001,
-};
+export function HooksUseSpringDemo() {
+    return (
+        <div style={{ display: "flex", gap: 100, padding: 50 }}>
+            <DragExample />
+
+            <MouseEventExample />
+
+            <div style={{ position: "relative", width: 100, height: 100 }}>
+                <RerenderExample />
+            </div>
+        </div>
+    );
+}
 
 function DragExample() {
     const dragX = useMotionValue(0);
@@ -26,9 +27,9 @@ function DragExample() {
     return (
         <motion.div
             drag
-            dragMomentum={false}
             _dragX={dragX}
             _dragY={dragY}
+            dragMomentum={false}
             style={{ width: 100, height: 100, background: "red", x, y, display: "flex", alignItems: "center", justifyContent: "center", color: "white" }}
         >
             Drag
@@ -36,11 +37,13 @@ function DragExample() {
     );
 }
 
+const spring = { stiffness: 300, damping: 28, restDelta: 0.00001, restSpeed: 0.00001, };
+
 function RerenderExample() {
     const [{ x, y }, setMousePosition] = useState({ x: 0, y: 0 });
 
     const updateMousePosition = useRef((e: MouseEvent) => {
-        // frame.postRender is deprecated/removed? frame.read/write/render exists.
+        // TODO: frame.postRender is deprecated/removed? frame.read/write/render exists.
         // using frame.read to batch reads, or just direct set in this simple case
         setMousePosition({ x: e.clientX, y: e.clientY });
     });
@@ -53,31 +56,16 @@ function RerenderExample() {
             animate={{ x, y }}
             transition={spring}
             style={{
+                position: "absolute",
+                inset: 0,
                 width: 100,
                 height: 100,
                 background: "green",
-                position: "absolute",
-                inset: 0,
                 display: "flex", alignItems: "center", justifyContent: "center", color: "white"
             }}
-            onTapStart={() => {
-                window.addEventListener(
-                    "mousemove",
-                    updateMousePosition.current
-                );
-            }}
-            onTap={() => {
-                window.removeEventListener(
-                    "mousemove",
-                    updateMousePosition.current
-                );
-            }}
-            onTapCancel={() => {
-                window.removeEventListener(
-                    "mousemove",
-                    updateMousePosition.current
-                );
-            }}
+            onTapStart={() => { window.addEventListener("mousemove", updateMousePosition.current); }}
+            onTap={() => { window.removeEventListener("mousemove", updateMousePosition.current); }}
+            onTapCancel={() => { window.removeEventListener("mousemove", updateMousePosition.current); }}
         >
             Rerender
         </motion.div>
@@ -97,13 +85,8 @@ function MouseEventExample() {
         }
     );
 
-    function startPointer() {
-        window.addEventListener("pointermove", onMove.current);
-    }
-
-    function cancelPointer() {
-        window.removeEventListener("pointermove", onMove.current);
-    }
+    function startPointer() { window.addEventListener("pointermove", onMove.current); }
+    function cancelPointer() { window.removeEventListener("pointermove", onMove.current); }
 
     return (
         <motion.div
@@ -117,16 +100,3 @@ function MouseEventExample() {
         </motion.div>
     );
 }
-
-export function HooksUseSpringDemo() {
-    return (
-        <div style={{ display: "flex", gap: 100, padding: 50 }}>
-            <DragExample />
-            <MouseEventExample />
-            <div style={{ position: "relative", width: 100, height: 100 }}>
-                 <RerenderExample />
-            </div>
-        </div>
-    );
-}
-

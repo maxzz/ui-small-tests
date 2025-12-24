@@ -2,8 +2,6 @@
 import { motion } from "motion/react";
 import { useState } from "react";
 
-const transition = { default: { duration: 5 }, scale: { duration: 0.2 } };
-
 export function TestLayoutTransformDemo() {
     const [isOpen, setIsOpen] = useState(false);
     return (
@@ -41,3 +39,4 @@ export function TestLayoutTransformDemo() {
     );
 }
 
+const transition = { default: { duration: 5 }, scale: { duration: 0.2 } };

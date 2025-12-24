@@ -1,43 +1,13 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/animate-stress-empty-transforms.tsx
 import { motion, useMotionValue } from "motion/react";
 
-function Box({ i }: { i: number }) {
-    const y = useMotionValue(0);
-    const rotate = useMotionValue(0);
-    const rotateX = useMotionValue(0);
-    const rotateY = useMotionValue(0);
-    const scaleX = useMotionValue(1);
-    const scaleY = useMotionValue(1);
-    const skewX = useMotionValue(0);
-    const skewY = useMotionValue(0);
-
-    return (
-        <motion.div
-            initial={{ rotate: 0 }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-            style={{
-                y,
-                rotate,
-                rotateX,
-                rotateY,
-                scaleX,
-                scaleY,
-                skewX,
-                skewY,
-                background: `hsla(${i * 10}, 100%, 50%, 1)`,
-                width: 100,
-                height: 100,
-            }}
-        />
-    );
-}
-
 export function TestAnimateStressEmptyTransformsDemo() {
-    // Reduced count from 1000 to 100 for better demo performance in some environments
-    const boxes = Array.from(Array(100).keys()).map((i) => (
-        <Box i={i} key={i} />
-    ));
+
+    const boxes = Array.from(Array(100).keys()).map( // Reduced count from 1000 to 100 for better demo performance in some environments
+        (i) => (
+            <Box i={i} key={i} />
+        )
+    );
 
     return (
         <div
@@ -53,3 +23,27 @@ export function TestAnimateStressEmptyTransformsDemo() {
     );
 }
 
+function Box({ i }: { i: number; }) {
+    const y = useMotionValue(0);
+    const rotate = useMotionValue(0);
+    const rotateX = useMotionValue(0);
+    const rotateY = useMotionValue(0);
+    const scaleX = useMotionValue(1);
+    const scaleY = useMotionValue(1);
+    const skewX = useMotionValue(0);
+    const skewY = useMotionValue(0);
+
+    return (
+        <motion.div
+            initial={{ rotate: 0 }}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            style={{
+                y, rotate, rotateX, rotateY, scaleX, scaleY, skewX, skewY,
+                background: `hsla(${i * 10}, 100%, 50%, 1)`,
+                width: 100,
+                height: 100,
+            }}
+        />
+    );
+}

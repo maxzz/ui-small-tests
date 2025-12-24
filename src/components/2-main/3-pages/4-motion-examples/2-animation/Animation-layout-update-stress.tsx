@@ -25,9 +25,6 @@ export function AnimationLayoutUpdateStressDemo() {
     );
 }
 
-const maxChildren = 4;
-const maxDepth = 2;
-
 function layoutChildren(currentDepth: number) {
     const children = [];
 
@@ -57,3 +54,6 @@ function layoutChildren(currentDepth: number) {
 
     return children;
 }
+
+const maxChildren = 4;
+const maxDepth = 2;

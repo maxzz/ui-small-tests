@@ -4,7 +4,6 @@ import { motion, useDragControls } from "motion/react";
 /**
  * This is an example of triggering drag from an external element using useDragControls
  */
-
 export function DragUseDragControlsDemo() {
     const dragControls = useDragControls();
 

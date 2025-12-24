@@ -2,12 +2,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 
-const style = {
-    width: 100,
-    height: 100,
-    background: "white",
-};
-
 export function WaapiBackgroundColorDemo() {
     const [state, setState] = useState(false);
 
@@ -16,12 +10,20 @@ export function WaapiBackgroundColorDemo() {
             <motion.div
                 initial={{ backgroundColor: "#00f" }}
                 animate={{ backgroundColor: state ? "#00f" : "#f00" }}
-                onClick={() => setState(!state)}
                 transition={{ duration: 1 }}
                 style={style}
+                onClick={() => setState(!state)}
             />
-            <p className="mt-4 text-sm text-muted-foreground">Click the box to animate background color using WAAPI (if supported/enabled)</p>
+            
+            <p className="mt-4 text-sm text-muted-foreground">
+                Click the box to animate background color using WAAPI (if supported/enabled)
+            </p>
         </div>
     );
 }
 
+const style = {
+    width: 100,
+    height: 100,
+    background: "white",
+};

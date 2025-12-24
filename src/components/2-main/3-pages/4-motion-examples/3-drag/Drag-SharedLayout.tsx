@@ -1,16 +1,74 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/Drag-SharedLayout.tsx
-import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import { motion } from "motion/react";
 
 /**
  * This is an example of transferring drag status by tagging a component with layoutId
  */
+export function DragSharedLayoutDemo() {
+    return (
+        <div
+            style={{
+                width: "100%",
+                height: "100%",
+                position: "absolute",
+                display: "flex",
+                alignItems: "stretch",
+                justifyContent: "stretch",
+            }}
+        >
+            <DragDrop />
+        </div>
+    );
+}
 
-interface Axis { min: number; max: number }
-interface Box { x: Axis; y: Axis }
+function DragDrop() {
+    const viewportWidth = useRef(0);
+    const [is, setIs] = useState(true);
 
-interface TargetProps {
-    onProjectionUpdate: (box: Box) => void
+    useEffect(
+        () => {
+            viewportWidth.current = window.innerWidth;
+        }, []
+    );
+
+    return (<>
+        <div
+            className="flex items-center justify-center"
+            style={{
+                width: "50%",
+                height: "100%",
+            }}
+        >
+            {is && (
+                <Target
+                    onProjectionUpdate={(box: Box) => {
+                        if (box.x.min > viewportWidth.current / 2 + 100) {
+                            setIs(false);
+                        }
+                    }}
+                />
+            )}
+        </div>
+
+        <div
+            className="flex items-center justify-center"
+            style={{
+                width: "50%",
+                height: "100%",
+            }}
+        >
+            {!is && (
+                <Target
+                    onProjectionUpdate={(box: Box) => {
+                        if (box.x.min < viewportWidth.current / 2 - 100) {
+                            setIs(true);
+                        }
+                    }}
+                />
+            )}
+        </div>
+    </>);
 }
 
 function Target({ onProjectionUpdate }: TargetProps) {
@@ -53,71 +111,9 @@ function Target({ onProjectionUpdate }: TargetProps) {
     );
 }
 
-function DragDrop() {
-    const viewportWidth = useRef(0);
-    const [is, setIs] = useState(true);
+interface Axis { min: number; max: number; }
+interface Box { x: Axis; y: Axis; }
 
-    useEffect(() => {
-        viewportWidth.current = window.innerWidth;
-    }, []);
-
-    return (
-        <>
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: "50%",
-                    height: "100%",
-                }}
-            >
-                {is && (
-                    <Target
-                        onProjectionUpdate={(box: Box) => {
-                            if (box.x.min > viewportWidth.current / 2 + 100) {
-                                setIs(false);
-                            }
-                        }}
-                    />
-                )}
-            </div>
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: "50%",
-                    height: "100%",
-                }}
-            >
-                {!is && (
-                    <Target
-                        onProjectionUpdate={(box: Box) => {
-                            if (box.x.min < viewportWidth.current / 2 - 100) {
-                                setIs(true);
-                            }
-                        }}
-                    />
-                )}
-            </div>
-        </>
-    );
-}
-
-export function DragSharedLayoutDemo() {
-    return (
-        <div
-            style={{
-                width: "100%",
-                height: "100%",
-                position: "absolute",
-                display: "flex",
-                alignItems: "stretch",
-                justifyContent: "stretch",
-            }}
-        >
-            <DragDrop />
-        </div>
-    );
+interface TargetProps {
+    onProjectionUpdate: (box: Box) => void;
 }

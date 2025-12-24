@@ -1,24 +1,135 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/layout-memory.tsx
-import { motion, MotionConfig } from "motion/react";
-import * as React from "react";
 import { useState } from "react";
+import { motion, MotionConfig } from "motion/react";
 
-const containerStyles = {
-    display: "flex",
-    flexWrap: "wrap" as const,
-    width: "1000px",
-    height: "4000px",
-    overflow: "hidden",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-};
+export function LayoutMemoryDemo() {
+    const [expanded, setExpanded] = useState(false);
+    const [count, setCount] = useState(0);
 
-const baseStyles = {
-    width: "var(--width)",
-    height: "var(--height)",
-};
+    return (
+        <div className="p-10">
+            <MotionConfig transition={{ duration: 10, ease: "linear" }}>
 
-const baseOffset = "var(--offset)";
+                <button className="bg-white px-2 py-1 rounded mb-4" onClick={() => setCount(count + 1)}>
+                    Replace children
+                </button>
+
+                <div
+                    data-layout
+                    key={count}
+                    style={{
+                        ...containerStyles,
+                        ...(expanded
+                            ? { "--width": "500px", "--height": "500px", "--offset": "100px", }
+                            : { "--width": "200px", "--height": "200px", "--offset": "10px", }) as any,
+                    }}
+                    onClick={() => setExpanded(!expanded)}
+                >
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+
+                    {/* Reduced number of groups for demo performance/visibility */}
+                    {/* 
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+
+
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+
+
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+
+
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+
+
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    */}
+
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                    <Group> <Group /> </Group>
+                </div>
+            </MotionConfig>
+        </div>
+    );
+}
 
 function Group({ children }: React.PropsWithChildren) {
     return (
@@ -41,6 +152,7 @@ function Group({ children }: React.PropsWithChildren) {
                     left: baseOffset,
                 }}
             />
+
             <motion.div
                 layout
                 style={{
@@ -49,6 +161,7 @@ function Group({ children }: React.PropsWithChildren) {
                     backgroundColor: "hsla(60, 50%, 50%)",
                 }}
             />
+
             <motion.div
                 layout
                 style={{
@@ -59,6 +172,7 @@ function Group({ children }: React.PropsWithChildren) {
             >
                 {children}
             </motion.div>
+
             <motion.div
                 layout
                 style={{
@@ -69,6 +183,7 @@ function Group({ children }: React.PropsWithChildren) {
                     left: baseOffset,
                 }}
             />
+
             <motion.div
                 layout
                 style={{
@@ -89,6 +204,7 @@ function Group({ children }: React.PropsWithChildren) {
                         left: baseOffset,
                     }}
                 />
+
                 <motion.div
                     layout
                     style={{
@@ -110,52 +226,25 @@ function Group({ children }: React.PropsWithChildren) {
                         }}
                     />
                 </motion.div>
+
             </motion.div>
         </motion.div>
     );
 }
 
-export function LayoutMemoryDemo() {
-    const [expanded, setExpanded] = useState(false);
-    const [count, setCount] = useState(0);
+const containerStyles = {
+    display: "flex",
+    flexWrap: "wrap" as const,
+    width: "1000px",
+    height: "4000px",
+    overflow: "hidden",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+};
 
-    return (
-        <div className="p-10">
-        <MotionConfig transition={{ duration: 10, ease: "linear" }}>
-            <button className="bg-white px-2 py-1 rounded mb-4" onClick={() => setCount(count + 1)}>
-                Replace children
-            </button>
-            <div
-                data-layout
-                key={count}
-                style={{
-                    ...containerStyles,
-                    ...(expanded
-                        ? {
-                              "--width": "500px",
-                              "--height": "500px",
-                              "--offset": "100px",
-                          }
-                        : {
-                              "--width": "200px",
-                              "--height": "200px",
-                              "--offset": "10px",
-                          }) as any,
-                }}
-                onClick={() => {
-                    setExpanded(!expanded);
-                }}
-            >
-                <Group>
-                    <Group />
-                </Group>
-                {/* Reduced number of groups for demo performance/visibility */}
-                <Group>
-                    <Group />
-                </Group>
-            </div>
-        </MotionConfig>
-        </div>
-    );
-}
+const baseStyles = {
+    width: "var(--width)",
+    height: "var(--height)",
+};
 
+const baseOffset = "var(--offset)";

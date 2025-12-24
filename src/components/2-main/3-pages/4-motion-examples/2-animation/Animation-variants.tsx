@@ -8,7 +8,10 @@ export function AnimationVariantsDemo() {
     const backgroundColor = useMotionValue("#f00");
 
     return (
-        <MotionFragment initial="initial" animate={isActive ? "to" : "initial"}>
+        <MotionFragment
+            initial="initial"
+            animate={isActive ? "to" : "initial"}
+        >
             <motion.div>
                 <motion.div
                     variants={{

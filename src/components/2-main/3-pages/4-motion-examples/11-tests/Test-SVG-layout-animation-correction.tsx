@@ -1,12 +1,6 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/_SVG-layout-animation-correction.tsx
 import { motion, useCycle } from "motion/react";
 
-const transition = {
-    type: "spring" as const,
-    stiffness: 20,
-    damping: 15,
-};
-
 export function TestSvgLayoutAnimationCorrectionDemo() {
     const [isOpen, toggleOpen] = useCycle(true, false);
     return (
@@ -30,7 +24,8 @@ export function TestSvgLayoutAnimationCorrectionDemo() {
                     height={500}
                     rx="15"
                     fill="white"
-                ></motion.rect>
+                />
+
                 <motion.circle
                     layout
                     cx={isOpen ? 100 : 400}
@@ -46,3 +41,8 @@ export function TestSvgLayoutAnimationCorrectionDemo() {
     );
 }
 
+const transition = {
+    type: "spring" as const,
+    stiffness: 20,
+    damping: 15,
+};

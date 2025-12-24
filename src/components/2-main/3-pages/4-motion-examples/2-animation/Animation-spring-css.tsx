@@ -1,13 +1,11 @@
+// Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/Animation-spring-css.tsx
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { spring } from "motion";
 
-// Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/Animation-spring-css.tsx
-
 /**
  * An example of the spring transition type
  */
-
 export function AnimationSpringCssDemo() {
     const [state, setState] = useState(false);
 
@@ -28,19 +26,21 @@ export function AnimationSpringCssDemo() {
         />
 
         <motion.div
-            animate={{
-                transform: state ? "translateX(200px)" : "translateX(0)",
-            }}
+            animate={{ transform: state ? "translateX(200px)" : "translateX(0)", }}
             transition={{ visualDuration: duration, bounce, type: "spring", }}
             style={style}
         />
 
         <SpringVisualiser transition={{ duration, type: "spring", bounce, durationBasedSpring: true, }} />
 
-        <div className="text-sm text-gray-500">Bounce: {bounce}</div>
+        <div className="text-sm text-gray-500">
+            Bounce: {bounce}
+        </div>
         <input type="range" min="0" max="1" step="0.01" value={bounce} onChange={(e) => setBounce(Number(e.target.value))} />
 
-        <div className="">Duration: {duration}</div>
+        <div className="">
+            Duration: {duration}
+        </div>
         <input type="range" min="0" max="10" step="0.1" value={duration} onChange={(e) => setDuration(Number(e.target.value))} />
     </>);
 }
@@ -51,11 +51,7 @@ export function SpringVisualiser({ transition }: any) {
         bounce: transition.bounce,
     };
 
-    const springResolver = spring({
-        bounce,
-        visualDuration: duration,
-        keyframes: [0, 1],
-    });
+    const springResolver = spring({ bounce, visualDuration: duration, keyframes: [0, 1], });
 
     let curveLine = `M${margin} ${margin + height}`;
     let perceptualMarker = "";

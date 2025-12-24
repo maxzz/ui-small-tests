@@ -4,13 +4,6 @@ import { motion, useMotionValue } from "motion/react";
 /**
  * An example of whileTap propagating through components.
  */
-
-const style = {
-    width: 100,
-    height: 100,
-    background: "white",
-};
-
 export function EventsWhileTapVariantsDemo() {
     const scale = useMotionValue(0.5);
     return (
@@ -23,3 +16,9 @@ export function EventsWhileTapVariantsDemo() {
         </motion.div>
     );
 }
+
+const style = {
+    width: 100,
+    height: 100,
+    background: "white",
+};

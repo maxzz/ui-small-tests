@@ -23,24 +23,19 @@ export function DragToReorderDemo() {
     );
 }
 
-const Item = ({ item, axis }: any) => {
+function Item({ item, axis }: any) {
     const y = useMotionValue(0);
     const boxShadow = useMotionValue(inactiveShadow);
 
     return (
-        <Reorder.Item
-            value={item}
-            id={item}
-            style={{ boxShadow, y }}
-            transition={{ duration: 0.1 }}
-        >
-            <span>{item}</span>
+        <Reorder.Item value={item} id={item} style={{ boxShadow, y }} transition={{ duration: 0.1 }}>
+            <span>
+                {item}
+            </span>
             <ReorderIcon />
         </Reorder.Item>
     );
-};
-
-const inactiveShadow = "0px 0px 0px rgba(0,0,0,0.8)";
+}
 
 function ReorderIcon() {
     return (
@@ -58,9 +53,12 @@ function ReorderIcon() {
     );
 }
 
+const inactiveShadow = "0px 0px 0px rgba(0,0,0,0.8)";
+
 // Data
 
 const initialItems = ["Tomato", "Cucumber", "Mustard", "Chicken"];
+
 export interface Position {
     top: number;
     height: number;
@@ -74,7 +72,7 @@ const horizontalList = {
     display: "flex",
 };
 
-const styles = `body {
+const styles = `1body {
   width: 100vw;
   height: 100vh;
   background: #ffaa00;

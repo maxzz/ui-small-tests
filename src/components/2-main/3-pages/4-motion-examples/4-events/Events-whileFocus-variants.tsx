@@ -4,6 +4,24 @@ import { motion } from "motion/react";
 /**
  * An example of using whileHover to convert between different value types
  */
+export function EventsWhileFocusVariantsDemo() {
+    return (
+        <div className="p-10">
+            <p className="mb-4 text-white">
+                Tab to focus the box
+            </p>
+
+            <motion.div
+                initial="hidden"
+                variants={container}
+                whileFocus="visible"
+                
+                tabIndex={0}
+                style={style}
+            />
+        </div>
+    );
+}
 
 const style = {
     width: 100,
@@ -17,18 +35,3 @@ const container = {
         width: "100%",
     },
 };
-
-export function EventsWhileFocusVariantsDemo() {
-    return (
-        <div className="p-10">
-            <p className="mb-4 text-white">Tab to focus the box</p>
-            <motion.div
-                tabIndex={0}
-                variants={container}
-                initial="hidden"
-                whileFocus="visible"
-                style={style}
-            />
-        </div>
-    );
-}

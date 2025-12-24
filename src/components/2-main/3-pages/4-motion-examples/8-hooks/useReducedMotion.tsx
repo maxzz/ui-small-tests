@@ -1,6 +1,36 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/useReducedMotion.tsx
 import { useState, useEffect } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion, type Transition, useReducedMotion, type Variants } from "motion/react";
+
+export function HooksUseReducedMotionDemo() {
+    const [isVisible, setIsVisible] = useState(false);
+    const shouldReduceMotion = useReducedMotion();
+
+    const transition: Transition = shouldReduceMotion ? { type: false } : { duration: 1 };
+    const variants: Variants = {
+        visible: { opacity: 1, transition },
+        hidden: { opacity: 0, transition },
+    };
+
+    useEffect(
+        () => {
+            const timeout = setTimeout(() => setIsVisible(!isVisible), 1500);
+            return () => clearTimeout(timeout);
+        }, [isVisible]
+    );
+
+    return (
+        <motion.div
+            initial={false}
+            animate={isVisible ? "visible" : "hidden"}
+        >
+            <motion.div
+                variants={variants}
+                style={style}
+            />
+        </motion.div>
+    );
+}
 
 const style = {
     width: 100,
@@ -8,24 +38,3 @@ const style = {
     background: "red",
     opacity: 1,
 };
-
-export function HooksUseReducedMotionDemo() {
-    const [isVisible, setIsVisible] = useState(false);
-    const shouldReduceMotion = useReducedMotion();
-    const transition = shouldReduceMotion ? { type: false } : { duration: 1 };
-    const variants = {
-        visible: { opacity: 1, transition },
-        hidden: { opacity: 0, transition },
-    };
-
-    useEffect(() => {
-        const timeout = setTimeout(() => setIsVisible(!isVisible), 1500);
-        return () => clearTimeout(timeout);
-    }, [isVisible]);
-
-    return (
-        <motion.div animate={isVisible ? "visible" : "hidden"} initial={false}>
-            <motion.div variants={variants as any} style={style} />
-        </motion.div>
-    );
-}

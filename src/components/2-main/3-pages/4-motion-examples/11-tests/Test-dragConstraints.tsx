@@ -1,12 +1,6 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/_dragConstraints.tsx
 import { motion } from "motion/react";
 
-const styleA = {
-    width: 300,
-    height: 300,
-    background: "white",
-    borderRadius: "10px",
-};
 export function TestDragConstraintsDemo() {
     return (
         <div className="p-10">
@@ -19,3 +13,9 @@ export function TestDragConstraintsDemo() {
     );
 }
 
+const styleA = {
+    width: 300,
+    height: 300,
+    background: "white",
+    borderRadius: "10px",
+};

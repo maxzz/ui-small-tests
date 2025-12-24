@@ -6,26 +6,42 @@ import { useState } from "react";
  * This demonstrates container components correctly animating
  * resize when children are added/removed/expanded
  */
-
-interface ItemProps {
-    i: number;
+export function SharedLayoutToggleDetailsDemo() {
+    return (
+        <LayoutGroup>
+            <motion.div
+                className="p-5 w-62 rounded-3xl bg-white flex flex-col"
+                layout
+                initial={{ borderRadius: 25 }}
+                id="container"
+            >
+                {items.map(
+                    (id) => (
+                        <Item key={id} i={id} />
+                    )
+                )}
+            </motion.div>
+        </LayoutGroup>
+    );
 }
 
-function Item({ i }: ItemProps) {
+const items = [0, 1, 2];
+
+function Item({ i }: { i: number; }) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
         <motion.div
             layout
-            onClick={() => setIsOpen(!isOpen)}
             id={`container-${i}`}
             style={{
                 backgroundColor: "rgba(214, 214, 214, 0.5)",
                 padding: "20px",
                 marginBottom: "20px",
-                overflow: "hidden",
                 borderRadius: 10,
+                overflow: "hidden",
             }}
+            onClick={() => setIsOpen(!isOpen)}
         >
             <motion.div
                 id={`image-${i}`}
@@ -37,6 +53,7 @@ function Item({ i }: ItemProps) {
                     borderRadius: "20px",
                 }}
             />
+
             <AnimatePresence initial={false}>
                 {isOpen && (
                     <motion.div
@@ -45,63 +62,12 @@ function Item({ i }: ItemProps) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <motion.div
-                            style={{
-                                width: "200px",
-                                height: "8px",
-                                backgroundColor: "#999",
-                                borderRadius: "10px",
-                                marginTop: "12px",
-                            }}
-                        />
-                        <motion.div
-                            style={{
-                                width: "200px",
-                                height: "8px",
-                                backgroundColor: "#999",
-                                borderRadius: "10px",
-                                marginTop: "12px",
-                            }}
-                        />
-                        <motion.div
-                            style={{
-                                width: "200px",
-                                height: "8px",
-                                backgroundColor: "#999",
-                                borderRadius: "10px",
-                                marginTop: "12px",
-                            }}
-                        />
+                        <motion.div style={{ marginTop: "12px", width: "200px", height: "8px", backgroundColor: "#999", borderRadius: "10px", }} />
+                        <motion.div style={{ marginTop: "12px", width: "200px", height: "8px", backgroundColor: "#999", borderRadius: "10px", }} />
+                        <motion.div style={{ marginTop: "12px", width: "200px", height: "8px", backgroundColor: "#999", borderRadius: "10px", }} />
                     </motion.div>
                 )}
             </AnimatePresence>
         </motion.div>
     );
 }
-
-export function SharedLayoutToggleDetailsDemo() {
-    return (
-        <LayoutGroup>
-            <motion.div
-                initial={{ borderRadius: 25 }}
-                layout
-                style={{
-                    width: "240px",
-                    display: "flex",
-                    flexDirection: "column",
-                    background: "white",
-                    padding: "20px",
-                    borderRadius: 25,
-                }}
-                id="container"
-            >
-                {items.map((id) => (
-                    <Item key={id} i={id} />
-                ))}
-            </motion.div>
-        </LayoutGroup>
-    );
-}
-
-const items = [0, 1, 2];
-

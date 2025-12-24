@@ -4,7 +4,6 @@ import { motion, useCycle } from "motion/react";
 /**
  * An example of the Motion keyframes syntax.
  */
-
 export function AnimationKeyframesDemo() {
     const [animate, cycle] = useCycle("a", "b");
     return (

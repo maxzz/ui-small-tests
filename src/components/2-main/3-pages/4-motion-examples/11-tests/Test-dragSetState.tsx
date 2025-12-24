@@ -2,13 +2,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 
-const styleA = {
-    width: 300,
-    height: 300,
-    background: "white",
-    borderRadius: "10px",
-};
-
 export function TestDragSetStateDemo() {
     const [state, setState] = useState(0);
 
@@ -18,7 +11,11 @@ export function TestDragSetStateDemo() {
 
     return (
         <div className="p-10">
-            <p className="mb-4 text-white">Drag triggers state update: {state}</p>
+
+            <p className="mb-4 text-white">
+                Drag triggers state update: {state}
+            </p>
+
             <motion.div
                 drag="x"
                 dragConstraints={{ left: -500, right: 500 }}
@@ -32,3 +29,9 @@ export function TestDragSetStateDemo() {
     );
 }
 
+const styleA = {
+    width: 300,
+    height: 300,
+    background: "white",
+    borderRadius: "10px",
+};

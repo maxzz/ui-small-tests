@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 
 /**
- * This demonstrates child scale correction working through a muggle motion
- * component.
+ * This demonstrates child scale correction working through a muggle motion component.
  */
 export function AnimationLayoutScaleCorrectionDemo() {
     const [isOn, setIsOn] = useState(false);

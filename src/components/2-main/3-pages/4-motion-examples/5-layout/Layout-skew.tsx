@@ -5,7 +5,6 @@ import { motion } from "motion/react";
 /**
  * This demonstrates the skew support with layout animations
  */
-
 export function LayoutSkewDemo() {
     const [isOn, setIsOn] = useState(false);
 
@@ -14,59 +13,38 @@ export function LayoutSkewDemo() {
             layout
             id="parent"
             initial={false}
+            animate={{ skewX: isOn ? 45 : 10, borderRadius: isOn ? 0 : 50, }}
             transition={{ duration: 1 }}
-            style={isOn ? bigParent : smallParent}
-            animate={{
-                skewX: isOn ? 45 : 10,
-                borderRadius: isOn ? 0 : 50,
-            }}
+            style={isOn ? bigParentStyles : smallParentStyles}
             onClick={() => setIsOn(!isOn)}
         >
             <motion.div
                 layout
                 id="child"
                 initial={false}
+                animate={{ skewX: isOn ? 0 : 45, borderRadius: isOn ? 20 : 0, }}
                 transition={{ duration: 1 }}
-                style={isOn ? bigChild : smallChild}
-                animate={{
-                    skewX: isOn ? 0 : 45,
-                    borderRadius: isOn ? 20 : 0,
-                }}
+                style={isOn ? bigChildStyles : smallChildStyles}
             />
         </motion.div>
     );
 }
 
-const parent = {
+// Parent styles
+
+const parentStyles = {
     backgroundColor: "white",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
 };
-const bigParent = {
-    ...parent,
-    width: 400,
-    height: 400,
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-};
-const smallParent = {
-    ...parent,
-    width: 100,
-    height: 100,
-};
+const bigParentStyles = { ...parentStyles, width: 400, height: 400, justifyContent: "flex-start", alignItems: "flex-start", };
+const smallParentStyles = { ...parentStyles, width: 100, height: 100, };
 
-const child = {
+// Child styles
+
+const childStyles = {
     backgroundColor: "red",
 };
-const bigChild = {
-    ...child,
-    width: 100,
-    height: 100,
-};
-const smallChild = {
-    ...child,
-    width: 50,
-    height: 50,
-};
-
+const bigChildStyles = { ...childStyles, width: 100, height: 100, };
+const smallChildStyles = { ...childStyles, width: 50, height: 50, };

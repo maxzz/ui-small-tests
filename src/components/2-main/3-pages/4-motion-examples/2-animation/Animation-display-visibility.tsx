@@ -5,7 +5,6 @@ import { MotionConfig, motion } from "motion/react";
 /**
  * An example of the tween transition type
  */
-
 export function AnimationDisplayVisibilityDemo() {
     const [state, setState] = useState(true);
 

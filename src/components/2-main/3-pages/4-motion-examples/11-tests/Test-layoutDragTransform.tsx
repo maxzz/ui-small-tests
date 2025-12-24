@@ -2,11 +2,6 @@
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 
-const transition = {
-    default: { duration: 2, ease: "easeInOut" },
-    scale: { duration: 0.2 },
-};
-
 export function TestLayoutDragTransformDemo() {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -56,3 +51,7 @@ export function TestLayoutDragTransformDemo() {
     );
 }
 
+const transition = {
+    default: { duration: 2, ease: "easeInOut" },
+    scale: { duration: 0.2 },
+};

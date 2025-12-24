@@ -5,7 +5,6 @@ import { motion } from "motion/react";
 /**
  * An example of the tween transition type
  */
-
 export function AnimationAnimateDemo() {
     const [state, setState] = useState(false);
 

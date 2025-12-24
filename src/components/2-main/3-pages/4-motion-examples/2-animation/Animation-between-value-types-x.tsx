@@ -4,7 +4,6 @@ import { motion, useCycle } from "motion/react";
 /**
  * An example of animating between different value types
  */
-
 export function AnimationBetweenValueTypesXDemo() {
     const [x, cycleX] = useCycle<string | number>(0, "calc(3 * var(--width))");
 

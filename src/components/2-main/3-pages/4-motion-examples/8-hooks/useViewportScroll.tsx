@@ -1,46 +1,16 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/useViewportScroll.tsx
 import { useEffect, useState } from "react";
-import {
-    // mix,
-    motion,
-    useScroll, // useViewportScroll is deprecated
-    useSpring,
-    useTransform,
-} from "motion/react";
+import { motion, useScroll, useSpring, useTransform, } from "motion/react"; // useScroll instead of useViewportScroll which is deprecated
 
-const mix = (from: number, to: number, progress: number) => -progress * from + progress * to + from;
+export function HooksUseViewportScrollDemo() {
+    return (<>
+        <style>{styles}</style>
 
-const randomInt = (min: number, max: number) => Math.round(mix(min, max, Math.random()));
-const generateParagraphLength = () => randomInt(10, 40);
-const generateWordLength = () => randomInt(20, 100);
-
-// Randomly generate some paragraphs of word lengths
-const paragraphs = Array.from(Array(40)).map(() => {
-    return Array.from(Array(generateParagraphLength())).map(generateWordLength);
-});
-
-const Word = ({ width }: { width: number }) => <div className="word" style={{ width }} />;
-
-const Paragraph = ({ words }: { words: number[] }) => (
-    <div className="paragraph">
-        {words.map((width, i) => (
-            <Word key={i} width={width} />
-        ))}
-    </div>
-);
-
-const ContentPlaceholder = () => (
-    <div className="content-placeholder">
-        <div className="header">
-            <Word width={75} />
-            <Word width={245} />
-            <Word width={120} />
+        <div className="example-container">
+            <Example />
         </div>
-        {paragraphs.map((words, i) => (
-            <Paragraph key={i} words={words} />
-        ))}
-    </div>
-);
+    </>);
+}
 
 function Example() {
     const [isComplete, setIsComplete] = useState(false);
@@ -53,6 +23,7 @@ function Example() {
     return (
         <div className="h-[500px] overflow-auto relative bg-[#7700ff]">
             <ContentPlaceholder />
+
             <svg className="progress-icon" viewBox="0 0 60 60">
                 <motion.path
                     fill="none"
@@ -68,6 +39,7 @@ function Example() {
                         scaleX: -1, // Reverse direction of line animation
                     }}
                 />
+
                 <motion.path
                     fill="none"
                     strokeWidth="5"
@@ -82,10 +54,56 @@ function Example() {
     );
 }
 
-export function HooksUseViewportScrollDemo() {
+function ContentPlaceholder() {
     return (
-        <>
-            <style>{`
+        <div className="content-placeholder">
+            <div className="header">
+                <Word width={75} />
+                <Word width={245} />
+                <Word width={120} />
+            </div>
+
+            {paragraphsArray.map(
+                (words, i) => (
+                    <Paragraph key={i} words={words} />
+                )
+            )}
+        </div>
+    );
+}
+
+function Paragraph({ words }: { words: number[]; }) {
+    return (
+        <div className="paragraph">
+            {words.map(
+                (width, i) => (
+                    <Word key={i} width={width} />
+                )
+            )}
+        </div>
+    );
+}
+
+function Word({ width }: { width: number; }) {
+    return <div className="word" style={{ width }} />;
+}
+
+// Utilities
+
+const mix = (from: number, to: number, progress: number) => -progress * from + progress * to + from;
+
+const randomInt = (min: number, max: number) => Math.round(mix(min, max, Math.random()));
+const generateParagraphLength = () => randomInt(10, 40);
+const generateWordLength = () => randomInt(20, 100);
+
+// Randomly generate some paragraphs of word lengths
+const paragraphsArray = Array.from(Array(40)).map(
+    () => Array.from(Array(generateParagraphLength())).map(generateWordLength)
+);
+
+// Styles
+
+const styles = `
 .content-placeholder {
   max-width: 600px;
   margin-top: 100px;
@@ -153,11 +171,4 @@ export function HooksUseViewportScrollDemo() {
     margin-bottom: 20px;
   }
 }
-`}</style>
-            <div className="example-container">
-                <Example />
-            </div>
-        </>
-    );
-}
-
+`;

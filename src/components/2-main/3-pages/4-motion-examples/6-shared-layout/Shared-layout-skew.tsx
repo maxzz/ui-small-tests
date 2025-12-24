@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "motion/react";
 /**
  * This demonstrates the skew support with layout animations
  */
-
 export function SharedLayoutSkewDemo() {
     const [isOn, setIsOn] = useState(false);
 
@@ -45,44 +44,20 @@ export function SharedLayoutSkewDemo() {
     );
 }
 
+// Styles
+
 const parent = {
     backgroundColor: "white",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
 };
-const bigParent = {
-    ...parent,
-    width: 400,
-    height: 400,
-    borderRadius: 0,
-    skewX: 45,
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-};
-const smallParent = {
-    ...parent,
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    skewX: 10,
-};
+const bigParent = { ...parent, width: 400, height: 400, borderRadius: 0, skewX: 45, justifyContent: "flex-start", alignItems: "flex-start", };
+const smallParent = { ...parent, width: 100, height: 100, borderRadius: 50, skewX: 10, };
 
 const child = {
     backgroundColor: "red",
 };
-const bigChild = {
-    ...child,
-    width: 100,
-    height: 100,
-    borderRadius: 20,
-    skewX: 0,
-};
-const smallChild = {
-    ...child,
-    width: 50,
-    height: 50,
-    borderRadius: 0,
-    skewX: 45,
-};
+const bigChild = { ...child, width: 100, height: 100, borderRadius: 20, skewX: 0, };
+const smallChild = { ...child, width: 50, height: 50, borderRadius: 0, skewX: 45, };
 

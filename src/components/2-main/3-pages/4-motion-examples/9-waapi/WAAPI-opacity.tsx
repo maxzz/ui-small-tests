@@ -2,11 +2,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 
-const style = {
-    width: 100,
-    height: 100,
-    background: "white",
-};
 
 export function WaapiOpacityDemo() {
     const [opacity, setOpacity] = useState(1);
@@ -25,3 +20,8 @@ export function WaapiOpacityDemo() {
     );
 }
 
+const style = {
+    width: 100,
+    height: 100,
+    background: "white",
+};

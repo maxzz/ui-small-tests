@@ -3,15 +3,7 @@ import { motion } from "motion/react";
 
 export function DragSvgDemo() {
     return (
-        <svg
-            viewBox="0 0 500 500"
-            style={{
-                width: 500,
-                height: 500,
-                border: "2px solid white",
-                borderRadius: 20,
-            }}
-        >
+        <svg viewBox="0 0 500 500" style={{ width: 500, height: 500, border: "2px solid white", borderRadius: 20, }}>
             <motion.circle
                 cx={300}
                 cy={300}

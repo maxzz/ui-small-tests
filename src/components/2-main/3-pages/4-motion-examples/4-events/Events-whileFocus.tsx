@@ -4,6 +4,27 @@ import { motion } from "motion/react";
 /**
  * An example of whileFocus dom event
  */
+export function EventsWhileFocusDemo() {
+    return (
+        <ul style={{ listStyle: "none", margin: "none", padding: "none" }}>
+            {list.map(
+                ({ name, color }) => (
+                    <li key={name}>
+                        <motion.button
+                            initial={{ backgroundColor: "#FFFFFF" }}
+                            whileHover={{ backgroundColor: color, scale: 1.1, }}
+                            whileFocus={{ backgroundColor: color, scale: 1, }}
+                            
+                            style={buttonStyle}
+                        >
+                            {name}
+                        </motion.button>
+                    </li>
+                )
+            )}
+        </ul>
+    );
+}
 
 const list = [
     { name: "Apple", color: "#66CC33" },
@@ -22,28 +43,3 @@ const buttonStyle = {
     borderRadius: 10,
     color: "#000000",
 };
-
-export function EventsWhileFocusDemo() {
-    return (
-        <ul style={{ listStyle: "none", margin: "none", padding: "none" }}>
-            {list.map(({ name, color }) => (
-                <li key={name}>
-                    <motion.button
-                        initial={{ backgroundColor: "#FFFFFF" }}
-                        whileHover={{
-                            backgroundColor: color,
-                            scale: 1.1,
-                        }}
-                        whileFocus={{
-                            backgroundColor: color,
-                            scale: 1,
-                        }}
-                        style={buttonStyle}
-                    >
-                        {name}
-                    </motion.button>
-                </li>
-            ))}
-        </ul>
-    );
-}

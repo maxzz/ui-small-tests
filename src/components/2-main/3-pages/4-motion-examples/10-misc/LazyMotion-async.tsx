@@ -5,14 +5,31 @@ import { m, LazyMotion } from "motion/react";
 /**
  * An example of dynamically loading features from a different entry point.
  */
+export function LazyMotionAsyncDemo() {
+    return (
+        <div className="p-10 bg-purple-600 h-full">
+            <LazyMotion
+                features={
+                    () => {
+                        return new Promise((resolve) => {
+                            setTimeout(() => {
+                                import("./lazy-features").then((res) => {
+                                    resolve(res.default);
+                                });
+                            }, 2000); // Simulate network delay
+                        });
+                    }
+                }
+            >
+                <div className="mb-4 text-white">
+                    Loading features... (2s delay)
+                </div>
 
-const style = {
-    width: 100,
-    height: 100,
-    background: "white",
-    x: 0,
-    borderRadius: 20,
-};
+                <Component />
+            </LazyMotion>
+        </div>
+    );
+}
 
 const Component = memo(() => {
     return (
@@ -30,26 +47,10 @@ const Component = memo(() => {
     );
 });
 
-export function LazyMotionAsyncDemo() {
-    return (
-        <div className="p-10 bg-purple-600 h-full">
-            <LazyMotion
-                features={() => {
-                    return new Promise((resolve) => {
-                        setTimeout(() => {
-                            import("./lazy-features").then((res) => {
-                                resolve(res.default);
-                            });
-                        }, 2000); // Simulate network delay
-                    });
-                }}
-            >
-                <div className="mb-4 text-white">
-                    Loading features... (2s delay)
-                </div>
-                <Component />
-            </LazyMotion>
-        </div>
-    );
-}
-
+const style = {
+    width: 100,
+    height: 100,
+    background: "white",
+    x: 0,
+    borderRadius: 20,
+};

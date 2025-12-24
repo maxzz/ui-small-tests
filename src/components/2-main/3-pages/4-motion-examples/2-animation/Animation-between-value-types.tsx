@@ -5,7 +5,6 @@ import { motion, useCycle } from "motion/react";
 /**
  * An example of animating between different value types
  */
-
 export function AnimationBetweenValueTypesDemo() {
     const [width, nextWidth] = useCycle<string | number>(0, "100%", "calc(50% + 100px)");
 

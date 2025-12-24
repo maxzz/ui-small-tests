@@ -13,8 +13,8 @@ export function AnimationLayoutTransformTemplateDemo() {
         <div className="flex items-center justify-center h-full">
             <motion.div
                 onClick={() => setIsOn(!isOn)}
-                transformTemplate={(_, generated) =>
-                    `translate(-50%, -50%) ${generated}`
+                transformTemplate={
+                    (_, generated) => `translate(-50%, -50%) ${generated}`
                 }
                 layout
                 style={{
@@ -36,6 +36,7 @@ export function AnimationLayoutTransformTemplateDemo() {
                         float: isOn ? "right" : "left",
                     }}
                 />
+                
             </motion.div>
         </div>
     );

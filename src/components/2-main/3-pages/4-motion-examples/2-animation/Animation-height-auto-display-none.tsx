@@ -7,7 +7,6 @@ import { mix, motion } from "motion/react";
  *
  * Currently broken
  */
-
 export function AnimationHeightAutoDisplayNoneDemo() {
     // This approach is if you only want max one section open at a time. If you want multiple
     // sections to potentially be open simultaneously, they can all be given their own `useState`.

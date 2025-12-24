@@ -3,12 +3,7 @@ import { motion } from "motion/react";
 
 export function SvgTransformDemo() {
     return (
-        <svg
-            width="250"
-            height="250"
-            viewBox="0 0 250 250"
-            xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg width="250" height="250" viewBox="0 0 250 250">
             <motion.rect
                 x={50}
                 y={50}
@@ -17,6 +12,7 @@ export function SvgTransformDemo() {
                 transition={{ duration: 3 }}
                 style={{ rotate: 45, fill: "white" }}
             />
+
             <motion.rect
                 x={0}
                 y={0}
@@ -25,6 +21,7 @@ export function SvgTransformDemo() {
                 transition={{ duration: 3 }}
                 style={{ rotate: 45, fill: "rgba(255,255,255,0.5)" }}
             />
+            
             <motion.rect
                 x={100}
                 y={100}

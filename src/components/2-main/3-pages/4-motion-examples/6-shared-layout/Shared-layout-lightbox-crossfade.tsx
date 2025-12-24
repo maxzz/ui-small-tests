@@ -9,79 +9,81 @@ import { motion, AnimatePresence } from "motion/react";
 
 // const transition = { type: "spring", stiffness: 500, damping: 30 }
 
-function Gallery({ items, setIndex }: { items: string[], setIndex: any }) {
-    return (
-        <ul style={container}>
-            {items.map((color, i) => (
-                <motion.li
-                    key={color}
-                    onClick={() => setIndex(i)}
-                    style={{ ...item, backgroundColor: color, borderRadius: 0 }}
-                    layoutId={color}
-                    //transition={{ duration: 5 }}
-                    id={i === 0 ? "list-red" : undefined}
-                >
-                    <motion.div style={child} layoutId={`child-${color}`} />
-                </motion.li>
-            ))}
-        </ul>
-    );
-}
-
-function SingleImage({ color, setIndex }: { color: string, setIndex: any }) {
-    return (
-        <>
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                style={overlay}
-                id="overlay"
-                transition={{ duration: 2 }}
-                onClick={() => setIndex(false)}
-            />
-            <div style={singleImageContainer}>
-                <motion.div
-                    id="color"
-                    layoutId={color}
-                    style={{
-                        ...singleImage,
-                        backgroundColor: "#fff",
-                        borderRadius: 50,
-                    }}
-                    transition={{ duration: 2 }}
-                >
-                    <motion.div
-                        style={{ ...child, backgroundColor: "black" }}
-                        id="child"
-                        layoutId={`child-${color}`}
-                        transition={{ duration: 2 }}
-                    />
-                </motion.div>
-            </div>
-        </>
-    );
-}
-
-const numColors = 3; // 4 * 4
-const makeColor = (hue: number) => `hsl(${hue}, 100%, 50%)`;
-const colors = Array.from(Array(numColors)).map((_, i) =>
-    makeColor(Math.round((360 / numColors) * i))
-);
-
 export function SharedLayoutLightboxCrossfadeDemo() {
     const [index, setIndex] = useState<false | number>(false);
     return (
         <div style={background}>
-            <Gallery items={colors} setIndex={setIndex} />
+            <Gallery items={colorsArray} setIndex={setIndex} />
+
             <AnimatePresence>
                 {index !== false && (
-                    <SingleImage color={colors[index]} setIndex={setIndex} />
+                    <SingleImage color={colorsArray[index]} setIndex={setIndex} />
                 )}
             </AnimatePresence>
         </div>
     );
 }
+
+function Gallery({ items, setIndex }: { items: string[], setIndex: any; }) {
+    return (
+        <ul style={container}>
+            {items.map(
+                (color, i) => (
+                    <motion.li
+                        layoutId={color}
+                        style={{ ...item, backgroundColor: color, borderRadius: 0 }}
+                        //transition={{ duration: 5 }}
+                        key={color}
+                        id={i === 0 ? "list-red" : undefined}
+                        onClick={() => setIndex(i)}
+                    >
+                        <motion.div style={child} layoutId={`child-${color}`} />
+                    </motion.li>
+                )
+            )}
+        </ul>
+    );
+}
+
+function SingleImage({ color, setIndex }: { color: string, setIndex: any; }) {
+    return (<>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2 }}
+            style={overlay}
+            id="overlay"
+            onClick={() => setIndex(false)}
+        />
+        <div style={singleImageContainer}>
+            <motion.div
+                id="color"
+                layoutId={color}
+                transition={{ duration: 2 }}
+                style={{ ...singleImage, backgroundColor: "#fff", borderRadius: 50, }}
+            >
+                <motion.div
+                    layoutId={`child-${color}`}
+                    transition={{ duration: 2 }}
+                    style={{ ...child, backgroundColor: "black" }}
+                    id="child"
+                />
+            </motion.div>
+        </div>
+    </>);
+}
+
+// Utilities
+
+const numColors = 3; // 4 * 4
+const makeColor = (hue: number) => `hsl(${hue}, 100%, 50%)`;
+
+const colorsArray = Array.from(Array(numColors)).map(
+    (_, i) => makeColor(Math.round((360 / numColors) * i))
+);
+
+// Styles
 
 const background: CSSProperties = {
     position: "absolute",

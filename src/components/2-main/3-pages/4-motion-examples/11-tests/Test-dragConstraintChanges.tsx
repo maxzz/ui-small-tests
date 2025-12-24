@@ -2,19 +2,13 @@
 import { useState } from "react";
 import { motion, PanInfo } from "motion/react";
 
-const styleA = {
-    width: 100,
-    height: 100,
-    background: "white",
-    borderRadius: "10px",
-    position: "absolute" as const,
-};
-
 export function TestDragConstraintChangesDemo() {
     const [constraint, setContraint] = useState(0);
+    
     function onDrag(event: any, { point }: PanInfo) {
         setContraint(point.x);
     }
+
     return (
         <div className="p-10 h-full relative">
             <motion.div
@@ -41,3 +35,10 @@ export function TestDragConstraintChangesDemo() {
     );
 }
 
+const styleA = {
+    width: 100,
+    height: 100,
+    background: "white",
+    borderRadius: "10px",
+    position: "absolute" as const,
+};
