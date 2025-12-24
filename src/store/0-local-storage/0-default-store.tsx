@@ -17,7 +17,7 @@ export const defaultAppUISettings: AppUISettings = {
     themeMode: 'light',
     // accordionsOpened: {},
     resizable: {},
-    leftTree: "cards",
+    leftTree: "common-cards",
     rightSubView: "simple-cards",
     themePreseetName: "dafault",
     zoom: 1,

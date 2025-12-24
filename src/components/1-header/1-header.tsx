@@ -21,7 +21,7 @@ export function Section1_Header({ className, ...rest }: HTMLAttributes<HTMLDivEl
             </div>
 
             <AnimatePresence initial={false}>
-                {leftTree === "cards" &&
+                {leftTree === "common-cards" &&
                     <motion.div
                         initial={{ opacity: 0, x: 100 }}
                         animate={{ opacity: 1, x: 0 }}

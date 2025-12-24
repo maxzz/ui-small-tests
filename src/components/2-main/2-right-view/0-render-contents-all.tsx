@@ -60,13 +60,13 @@ function RightView() {
     }
 
     switch (leftTree) {
-        case "cards": return <RightViewWithMouseTracking />;
-        case "dashboard": return <>{Dashboard}</>;
-        case "hero-text": return <HeroTitleText />;
-        case "listview": return <UserItemList />;
-        case "motion-variants-race": return <MotionVariantsRace />;
+        case "common-cards": return <RightViewWithMouseTracking />;
+        case "common-dashboard": return <>{Dashboard}</>;
+        case "common-hero-text": return <HeroTitleText />;
+        case "common-listview": return <UserItemList />;
+        case "common-motion-variants-race": return <MotionVariantsRace />;
         
-        case "not-yet":
+        case "thelast-not-yet":
             return <div className="px-4 py-2 h-full text-xs text-green-950 bg-green-500/10 uppercase">Space for rent</div>;
         default: {
             const _exhaustiveCheck: never = leftTree;
