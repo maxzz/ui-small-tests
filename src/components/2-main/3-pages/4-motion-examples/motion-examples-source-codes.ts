@@ -135,14 +135,14 @@ import waapiInterrupt from "./9-waapi/WAAPI-interrupt.tsx?raw";
 import waapiOpacityOrchestration from "./9-waapi/WAAPI-opacity-orchestration.tsx?raw";
 
 // Misc examples
-import miscMotionCustomTag from "./10-misc/motion-custom-tag.tsx?raw";
-import miscLazyMotionAsync from "./10-misc/LazyMotion-async.tsx?raw";
+import miscMotionCustomTag from "./a-misc/motion-custom-tag.tsx?raw";
+import miscLazyMotionAsync from "./a-misc/LazyMotion-async.tsx?raw";
 // New Misc
-import miscLazyMotionSync from "./10-misc/LazyMotion-sync.tsx?raw";
-import miscMotionConfigIsStatic from "./10-misc/MotionConfig-isStatic.tsx?raw";
-import miscMotionConfigNonce from "./10-misc/MotionConfig-nonce.tsx?raw";
-import miscPropRef from "./10-misc/Prop-ref.tsx?raw";
-import miscPropStyle from "./10-misc/Prop-style.tsx?raw";
+import miscLazyMotionSync from "./a-misc/LazyMotion-sync.tsx?raw";
+import miscMotionConfigIsStatic from "./a-misc/MotionConfig-isStatic.tsx?raw";
+import miscMotionConfigNonce from "./a-misc/MotionConfig-nonce.tsx?raw";
+import miscPropRef from "./a-misc/Prop-ref.tsx?raw";
+import miscPropStyle from "./a-misc/Prop-style.tsx?raw";
 
 // Export as a map
 export const demoSourceCodes: Record<MotionExampleId, string> = {

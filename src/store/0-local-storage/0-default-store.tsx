@@ -1,16 +1,16 @@
 import { type ThemeMode } from "@/utils";
-import { RightViewId, type LeftViewId } from "./9-types";
+import { RightSubViewId, type LeftViewId } from "./9-types";
 
 export type AppUISettings = {
     themeMode: ThemeMode;
     // accordionsOpened: Record<string, boolean>;
     resizable: Record<string, string>; // PanelGroupStorage serialized layout
     leftTree: LeftViewId;
-    rightView: RightViewId;
+    rightSubView: RightSubViewId;          // Right sub-view for mouse color tracking
     themePreseetName: string;
     zoom: number;
-    sidebarLeftOpen: boolean;   // main sidebar
-    sidebarRightOpen: boolean;  // right inner iframe sidebar
+    sidebarLeftOpen: boolean;           // Main sidebar
+    sidebarRightOpen: boolean;          // Right inner iframe sidebar
 };
 
 export const defaultAppUISettings: AppUISettings = {
@@ -18,7 +18,7 @@ export const defaultAppUISettings: AppUISettings = {
     // accordionsOpened: {},
     resizable: {},
     leftTree: "cards",
-    rightView: "simple-cards",
+    rightSubView: "simple-cards",
     themePreseetName: "dafault",
     zoom: 1,
     sidebarLeftOpen: true,

@@ -39,12 +39,12 @@ export function Section2_RenderContents() {
 
     return (
         <div ref={demoRef} className="@container min-h-0">
-            <LeftViewChildren />
+            <RightView />
         </div>
     );
 }
 
-function LeftViewChildren() {
+function RightView() {
     const { leftTree } = useSnapshot(appSettings.appUi);
 
     const Dashboard = useMemo(
@@ -76,7 +76,7 @@ function LeftViewChildren() {
 }
 
 function RightViewWithMouseTracking() {
-    const { zoom, rightView } = useSnapshot(appSettings.appUi);
+    const { zoom } = useSnapshot(appSettings.appUi);
     return (
         <ScrollArea className="size-full">
             <MouseTracker className={zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100"}>
@@ -89,7 +89,7 @@ function RightViewWithMouseTracking() {
 }
 
 function RightViewChildren() {
-    const { rightView } = useSnapshot(appSettings.appUi);
+    const { rightSubView: rightView } = useSnapshot(appSettings.appUi);
 
     if (isMotionExampleId(rightView)) {
         return <MotionExampleRenderer viewId={rightView} />;

@@ -35,7 +35,7 @@ export const LeftViewItems = [
 
 // Right view
 
-export type RightViewId = 
+export type RightSubViewId = 
     | "simple-cards" 
     | "simple-dashboard" 
     | "original-cards"
@@ -43,7 +43,7 @@ export type RightViewId =
     | MotionExampleId;
 
 export type RightViewItem = {
-    id: RightViewId;
+    id: RightSubViewId;
     title: string;
     description?: string;
     icon?: string;
@@ -57,6 +57,6 @@ export const RightViewItems = [
     ...MotionExampleItems,
 ] as const satisfies readonly RightViewItem[];
 
-export function rightViewTypeGuard(rightView: RightViewId): string {
+export function rightViewTypeGuard(rightView: RightSubViewId): string {
     return rightView;
 }
