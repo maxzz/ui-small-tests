@@ -26,4 +26,4 @@ export * from "./8-hooks";
 export * from "./9-waapi";
 
 // Misc examples
-export * from "./10-misc";
+export * from "./a-misc";
