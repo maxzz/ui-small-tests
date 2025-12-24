@@ -1,9 +1,5 @@
 import { type MotionExampleId, MotionExampleItems } from "../../components/2-main/3-pages/4-motion-examples/motion-examples-types";
 
-// Re-export for backward compatibility
-export type { MotionExampleId };
-export { MotionExampleItems };
-
 // Left view
 
 export type LeftViewId = 
@@ -33,30 +29,22 @@ export const LeftViewItems = [
 
 //export type LeftViewId = typeof LeftViewItems[number]["id"];
 
-// Right view
+// Right sub-view
 
 export type RightSubViewId = 
     | "simple-cards" 
     | "simple-dashboard" 
-    | "original-cards"
-    | "motion-variants-race"
-    | MotionExampleId;
+    | "original-cards";
 
-export type RightViewItem = {
+export type RightSubViewItem = {
     id: RightSubViewId;
     title: string;
     description?: string;
     icon?: string;
 };
 
-export const RightViewItems = [
+export const RightSubViewItems = [
     { id: "simple-cards", title: "Cards", description: "Cards demo", icon: "💻" },
     { id: "simple-dashboard", title: "Dashboard", description: "Dashboard demo", icon: "💻" },
     { id: "original-cards", title: "Original Cards", description: "Original Cards demo", icon: "💻" },
-    { id: "motion-variants-race", title: "Motion Variants Race", description: "Motion Variants Race demo", icon: "🏁" },
-    ...MotionExampleItems,
-] as const satisfies readonly RightViewItem[];
-
-export function rightViewTypeGuard(rightView: RightSubViewId): string {
-    return rightView;
-}
+] as const satisfies readonly RightSubViewItem[];

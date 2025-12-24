@@ -85,7 +85,7 @@ function RightViewWithMouseTracking() {
     return (
         <ScrollArea className="size-full">
             <MouseTracker className={zoom === 0.5 ? "scale-50 origin-top-left" : "scale-100"}>
-                <RightViewChildren />
+                <RightViewWithMouseTrackingChildren />
             </MouseTracker>
 
             <MouseMoveTrackerTooltip hoverStackAtom={hoverStackAtom} mousePosAtom={mousePosAtom} />
@@ -93,25 +93,19 @@ function RightViewWithMouseTracking() {
     );
 }
 
-function RightViewChildren() {
-    const { rightSubView: rightView } = useSnapshot(appSettings.appUi);
+function RightViewWithMouseTrackingChildren() {
+    const { rightSubView } = useSnapshot(appSettings.appUi);
 
-    if (isMotionExampleId(rightView)) {
-        return <MotionExampleRenderer viewId={rightView} />;
-    }
-
-    switch (rightView) {
+    switch (rightSubView) {
         case "simple-cards":
             return <CardsContents />;
         case "simple-dashboard":
             return <DashboardContents className="col-span-full" />;
         case "original-cards":
             return <RootComponents className="col-span-full" />;
-        case "motion-variants-race":
-            return <MotionVariantsRace />;
 
         default: {
-            const _exhaustiveCheck: never = rightView;
+            const _exhaustiveCheck: never = rightSubView;
             return null;
         }
     }

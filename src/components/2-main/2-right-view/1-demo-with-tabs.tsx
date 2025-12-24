@@ -2,7 +2,7 @@ import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import { demoSourceCodes } from "../3-pages/4-motion-examples/motion-examples-source-codes";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn/tabs";
 import { highlightTsxCode } from "@/utils/syntax-highlight-tsx";
-import { type MotionExampleId } from "@/store/0-local-storage/9-types";
+import { type MotionExampleId } from "@/components/2-main/3-pages/4-motion-examples/motion-examples-types";
 
 /**
  * Wrapper component for demos with tabs (Demo + Source Code)

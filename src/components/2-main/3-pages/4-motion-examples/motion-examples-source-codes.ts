@@ -1,5 +1,5 @@
 // Import raw source files using Vite's ?raw feature
-import { type MotionExampleId } from "@/store/0-local-storage/9-types";
+import { type MotionExampleId } from "./motion-examples-types";
 
 // AnimatePresence examples
 import animatePresence from "./1-animate-presence/AnimatePresence.tsx?raw";
