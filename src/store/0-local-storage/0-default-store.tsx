@@ -8,6 +8,7 @@ export type AppUISettings = {
     leftTree: LeftViewId;
     rightSubView: RightSubViewId;          // Right sub-view for mouse color tracking
     themePreseetName: string;
+    expandedGroups: string[];
     zoom: number;
     sidebarLeftOpen: boolean;           // Main sidebar
     sidebarRightOpen: boolean;          // Right inner iframe sidebar
@@ -20,6 +21,7 @@ export const defaultAppUISettings: AppUISettings = {
     leftTree: "common-cards",
     rightSubView: "simple-cards",
     themePreseetName: "dafault",
+    expandedGroups: ["common", "motionExamples"],
     zoom: 1,
     sidebarLeftOpen: true,
     sidebarRightOpen: true,

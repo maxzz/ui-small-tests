@@ -46,6 +46,39 @@ export function mergeConfigRecursively<T extends Record<string, any>>(defaults: 
     return rv as T;
 }
 
+export function mergeStateRecursively<T extends Record<string, any>>(defaults: T, overrides: Record<string, any> | undefined | null): T {
+    if (!overrides) {
+        return defaults;
+    }
+
+    const rv: Record<string, any> = { ...defaults };
+
+    for (const key in overrides) {
+        const value = overrides[key];
+        if (value === undefined) { // Allow null to be a value if needed, but usually undefined means "not present" in JSON? JSON doesn't have undefined.
+            continue;
+        }
+
+        const existing = rv[key];
+
+        // If override is provided for an array, use it (overwrite)
+        if (Array.isArray(value)) {
+            rv[key] = value;
+            continue;
+        }
+
+        if (isObject(existing) && isObject(value)) {
+            rv[key] = mergeStateRecursively(existing, value);
+            continue;
+        }
+
+        rv[key] = value;
+    }
+
+    return rv as T;
+}
+
+
 // export function isObject(value: any): boolean { //non-vite version
 //     return value && typeof value === 'object';
 // }
