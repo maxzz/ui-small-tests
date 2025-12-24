@@ -17,7 +17,7 @@ import { DashboardAsIframe } from "../3-pages/2-dashboard-iframe";
 
 import { MotionExampleRenderer, isMotionExampleId } from "../3-pages/4-motion-examples/motion-examples-render";
 
-export function Section2_RenderContents() {
+export function Section2_RightView() {
     const { themePreseetName } = useSnapshot(appSettings.appUi);
     const demoRef = useRef<HTMLDivElement>(null);
 
@@ -47,6 +47,25 @@ export function Section2_RenderContents() {
 function RightView() {
     const { leftTree } = useSnapshot(appSettings.appUi);
 
+    if (isMotionExampleId(leftTree)) {
+        return <MotionExampleRenderer viewId={leftTree} />;
+    }
+
+    switch (leftTree) {
+        case "common-cards": return <RightViewWithMouseTracking />;
+        case "common-dashboard": return <RightViewDashboard />;
+        case "common-hero-text": return <HeroTitleText />;
+        case "common-listview": return <UserItemList />;
+        case "common-motion-variants-race": return <MotionVariantsRace />;
+        case "thelast-not-yet": return <RightViewNotYet />;
+        default: {
+            const _exhaustiveCheck: never = leftTree;
+            return null;
+        }
+    }
+}
+
+function RightViewDashboard() {
     const Dashboard = useMemo(
         () => {
             return <div className="size-full">
@@ -54,25 +73,11 @@ function RightView() {
             </div>;
         }, []
     );
+    return <>{Dashboard}</>;
+}
 
-    if (isMotionExampleId(leftTree)) {
-        return <MotionExampleRenderer viewId={leftTree} />;
-    }
-
-    switch (leftTree) {
-        case "common-cards": return <RightViewWithMouseTracking />;
-        case "common-dashboard": return <>{Dashboard}</>;
-        case "common-hero-text": return <HeroTitleText />;
-        case "common-listview": return <UserItemList />;
-        case "common-motion-variants-race": return <MotionVariantsRace />;
-        
-        case "thelast-not-yet":
-            return <div className="px-4 py-2 h-full text-xs text-green-950 bg-green-500/10 uppercase">Space for rent</div>;
-        default: {
-            const _exhaustiveCheck: never = leftTree;
-            return null;
-        }
-    }
+function RightViewNotYet() {
+    return <div className="px-4 py-2 h-full text-xs text-green-950 bg-green-500/10 uppercase">Space for rent</div>;
 }
 
 function RightViewWithMouseTracking() {
@@ -104,7 +109,7 @@ function RightViewChildren() {
             return <RootComponents className="col-span-full" />;
         case "motion-variants-race":
             return <MotionVariantsRace />;
-        
+
         default: {
             const _exhaustiveCheck: never = rightView;
             return null;
