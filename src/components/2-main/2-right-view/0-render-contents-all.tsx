@@ -15,7 +15,7 @@ import { hoverStackAtom, MouseMoveTrackerTooltip, mousePosAtom, MouseTracker } f
 import { HeroTitleText } from "../3-pages/3-controls/1-effect-hero-title/0-all";
 import { DashboardAsIframe } from "../3-pages/2-dashboard-iframe";
 
-import { MotionExampleRenderer, isMotionExampleId } from "../3-pages/4-motion-examples/motion-example-render";
+import { MotionExampleRenderer, isMotionExampleId } from "../3-pages/4-motion-examples/motion-examples-render";
 
 export function Section2_RenderContents() {
     const { themePreseetName } = useSnapshot(appSettings.appUi);

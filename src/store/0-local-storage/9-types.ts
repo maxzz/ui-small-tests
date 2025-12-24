@@ -1,4 +1,4 @@
-import { type MotionExampleId, MotionExampleItems } from "../../components/2-main/3-pages/4-motion-examples/9-motion-example-types";
+import { type MotionExampleId, MotionExampleItems } from "../../components/2-main/3-pages/4-motion-examples/motion-examples-types";
 
 // Re-export for backward compatibility
 export type { MotionExampleId };
