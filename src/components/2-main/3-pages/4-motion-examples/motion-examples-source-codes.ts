@@ -144,6 +144,29 @@ import miscMotionConfigNonce from "./a-misc/MotionConfig-nonce.tsx?raw";
 import miscPropRef from "./a-misc/Prop-ref.tsx?raw";
 import miscPropStyle from "./a-misc/Prop-style.tsx?raw";
 
+// Tests
+import testDragPropagation from "./b-tests/Test-dragPropagation.tsx?raw";
+import testSvgLayoutAnimationCorrection from "./b-tests/Test-SVG-layout-animation-correction.tsx?raw";
+import testLayoutTransform from "./b-tests/Test-layoutTransform.tsx?raw";
+import testLayoutDragTransform from "./b-tests/Test-layoutDragTransform.tsx?raw";
+import testDragSetState from "./b-tests/Test-dragSetState.tsx?raw";
+import testDragOverdrag from "./b-tests/Test-dragOverdrag.tsx?raw";
+import testDragExternalControl from "./b-tests/Test-dragExternalControl.tsx?raw";
+import testDragDevice from "./b-tests/Test-dragDevice.tsx?raw";
+import testDragContainingInput from "./b-tests/Test-dragContainingInput.tsx?raw";
+import testDragConstraintsRefSmallerThanChild from "./b-tests/Test-dragConstraintsRefSmallerThanChild.tsx?raw";
+import testDragConstraintsRefScale from "./b-tests/Test-dragConstraintsRefScale.tsx?raw";
+import testDragConstraintsRef from "./b-tests/Test-dragConstraintsRef.tsx?raw";
+import testDragConstraints from "./b-tests/Test-dragConstraints.tsx?raw";
+import testDragConstraintChanges from "./b-tests/Test-dragConstraintChanges.tsx?raw";
+import testDragClickable from "./b-tests/Test-dragClickable.tsx?raw";
+import testConditionalDraggable from "./b-tests/Test-conditionalDraggable.tsx?raw";
+import testAnimateStressExternalMotionValue from "./b-tests/Test-animate-stress-external-motion-value.tsx?raw";
+import testAnimateStressEmptyTransforms from "./b-tests/Test-animate-stress-empty-transforms.tsx?raw";
+import testDragControls from "./b-tests/Test-dragControls.tsx?raw";
+import testAnimateStressHeadlessX from "./b-tests/Test-animate-stress-headless-x.tsx?raw";
+import testAnimateStressHeadlessColor from "./b-tests/Test-animate-stress-headless-color.tsx?raw";
+
 // Export as a map
 export const demoSourceCodes: Record<MotionExampleId, string> = {
     // AnimatePresence examples
@@ -270,6 +293,28 @@ export const demoSourceCodes: Record<MotionExampleId, string> = {
     "misc-motion-config-nonce": miscMotionConfigNonce,
     "misc-prop-ref": miscPropRef,
     "misc-prop-style": miscPropStyle,
+    // Tests
+    "test-drag-propagation": testDragPropagation,
+    "test-svg-layout-animation-correction": testSvgLayoutAnimationCorrection,
+    "test-layout-transform": testLayoutTransform,
+    "test-layout-drag-transform": testLayoutDragTransform,
+    "test-drag-set-state": testDragSetState,
+    "test-drag-overdrag": testDragOverdrag,
+    "test-drag-external-control": testDragExternalControl,
+    "test-drag-device": testDragDevice,
+    "test-drag-containing-input": testDragContainingInput,
+    "test-drag-constraints-ref-smaller-than-child": testDragConstraintsRefSmallerThanChild,
+    "test-drag-constraints-ref-scale": testDragConstraintsRefScale,
+    "test-drag-constraints-ref": testDragConstraintsRef,
+    "test-drag-constraints": testDragConstraints,
+    "test-drag-constraint-changes": testDragConstraintChanges,
+    "test-drag-clickable": testDragClickable,
+    "test-conditional-draggable": testConditionalDraggable,
+    "test-animate-stress-external-motion-value": testAnimateStressExternalMotionValue,
+    "test-animate-stress-empty-transforms": testAnimateStressEmptyTransforms,
+    "test-drag-controls": testDragControls,
+    "test-animate-stress-headless-x": testAnimateStressHeadlessX,
+    "test-animate-stress-headless-color": testAnimateStressHeadlessColor,
 };
 
 // Debug: Log available keys to console

@@ -27,3 +27,6 @@ export * from "./9-waapi";
 
 // Misc examples
 export * from "./a-misc";
+
+// Tests
+export * from "./b-tests";

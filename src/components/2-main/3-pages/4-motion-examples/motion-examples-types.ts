@@ -131,7 +131,30 @@ export type MotionExampleId =
     | "misc-motion-config-is-static"
     | "misc-motion-config-nonce"
     | "misc-prop-ref"
-    | "misc-prop-style";
+    | "misc-prop-style"
+    // Tests
+    | "test-drag-propagation"
+    | "test-svg-layout-animation-correction"
+    | "test-layout-transform"
+    | "test-layout-drag-transform"
+    | "test-drag-set-state"
+    | "test-drag-overdrag"
+    | "test-drag-external-control"
+    | "test-drag-device"
+    | "test-drag-containing-input"
+    | "test-drag-constraints-ref-smaller-than-child"
+    | "test-drag-constraints-ref-scale"
+    | "test-drag-constraints-ref"
+    | "test-drag-constraints"
+    | "test-drag-constraint-changes"
+    | "test-drag-clickable"
+    | "test-conditional-draggable"
+    | "test-animate-stress-external-motion-value"
+    | "test-animate-stress-empty-transforms"
+    | "test-drag-controls"
+    | "test-animate-stress-headless-x"
+    | "test-animate-stress-headless-color";
+
 
 export const MotionExampleItems = [
     // AnimatePresence examples
@@ -267,4 +290,26 @@ export const MotionExampleItems = [
     { id: "misc-motion-config-nonce", title: "Nonce", description: "MotionConfig nonce", icon: "🔒" },
     { id: "misc-prop-ref", title: "Prop Ref", description: "Prop ref example", icon: "🔗" },
     { id: "misc-prop-style", title: "Prop Style", description: "Prop style example", icon: "🎨" },
+    // Tests
+    { id: "test-drag-propagation", title: "Drag Propagation", description: "Test Drag Propagation", icon: "🧪" },
+    { id: "test-svg-layout-animation-correction", title: "SVG Layout Correction", description: "Test SVG Layout Animation Correction", icon: "🧪" },
+    { id: "test-layout-transform", title: "Layout Transform", description: "Test Layout Transform", icon: "🧪" },
+    { id: "test-layout-drag-transform", title: "Layout Drag Transform", description: "Test Layout Drag Transform", icon: "🧪" },
+    { id: "test-drag-set-state", title: "Drag Set State", description: "Test Drag Set State", icon: "🧪" },
+    { id: "test-drag-overdrag", title: "Drag Overdrag", description: "Test Drag Overdrag", icon: "🧪" },
+    { id: "test-drag-external-control", title: "Drag External Control", description: "Test Drag External Control", icon: "🧪" },
+    { id: "test-drag-device", title: "Drag Device", description: "Test Drag Device", icon: "🧪" },
+    { id: "test-drag-containing-input", title: "Drag Containing Input", description: "Test Drag Containing Input", icon: "🧪" },
+    { id: "test-drag-constraints-ref-smaller-than-child", title: "Drag Constraints Ref Small", description: "Test Drag Constraints Ref Smaller Than Child", icon: "🧪" },
+    { id: "test-drag-constraints-ref-scale", title: "Drag Constraints Ref Scale", description: "Test Drag Constraints Ref Scale", icon: "🧪" },
+    { id: "test-drag-constraints-ref", title: "Drag Constraints Ref", description: "Test Drag Constraints Ref", icon: "🧪" },
+    { id: "test-drag-constraints", title: "Drag Constraints", description: "Test Drag Constraints", icon: "🧪" },
+    { id: "test-drag-constraint-changes", title: "Drag Constraint Changes", description: "Test Drag Constraint Changes", icon: "🧪" },
+    { id: "test-drag-clickable", title: "Drag Clickable", description: "Test Drag Clickable", icon: "🧪" },
+    { id: "test-conditional-draggable", title: "Conditional Draggable", description: "Test Conditional Draggable", icon: "🧪" },
+    { id: "test-animate-stress-external-motion-value", title: "Stress External Motion Value", description: "Test Animate Stress External Motion Value", icon: "🧪" },
+    { id: "test-animate-stress-empty-transforms", title: "Stress Empty Transforms", description: "Test Animate Stress Empty Transforms", icon: "🧪" },
+    { id: "test-drag-controls", title: "Drag Controls", description: "Test Drag Controls", icon: "🧪" },
+    { id: "test-animate-stress-headless-x", title: "Stress Headless X", description: "Test Animate Stress Headless X", icon: "🧪" },
+    { id: "test-animate-stress-headless-color", title: "Stress Headless Color", description: "Test Animate Stress Headless Color", icon: "🧪" },
 ] as const satisfies readonly { id: MotionExampleId; title: string; description?: string; icon?: string; }[];
