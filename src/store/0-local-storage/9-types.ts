@@ -18,15 +18,6 @@ export type LeftViewItem = {
     icon?: string;
 };
 
-export const LeftViewItems = [
-    { id: "common-cards", title: "Cards", description: "Cards demo", icon: "📊" },
-    { id: "common-dashboard", title: "Dashboard", description: "Dashboard demo", icon: "📊" },
-    { id: "common-hero-text", title: "Effect Hero Title", description: "Effect Hero Title demo", icon: "📊" },
-    { id: "common-listview", title: "List View", description: "List View demo", icon: "📊" },
-    { id: "common-motion-variants-race", title: "Motion Variants Race", description: "Motion Variants Race demo", icon: "🏁" },
-    ...MotionExampleItems,
-] as const satisfies readonly LeftViewItem[];
-
 // Grouped left view items
 
 export type LeftViewItemsGroups = {
@@ -35,8 +26,8 @@ export type LeftViewItemsGroups = {
 
 export const leftViewItemsGroups = {
     common: [
-        { id: "common-cards", title: "Cards", description: "Cards demo", icon: "📊" },
-        { id: "common-dashboard", title: "Dashboard", description: "Dashboard demo", icon: "📊" },
+        { id: "common-cards", title: "Cards with mouse tracking", description: "Cards demo", icon: "📊" },
+        { id: "common-dashboard", title: "Dashboard in iframe", description: "Dashboard demo", icon: "📊" },
         { id: "common-hero-text", title: "Effect Hero Title", description: "Effect Hero Title demo", icon: "📊" },
         { id: "common-listview", title: "List View", description: "List View demo", icon: "📊" },
         { id: "common-motion-variants-race", title: "Motion Variants Race", description: "Motion Variants Race demo", icon: "🏁" },
@@ -46,8 +37,6 @@ export const leftViewItemsGroups = {
         { id: "thelast-not-yet", title: "Not Yet", description: "Not Yet demo", icon: "🏁" },
     ],
 } as const satisfies { [key: string]: LeftViewItem[] };
-
-//export type LeftViewId = typeof LeftViewItems[number]["id"];
 
 // Right sub-view
 

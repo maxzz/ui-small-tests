@@ -9,7 +9,7 @@ export function DashboardAsIframe({ className, ...rest }: React.ComponentProps<"
     return (
         <iframe
             src="index-dashboard.html"
-            className={classNames("size-full border rounded-lg shadow-lg", className)}
+            className={classNames("size-full", className)}
             title="Demo Dashboard"
             {...rest}
         />
