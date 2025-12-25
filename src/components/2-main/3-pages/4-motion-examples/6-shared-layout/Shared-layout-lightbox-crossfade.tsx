@@ -12,7 +12,7 @@ import { motion, AnimatePresence } from "motion/react";
 export function SharedLayoutLightboxCrossfadeDemo() {
     const [index, setIndex] = useState<false | number>(false);
     return (
-        <div style={background}>
+        <div style={backgroundStyles}>
             <Gallery items={colorsArray} setIndex={setIndex} />
 
             <AnimatePresence>
@@ -26,18 +26,18 @@ export function SharedLayoutLightboxCrossfadeDemo() {
 
 function Gallery({ items, setIndex }: { items: string[], setIndex: any; }) {
     return (
-        <ul style={container}>
+        <ul style={containerStyles}>
             {items.map(
                 (color, i) => (
                     <motion.li
                         layoutId={color}
-                        style={{ ...item, backgroundColor: color, borderRadius: 0 }}
+                        style={{ ...itemStyles, backgroundColor: color, borderRadius: 0 }}
                         //transition={{ duration: 5 }}
                         key={color}
                         id={i === 0 ? "list-red" : undefined}
                         onClick={() => setIndex(i)}
                     >
-                        <motion.div style={child} layoutId={`child-${color}`} />
+                        <motion.div style={childStyles} layoutId={`child-${color}`} />
                     </motion.li>
                 )
             )}
@@ -52,21 +52,21 @@ function SingleImage({ color, setIndex }: { color: string, setIndex: any; }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 2 }}
-            style={overlay}
+            style={overlayStyles}
             id="overlay"
             onClick={() => setIndex(false)}
         />
-        <div style={singleImageContainer}>
+        <div style={singleImageContainerStyles}>
             <motion.div
                 id="color"
                 layoutId={color}
                 transition={{ duration: 2 }}
-                style={{ ...singleImage, backgroundColor: "#fff", borderRadius: 50, }}
+                style={{ ...singleImageStyles, backgroundColor: "#fff", borderRadius: 50, }}
             >
                 <motion.div
                     layoutId={`child-${color}`}
                     transition={{ duration: 2 }}
-                    style={{ ...child, backgroundColor: "black" }}
+                    style={{ ...childStyles, backgroundColor: "black" }}
                     id="child"
                 />
             </motion.div>
@@ -85,7 +85,7 @@ const colorsArray = Array.from(Array(numColors)).map(
 
 // Styles
 
-const background: CSSProperties = {
+const backgroundStyles: CSSProperties = {
     position: "absolute",
     top: "0",
     left: "0",
@@ -97,7 +97,7 @@ const background: CSSProperties = {
     background: "#ccc",
 };
 
-const container: CSSProperties = {
+const containerStyles: CSSProperties = {
     backgroundColor: "#eeeeee",
     borderRadius: "25px",
     width: "600px",
@@ -111,7 +111,7 @@ const container: CSSProperties = {
     listStyle: "none",
 };
 
-const item: CSSProperties = {
+const itemStyles: CSSProperties = {
     padding: "20px",
     cursor: "pointer",
     margin: "20px 0 0 20px",
@@ -121,7 +121,7 @@ const item: CSSProperties = {
     alignItems: "center",
 };
 
-const overlay: CSSProperties = {
+const overlayStyles: CSSProperties = {
     background: "rgba(0,0,0,0.6)",
     position: "fixed",
     top: "0",
@@ -130,7 +130,7 @@ const overlay: CSSProperties = {
     right: "0",
 };
 
-const singleImageContainer: CSSProperties = {
+const singleImageContainerStyles: CSSProperties = {
     position: "absolute",
     top: "0",
     left: "0",
@@ -142,13 +142,13 @@ const singleImageContainer: CSSProperties = {
     pointerEvents: "none",
 };
 
-const singleImage: CSSProperties = {
+const singleImageStyles: CSSProperties = {
     width: "500px",
     height: "300px",
     padding: 50,
 };
 
-const child: CSSProperties = {
+const childStyles: CSSProperties = {
     width: 50,
     height: 50,
     borderRadius: 25,
