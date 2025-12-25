@@ -27,6 +27,8 @@ export const LeftViewItems = [
     ...MotionExampleItems,
 ] as const satisfies readonly LeftViewItem[];
 
+// Grouped left view items
+
 export type LeftViewItemsGroups = {
     [key: string]: readonly LeftViewItem[] | LeftViewItemsGroups;
 };

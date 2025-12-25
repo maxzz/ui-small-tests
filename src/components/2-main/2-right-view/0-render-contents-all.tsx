@@ -103,7 +103,6 @@ function RightViewWithMouseTrackingChildren() {
             return <DashboardContents className="col-span-full" />;
         case "original-cards":
             return <RootComponents className="col-span-full" />;
-
         default: {
             const _exhaustiveCheck: never = rightSubView;
             return null;
