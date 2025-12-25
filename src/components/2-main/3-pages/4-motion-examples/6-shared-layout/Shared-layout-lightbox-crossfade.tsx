@@ -1,5 +1,5 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/Shared-layout-lightbox-crossfade.tsx
-import { CSSProperties, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 /**
@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "motion/react";
 export function SharedLayoutLightboxCrossfadeDemo() {
     const [index, setIndex] = useState<false | number>(false);
     return (
-        <div className="absolute inset-0 bg-[#ccc] flex items-center justify-center">
+        <div className="relative p-4 bg-gray-500 flex items-center justify-center">
             <Gallery items={colorsArray} setIndex={setIndex} />
 
             <AnimatePresence>
@@ -22,7 +22,7 @@ export function SharedLayoutLightboxCrossfadeDemo() {
 
 function Gallery({ items, setIndex }: { items: string[], setIndex: any; }) {
     return (
-        <ul className="m-0 p-[0_20px_20px_0] w-[600px] h-[600px] bg-[#eeeeee] rounded-[25px] list-none flex items-center justify-between flex-wrap">
+        <ul className="m-0 p-[0_20px_20px_0] w-150 h-150 bg-gray-200 rounded-2xl list-none flex items-center justify-between flex-wrap">
             {items.map(
                 (color, i) => (
                     <motion.li
