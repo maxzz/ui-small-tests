@@ -9,6 +9,11 @@ export function mergeDefaultAndLoaded<T extends Record<string, unknown>>({ defau
 
 /**
  * https://github.com/vitejs/vite/blob/main/packages/vite/src/node/utils.ts
+ * Merge two objects recursively.
+ * @param defaults - The default object.
+ * @param overrides - The overrides object.
+ * @param rootPath - The root path.
+ * @returns The merged object.
  */
 export function mergeConfigRecursively<T extends Record<string, any>>(defaults: T, overrides: Record<string, any> | undefined | null, rootPath: string = ''): T {
     if (!overrides) {
@@ -46,6 +51,12 @@ export function mergeConfigRecursively<T extends Record<string, any>>(defaults: 
     return rv as T;
 }
 
+/**
+ * Merge two objects recursively. The defference from mergeConfigRecursively is that it allows undefined values to be merged (but not null).
+ * @param defaults - The default object.
+ * @param overrides - The overrides object.
+ * @returns The merged object.
+ */
 export function mergeStateRecursively<T extends Record<string, any>>(defaults: T, overrides: Record<string, any> | undefined | null): T {
     if (!overrides) {
         return defaults;

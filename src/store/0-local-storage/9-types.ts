@@ -27,7 +27,11 @@ export const LeftViewItems = [
     ...MotionExampleItems,
 ] as const satisfies readonly LeftViewItem[];
 
-export const LeftViewItemsGroups = {
+export type LeftViewItemsGroups = {
+    [key: string]: readonly LeftViewItem[] | LeftViewItemsGroups;
+};
+
+export const leftViewItemsGroups = {
     common: [
         { id: "common-cards", title: "Cards", description: "Cards demo", icon: "📊" },
         { id: "common-dashboard", title: "Dashboard", description: "Dashboard demo", icon: "📊" },
@@ -36,7 +40,7 @@ export const LeftViewItemsGroups = {
         { id: "common-motion-variants-race", title: "Motion Variants Race", description: "Motion Variants Race demo", icon: "🏁" },
     ],
     motionExamples: [...MotionExampleItems],
-    thelast: [
+    miscellaneous: [
         { id: "thelast-not-yet", title: "Not Yet", description: "Not Yet demo", icon: "🏁" },
     ],
 } as const satisfies { [key: string]: LeftViewItem[] };
