@@ -45,12 +45,12 @@ function Gallery({ items, setIndex }: { items: string[], setIndex: any; }) {
 function SingleImage({ color, setIndex }: { color: string, setIndex: any; }) {
     return (<>
         <motion.div
+            id="overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 2 }}
             className="fixed inset-0 bg-[rgba(0,0,0,0.6)]"
-            id="overlay"
             onClick={() => setIndex(false)}
         />
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -58,14 +58,14 @@ function SingleImage({ color, setIndex }: { color: string, setIndex: any; }) {
                 id="color"
                 layoutId={color}
                 transition={{ duration: 2 }}
-                className="p-[50px] w-[500px] h-[300px]"
+                className="p-[50px] w-125 h-75"
             >
                 <motion.div
+                    id="child"
                     layoutId={`child-${color}`}
                     transition={{ duration: 2 }}
-                    className="w-[50px] h-[50px] rounded-[25px] bg-white opacity-50"
+                    className="size-12.5 rounded-3xl bg-white opacity-50"
                     style={{ backgroundColor: "black" }}
-                    id="child"
                 />
             </motion.div>
         </div>
