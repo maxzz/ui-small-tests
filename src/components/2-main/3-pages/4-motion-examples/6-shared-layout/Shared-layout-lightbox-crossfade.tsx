@@ -3,16 +3,12 @@ import { CSSProperties, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 /**
- * This demonstrates children with layoutId animating
- * back to their origin components
+ * This demonstrates children with layoutId animating back to their origin components
  */
-
-// const transition = { type: "spring", stiffness: 500, damping: 30 }
-
 export function SharedLayoutLightboxCrossfadeDemo() {
     const [index, setIndex] = useState<false | number>(false);
     return (
-        <div style={backgroundStyles}>
+        <div className="absolute inset-0 bg-[#ccc] flex items-center justify-center">
             <Gallery items={colorsArray} setIndex={setIndex} />
 
             <AnimatePresence>
@@ -26,18 +22,19 @@ export function SharedLayoutLightboxCrossfadeDemo() {
 
 function Gallery({ items, setIndex }: { items: string[], setIndex: any; }) {
     return (
-        <ul style={containerStyles}>
+        <ul className="m-0 p-[0_20px_20px_0] w-[600px] h-[600px] bg-[#eeeeee] rounded-[25px] list-none flex items-center justify-between flex-wrap">
             {items.map(
                 (color, i) => (
                     <motion.li
                         layoutId={color}
-                        style={{ ...itemStyles, backgroundColor: color, borderRadius: 0 }}
-                        //transition={{ duration: 5 }}
+                        className="p-[20px] m-[20px_0_0_20px] flex items-center justify-center flex-[1_1_90px] cursor-pointer"
+                        style={{ backgroundColor: color, borderRadius: 0 }}
+                        //transition={{ duration: 5 }} // const transition = { type: "spring", stiffness: 500, damping: 30 }
                         key={color}
                         id={i === 0 ? "list-red" : undefined}
                         onClick={() => setIndex(i)}
                     >
-                        <motion.div style={childStyles} layoutId={`child-${color}`} />
+                        <motion.div className="w-[50px] h-[50px] rounded-[25px] bg-white opacity-50" layoutId={`child-${color}`} />
                     </motion.li>
                 )
             )}
@@ -52,21 +49,22 @@ function SingleImage({ color, setIndex }: { color: string, setIndex: any; }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 2 }}
-            style={overlayStyles}
+            className="fixed inset-0 bg-[rgba(0,0,0,0.6)]"
             id="overlay"
             onClick={() => setIndex(false)}
         />
-        <div style={singleImageContainerStyles}>
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <motion.div
                 id="color"
                 layoutId={color}
                 transition={{ duration: 2 }}
-                style={{ ...singleImageStyles, backgroundColor: "#fff", borderRadius: 50, }}
+                className="p-[50px] w-[500px] h-[300px]"
             >
                 <motion.div
                     layoutId={`child-${color}`}
                     transition={{ duration: 2 }}
-                    style={{ ...childStyles, backgroundColor: "black" }}
+                    className="w-[50px] h-[50px] rounded-[25px] bg-white opacity-50"
+                    style={{ backgroundColor: "black" }}
                     id="child"
                 />
             </motion.div>
@@ -82,76 +80,3 @@ const makeColor = (hue: number) => `hsl(${hue}, 100%, 50%)`;
 const colorsArray = Array.from(Array(numColors)).map(
     (_, i) => makeColor(Math.round((360 / numColors) * i))
 );
-
-// Styles
-
-const backgroundStyles: CSSProperties = {
-    position: "absolute",
-    top: "0",
-    left: "0",
-    bottom: "0",
-    right: "0",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    background: "#ccc",
-};
-
-const containerStyles: CSSProperties = {
-    backgroundColor: "#eeeeee",
-    borderRadius: "25px",
-    width: "600px",
-    height: "600px",
-    margin: "0",
-    padding: "0 20px 20px 0",
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    alignItems: "center", // Fixed from 'space-between'
-    listStyle: "none",
-};
-
-const itemStyles: CSSProperties = {
-    padding: "20px",
-    cursor: "pointer",
-    margin: "20px 0 0 20px",
-    flex: "1 1 90px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-};
-
-const overlayStyles: CSSProperties = {
-    background: "rgba(0,0,0,0.6)",
-    position: "fixed",
-    top: "0",
-    left: "0",
-    bottom: "0",
-    right: "0",
-};
-
-const singleImageContainerStyles: CSSProperties = {
-    position: "absolute",
-    top: "0",
-    left: "0",
-    bottom: "0",
-    right: "0",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    pointerEvents: "none",
-};
-
-const singleImageStyles: CSSProperties = {
-    width: "500px",
-    height: "300px",
-    padding: 50,
-};
-
-const childStyles: CSSProperties = {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: "white",
-    opacity: 0.5,
-};
