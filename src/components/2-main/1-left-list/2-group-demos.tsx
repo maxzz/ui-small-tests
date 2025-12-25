@@ -42,19 +42,21 @@ export function GroupDemos() {
 
             <SidebarGroupContent className="flex-1 overflow-hidden">
                 <ScrollArea className="h-full pr-3">
-                    <SidebarMenu>
-                        {Object.entries(leftViewItemsGroups).map(([groupKey, items]) => (
-                            <GroupItem
-                                items={items}
-                                key={groupKey}
-                                groupKey={groupKey}
-                                expandedGroups={(expandedGroups || []) as string[]}
-                                currentItemId={currentItemId}
-                                activeItemRef={activeItemRef}
-                                onToggleGroup={onToggleGroup}
-                                onItemClick={onItemClick}
-                            />
-                        ))}
+                    <SidebarMenu className="gap-0">
+                        {Object.entries(leftViewItemsGroups).map(
+                            ([groupKey, items]) => (
+                                <GroupItem
+                                    items={items}
+                                    key={groupKey}
+                                    groupKey={groupKey}
+                                    expandedGroups={(expandedGroups || []) as string[]}
+                                    currentItemId={currentItemId}
+                                    activeItemRef={activeItemRef}
+                                    onToggleGroup={onToggleGroup}
+                                    onItemClick={onItemClick}
+                                />
+                            )
+                        )}
                     </SidebarMenu>
                 </ScrollArea>
             </SidebarGroupContent>
@@ -76,9 +78,9 @@ type GroupItemProps = {
 function GroupItem({ groupKey, items, expandedGroups, currentItemId, activeItemRef, onToggleGroup, onItemClick, depth = 0 }: GroupItemProps) {
     const isExpanded = expandedGroups?.includes(groupKey);
     return (
-        <div className="mb-2">
+        <div className="">
             <SidebarMenuItem>
-                <SidebarMenuButton className="font-medium text-sidebar-foreground/70 h-8" onClick={() => onToggleGroup(groupKey)}>
+                <SidebarMenuButton className="font-medium text-sidebar-foreground/70" size="xs" onClick={() => onToggleGroup(groupKey)}>
                     <ChevronRight className={classNames("transition-transform duration-200", isExpanded && "rotate-90")} />
                     <span className="truncate">
                         {formatLabel(groupKey)}
@@ -95,7 +97,7 @@ function GroupItem({ groupKey, items, expandedGroups, currentItemId, activeItemR
                         transition={{ duration: 0.2 }}
                         className="overflow-hidden"
                     >
-                        <div className="ml-4 my-1 pl-1 border-sidebar-border border-l">
+                        <div className="ml-4 pl-1 border-sidebar-border border-l">
                             {Array.isArray(items)
                                 ? (
                                     items.map(
@@ -103,7 +105,7 @@ function GroupItem({ groupKey, items, expandedGroups, currentItemId, activeItemR
                                             const isActive = currentItemId === id;
                                             return (
                                                 <SidebarMenuItem ref={isActive ? activeItemRef : null} key={id}>
-                                                    <SidebarMenuButton isActive={isActive} size="sm" onClick={() => onItemClick(id)}>
+                                                    <SidebarMenuButton className="py-0" isActive={isActive} size="xs" onClick={() => onItemClick(id)}>
                                                         {icon} <span className="truncate">{title}</span>
                                                     </SidebarMenuButton>
                                                 </SidebarMenuItem>
