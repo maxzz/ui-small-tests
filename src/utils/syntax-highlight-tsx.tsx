@@ -76,20 +76,20 @@ export function highlightTsxCode(code: string): React.ReactNode[] {
 }
 
 function highlightKeywords(text: string): string {
-    return text
-        // Keywords
-        .replace(/\b(import|export|from|const|let|var|function|return|if|else|switch|case|default|break|continue|for|while|do|try|catch|finally|throw|new|typeof|instanceof|class|extends|implements|interface|type|enum|async|await|yield|static|get|set|public|private|protected|readonly|as|is)\b/g,
-            '<span class="text-purple-600 dark:text-purple-400 font-medium">$1</span>')
-        // React/JSX hooks
-        .replace(/\b(React|useState|useEffect|useRef|useMemo|useCallback|useContext|useReducer|forwardRef)\b/g,
-            '<span class="text-cyan-600 dark:text-cyan-400">$1</span>')
-        // Types
-        .replace(/\b(string|number|boolean|null|undefined|void|any|never|unknown|object|Array|Promise|Record)\b/g,
-            '<span class="text-sky-600 dark:text-sky-400">$1</span>')
-        // Numbers
-        .replace(/\b(\d+)\b/g,
-            '<span class="text-orange-500 dark:text-orange-400">$1</span>')
-        // Booleans
-        .replace(/\b(true|false)\b/g,
-            '<span class="text-orange-600 dark:text-orange-400 font-medium">$1</span>');
+    const keywords = "import|export|from|const|let|var|function|return|if|else|switch|case|default|break|continue|for|while|do|try|catch|finally|throw|new|typeof|instanceof|class|extends|implements|interface|type|enum|async|await|yield|static|get|set|public|private|protected|readonly|as|is";
+    const hooks = "React|useState|useEffect|useRef|useMemo|useCallback|useContext|useReducer|forwardRef";
+    const types = "string|number|boolean|null|undefined|void|any|never|unknown|object|Array|Promise|Record";
+    const booleans = "true|false";
+
+    // Combine into one regex
+    const combinedRegex = new RegExp(`\\b(${keywords})\\b|\\b(${hooks})\\b|\\b(${types})\\b|\\b(${booleans})\\b|\\b(\\d+)\\b`, 'g');
+
+    return text.replace(combinedRegex, (match, p1, p2, p3, p4, p5) => {
+        if (p1) return `<span class="text-purple-600 dark:text-purple-400 font-medium">${p1}</span>`;
+        if (p2) return `<span class="text-cyan-600 dark:text-cyan-400">${p2}</span>`;
+        if (p3) return `<span class="text-sky-600 dark:text-sky-400">${p3}</span>`;
+        if (p4) return `<span class="text-orange-600 dark:text-orange-400 font-medium">${p4}</span>`;
+        if (p5) return `<span class="text-orange-500 dark:text-orange-400">${p5}</span>`;
+        return match;
+    });
 }
