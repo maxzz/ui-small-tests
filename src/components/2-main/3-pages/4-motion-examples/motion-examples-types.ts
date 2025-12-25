@@ -82,21 +82,20 @@ export type MotionExampleId =
     | "layout-projection-scale-size"
     | "layout-svg"
     // Shared Layout
+    | "shared-layout-continuity-crossfade"
     | "shared-layout-continuity"
+    | "shared-layout-lightbox-crossfade"
     | "shared-layout-lightbox"
     | "shared-layout-lists"
-    | "shared-layout-toggle-details"
-    // New Shared Layout
-    | "shared-layout-continuity-crossfade"
-    | "shared-layout-lightbox-crossfade"
     | "shared-layout-motion-value-continuity"
-    | "shared-layout-nested-inset-elements"
     | "shared-layout-nested-inset-elements-no-layout"
+    | "shared-layout-nested-inset-elements"
     | "shared-layout-reparenting"
     | "shared-layout-reparenting-transform-template"
     | "shared-layout-rotate"
     | "shared-layout-sibling-to-child"
     | "shared-layout-skew"
+    | "shared-layout-toggle-details"
     // SVG
     | "svg-path"
     | "svg-layout-animation"
@@ -240,21 +239,20 @@ export const MotionExampleItems = [
     { id: "layout-projection-scale-size", title: "Scale Size", description: "Scale size projection", icon: "📐" },
     { id: "layout-svg", title: "Layout SVG", description: "SVG layout animation", icon: "📐" },
     // Shared Layout examples
+    { id: "shared-layout-continuity-crossfade", title: "Continuity Crossfade", description: "Shared layout crossfade", icon: "🔗" },
     { id: "shared-layout-continuity", title: "Shared Layout Continuity", description: "Shared layout continuity", icon: "🔗" },
+    { id: "shared-layout-lightbox-crossfade", title: "Lightbox Crossfade", description: "Lightbox with crossfade", icon: "🔗" },
     { id: "shared-layout-lightbox", title: "Lightbox", description: "Shared layout lightbox", icon: "🔗" },
     { id: "shared-layout-lists", title: "Lists", description: "Shared layout lists", icon: "🔗" },
-    { id: "shared-layout-toggle-details", title: "Toggle Details", description: "Shared layout toggle details", icon: "🔗" },
-    // New Shared Layout
-    { id: "shared-layout-continuity-crossfade", title: "Continuity Crossfade", description: "Shared layout crossfade", icon: "🔗" },
-    { id: "shared-layout-lightbox-crossfade", title: "Lightbox Crossfade", description: "Lightbox with crossfade", icon: "🔗" },
     { id: "shared-layout-motion-value-continuity", title: "Motion Value", description: "Shared motion value continuity", icon: "🔗" },
-    { id: "shared-layout-nested-inset-elements", title: "Nested Inset", description: "Nested inset elements", icon: "🔗" },
     { id: "shared-layout-nested-inset-elements-no-layout", title: "Nested No Layout", description: "Nested inset without layout", icon: "🔗" },
+    { id: "shared-layout-nested-inset-elements", title: "Nested Inset", description: "Nested inset elements", icon: "🔗" },
     { id: "shared-layout-reparenting", title: "Reparenting", description: "Shared layout reparenting", icon: "🔗" },
     { id: "shared-layout-reparenting-transform-template", title: "Reparent Transform", description: "Reparenting transform template", icon: "🔗" },
     { id: "shared-layout-rotate", title: "Shared Rotate", description: "Shared layout rotation", icon: "🔗" },
     { id: "shared-layout-sibling-to-child", title: "Sibling to Child", description: "Sibling to child animation", icon: "🔗" },
     { id: "shared-layout-skew", title: "Shared Skew", description: "Shared layout skew", icon: "🔗" },
+    { id: "shared-layout-toggle-details", title: "Toggle Details", description: "Shared layout toggle details", icon: "🔗" },
     // SVG examples
     { id: "svg-path", title: "SVG Path", description: "SVG path animation", icon: "✏️" },
     { id: "svg-layout-animation", title: "SVG Layout", description: "SVG layout animation", icon: "✏️" },
