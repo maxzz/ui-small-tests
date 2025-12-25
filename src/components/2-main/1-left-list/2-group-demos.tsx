@@ -105,7 +105,7 @@ function GroupItem({ groupKey, items, expandedGroups, currentItemId, activeItemR
                                             const isActive = currentItemId === id;
                                             return (
                                                 <SidebarMenuItem ref={isActive ? activeItemRef : null} key={id}>
-                                                    <SidebarMenuButton className="py-0" isActive={isActive} size="xs" onClick={() => onItemClick(id)}>
+                                                    <SidebarMenuButton className="py-0" isActive={isActive} size="xs" onClick={() => onItemClick(id)} title={id}>
                                                         {icon} <span className="truncate">{title}</span>
                                                     </SidebarMenuButton>
                                                 </SidebarMenuItem>
