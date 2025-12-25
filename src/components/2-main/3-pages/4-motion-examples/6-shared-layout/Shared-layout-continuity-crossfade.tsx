@@ -6,7 +6,7 @@ import { motion, useCycle, AnimatePresence } from "motion/react";
  */
 export function SharedLayoutContinuityCrossfadeDemo() {
     return (
-        <div className="absolute inset-0 bg-white flex items-center justify-center">
+        <div className="relative bg-sky-500 flex items-center justify-center">
             <Component />
         </div>
     );
