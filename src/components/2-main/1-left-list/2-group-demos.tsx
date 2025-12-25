@@ -7,18 +7,73 @@ import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import { ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
+export function GroupDemos() {
+    const { leftTree: currentItemId, expandedGroups } = useSnapshot(appSettings.appUi);
+    const activeItemRef = useRef<HTMLLIElement>(null);
+
+    const onItemClick = useCallback(
+        (nodeId: LeftViewId) => {
+            appSettings.appUi.leftTree = nodeId;
+        }, []
+    );
+
+    const onToggleGroup = useCallback(
+        (groupKey: string) => {
+            const current = appSettings.appUi.expandedGroups || [];
+            if (current.includes(groupKey)) {
+                appSettings.appUi.expandedGroups = current.filter(k => k !== groupKey);
+            } else {
+                appSettings.appUi.expandedGroups = [...current, groupKey];
+            }
+        }, []
+    );
+
+    useEffect( // Scroll active item into view when it changes
+        () => {
+            activeItemRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        }, [currentItemId]
+    );
+
+    return (
+        <SidebarGroup className="h-full flex flex-col">
+            <SidebarGroupLabel>
+                Demos
+            </SidebarGroupLabel>
+
+            <SidebarGroupContent className="flex-1 overflow-hidden">
+                <ScrollArea className="h-full pr-3">
+                    <SidebarMenu>
+                        {Object.entries(leftViewItemsGroups).map(([groupKey, items]) => (
+                            <GroupItem
+                                items={items}
+                                key={groupKey}
+                                groupKey={groupKey}
+                                expandedGroups={(expandedGroups || []) as string[]}
+                                currentItemId={currentItemId}
+                                activeItemRef={activeItemRef}
+                                onToggleGroup={onToggleGroup}
+                                onItemClick={onItemClick}
+                            />
+                        ))}
+                    </SidebarMenu>
+                </ScrollArea>
+            </SidebarGroupContent>
+        </SidebarGroup>
+    );
+}
+
 type GroupItemProps = {
-    items: readonly LeftViewItem[] | LeftViewItemsGroups;
-    groupKey: string;
-    expandedGroups: string[];
-    leftTree: LeftViewId;
-    activeItemRef: React.RefObject<HTMLLIElement | null>;
-    onToggleGroup: (key: string) => void;
-    onItemClick: (id: LeftViewId) => void;
-    depth?: number;
+    items: readonly LeftViewItem[] | LeftViewItemsGroups;   // The items to display in the group.
+    expandedGroups: string[];                               // The groups that are expanded like ["common", "motionExamples"].
+    currentItemId: LeftViewId;                              // The current item id like "common-cards" or "motion-variants-race".
+    groupKey: string;                                       // The key of the group like "common" or "motionExamples" or "miscellaneous".
+    onToggleGroup: (key: string) => void;                   // The function to collapse or expand the group.
+    onItemClick: (id: LeftViewId) => void;                  // The function to select the item.
+    activeItemRef: React.RefObject<HTMLLIElement | null>;   // The ref of the active item so that it can be scrolled into view when it changes.
+    depth?: number;                                         // The depth of the group like 0 for the main group, 1 for the sub-groups.
 };
 
-function GroupItem({ groupKey, items, expandedGroups, leftTree, activeItemRef, onToggleGroup, onItemClick, depth = 0 }: GroupItemProps) {
+function GroupItem({ groupKey, items, expandedGroups, currentItemId, activeItemRef, onToggleGroup, onItemClick, depth = 0 }: GroupItemProps) {
     const isExpanded = expandedGroups?.includes(groupKey);
     return (
         <div className="mb-2">
@@ -45,7 +100,7 @@ function GroupItem({ groupKey, items, expandedGroups, leftTree, activeItemRef, o
                                 ? (
                                     items.map(
                                         ({ id, title, icon }) => {
-                                            const isActive = leftTree === id;
+                                            const isActive = currentItemId === id;
                                             return (
                                                 <SidebarMenuItem ref={isActive ? activeItemRef : null} key={id}>
                                                     <SidebarMenuButton isActive={isActive} size="sm" onClick={() => onItemClick(id)}>
@@ -60,14 +115,15 @@ function GroupItem({ groupKey, items, expandedGroups, leftTree, activeItemRef, o
                                         ([subGroupKey, subItems]) => (
                                             <GroupItem
                                                 key={subGroupKey}
-                                                groupKey={subGroupKey}
                                                 items={subItems}
                                                 expandedGroups={expandedGroups}
-                                                leftTree={leftTree}
-                                                activeItemRef={activeItemRef}
+                                                currentItemId={currentItemId}
+                                                groupKey={subGroupKey}
                                                 onToggleGroup={onToggleGroup}
                                                 onItemClick={onItemClick}
-                                                depth={depth + 1} />
+                                                activeItemRef={activeItemRef}
+                                                depth={depth + 1}
+                                            />
                                         )
                                     )
                                 )
@@ -77,64 +133,6 @@ function GroupItem({ groupKey, items, expandedGroups, leftTree, activeItemRef, o
                 )}
             </AnimatePresence>
         </div>
-    );
-}
-
-export function GroupDemos() {
-    const { leftTree, expandedGroups } = useSnapshot(appSettings.appUi);
-    const activeItemRef = useRef<HTMLLIElement>(null);
-
-    const onItemClick = useCallback(
-        (nodeId: LeftViewId) => {
-            appSettings.appUi.leftTree = nodeId;
-        }, []
-    );
-
-    const onToggleGroup = useCallback(
-        (groupKey: string) => {
-            const current = appSettings.appUi.expandedGroups || [];
-            if (current.includes(groupKey)) {
-                appSettings.appUi.expandedGroups = current.filter(k => k !== groupKey);
-            } else {
-                appSettings.appUi.expandedGroups = [...current, groupKey];
-            }
-        }, []
-    );
-
-    // Scroll active item into view when it changes
-    useEffect(
-        () => {
-            if (activeItemRef.current) {
-                activeItemRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-            }
-        }, [leftTree]
-    );
-
-    return (
-        <SidebarGroup className="h-full flex flex-col">
-            <SidebarGroupLabel>
-                Demos
-            </SidebarGroupLabel>
-
-            <SidebarGroupContent className="flex-1 overflow-hidden">
-                <ScrollArea className="h-full pr-3">
-                    <SidebarMenu>
-                        {Object.entries(leftViewItemsGroups).map(([groupKey, items]) => (
-                            <GroupItem
-                                key={groupKey}
-                                groupKey={groupKey}
-                                items={items}
-                                expandedGroups={(expandedGroups || []) as string[]}
-                                leftTree={leftTree}
-                                activeItemRef={activeItemRef}
-                                onToggleGroup={onToggleGroup}
-                                onItemClick={onItemClick}
-                            />
-                        ))}
-                    </SidebarMenu>
-                </ScrollArea>
-            </SidebarGroupContent>
-        </SidebarGroup>
     );
 }
 
