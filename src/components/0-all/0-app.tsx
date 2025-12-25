@@ -11,7 +11,7 @@ export function App() {
     const { sidebarLeftOpen } = useSnapshot(appSettings.appUi);
     const onSidebarLeftOpenChange = useCallback((open: boolean) => appSettings.appUi.sidebarLeftOpen = open, []);
     return (
-        <div className="h-screen grid grid-rows-[auto_1fr_auto] debug-screens">
+        <div className="h-screen grid grid-rows-[auto_1fr_auto] 1debug-screens">
             <SidebarProvider defaultOpen={sidebarLeftOpen} open={sidebarLeftOpen} onOpenChange={onSidebarLeftOpenChange}>
                 <LeftList />
 

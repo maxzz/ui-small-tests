@@ -36,9 +36,9 @@ export function GroupDemos() {
 
     return (
         <SidebarGroup className="h-full flex flex-col">
-            <SidebarGroupLabel>
+            {/* <SidebarGroupLabel>
                 Demos
-            </SidebarGroupLabel>
+            </SidebarGroupLabel> */}
 
             <SidebarGroupContent className="flex-1 overflow-hidden">
                 <ScrollArea className="h-full pr-3">
