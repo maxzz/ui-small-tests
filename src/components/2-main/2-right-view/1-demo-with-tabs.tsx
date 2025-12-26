@@ -3,12 +3,14 @@ import { demoSourceCodes } from "../3-pages/4-motion-examples/motion-examples-so
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn/tabs";
 import { highlightTsxCode } from "@/utils/syntax-highlight-tsx";
 import { type MotionExampleId } from "@/components/2-main/3-pages/4-motion-examples/motion-examples-types";
+import { Button } from "@/components/ui/shadcn/button";
+import { RefreshCcwIcon } from "lucide-react";
 
 /**
  * Wrapper component for demos with tabs (Demo + Source Code)
  */
 export function DemoWithTabs({ demoId, children }: { demoId: MotionExampleId; children: React.ReactNode; }) {
-    
+
     const sourceCode = demoSourceCodes[demoId as keyof typeof demoSourceCodes];
     const isMissing = !sourceCode;
 
@@ -29,10 +31,16 @@ export function DemoWithTabs({ demoId, children }: { demoId: MotionExampleId; ch
     return (
         <Tabs defaultValue="demo" className="h-full flex flex-col">
 
-            <TabsList className="grid w-full grid-cols-2 mx-2 mt-1">
-                <TabsTrigger value="demo">Demo</TabsTrigger>
-                <TabsTrigger value="source">Source Code</TabsTrigger>
-            </TabsList>
+            <div className="flex items-center justify-between">
+                <TabsList className="grid grid-cols-2">
+                    <TabsTrigger value="demo">Demo</TabsTrigger>
+                    <TabsTrigger value="source">Source Code</TabsTrigger>
+                </TabsList>
+
+                <Button className="mx-2" variant="ghost" size="icon">
+                    <RefreshCcwIcon className="side-4" />
+                </Button>
+            </div>
 
             <TabsContent value="demo" className="flex-1 overflow-auto mt-0">
                 {children}
