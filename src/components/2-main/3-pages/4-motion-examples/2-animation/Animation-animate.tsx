@@ -21,13 +21,7 @@ export function AnimationAnimateDemo() {
         <motion.div
             animate={{ x: state ? 0 : 100 }}
             transition={{ duration: 1 }}
-            style={style}
+            className="size-24 bg-red-500 rounded-full"
         />
     );
 }
-
-const style = {
-    width: 100,
-    height: 100,
-    background: "red",
-};

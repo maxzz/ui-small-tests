@@ -1,6 +1,8 @@
 // Source: https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/Animation-batch-read-writes.tsx
 import { MotionConfig, motion } from "motion/react";
-
+import { useAtomValue } from "jotai";
+import { restartDemoAtom } from "@/store/3-ui-atoms";
+import { useEffect } from "react";
 // window.MotionHandoffAnimation = () => 0;
 
 export function AnimationBatchReadWritesDemo() {
