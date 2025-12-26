@@ -7,6 +7,7 @@ export type LeftViewId =
     | "common-dashboard" 
     | "common-hero-text" 
     | "common-listview"
+    | "controls-bezier-editor"
     | MotionExampleId
     | "thelast-not-yet";
 
@@ -29,6 +30,9 @@ export const leftViewItemsGroups = {
         { id: "common-dashboard", title: "Dashboard in iframe", description: "Dashboard demo", icon: "📊" },
         { id: "common-hero-text", title: "Effect Hero Title", description: "Effect Hero Title demo", icon: "📊" },
         { id: "common-listview", title: "List View", description: "List View demo", icon: "📊" },
+    ],
+    controls: [
+        { id: "controls-bezier-editor", title: "Bezier Curve Editor", description: "Edit bezier curves for animations", icon: "📐" },
     ],
     motionExamples: MotionExampleItems,
     miscellaneous: [

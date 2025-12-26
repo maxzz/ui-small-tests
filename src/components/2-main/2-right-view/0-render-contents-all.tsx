@@ -13,6 +13,7 @@ import { CardsContents } from "./10-cards-contents";
 import { hoverStackAtom, MouseMoveTrackerTooltip, mousePosAtom, MouseTracker } from "@/components/ui/local/8-mouse-tracker";
 import { HeroTitleText } from "../3-pages/3-controls/1-effect-hero-title/0-all";
 import { DashboardAsIframe } from "../3-pages/2-dashboard-iframe";
+import { OptionsEditor } from "../3-pages/3-controls/3-bezier-editor";
 
 import { MotionExampleRenderer, isMotionExampleId } from "../3-pages/4-motion-examples/motion-examples-render";
 
@@ -55,6 +56,7 @@ function RightView() {
         case "common-dashboard": return <RightViewDashboard />;
         case "common-hero-text": return <HeroTitleText />;
         case "common-listview": return <UserItemList />;
+        case "controls-bezier-editor": return <OptionsEditor />;
         case "thelast-not-yet": return <RightViewNotYet />;
         default: {
             const _exhaustiveCheck: never = leftTree;
