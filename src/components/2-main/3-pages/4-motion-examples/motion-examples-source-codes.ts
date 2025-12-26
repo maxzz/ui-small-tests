@@ -168,6 +168,9 @@ import testDragControls from "./b-tests/Test-dragControls.tsx?raw";
 import testAnimateStressHeadlessX from "./b-tests/Test-animate-stress-headless-x.tsx?raw";
 import testAnimateStressHeadlessColor from "./b-tests/Test-animate-stress-headless-color.tsx?raw";
 
+// External examples
+import externalHoverParentToChild from "./c-external/hover-parent-to-child.tsx?raw";
+
 // Export as a map
 export const demoSourceCodes: Record<MotionExampleId, string> = {
     // AnimatePresence examples
@@ -317,6 +320,8 @@ export const demoSourceCodes: Record<MotionExampleId, string> = {
     "test-drag-controls": testDragControls,
     "test-animate-stress-headless-x": testAnimateStressHeadlessX,
     "test-animate-stress-headless-color": testAnimateStressHeadlessColor,
+    // External examples
+    "external-hover-parent-to-child": externalHoverParentToChild,
 };
 
 // Debug: Log available keys to console

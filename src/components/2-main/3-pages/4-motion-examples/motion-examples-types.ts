@@ -149,6 +149,8 @@ export type MotionExampleId =
     | "test-animate-stress-empty-transforms"
     | "test-drag-controls"
     | "test-animate-stress-headless-x"
-    | "test-animate-stress-headless-color";
+    | "test-animate-stress-headless-color"
+    // External
+    | "external-hover-parent-to-child";
 
 export { MotionExampleItems } from "./motion-examples-render-order";

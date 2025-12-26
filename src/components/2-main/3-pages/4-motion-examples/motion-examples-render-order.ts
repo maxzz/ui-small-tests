@@ -173,6 +173,10 @@ const testItems = [
     { id: "test-animate-stress-headless-color", title: "Stress Headless Color", description: "Test Animate Stress Headless Color", icon: "🧪" },
 ] as const satisfies readonly MotionExampleItem[];
 
+const externalItems = [
+    { id: "external-hover-parent-to-child", title: "Hover Parent to Child", description: "Animate children when hovering parent", icon: "🔗" },
+] as const satisfies readonly MotionExampleItem[];
+
 // Export as LeftViewItemsGroups with prefix as keys
 export const MotionExampleItems = {
     "animate presence": animatePresenceItems,
@@ -186,4 +190,5 @@ export const MotionExampleItems = {
     "waapi": waapiItems,
     "misc": miscItems,
     "test": testItems,
+    "external": externalItems,
 } as const satisfies LeftViewItemsGroups;

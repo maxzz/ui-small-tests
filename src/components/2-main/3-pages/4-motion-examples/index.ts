@@ -30,3 +30,6 @@ export * from "./a-misc";
 
 // Tests
 export * from "./b-tests";
+
+// External examples
+export * from "./c-external";

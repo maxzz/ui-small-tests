@@ -168,4 +168,6 @@ const MotionExampleComponents: Record<MotionExampleId, React.ComponentType> = {
     "test-drag-controls": MotionExamples.TestDragControlsDemo,
     "test-animate-stress-headless-x": MotionExamples.TestAnimateStressHeadlessXDemo,
     "test-animate-stress-headless-color": MotionExamples.TestAnimateStressHeadlessColorDemo,
+    // External examples
+    "external-hover-parent-to-child": MotionExamples.HoverParentToChildDemo,
 };
