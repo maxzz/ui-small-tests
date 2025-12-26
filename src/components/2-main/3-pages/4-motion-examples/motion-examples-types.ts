@@ -97,36 +97,32 @@ export type MotionExampleId =
     | "shared-layout-skew"
     | "shared-layout-toggle-details"
     // SVG
-    | "svg-path"
     | "svg-layout-animation"
-    // New SVG
     | "svg-motion-value"
+    | "svg-path"
     | "svg-text-motion-value-child"
     | "svg-transform"
     | "svg-without-initial-values"
     // Hooks
-    | "hooks-use-scroll"
-    | "hooks-use-spring"
-    | "hooks-use-animation"
-    // New Hooks
     | "hooks-use-animated-state"
+    | "hooks-use-animation"
     | "hooks-use-instant-transition"
     | "hooks-use-presence"
     | "hooks-use-reduced-motion"
+    | "hooks-use-spring"
+    | "hooks-use-scroll"
     | "hooks-use-transform-with-use-layout-effect"
     | "hooks-use-velocity"
     | "hooks-use-viewport-scroll"
     // WAAPI
     | "waapi-background-color"
-    | "waapi-opacity"
-    // New WAAPI
     | "waapi-interrupt"
     | "waapi-opacity-orchestration"
+    | "waapi-opacity"
     // Misc
-    | "misc-motion-custom-tag"
     | "misc-lazy-motion-async"
-    // New Misc
     | "misc-lazy-motion-sync"
+    | "misc-motion-custom-tag"
     | "misc-motion-config-is-static"
     | "misc-motion-config-nonce"
     | "misc-prop-ref"
@@ -254,36 +250,32 @@ export const MotionExampleItems = [
     { id: "shared-layout-skew", title: "Shared Skew", description: "Shared layout skew", icon: "🔗" },
     { id: "shared-layout-toggle-details", title: "Toggle Details", description: "Shared layout toggle details", icon: "🔗" },
     // SVG examples
-    { id: "svg-path", title: "SVG Path", description: "SVG path animation", icon: "✏️" },
     { id: "svg-layout-animation", title: "SVG Layout", description: "SVG layout animation", icon: "✏️" },
-    // New SVG
     { id: "svg-motion-value", title: "Motion Value", description: "SVG MotionValue", icon: "✏️" },
+    { id: "svg-path", title: "SVG Path", description: "SVG path animation", icon: "✏️" },
     { id: "svg-text-motion-value-child", title: "Text Child", description: "SVG Text MotionValue Child", icon: "✏️" },
     { id: "svg-transform", title: "Transform", description: "SVG Transform", icon: "✏️" },
     { id: "svg-without-initial-values", title: "No Initial", description: "SVG without initial values", icon: "✏️" },
     // Hooks examples
-    { id: "hooks-use-scroll", title: "useScroll", description: "Scroll animation hook", icon: "🪝" },
-    { id: "hooks-use-spring", title: "useSpring", description: "Spring animation hook", icon: "🪝" },
-    { id: "hooks-use-animation", title: "useAnimation", description: "Animation control hook", icon: "🪝" },
-    // New Hooks
     { id: "hooks-use-animated-state", title: "useAnimatedState", description: "useAnimatedState hook", icon: "🪝" },
+    { id: "hooks-use-animation", title: "useAnimation", description: "Animation control hook", icon: "🪝" },
     { id: "hooks-use-instant-transition", title: "useInstantTransition", description: "useInstantTransition hook", icon: "🪝" },
     { id: "hooks-use-presence", title: "usePresence", description: "usePresence hook", icon: "🪝" },
     { id: "hooks-use-reduced-motion", title: "useReducedMotion", description: "useReducedMotion hook", icon: "🪝" },
+    { id: "hooks-use-scroll", title: "useScroll", description: "Scroll animation hook", icon: "🪝" },
+    { id: "hooks-use-spring", title: "useSpring", description: "Spring animation hook", icon: "🪝" },
     { id: "hooks-use-transform-with-use-layout-effect", title: "useTransform Layout", description: "useTransform with useLayoutEffect", icon: "🪝" },
     { id: "hooks-use-velocity", title: "useVelocity", description: "useVelocity hook", icon: "🪝" },
     { id: "hooks-use-viewport-scroll", title: "useViewportScroll", description: "useViewportScroll hook", icon: "🪝" },
     // WAAPI examples
     { id: "waapi-background-color", title: "WAAPI Color", description: "Web Animations API color", icon: "🌊" },
-    { id: "waapi-opacity", title: "WAAPI Opacity", description: "Web Animations API opacity", icon: "🌊" },
-    // New WAAPI
     { id: "waapi-interrupt", title: "Interrupt", description: "WAAPI Interrupt", icon: "🌊" },
     { id: "waapi-opacity-orchestration", title: "Opacity Orchestration", description: "WAAPI Opacity Orchestration", icon: "🌊" },
+    { id: "waapi-opacity", title: "WAAPI Opacity", description: "Web Animations API opacity", icon: "🌊" },
     // Misc examples
-    { id: "misc-motion-custom-tag", title: "Custom Tag", description: "Custom motion component", icon: "🧩" },
     { id: "misc-lazy-motion-async", title: "Lazy Motion", description: "Async lazy loading", icon: "🧩" },
-    // New Misc
     { id: "misc-lazy-motion-sync", title: "Lazy Motion Sync", description: "Sync lazy loading", icon: "🧩" },
+    { id: "misc-motion-custom-tag", title: "Custom Tag", description: "Custom motion component", icon: "🧩" },
     { id: "misc-motion-config-is-static", title: "Is Static", description: "MotionConfig isStatic", icon: "🧩" },
     { id: "misc-motion-config-nonce", title: "Nonce", description: "MotionConfig nonce", icon: "🧩" },
     { id: "misc-prop-ref", title: "Prop Ref", description: "Prop ref example", icon: "🧩" },

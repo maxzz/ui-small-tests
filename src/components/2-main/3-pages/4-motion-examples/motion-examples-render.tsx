@@ -113,36 +113,32 @@ const MotionExampleComponents: Record<MotionExampleId, React.ComponentType> = {
     "shared-layout-sibling-to-child": MotionExamples.SharedLayoutSiblingToChildDemo,
     "shared-layout-skew": MotionExamples.SharedLayoutSkewDemo,
     // SVG examples
-    "svg-path": MotionExamples.SvgPathDemo,
     "svg-layout-animation": MotionExamples.SvgLayoutAnimationDemo,
-    // New SVG
     "svg-motion-value": MotionExamples.SvgMotionValueDemo,
+    "svg-path": MotionExamples.SvgPathDemo,
     "svg-text-motion-value-child": MotionExamples.SvgTextMotionValueChildDemo,
     "svg-transform": MotionExamples.SvgTransformDemo,
     "svg-without-initial-values": MotionExamples.SvgWithoutInitialValuesDemo,
     // Hooks examples
-    "hooks-use-scroll": MotionExamples.HooksUseScrollDemo,
-    "hooks-use-spring": MotionExamples.HooksUseSpringDemo,
-    "hooks-use-animation": MotionExamples.HooksUseAnimationDemo,
-    // New Hooks
     "hooks-use-animated-state": MotionExamples.HooksUseAnimatedStateDemo,
+    "hooks-use-animation": MotionExamples.HooksUseAnimationDemo,
     "hooks-use-instant-transition": MotionExamples.HooksUseInstantTransitionDemo,
     "hooks-use-presence": MotionExamples.HooksUsePresenceDemo,
     "hooks-use-reduced-motion": MotionExamples.HooksUseReducedMotionDemo,
+    "hooks-use-scroll": MotionExamples.HooksUseScrollDemo,
+    "hooks-use-spring": MotionExamples.HooksUseSpringDemo,
     "hooks-use-transform-with-use-layout-effect": MotionExamples.HooksUseTransformWithUseLayoutEffectDemo,
     "hooks-use-velocity": MotionExamples.HooksUseVelocityDemo,
     "hooks-use-viewport-scroll": MotionExamples.HooksUseViewportScrollDemo,
     // WAAPI examples
     "waapi-background-color": MotionExamples.WaapiBackgroundColorDemo,
-    "waapi-opacity": MotionExamples.WaapiOpacityDemo,
-    // New WAAPI
     "waapi-interrupt": MotionExamples.WaapiInterruptDemo,
     "waapi-opacity-orchestration": MotionExamples.WaapiOpacityOrchestrationDemo,
+    "waapi-opacity": MotionExamples.WaapiOpacityDemo,
     // Misc examples
-    "misc-motion-custom-tag": MotionExamples.MotionCustomTagDemo,
     "misc-lazy-motion-async": MotionExamples.LazyMotionAsyncDemo,
-    // New Misc
     "misc-lazy-motion-sync": MotionExamples.LazyMotionSyncDemo,
+    "misc-motion-custom-tag": MotionExamples.MotionCustomTagDemo,
     "misc-motion-config-is-static": MotionExamples.MotionConfigIsStaticDemo,
     "misc-motion-config-nonce": MotionExamples.MotionConfigNonceDemo,
     "misc-prop-ref": MotionExamples.PropRefDemo,
