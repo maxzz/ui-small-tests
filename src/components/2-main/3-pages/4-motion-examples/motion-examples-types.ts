@@ -151,6 +151,7 @@ export type MotionExampleId =
     | "test-animate-stress-headless-x"
     | "test-animate-stress-headless-color"
     // External
-    | "external-hover-parent-to-child";
+    | "external-hover-parent-to-child"
+    | "external-react-19-motion-client";
 
 export { MotionExampleItems } from "./motion-examples-render-order";

@@ -170,6 +170,7 @@ import testAnimateStressHeadlessColor from "./b-tests/Test-animate-stress-headle
 
 // External examples
 import externalHoverParentToChild from "./c-external/hover-parent-to-child.tsx?raw";
+import externalReact19MotionClient from "./c-external/react-19-motion-client.tsx?raw";
 
 // Export as a map
 export const demoSourceCodes: Record<MotionExampleId, string> = {
@@ -322,6 +323,7 @@ export const demoSourceCodes: Record<MotionExampleId, string> = {
     "test-animate-stress-headless-color": testAnimateStressHeadlessColor,
     // External examples
     "external-hover-parent-to-child": externalHoverParentToChild,
+    "external-react-19-motion-client": externalReact19MotionClient,
 };
 
 // Debug: Log available keys to console

@@ -175,6 +175,7 @@ const testItems = [
 
 const externalItems = [
     { id: "external-hover-parent-to-child", title: "Hover Parent to Child", description: "Animate children when hovering parent", icon: "🔗" },
+    { id: "external-react-19-motion-client", title: "React 19 Motion Client", description: "React 19 motion client example", icon: "🔗" },
 ] as const satisfies readonly MotionExampleItem[];
 
 // Export as LeftViewItemsGroups with prefix as keys

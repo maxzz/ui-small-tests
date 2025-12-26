@@ -170,4 +170,5 @@ const MotionExampleComponents: Record<MotionExampleId, React.ComponentType> = {
     "test-animate-stress-headless-color": MotionExamples.TestAnimateStressHeadlessColorDemo,
     // External examples
     "external-hover-parent-to-child": MotionExamples.HoverParentToChildDemo,
+    "external-react-19-motion-client": MotionExamples.React19MotionClientDemo,
 };
