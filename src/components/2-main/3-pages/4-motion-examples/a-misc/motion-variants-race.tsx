@@ -1,7 +1,7 @@
 import { useState } from "react"; //https://github.com/motiondivision/motion/blob/main/dev/react/src/examples/variants-race.tsx //GH: 'repo:motiondivision/motion Variants'
 import { motion } from "motion/react";
 
-export function MotionVariantsRace() {
+export function MotionVariantsRaceDemo() {
     const [isHover, setIsHover] = useState(false);
     const [isPressed, setIsPressed] = useState(false);
     const [variant, setVariant] = useState("a");

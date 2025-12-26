@@ -136,6 +136,7 @@ import waapiOpacityOrchestration from "./9-waapi/WAAPI-opacity-orchestration.tsx
 
 // Misc examples
 import miscMotionCustomTag from "./a-misc/motion-custom-tag.tsx?raw";
+import miscMotionVariantsRace from "./a-misc/motion-variants-race.tsx?raw";
 import miscLazyMotionAsync from "./a-misc/LazyMotion-async.tsx?raw";
 // New Misc
 import miscLazyMotionSync from "./a-misc/LazyMotion-sync.tsx?raw";
@@ -289,6 +290,7 @@ export const demoSourceCodes: Record<MotionExampleId, string> = {
     "misc-lazy-motion-async": miscLazyMotionAsync,
     "misc-lazy-motion-sync": miscLazyMotionSync,
     "misc-motion-custom-tag": miscMotionCustomTag,
+    "misc-motion-variants-race": miscMotionVariantsRace,
     "misc-motion-config-is-static": miscMotionConfigIsStatic,
     "misc-motion-config-nonce": miscMotionConfigNonce,
     "misc-prop-ref": miscPropRef,

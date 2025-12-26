@@ -1,4 +1,5 @@
 export { MotionCustomTagDemo } from "./motion-custom-tag";
+export { MotionVariantsRaceDemo } from "./motion-variants-race";
 export { LazyMotionAsyncDemo } from "./LazyMotion-async";
 // New
 export { LazyMotionSyncDemo } from "./LazyMotion-sync";

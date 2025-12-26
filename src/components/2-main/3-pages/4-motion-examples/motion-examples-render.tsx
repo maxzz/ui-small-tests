@@ -139,6 +139,7 @@ const MotionExampleComponents: Record<MotionExampleId, React.ComponentType> = {
     "misc-lazy-motion-async": MotionExamples.LazyMotionAsyncDemo,
     "misc-lazy-motion-sync": MotionExamples.LazyMotionSyncDemo,
     "misc-motion-custom-tag": MotionExamples.MotionCustomTagDemo,
+    "misc-motion-variants-race": MotionExamples.MotionVariantsRaceDemo,
     "misc-motion-config-is-static": MotionExamples.MotionConfigIsStaticDemo,
     "misc-motion-config-nonce": MotionExamples.MotionConfigNonceDemo,
     "misc-prop-ref": MotionExamples.PropRefDemo,

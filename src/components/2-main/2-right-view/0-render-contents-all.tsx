@@ -8,7 +8,6 @@ import { ScrollArea } from "../../ui/shadcn/scroll-area";
 import { UserItemList } from "../3-pages/3-controls/2-listview-commands/1-users-list";
 import { DashboardContents } from "./20-dashboard-contents";
 import { RootComponents } from "../3-pages/shadcn-frontpage";
-import { MotionVariantsRace } from "./30-motion-variants-race";
 import { CardsContents } from "./10-cards-contents";
 // import { CardsDemoWithTooltip } from "../../ui/local/8-mouse-tracker/x-nun-all-wrapper-w-tooltip";
 import { hoverStackAtom, MouseMoveTrackerTooltip, mousePosAtom, MouseTracker } from "@/components/ui/local/8-mouse-tracker";
@@ -56,7 +55,6 @@ function RightView() {
         case "common-dashboard": return <RightViewDashboard />;
         case "common-hero-text": return <HeroTitleText />;
         case "common-listview": return <UserItemList />;
-        case "common-motion-variants-race": return <MotionVariantsRace />;
         case "thelast-not-yet": return <RightViewNotYet />;
         default: {
             const _exhaustiveCheck: never = leftTree;
