@@ -8,53 +8,41 @@ export function HoverParentToChildDemo() {
             initial="rest"
             animate="rest"
             whileHover="hover"
-            className="relative max-w-[200px] cursor-pointer"
+            className="relative p-4 text-sm text-foreground bg-sky-100 cursor-pointer"
         >
-            <motion.div
-                className="absolute top-1/2 left-0 translate-y-1/2 opacity-0"
-                variants={slashMotion}
-            >
-                <svg width="1em" height="1em" viewBox="0 0 27 50"> {/* svg { width: auto; height: 50px; object-fit: scale-down; } */}
-                    <path
-                        fill="#154FFF"
-                        d="M21.177 0L0 50h5.818L26.995 0z"
-                        fillRule="evenodd" />
+            <motion.div className="absolute left-4 top-1/2 -translate-y-1/2 opacity-0" variants={slashVariants}>
+                <svg className="1w-auto h-10 fill-blue-700" viewBox="0 0 27 50" style={{ objectFit: "scale-down" }}>
+                    <path d="M21.177 0L0 50h5.818L26.995 0z" />
                 </svg>
             </motion.div>
-            <motion.h1 variants={textMotion}>Hover me!</motion.h1>
+
+            <motion.h1 variants={textVariants}>
+                Hover me!
+            </motion.h1>
         </motion.div>
     );
 }
 
-const textMotion: Variants = {
+const slashVariants: Variants = {
     rest: {
-        color: "grey",
-        x: 0,
-        transition: {
-            duration: 2,
-            type: "tween",
-            ease: "easeIn"
-        }
+        opacity: 0,
+        transition: { duration: 0.2, ease: "easeOut", },
     },
     hover: {
-        color: "blue",
-        x: 30,
-        transition: {
-            duration: 0.4,
-            type: "tween",
-            ease: "easeOut"
-        }
+        opacity: 1,
+        transition: { duration: 1, },
     }
 };
 
-const slashMotion: Variants = {
-    rest: { opacity: 0, transition: { duration: 0.2, type: "tween", ease: "easeOut" } },
+const textVariants: Variants = {
+    rest: {
+        color: "black",
+        x: 0,
+        transition: { duration: 0.2, ease: "easeIn", },
+    },
     hover: {
-        opacity: 1,
-        transition: {
-            duration: 0.4,
-            type: "tween",
-            ease: "easeIn"
-        }
+        color: "blue",
+        x: 50,
+        transition: { duration: 0.4, ease: "easeOut", },
     }
 };
