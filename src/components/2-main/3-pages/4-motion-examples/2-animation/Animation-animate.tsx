@@ -9,8 +9,8 @@ export function AnimationAnimateDemo() {
     const [state, setState] = useState(false);
 
     useEffect(() => {
-        setTimeout(() => { setState(true); }, 300);
-    }, [state]);
+        setTimeout(() => { setState((prev) => !prev); }, 300);
+    }, []);
 
     return (
         <motion.div
@@ -24,5 +24,5 @@ export function AnimationAnimateDemo() {
 const style = {
     width: 100,
     height: 100,
-    background: "white",
+    background: "red",
 };
