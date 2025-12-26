@@ -5,14 +5,14 @@ import { highlightTsxCode } from "@/utils/syntax-highlight-tsx";
 import { type MotionExampleId } from "@/components/2-main/3-pages/4-motion-examples/motion-examples-types";
 import { Button } from "@/components/ui/shadcn/button";
 import { RefreshCcwIcon } from "lucide-react";
-import { useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import { restartDemoAtom } from "@/store/3-ui-atoms";
 
 /**
  * Wrapper component for demos with tabs (Demo + Source Code)
  */
 export function DemoWithTabs({ demoId, children }: { demoId: MotionExampleId; children: React.ReactNode; }) {
-    const setRestartDemo = useSetAtom(restartDemoAtom);
+    const [restartCount, setRestartDemo] = useAtom(restartDemoAtom);
 
     const sourceCode = demoSourceCodes[demoId as keyof typeof demoSourceCodes];
     const isMissing = !sourceCode;
@@ -40,17 +40,12 @@ export function DemoWithTabs({ demoId, children }: { demoId: MotionExampleId; ch
                     <TabsTrigger value="source">Source Code</TabsTrigger>
                 </TabsList>
 
-                <Button 
-                    className="mx-2" 
-                    variant="ghost" 
-                    size="icon"
-                    onClick={() => setRestartDemo((prev) => prev + 1)}
-                >
+                <Button className="mx-2" variant="ghost" size="icon" onClick={() => setRestartDemo((prev) => prev + 1)}>
                     <RefreshCcwIcon className="side-4" />
                 </Button>
             </div>
 
-            <TabsContent value="demo" className="flex-1 overflow-auto mt-0">
+            <TabsContent value="demo" className="flex-1 overflow-auto mt-0" key={restartCount}>
                 {children}
             </TabsContent>
 
