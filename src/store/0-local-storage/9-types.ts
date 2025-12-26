@@ -30,11 +30,11 @@ export const leftViewItemsGroups = {
         { id: "common-hero-text", title: "Effect Hero Title", description: "Effect Hero Title demo", icon: "📊" },
         { id: "common-listview", title: "List View", description: "List View demo", icon: "📊" },
     ],
-    motionExamples: [...MotionExampleItems],
+    motionExamples: MotionExampleItems,
     miscellaneous: [
         { id: "thelast-not-yet", title: "Not Yet", description: "Not Yet demo", icon: "🏁" },
     ],
-} as const satisfies { [key: string]: LeftViewItem[] };
+} as const satisfies { [key: string]: LeftViewItem[] | LeftViewItemsGroups };
 
 // Right sub-view
 

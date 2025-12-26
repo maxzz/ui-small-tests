@@ -11,7 +11,9 @@ export function MotionExampleRenderer({ viewId }: { viewId: MotionExampleId }) {
     return <DemoWithTabs demoId={viewId}><Component /></DemoWithTabs>;
 }
 
-const motionExampleIds = new Set(MotionExampleItems.map(item => item.id));
+const motionExampleIds = new Set(
+    Object.values(MotionExampleItems).flatMap(items => items.map(item => item.id))
+);
 
 const MotionExampleComponents: Record<MotionExampleId, React.ComponentType> = {
     // AnimatePresence examples

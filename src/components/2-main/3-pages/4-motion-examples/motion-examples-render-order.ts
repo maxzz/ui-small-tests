@@ -1,7 +1,10 @@
 import { type MotionExampleId } from "./motion-examples-types";
+import type { LeftViewItemsGroups } from "@/store/0-local-storage/9-types";
 
-export const MotionExampleItems = [
-    // AnimatePresence examples
+type MotionExampleItem = { id: MotionExampleId; title: string; description?: string; icon?: string; };
+
+// Individual item arrays grouped by prefix
+const animatePresenceItems = [
     { id: "animate-presence", title: "AnimatePresence", description: "Single-child AnimatePresence animation", icon: "🎬" },
     { id: "animate-presence-image-gallery", title: "Image Gallery", description: "Image gallery with AnimatePresence", icon: "🎬" },
     { id: "animate-presence-layout-animations-siblings", title: "Layout Siblings", description: "AnimatePresence with shared layout", icon: "🎬" },
@@ -12,7 +15,9 @@ export const MotionExampleItems = [
     { id: "animate-presence-switch", title: "Switch", description: "Switching between components", icon: "🎬" },
     { id: "animate-presence-variants", title: "Variants", description: "AnimatePresence with variants", icon: "🎬" },
     { id: "animate-presence-wait", title: "Wait Mode", description: "Wait for exit before entering", icon: "🎬" },
-    // Animation examples
+] as const satisfies readonly MotionExampleItem[];
+
+const animationItems = [
     { id: "animation-animate", title: "Animate", description: "Basic tween animation", icon: "📐" },//✨
     { id: "animation-keyframes", title: "Keyframes", description: "Keyframe animations", icon: "📐" },
     { id: "animation-spring-css", title: "Spring CSS", description: "Spring animations with CSS", icon: "📐" },
@@ -21,7 +26,6 @@ export const MotionExampleItems = [
     { id: "animation-css-variables", title: "CSS Variables", description: "Animating CSS variables", icon: "📐" },
     { id: "animation-filter", title: "Filter", description: "Animating filter property", icon: "📐" },
     { id: "animation-height-auto-padding", title: "Height Auto", description: "Auto height with padding", icon: "📐" },
-    // New Animation
     { id: "animation-batch-read-writes", title: "Batch Read/Writes", description: "Batch read/writes example", icon: "📐" },
     { id: "animation-between-value-types", title: "Value Types", description: "Animate between value types", icon: "📐" },
     { id: "animation-between-value-types-x", title: "Value Types X", description: "Animate between value types X", icon: "📐" },
@@ -44,13 +48,14 @@ export const MotionExampleItems = [
     { id: "animation-stress-mount", title: "Stress Mount", description: "Stress test mounting", icon: "📐" },
     { id: "animation-transition-tween", title: "Tween Transition", description: "Tween transition example", icon: "📐" },
     { id: "animation-use-animate-initial-transform", title: "Initial Transform", description: "useAnimate initial transform", icon: "📐" },
-    // Drag examples
+] as const satisfies readonly MotionExampleItem[];
+
+const dragItems = [
     { id: "drag-draggable", title: "Draggable", description: "Basic draggable element", icon: "👆" },
     { id: "drag-constraints-ref", title: "Drag Constraints", description: "Drag with ref constraints", icon: "👆" },
     { id: "drag-to-reorder", title: "Drag to Reorder", description: "Reorderable list", icon: "👆" },
     { id: "drag-use-drag-controls", title: "Drag Controls", description: "External drag controls", icon: "👆" },
     { id: "drag-nested", title: "Nested Drag", description: "Nested draggable elements", icon: "👆" },
-    // New Drag
     { id: "drag-block-viewport-conditionally", title: "Block Viewport", description: "Conditionally block viewport", icon: "👆" },
     { id: "drag-constraints-ref-small-container", title: "Small Container", description: "Constraints in small container", icon: "👆" },
     { id: "drag-constraints-ref-small-container-layout", title: "Small Layout", description: "Constraints layout", icon: "👆" },
@@ -60,11 +65,12 @@ export const MotionExampleItems = [
     { id: "drag-shared-layout", title: "Shared Layout Drag", description: "Drag with shared layout", icon: "👆" },
     { id: "drag-svg", title: "SVG Drag", description: "Draggable SVG", icon: "👆" },
     { id: "drag-use-drag-controls-snap-to-cursor", title: "Snap to Cursor", description: "Drag snap to cursor", icon: "👆" },
-    // Events examples
+] as const satisfies readonly MotionExampleItem[];
+
+const eventsItems = [
     { id: "events-while-hover", title: "While Hover", description: "Hover interactions", icon: "🖱️" },
     { id: "events-while-tap", title: "While Tap", description: "Tap interactions", icon: "🖱️" },
     { id: "events-on-tap", title: "On Tap", description: "Tap event handling", icon: "🖱️" },
-    // New Events
     { id: "events-pan", title: "Pan", description: "Pan events", icon: "🖱️" },
     { id: "events-while-focus", title: "While Focus", description: "Focus interactions", icon: "🖱️" },
     { id: "events-while-focus-variants", title: "Focus Variants", description: "Focus with variants", icon: "🖱️" },
@@ -72,18 +78,21 @@ export const MotionExampleItems = [
     { id: "events-while-tap-cancel-on-scroll", title: "Tap Cancel Scroll", description: "Tap cancel on scroll", icon: "🖱️" },
     { id: "events-while-tap-global", title: "Global Tap", description: "Global tap target", icon: "🖱️" },
     { id: "events-while-tap-variants", title: "Tap Variants", description: "Tap variants", icon: "🖱️" },
-    // Layout examples
+] as const satisfies readonly MotionExampleItem[];
+
+const layoutItems = [
     { id: "layout-rotate", title: "Layout Rotate", description: "Layout animation with rotation", icon: "✏️" },
     { id: "layout-skew", title: "Layout Skew", description: "Layout animation with skew", icon: "✏️" },
     { id: "layout-projection-scale-position", title: "Scale Position", description: "Projection based layout animation", icon: "✏️" },
-    // New Layout
     { id: "layout-projection-correct-style-border-radius", title: "Border Radius", description: "Correct style border radius", icon: "✏️" },
     { id: "layout-projection-custom-values", title: "Custom Values", description: "Projection custom values", icon: "✏️" },
     { id: "layout-projection-scale-correction-border-radius", title: "Scale Radius", description: "Scale correction border radius", icon: "✏️" },
     { id: "layout-projection-scale-correction-shadow", title: "Scale Shadow", description: "Scale correction shadow", icon: "✏️" },
     { id: "layout-projection-scale-size", title: "Scale Size", description: "Scale size projection", icon: "✏️" },
     { id: "layout-svg", title: "Layout SVG", description: "SVG layout animation", icon: "✏️" },
-    // Shared Layout examples
+] as const satisfies readonly MotionExampleItem[];
+
+const sharedLayoutItems = [
     { id: "shared-layout-continuity-crossfade", title: "Continuity Crossfade", description: "Shared layout crossfade", icon: "🔗" },
     { id: "shared-layout-continuity", title: "Shared Layout Continuity", description: "Shared layout continuity", icon: "🔗" },
     { id: "shared-layout-lightbox-crossfade", title: "Lightbox Crossfade", description: "Lightbox with crossfade", icon: "🔗" },
@@ -98,14 +107,18 @@ export const MotionExampleItems = [
     { id: "shared-layout-sibling-to-child", title: "Sibling to Child", description: "Sibling to child animation", icon: "🔗" },
     { id: "shared-layout-skew", title: "Shared Skew", description: "Shared layout skew", icon: "🔗" },
     { id: "shared-layout-toggle-details", title: "Toggle Details", description: "Shared layout toggle details", icon: "🔗" },
-    // SVG examples
+] as const satisfies readonly MotionExampleItem[];
+
+const svgItems = [
     { id: "svg-layout-animation", title: "SVG Layout", description: "SVG layout animation", icon: "🧩" },
     { id: "svg-motion-value", title: "Motion Value", description: "SVG MotionValue", icon: "🧩" },
     { id: "svg-path", title: "SVG Path", description: "SVG path animation", icon: "🧩" },
     { id: "svg-text-motion-value-child", title: "Text Child", description: "SVG Text MotionValue Child", icon: "🧩" },
     { id: "svg-transform", title: "Transform", description: "SVG Transform", icon: "🧩" },
     { id: "svg-without-initial-values", title: "No Initial", description: "SVG without initial values", icon: "🧩" },
-    // Hooks examples
+] as const satisfies readonly MotionExampleItem[];
+
+const hooksItems = [
     { id: "hooks-use-animated-state", title: "useAnimatedState", description: "useAnimatedState hook", icon: "🪝" },
     { id: "hooks-use-animation", title: "useAnimation", description: "Animation control hook", icon: "🪝" },
     { id: "hooks-use-instant-transition", title: "useInstantTransition", description: "useInstantTransition hook", icon: "🪝" },
@@ -116,12 +129,16 @@ export const MotionExampleItems = [
     { id: "hooks-use-transform-with-use-layout-effect", title: "useTransform Layout", description: "useTransform with useLayoutEffect", icon: "🪝" },
     { id: "hooks-use-velocity", title: "useVelocity", description: "useVelocity hook", icon: "🪝" },
     { id: "hooks-use-viewport-scroll", title: "useViewportScroll", description: "useViewportScroll hook", icon: "🪝" },
-    // WAAPI examples
+] as const satisfies readonly MotionExampleItem[];
+
+const waapiItems = [
     { id: "waapi-background-color", title: "WAAPI Color", description: "Web Animations API color", icon: "🌊" },
     { id: "waapi-interrupt", title: "Interrupt", description: "WAAPI Interrupt", icon: "🌊" },
     { id: "waapi-opacity-orchestration", title: "Opacity Orchestration", description: "WAAPI Opacity Orchestration", icon: "🌊" },
     { id: "waapi-opacity", title: "WAAPI Opacity", description: "Web Animations API opacity", icon: "🌊" },
-    // Misc examples
+] as const satisfies readonly MotionExampleItem[];
+
+const miscItems = [
     { id: "misc-lazy-motion-async", title: "Lazy Motion", description: "Async lazy loading", icon: "🏁" },
     { id: "misc-lazy-motion-sync", title: "Lazy Motion Sync", description: "Sync lazy loading", icon: "🏁" },
     { id: "misc-motion-custom-tag", title: "Custom Tag", description: "Custom motion component", icon: "🏁" },
@@ -130,7 +147,9 @@ export const MotionExampleItems = [
     { id: "misc-motion-config-nonce", title: "Nonce", description: "MotionConfig nonce", icon: "🏁" },
     { id: "misc-prop-ref", title: "Prop Ref", description: "Prop ref example", icon: "🏁" },
     { id: "misc-prop-style", title: "Prop Style", description: "Prop style example", icon: "🏁" },
-    // Tests
+] as const satisfies readonly MotionExampleItem[];
+
+const testItems = [
     { id: "test-drag-propagation", title: "Drag Propagation", description: "Test Drag Propagation", icon: "🧪" },
     { id: "test-svg-layout-animation-correction", title: "SVG Layout Correction", description: "Test SVG Layout Animation Correction", icon: "🧪" },
     { id: "test-layout-transform", title: "Layout Transform", description: "Test Layout Transform", icon: "🧪" },
@@ -152,5 +171,19 @@ export const MotionExampleItems = [
     { id: "test-drag-controls", title: "Drag Controls", description: "Test Drag Controls", icon: "🧪" },
     { id: "test-animate-stress-headless-x", title: "Stress Headless X", description: "Test Animate Stress Headless X", icon: "🧪" },
     { id: "test-animate-stress-headless-color", title: "Stress Headless Color", description: "Test Animate Stress Headless Color", icon: "🧪" },
-] as const satisfies readonly { id: MotionExampleId; title: string; description?: string; icon?: string; }[];
+] as const satisfies readonly MotionExampleItem[];
 
+// Export as LeftViewItemsGroups with prefix as keys
+export const MotionExampleItems = {
+    "animate-presence": animatePresenceItems,
+    "animation": animationItems,
+    "drag": dragItems,
+    "events": eventsItems,
+    "layout": layoutItems,
+    "shared-layout": sharedLayoutItems,
+    "svg": svgItems,
+    "hooks": hooksItems,
+    "waapi": waapiItems,
+    "misc": miscItems,
+    "test": testItems,
+} as const satisfies LeftViewItemsGroups;
