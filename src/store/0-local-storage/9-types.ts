@@ -34,7 +34,7 @@ export const leftViewItemsGroups = {
     miscellaneous: [
         { id: "thelast-not-yet", title: "Not Yet", description: "Not Yet demo", icon: "🏁" },
     ],
-} as const satisfies { [key: string]: LeftViewItem[] | LeftViewItemsGroups };
+} as const satisfies LeftViewItemsGroups;
 
 // Right sub-view
 

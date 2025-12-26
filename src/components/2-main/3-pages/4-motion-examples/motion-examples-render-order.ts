@@ -19,21 +19,18 @@ const animatePresenceItems = [
 
 const animationItems = [
     { id: "animation-animate", title: "Animate", description: "Basic tween animation", icon: "📐" },//✨
-    { id: "animation-keyframes", title: "Keyframes", description: "Keyframe animations", icon: "📐" },
-    { id: "animation-spring-css", title: "Spring CSS", description: "Spring animations with CSS", icon: "📐" },
-    { id: "animation-stagger", title: "Stagger", description: "Staggered animations", icon: "📐" },
-    { id: "animation-variants", title: "Variants", description: "Animation with variants", icon: "📐" },
-    { id: "animation-css-variables", title: "CSS Variables", description: "Animating CSS variables", icon: "📐" },
-    { id: "animation-filter", title: "Filter", description: "Animating filter property", icon: "📐" },
-    { id: "animation-height-auto-padding", title: "Height Auto", description: "Auto height with padding", icon: "📐" },
     { id: "animation-batch-read-writes", title: "Batch Read/Writes", description: "Batch read/writes example", icon: "📐" },
-    { id: "animation-between-value-types", title: "Value Types", description: "Animate between value types", icon: "📐" },
     { id: "animation-between-value-types-x", title: "Value Types X", description: "Animate between value types X", icon: "📐" },
+    { id: "animation-between-value-types", title: "Value Types", description: "Animate between value types", icon: "📐" },
     { id: "animation-box-shadow", title: "Box Shadow", description: "Animate box shadow", icon: "📐" },
     { id: "animation-cleanup", title: "Cleanup", description: "Animation cleanup", icon: "📐" },
+    { id: "animation-css-variables", title: "CSS Variables", description: "Animating CSS variables", icon: "📐" },
     { id: "animation-display-visibility", title: "Display Visibility", description: "Animate display/visibility", icon: "📐" },
+    { id: "animation-filter", title: "Filter", description: "Animating filter property", icon: "📐" },
     { id: "animation-height-auto-display-none", title: "Height Auto None", description: "Height auto with display none", icon: "📐" },
+    { id: "animation-height-auto-padding", title: "Height Auto", description: "Auto height with padding", icon: "📐" },
     { id: "animation-height-auto-rotate-scale", title: "Height Rotate Scale", description: "Height auto with rotate scale", icon: "📐" },
+    { id: "animation-keyframes", title: "Keyframes", description: "Keyframe animations", icon: "📐" },
     { id: "animation-layout-delay-children", title: "Layout Delay", description: "Layout animation delay children", icon: "📐" },
     { id: "animation-layout-nested-position", title: "Nested Position", description: "Nested layout position", icon: "📐" },
     { id: "animation-layout-scale-correction", title: "Scale Correction", description: "Layout scale correction", icon: "📐" },
@@ -44,10 +41,13 @@ const animationItems = [
     { id: "animation-layout-update-stress", title: "Update Stress", description: "Layout update stress test", icon: "📐" },
     { id: "animation-repeat-spring", title: "Repeat Spring", description: "Repeating spring animation", icon: "📐" },
     { id: "animation-reverse", title: "Reverse", description: "Reversing animation", icon: "📐" },
+    { id: "animation-spring-css", title: "Spring CSS", description: "Spring animations with CSS", icon: "📐" },
     { id: "animation-stagger-custom", title: "Custom Stagger", description: "Custom stagger effect", icon: "📐" },
+    { id: "animation-stagger", title: "Stagger", description: "Staggered animations", icon: "📐" },
     { id: "animation-stress-mount", title: "Stress Mount", description: "Stress test mounting", icon: "📐" },
     { id: "animation-transition-tween", title: "Tween Transition", description: "Tween transition example", icon: "📐" },
     { id: "animation-use-animate-initial-transform", title: "Initial Transform", description: "useAnimate initial transform", icon: "📐" },
+    { id: "animation-variants", title: "Variants", description: "Animation with variants", icon: "📐" },
 ] as const satisfies readonly MotionExampleItem[];
 
 const dragItems = [
@@ -175,12 +175,12 @@ const testItems = [
 
 // Export as LeftViewItemsGroups with prefix as keys
 export const MotionExampleItems = {
-    "animate-presence": animatePresenceItems,
+    "animate presence": animatePresenceItems,
     "animation": animationItems,
     "drag": dragItems,
     "events": eventsItems,
     "layout": layoutItems,
-    "shared-layout": sharedLayoutItems,
+    "shared layout": sharedLayoutItems,
     "svg": svgItems,
     "hooks": hooksItems,
     "waapi": waapiItems,
