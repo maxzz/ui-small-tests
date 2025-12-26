@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
-import { appSettings, leftViewItemsGroups, type LeftViewId, type LeftViewItem, type LeftViewItemsGroups } from "@/store/0-local-storage";
-import { SidebarGroup, SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, } from "@/components/ui/shadcn/sidebar";
-import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
-import { ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { appSettings, leftViewItemsGroups, type LeftViewId, type LeftViewItem, type LeftViewItemsGroups } from "@/store/0-local-storage";
+import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
+import { SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, } from "@/components/ui/shadcn/sidebar";
+import { ChevronRight } from "lucide-react";
 
 export function GroupDemos() {
     const { leftTree: currentItemId, expandedGroups } = useSnapshot(appSettings.appUi);
