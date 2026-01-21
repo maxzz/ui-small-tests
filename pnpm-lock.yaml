@@ -126,8 +126,8 @@ importers:
         specifier: ^2.0.7
         version: 2.0.7(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       tailwind-merge:
-        specifier: ^3.3.1
-        version: 3.3.1
+        specifier: ^3.4.0
+        version: 3.4.0
       valtio:
         specifier: ^2.2.0
         version: 2.2.0(@types/react@19.2.9)(react@19.2.3)
@@ -2013,8 +2013,8 @@ packages:
   std-env@3.10.0:
     resolution: {integrity: sha512-5GS12FdOZNliM5mAOxFRg7Ir0pWz8MdpYm6AY6VPkGpbA7ZzmbzNcBJQ0GPvvyWgcY7QAhCgf9Uy89I03faLkg==}
 
-  tailwind-merge@3.3.1:
-    resolution: {integrity: sha512-gBXpgUm/3rp1lMZZrM/w7D8GKqshif0zAymAhbCyIt8KMe+0v9DQ7cdYLR4FHH/cKpdTXb+A/tKKU3eolfsI+g==}
+  tailwind-merge@3.4.0:
+    resolution: {integrity: sha512-uSaO4gnW+b3Y2aWoWfFpX62vn2sR3skfhbjsEnaBI81WD1wBLlHZe5sWf0AqjksNdYTbGBEd0UasQMT3SNV15g==}
 
   tailwindcss-plugin-debug-screens-tw4@1.0.4:
     resolution: {integrity: sha512-oMIr6I+I4sV4rM76UVyfGMzU0Ou6EaNJYuCSA5hCpHWNEbk/Y56ukxOxA/PoRk0y1tRlX9sU648W37gvmiEMgQ==}
@@ -3838,7 +3838,7 @@ snapshots:
 
   std-env@3.10.0: {}
 
-  tailwind-merge@3.3.1: {}
+  tailwind-merge@3.4.0: {}
 
   tailwindcss-plugin-debug-screens-tw4@1.0.4(tailwindcss@4.1.18):
     dependencies:
